@@ -2,6 +2,8 @@ package bossmonster.domain;
 
 import bossmonster.ExceptionMessage;
 
+import java.util.Random;
+
 public class Boss {
 	private String name;
 	private int startHp;
@@ -53,5 +55,9 @@ public class Boss {
 
 	public String getStatusImg() {
 		return status.toString();
+	}
+
+	public int getAttackDamage() {
+		return (int) (Math.random() * 21);
 	}
 }

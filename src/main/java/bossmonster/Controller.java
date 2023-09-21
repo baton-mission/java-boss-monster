@@ -24,7 +24,10 @@ public class Controller {
 		while (boss.isAlive() && player.isAlive()) {
 			printRadeInfo(boss, player);
 			initAttackType(player);
-			service.attackBoss(boss, player);
+			int playerToBossDamage = service.attackBoss(boss, player);
+			int bossToPlayerDamage = service.attackPlayer(boss, player);
+			OutputView.printPlayerAttackResult(playerToBossDamage, player);
+			OutputView.printBossAttackResult(bossToPlayerDamage);
 		}
 	}
 

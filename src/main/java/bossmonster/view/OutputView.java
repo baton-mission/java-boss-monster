@@ -37,4 +37,15 @@ public class OutputView {
 				player.getCurMp(),
 				player.getStartMp());
 	}
+
+	public static void printPlayerAttackResult(int playerToBossDamage, Player player) {
+		System.out.printf(Message.PLAYER_ATTACK_FORMAT.toString(),
+				player.getAttackTypeName(),
+				playerToBossDamage);
+	}
+
+	public static void printBossAttackResult(int bossToPlayerDamage) {
+		System.out.printf(Message.BOSS_ATTACK_FORMAT.toString(),
+				bossToPlayerDamage);
+	}
 }

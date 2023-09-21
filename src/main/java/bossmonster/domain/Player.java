@@ -86,7 +86,7 @@ public class Player {
 	}
 
 	public boolean isAlive() {
-		return startHp > 0;
+		return curHp > 0;
 	}
 
 	public String getName() {
@@ -125,5 +125,13 @@ public class Player {
 			this.curMp = Math.max(PLAYER_MIN_MP, this.curMp - PLAYER_MAGIC_ATTACK_MP_COST);
 			return;
 		}
+	}
+
+	public void attacked(int attackDamage) {
+		this.curHp = Math.max(PLAYER_MIN_HP, this.curHp - attackDamage);
+	}
+
+	public String getAttackTypeName() {
+		return this.attackType.getTypeName();
 	}
 }

@@ -11,7 +11,9 @@ public enum Message {
 	DOUBLE_DIV("============================"),
 	READ_ATTACK_TYPE("어떤 공격을 하시겠습니까?\n" +
 			"1. 물리 공격\n" +
-			"2. 마법 공격");
+			"2. 마법 공격"),
+	PLAYER_ATTACK_FORMAT("%s을 했습니다. (입힌 데미지: %d)\n"),
+	BOSS_ATTACK_FORMAT("보스가 공격 했습니다. (입힌 데미지: %d)\n");
 	private final String message;
 
 	Message(String message) {

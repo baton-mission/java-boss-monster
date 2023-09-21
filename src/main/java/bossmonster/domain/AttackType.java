@@ -32,4 +32,8 @@ public enum AttackType {
 	public int getDamage() {
 		return damage;
 	}
+
+	public String getTypeName() {
+		return typeName;
+	}
 }
