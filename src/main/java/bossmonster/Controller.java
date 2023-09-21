@@ -1,7 +1,6 @@
 package bossmonster;
 
 import bossmonster.domain.Boss;
-import bossmonster.domain.GameOption;
 import bossmonster.domain.Player;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
@@ -10,12 +9,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static bossmonster.domain.GameOption.*;
+import static bossmonster.domain.GameOption.DELIMITER;
 
 public class Controller {
 	public void run() {
 		Boss boss = initBoss();
 		Player player = initPlayer();
+
+		OutputView.printRadeStart();
 	}
 
 	// TODO 제내릭으로 리펙터링
