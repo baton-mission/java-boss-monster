@@ -7,7 +7,11 @@ public enum Message {
 	START_RADE("보스 레이드를 시작합니다!"),
 	HP_STATUS_FORMAT("%s HP [%d/%d]\n"),
 	HP_AND_MP_STATUS_FORMAT("%s HP [%d/%d] MP [%d/%d]\n"),
-	DIV("____________________________\n");
+	DIV("____________________________"),
+	DOUBLE_DIV("============================"),
+	READ_ATTACK_TYPE("어떤 공격을 하시겠습니까?\n" +
+			"1. 물리 공격\n" +
+			"2. 마법 공격");
 	private final String message;
 
 	Message(String message) {

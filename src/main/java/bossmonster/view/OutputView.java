@@ -14,6 +14,11 @@ public class OutputView {
 		System.out.println(Message.START_RADE);
 	}
 
+
+	public static void printDoubleDiv() {
+		System.out.println(Message.DOUBLE_DIV);
+	}
+
 	public static void printBoss(Boss boss) {
 		System.out.printf(Message.HP_STATUS_FORMAT.toString(),
 				boss.getName(),
@@ -25,7 +30,7 @@ public class OutputView {
 	}
 
 	public static void printPlayer(Player player) {
-		System.out.printf(Message.HP_STATUS_FORMAT.toString(),
+		System.out.printf(Message.HP_AND_MP_STATUS_FORMAT.toString(),
 				player.getName(),
 				player.getCurHp(),
 				player.getStartHp(),

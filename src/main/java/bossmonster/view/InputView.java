@@ -12,26 +12,31 @@ public class InputView {
 
 	public static String readBossHp() {
 		System.out.println(Message.READ_BOSS_HP);
-		return readValidatedString();
+		return getValidatedString();
 	}
 
 	public static String readPlayerName() {
 		System.out.println(Message.READ_PLAYER_NAME);
-		return readValidatedString();
+		return getValidatedString();
 	}
 
 	public static String readPlayerInfo() {
 		System.out.println(Message.READ_PLAYER_HP_MP);
-		return readValidatedString();
+		return getValidatedString();
 	}
 
-	private static String readValidatedString() {
-		String inputValue = readValueWithoutCheckError();
+	public static String readAttackType() {
+		System.out.println(Message.READ_ATTACK_TYPE);
+		return getValidatedString();
+	}
+
+	private static String getValidatedString() {
+		String inputValue = getValueWithoutCheckError();
 		isBlank(inputValue);
 		return inputValue;
 	}
 
-	private static String readValueWithoutCheckError() {
+	private static String getValueWithoutCheckError() {
 		try {
 			return br.readLine();
 		} catch (IOException e) {
@@ -44,6 +49,7 @@ public class InputView {
 			throw new IllegalArgumentException(ExceptionMessage.BLANK);
 		}
 	}
+
 
 
 }

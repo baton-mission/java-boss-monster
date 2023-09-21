@@ -1,5 +1,6 @@
 package bossmonster;
 
+import bossmonster.domain.AttackType;
 import bossmonster.domain.Boss;
 import bossmonster.domain.Player;
 import bossmonster.view.InputView;
@@ -18,11 +19,13 @@ public class Controller {
 
 		OutputView.printRadeStart();
 		while (boss.isAlive() && player.isAlive()) {
-			OutputView.printBoss(boss);
-			OutputView.printPlayer(player);
-			break;
+			printRadeInfo(boss, player);
+			AttackType attackType = initAttackType();
+
 		}
 	}
+
+
 
 	// TODO 제내릭으로 리펙터링
 	private Boss initBoss() {
@@ -63,4 +66,22 @@ public class Controller {
 			initPlayerHPAndMP(player);
 		}
 	}
+
+	private void printRadeInfo(Boss boss, Player player) {
+		OutputView.printDoubleDiv();
+		OutputView.printBoss(boss);
+		OutputView.printPlayer(player);
+		OutputView.printDoubleDiv();
+	}
+
+	private AttackType initAttackType() {
+		try {
+			int attackNumber = Converter.stringToInt(InputView.readAttackType());
+			return AttackType.findByNumber(attackNumber);
+		} catch (IllegalArgumentException e) {
+			OutputView.printError(e);
+			return initAttackType();
+		}
+	}
+
 }

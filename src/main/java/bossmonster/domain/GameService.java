@@ -2,7 +2,7 @@ package bossmonster.domain;
 
 public class GameService {
 
-	public void proceedTurn(Boss boss, Player player) {
+	public void attackBoss(Boss boss, Player player, AttackType attackType) {
 
 	}
 }
