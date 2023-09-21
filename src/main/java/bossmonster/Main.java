@@ -18,9 +18,22 @@ public class Main {
     static int 플레이어_HP;
     static int 플레이어_MP;
 
-    static final int 보스_일반_얼굴 = 0;
-    static final int 보스_아픈_얼굴 = 1;
-    static final int 보스_이긴_얼굴 = 2;
+    static final String 보스_일반_얼굴 = "   ^-^" + "\n"
+            + " / 0 0 \\" + "\n"
+            + "(   \"   )" + "\n"
+            + " \\  -  /" + "\n"
+            + "  - ^ -";
+    static final String 보스_아픈_얼굴 = "   ^-^" + "\n"
+            + " / x x \\" + "\n"
+            + "(   \"\\  )" + "\n"
+            + " \\  ^  /" + "\n"
+            + "  - ^ -";
+    static final String 보스_이긴_얼굴 = "   ^-^" + "\n"
+            + " / ^ ^ \\" + "\n"
+            + "(   \"   )" + "\n"
+            + " \\  3  /" + "\n"
+            + "  - ^ -";
+
 
     static int 반복_회수 = 0;
 
@@ -86,7 +99,7 @@ public class Main {
     }
 
     static void 게임_시작() {
-        int 보스_현재_상태 = 보스_일반_얼굴;
+        String 보스_현재_상태 = 보스_일반_얼굴;
         System.out.println("보스 레이드를 시작합니다!\n");
         do {
             보스와_플레이어_상태_출력(보스_현재_상태);
@@ -98,7 +111,7 @@ public class Main {
         } while (양측이_모두_살아있는_경우());
     }
 
-    static void 보스와_플레이어_상태_출력(int 보스_현재_상태) {
+    static void 보스와_플레이어_상태_출력(String 보스_현재_상태) {
         System.out.println("============================");
         보스_체력_출력();
         보스_얼굴_출력(보스_현재_상태);
@@ -110,37 +123,9 @@ public class Main {
         System.out.println("BOSS HP [" + 보스몬스터_현재_HP + "/" + 보스몬스터_최대_HP + "]");
     }
 
-    static void 보스_얼굴_출력(int 보스_현재_상태) {
+    static void 보스_얼굴_출력(String 보스_현재_상태) {
         System.out.println("____________________________");
-        switch (보스_현재_상태) {
-            case 보스_일반_얼굴: {
-                System.out.println("   ^-^");
-                System.out.println(" / 0 0 \\");
-                System.out.println("(   \"   )");
-                System.out.println(" \\  -  /");
-                System.out.println("  - ^ -");
-                break;
-            }
-            case 보스_아픈_얼굴: {
-                System.out.println("   ^-^");
-                System.out.println(" / x x \\");
-                System.out.println("(   \"\\  )");
-                System.out.println(" \\  ^  /");
-                System.out.println("  - ^ -");
-                break;
-            }
-            case 보스_이긴_얼굴: {
-                System.out.println("   ^-^");
-                System.out.println(" / ^ ^ \\");
-                System.out.println("(   \"   )");
-                System.out.println(" \\  3  /");
-                System.out.println("  - ^ -");
-                break;
-            }
-            default: {
-                throw new RuntimeException("없는 얼굴");
-            }
-        }
+        System.out.println(보스_현재_상태);
         System.out.println("____________________________\n");
     }
 
@@ -223,9 +208,10 @@ public class Main {
 
     private static void 게임_결과() {
         if (플레이어_HP <= 0) {
+            보스와_플레이어_상태_출력(보스_이긴_얼굴);
+            System.out.println();
             System.out.println(플레이어_이름 + "의 HP가 0이 되었습니다.");
             System.out.println("보스 레이드에 실패했습니다.");
-            보스와_플레이어_상태_출력(보스_이긴_얼굴);
             return;
         }
         if (보스몬스터_현재_HP <= 0) {
