@@ -64,7 +64,7 @@ public class Main {
         플레이어_스테미너_입력();
     }
 
-    private static void 플레이어_이름_입력() {
+    static void 플레이어_이름_입력() {
         try {
             System.out.println("플레이어의 이름을 입력해주세요");
             플레이어_이름 = sc.nextLine();
@@ -77,7 +77,7 @@ public class Main {
         }
     }
 
-    private static void 플레이어_스테미너_입력() {
+    static void 플레이어_스테미너_입력() {
         try {
             System.out.println("플레이어의 HP와 MP를 입력해주세요.(,로 구분)");
             String[] 플레이어_HP_MP = sc.nextLine().split(",");
@@ -171,13 +171,13 @@ public class Main {
         }
     }
 
-    private static void 물리_공격() {
+    static void 물리_공격() {
         System.out.println("물리 공격을 했습니다. (입힌 데미지: 10)");
         보스몬스터_현재_HP = 스테미나_차감(플레이어_MP, 10);
         플레이어_MP = 스테미나_상승(플레이어_MP, 10, 플레이어_최대_MP);
     }
 
-    private static void 마법_공격() {
+    static void 마법_공격() {
         if (플레이어_MP < 30) {
             System.out.println("마나가 부족하여 마법공력을 할 수 없습니다. 대신 물리 공격을 진행합니다.");
             물리_공격();
@@ -206,7 +206,7 @@ public class Main {
         return 플레이어_HP > 0 && 보스몬스터_현재_HP > 0;
     }
 
-    private static void 게임_결과() {
+    static void 게임_결과() {
         if (플레이어_HP <= 0) {
             보스와_플레이어_상태_출력(보스_이긴_얼굴);
             System.out.println();
