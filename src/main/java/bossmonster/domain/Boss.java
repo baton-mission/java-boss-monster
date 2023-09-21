@@ -3,13 +3,21 @@ package bossmonster.domain;
 import bossmonster.ExceptionMessage;
 
 public class Boss {
-	private int hp;
-	private int mp;
+	private String name;
+	private int startHp;
+	private int startMp;
+	private int curHp;
+	private int curMp;
+	private BossStatus status;
 
 	public Boss(int hp) {
 		validate(hp);
-		this.hp = hp;
-		this.mp = hp;
+		this.name = "BOSS";
+		this.startHp = hp;
+		this.startMp = hp;
+		this.curHp = hp;
+		this.curMp = hp;
+		this.status = BossStatus.NORMAL;
 	}
 
 	private void validate(int hp) {
@@ -21,5 +29,25 @@ public class Boss {
 				hp > GameOption.BOSS_HP_MAX_INCLUSIVE) {
 			throw new IllegalArgumentException(ExceptionMessage.BOSS_HP_RANGE);
 		}
+	}
+
+	public boolean isAlive() {
+		return curHp > 0;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getCurHp() {
+		return curHp;
+	}
+
+	public int getStartHp() {
+		return startHp;
+	}
+
+	public String getStatusImg() {
+		return status.toString();
 	}
 }

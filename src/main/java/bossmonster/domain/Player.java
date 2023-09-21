@@ -9,8 +9,10 @@ import static bossmonster.domain.GameOption.*;
 // TODO 책임 분리 필요
 public class Player {
 	private String name;
-	private int hp;
-	private int mp;
+	private int startHp;
+	private int startMp;
+	private int curHp;
+	private int curMp;
 
 	public Player() {
 	}
@@ -22,8 +24,10 @@ public class Player {
 
 	public void setHpAndMp(List<Integer> playerStats) {
 		validateStats(playerStats);
-		hp = playerStats.get(HP_INDEX);
-		mp = playerStats.get(MP_INDEX);
+		startHp = playerStats.get(HP_INDEX);
+		startMp = playerStats.get(MP_INDEX);
+		this.curHp = startHp;
+		this.curMp = startMp;
 	}
 
 	private void validateName(String name) {
@@ -76,5 +80,7 @@ public class Player {
 		}
 	}
 
-
+	public boolean isAlive() {
+		return startHp > 0;
+	}
 }

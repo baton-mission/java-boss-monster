@@ -17,6 +17,10 @@ public class Controller {
 		Player player = initPlayer();
 
 		OutputView.printRadeStart();
+		while (boss.isAlive() && player.isAlive()) {
+			OutputView.printBoss(boss);
+			break;
+		}
 	}
 
 	// TODO 제내릭으로 리펙터링
