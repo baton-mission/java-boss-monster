@@ -35,6 +35,10 @@ public class Boss {
 		return curHp > 0;
 	}
 
+	public void attacked(int damage) {
+		this.curHp = Math.max(curHp - damage, 0);
+	}
+
 	public String getName() {
 		return name;
 	}

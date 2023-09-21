@@ -2,6 +2,7 @@ package bossmonster;
 
 import bossmonster.domain.AttackType;
 import bossmonster.domain.Boss;
+import bossmonster.domain.GameService;
 import bossmonster.domain.Player;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
@@ -13,6 +14,8 @@ import java.util.stream.Collectors;
 import static bossmonster.domain.GameOption.DELIMITER;
 
 public class Controller {
+	public static final GameService service = new GameService();
+
 	public void run() {
 		Boss boss = initBoss();
 		Player player = initPlayer();
@@ -20,12 +23,10 @@ public class Controller {
 		OutputView.printRadeStart();
 		while (boss.isAlive() && player.isAlive()) {
 			printRadeInfo(boss, player);
-			AttackType attackType = initAttackType();
-
+			initAttackType(player);
+			service.attackBoss(boss, player);
 		}
 	}
-
-
 
 	// TODO 제내릭으로 리펙터링
 	private Boss initBoss() {
@@ -74,13 +75,13 @@ public class Controller {
 		OutputView.printDoubleDiv();
 	}
 
-	private AttackType initAttackType() {
+	private void initAttackType(Player player) {
 		try {
 			int attackNumber = Converter.stringToInt(InputView.readAttackType());
-			return AttackType.findByNumber(attackNumber);
+			player.setAttackType(AttackType.findByNumber(attackNumber));
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e);
-			return initAttackType();
+			initAttackType(player);
 		}
 	}
 

@@ -10,4 +10,8 @@ public class GameOption {
 	public static final int PLAYER_NAME_MAX_INCLUSIVE = 5;
 	public static final Integer PLAYER_SUM_VALUE = 200;
 	public static final int PLAYER_STATS_SIZE = 2;
+
+	public static final int PLAYER_MAGIC_ATTACK_MP_COST = 30;
+	public static final int PLAYER_MP_RECOVER = 10;
+	public static final int PLAYER_MIN_MP = 0;
 }

@@ -13,6 +13,7 @@ public class Player {
 	private int startMp;
 	private int curHp;
 	private int curMp;
+	private AttackType attackType;
 
 	public Player() {
 	}
@@ -28,6 +29,10 @@ public class Player {
 		startMp = playerStats.get(MP_INDEX);
 		this.curHp = startHp;
 		this.curMp = startMp;
+	}
+
+	public void setAttackType(AttackType attackType) {
+		this.attackType = attackType;
 	}
 
 	private void validateName(String name) {
@@ -102,5 +107,23 @@ public class Player {
 
 	public int getCurMp() {
 		return curMp;
+	}
+
+	public int getAttackDamage() {
+		if (attackType.equals(AttackType.MAGIC) && curMp < PLAYER_MAGIC_ATTACK_MP_COST) {
+			return 0;
+		}
+		return attackType.getDamage();
+	}
+
+	public void handleCost() {
+		if (attackType.equals(AttackType.PHYSICAL)) {
+			this.curMp = Math.min(startMp, this.curMp + PLAYER_MP_RECOVER);
+			return;
+		}
+		if (attackType.equals(AttackType.MAGIC)) {
+			this.curMp = Math.max(PLAYER_MIN_MP, this.curMp - PLAYER_MAGIC_ATTACK_MP_COST);
+			return;
+		}
 	}
 }

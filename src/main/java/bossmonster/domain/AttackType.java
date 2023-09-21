@@ -28,4 +28,8 @@ public enum AttackType {
 		}
 		return findType.get();
 	}
+
+	public int getDamage() {
+		return damage;
+	}
 }
