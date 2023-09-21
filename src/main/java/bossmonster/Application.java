@@ -8,8 +8,11 @@ public class Application {
         Input input = new Input();
         Output output = new Output();
         Player player = new Player();
+        BossMonster bossMonster = new BossMonster();
 
+        input.bossHP(bossMonster);
         input.playerName(player);
+        input.playerHPMP(player);
 
     }
 }

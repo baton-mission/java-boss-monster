@@ -11,5 +11,12 @@ public class Player {
     public void createName(String input){
         this.name = new Name(input);
     }
+    public void createHPMP(int hp, int mp){
+        if (!(hp + mp == 200))
+            throw new IllegalArgumentException("플레이어의 초기 HP와 MP 합은 200이어야 합니다.");
+        this.hp = new HP(hp);
+        this.mp = new MP(mp);
+
+    }
 }
 
