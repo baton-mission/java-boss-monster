@@ -6,6 +6,7 @@ public enum Message {
 	READ_PLAYER_HP_MP("플레이어의 HP와 MP를 입력해주세요.(,로 구분)"),
 	START_RADE("보스 레이드를 시작합니다!"),
 	HP_STATUS_FORMAT("%s HP [%d/%d]\n"),
+	HP_AND_MP_STATUS_FORMAT("%s HP [%d/%d] MP [%d/%d]\n"),
 	DIV("____________________________\n");
 	private final String message;
 

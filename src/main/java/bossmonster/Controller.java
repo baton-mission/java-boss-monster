@@ -19,6 +19,7 @@ public class Controller {
 		OutputView.printRadeStart();
 		while (boss.isAlive() && player.isAlive()) {
 			OutputView.printBoss(boss);
+			OutputView.printPlayer(player);
 			break;
 		}
 	}

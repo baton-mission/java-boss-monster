@@ -83,4 +83,24 @@ public class Player {
 	public boolean isAlive() {
 		return startHp > 0;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getStartHp() {
+		return startHp;
+	}
+
+	public int getStartMp() {
+		return startMp;
+	}
+
+	public int getCurHp() {
+		return curHp;
+	}
+
+	public int getCurMp() {
+		return curMp;
+	}
 }

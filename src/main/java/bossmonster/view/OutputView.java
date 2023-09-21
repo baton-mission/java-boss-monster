@@ -3,6 +3,7 @@ package bossmonster.view;
 import bossmonster.ExceptionMessage;
 import bossmonster.Message;
 import bossmonster.domain.Boss;
+import bossmonster.domain.Player;
 
 public class OutputView {
 	public static void printError(IllegalArgumentException e) {
@@ -21,5 +22,14 @@ public class OutputView {
 		System.out.println(Message.DIV);
 		System.out.println(boss.getStatusImg());
 		System.out.println(Message.DIV);
+	}
+
+	public static void printPlayer(Player player) {
+		System.out.printf(Message.HP_STATUS_FORMAT.toString(),
+				player.getName(),
+				player.getCurHp(),
+				player.getStartHp(),
+				player.getCurMp(),
+				player.getStartMp());
 	}
 }
