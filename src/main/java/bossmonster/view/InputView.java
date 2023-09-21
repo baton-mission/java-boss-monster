@@ -9,8 +9,23 @@ import java.io.InputStreamReader;
 
 public class InputView {
 	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
 	public static String readBossHp() {
 		System.out.println(Message.READ_BOSS_HP);
+		return readValidatedString();
+	}
+
+	public static String readPlayerName() {
+		System.out.println(Message.READ_PLAYER_NAME);
+		return readValidatedString();
+	}
+
+	public static String readPlayerInfo() {
+		System.out.println(Message.READ_PLAYER_HP_MP);
+		return readValidatedString();
+	}
+
+	private static String readValidatedString() {
 		String inputValue = readValueWithoutCheckError();
 		isBlank(inputValue);
 		return inputValue;
@@ -29,4 +44,6 @@ public class InputView {
 			throw new IllegalArgumentException(ExceptionMessage.BLANK);
 		}
 	}
+
+
 }
