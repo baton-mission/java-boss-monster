@@ -9,14 +9,37 @@ import static bossmonster.domain.GameOption.*;
 // TODO 책임 분리 필요
 public class Player {
 	private String name;
-	private int startHp;
-	private int startMp;
-	private int curHp;
-	private int curMp;
-	private int attackCount = 0;
+	private Stats stats;
 	private AttackType attackType;
 
 	public Player() {
+	}
+
+	public boolean isAlive() {
+		return stats.isAlive();
+	}
+
+	public int attackBoss() {
+		int attackDamage = getAttackDamage();
+		stats.handleCost(attackType);
+		stats.addAttackCount();
+		return attackDamage;
+	}
+
+	private int getAttackDamage() {
+		if (isMagicAttackWithLackMp()) {
+			return 0;
+		}
+		return attackType.getDamage();
+	}
+
+	private boolean isMagicAttackWithLackMp() {
+		return attackType.equals(AttackType.MAGIC) &&
+				stats.hasEnoughMp(PLAYER_MAGIC_ATTACK_MP_COST);
+	}
+
+	public void attacked(int attackDamage) {
+		stats.reduceHp(attackDamage);
 	}
 
 	public void setName(String name) {
@@ -24,54 +47,29 @@ public class Player {
 		this.name = name;
 	}
 
-	public void setHpAndMp(List<Integer> playerStats) {
-		validateStats(playerStats);
-		startHp = playerStats.get(HP_INDEX);
-		startMp = playerStats.get(MP_INDEX);
-		this.curHp = startHp;
-		this.curMp = startMp;
+	public void setStats(List<Integer> playerStats) {
+		this.stats = new Stats(playerStats);
 	}
 
 	public void setAttackType(AttackType attackType) {
 		this.attackType = attackType;
 	}
 
+	public String getAttackTypeName() {
+		return this.attackType.getTypeName();
+	}
+
+	public int getAttackCount() {
+		return stats.getAttackCount();
+	}
+
+	public String getName() {
+		return name;
+	}
+
 	private void validateName(String name) {
 		isBlank(name);
 		isLegalLength(name);
-	}
-
-	private void validateStats(List<Integer> playerStats) {
-		isLegalSize(playerStats);
-		isPositiveNumber(playerStats);
-		isLegalSumValue(playerStats);
-	}
-
-	private void isLegalSize(List<Integer> playerStats) {
-		if (playerStats.size() != GameOption.PLAYER_STATS_SIZE) {
-			throw new IllegalArgumentException(ExceptionMessage.PLAYER_STATS_SIZE);
-		}
-	}
-
-	private void isPositiveNumber(List<Integer> playerStats) {
-		playerStats.forEach(v -> {
-			if (isNegative(v)) {
-				throw new IllegalArgumentException(ExceptionMessage.PLAYER_STATS_NEGATIVE);
-			}
-		});
-	}
-
-	private boolean isNegative(Integer v) {
-		return v < 0;
-	}
-
-	private void isLegalSumValue(List<Integer> playerStats) {
-		Integer sumValue = playerStats.stream()
-				.reduce(Integer::sum)
-				.get();
-		if (!sumValue.equals(GameOption.PLAYER_SUM_VALUE)) {
-			throw new IllegalArgumentException(ExceptionMessage.PLAYER_STATS_SUM_VALUE);
-		}
 	}
 
 	private void isBlank(String name) {
@@ -86,70 +84,4 @@ public class Player {
 		}
 	}
 
-	public boolean isAlive() {
-		return curHp > 0;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public int getStartHp() {
-		return startHp;
-	}
-
-	public int getStartMp() {
-		return startMp;
-	}
-
-	public int getCurHp() {
-		return curHp;
-	}
-
-	public int getCurMp() {
-		return curMp;
-	}
-
-	public int attackBoss() {
-		int attackDamage = getAttackDamage();
-		handleCost();
-		attackCount++;
-		return attackDamage;
-	}
-
-	private int getAttackDamage() {
-		if (attackType.equals(AttackType.MAGIC) && isInsufficientMp()) {
-			return 0;
-		}
-		return attackType.getDamage();
-	}
-
-	private void handleCost() {
-		if (attackType.equals(AttackType.PHYSICAL)) {
-			this.curMp = Math.min(startMp, this.curMp + PLAYER_MP_RECOVER);
-			return;
-		}
-		if (attackType.equals(AttackType.MAGIC)) {
-			if (isInsufficientMp()) {
-				return;
-			}
-			this.curMp = Math.max(PLAYER_MIN_MP, this.curMp - PLAYER_MAGIC_ATTACK_MP_COST);
-		}
-	}
-
-	private boolean isInsufficientMp() {
-		return this.curMp < PLAYER_MAGIC_ATTACK_MP_COST;
-	}
-
-	public void attacked(int attackDamage) {
-		this.curHp = Math.max(PLAYER_MIN_HP, this.curHp - attackDamage);
-	}
-
-	public String getAttackTypeName() {
-		return this.attackType.getTypeName();
-	}
-
-	public int getAttackCount() {
-		return attackCount;
-	}
 }

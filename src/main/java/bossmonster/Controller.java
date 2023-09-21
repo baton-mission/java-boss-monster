@@ -63,7 +63,7 @@ public class Controller {
 			List<Integer> playerStats = Arrays.stream(playerStatsString.split(DELIMITER))
 					.map(Converter::stringToInt)
 					.collect(Collectors.toList());
-			player.setHpAndMp(playerStats);
+			player.setStats(playerStats);
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e);
 			initPlayerHPAndMP(player);
