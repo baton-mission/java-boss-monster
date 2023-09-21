@@ -13,6 +13,7 @@ public class Player {
 	private int startMp;
 	private int curHp;
 	private int curMp;
+	private int attackCount = 0;
 	private AttackType attackType;
 
 	public Player() {
@@ -109,14 +110,21 @@ public class Player {
 		return curMp;
 	}
 
-	public int getAttackDamage() {
+	public int attackBoss() {
+		int attackDamage = getAttackDamage();
+		handleCost();
+		attackCount++;
+		return attackDamage;
+	}
+
+	private int getAttackDamage() {
 		if (attackType.equals(AttackType.MAGIC) && curMp < PLAYER_MAGIC_ATTACK_MP_COST) {
 			return 0;
 		}
 		return attackType.getDamage();
 	}
 
-	public void handleCost() {
+	private void handleCost() {
 		if (attackType.equals(AttackType.PHYSICAL)) {
 			this.curMp = Math.min(startMp, this.curMp + PLAYER_MP_RECOVER);
 			return;

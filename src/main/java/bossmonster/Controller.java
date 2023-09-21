@@ -19,17 +19,11 @@ public class Controller {
 	public void run() {
 		Boss boss = initBoss();
 		Player player = initPlayer();
+		proceedRade(boss, player);
 
-		OutputView.printRadeStart();
-		while (boss.isAlive() && player.isAlive()) {
-			printRadeInfo(boss, player);
-			initAttackType(player);
-			int playerToBossDamage = service.attackBoss(boss, player);
-			int bossToPlayerDamage = service.attackPlayer(boss, player);
-			OutputView.printPlayerAttackResult(playerToBossDamage, player);
-			OutputView.printBossAttackResult(bossToPlayerDamage);
-		}
 	}
+
+
 
 	// TODO 제내릭으로 리펙터링
 	private Boss initBoss() {
@@ -68,6 +62,23 @@ public class Controller {
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e);
 			initPlayerHPAndMP(player);
+		}
+	}
+
+	private void proceedRade(Boss boss, Player player) {
+		OutputView.printRadeStart();
+		int bossToPlayerDamage = 0;
+		while (boss.isAlive() && player.isAlive()) {
+			printRadeInfo(boss, player);
+			initAttackType(player);
+			int playerToBossDamage = service.attackBoss(boss, player);
+			if (boss.isAlive()) {
+				bossToPlayerDamage = service.attackPlayer(boss, player);
+			}
+			OutputView.printPlayerAttackResult(playerToBossDamage, player);
+			if (boss.isAlive()) {
+				OutputView.printBossAttackResult(bossToPlayerDamage);
+			}
 		}
 	}
 

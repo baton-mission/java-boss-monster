@@ -38,7 +38,16 @@ public class Boss {
 	}
 
 	public void attacked(int damage) {
+		handleBossStatus(damage);
 		this.curHp = Math.max(curHp - damage, 0);
+	}
+
+	private void handleBossStatus(int damage) {
+		if (damage > 0) {
+			this.status = BossStatus.ATTACKED;
+			return;
+		}
+		this.status = BossStatus.NORMAL;
 	}
 
 	public String getName() {
@@ -57,7 +66,11 @@ public class Boss {
 		return status.toString();
 	}
 
-	public int getAttackDamage() {
+	public int attackPlayer() {
+		return getAttackDamage();
+	}
+
+	private int getAttackDamage() {
 		return (int) (Math.random() * 21);
 	}
 }
