@@ -38,16 +38,20 @@ public class Boss {
 	}
 
 	public void attacked(int damage) {
-		handleBossStatus(damage);
+		handleBossStatus(damage > 0);
 		this.curHp = Math.max(curHp - damage, 0);
 	}
 
-	private void handleBossStatus(int damage) {
-		if (damage > 0) {
-			this.status = BossStatus.ATTACKED;
+	private void handleBossStatus(boolean isAttacked) {
+		if (isAttacked) {
+			setStatus(BossStatus.ATTACKED);
 			return;
 		}
-		this.status = BossStatus.NORMAL;
+		setStatus(BossStatus.NORMAL);
+	}
+
+	public void setStatus(BossStatus status) {
+		this.status = status;
 	}
 
 	public String getName() {

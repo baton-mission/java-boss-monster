@@ -13,7 +13,9 @@ public enum Message {
 			"1. 물리 공격\n" +
 			"2. 마법 공격"),
 	PLAYER_ATTACK_FORMAT("%s을 했습니다. (입힌 데미지: %d)\n"),
-	BOSS_ATTACK_FORMAT("보스가 공격 했습니다. (입힌 데미지: %d)\n");
+	BOSS_ATTACK_FORMAT("보스가 공격 했습니다. (입힌 데미지: %d)\n"),
+	RADE_WIN_FORMAT("%s 님이 %d번의 전투 끝에 보스 몬스터를 잡았습니다.\n"),
+	RADE_LOSS_FORMAT("%s의 HP가 0이 되었습니다.\n보스 레이드에 실패했습니다.\n");
 	private final String message;
 
 	Message(String message) {

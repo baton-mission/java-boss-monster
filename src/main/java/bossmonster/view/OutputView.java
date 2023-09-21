@@ -30,6 +30,7 @@ public class OutputView {
 	}
 
 	public static void printPlayer(Player player) {
+		System.out.println();
 		System.out.printf(Message.HP_AND_MP_STATUS_FORMAT.toString(),
 				player.getName(),
 				player.getCurHp(),
@@ -47,5 +48,17 @@ public class OutputView {
 	public static void printBossAttackResult(int bossToPlayerDamage) {
 		System.out.printf(Message.BOSS_ATTACK_FORMAT.toString(),
 				bossToPlayerDamage);
+	}
+
+	public static void printRadeWin(Player player) {
+		System.out.println();
+		System.out.printf(Message.RADE_WIN_FORMAT.toString(),
+				player.getName(),
+				player.getAttackCount());
+	}
+
+	public static void printRadeLoss(Player player) {
+		System.out.println();
+		System.out.printf(Message.RADE_LOSS_FORMAT.toString(), player.getName());
 	}
 }

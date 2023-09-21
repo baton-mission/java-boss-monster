@@ -20,7 +20,12 @@ public class Controller {
 		Boss boss = initBoss();
 		Player player = initPlayer();
 		proceedRade(boss, player);
-
+		if (player.isAlive()) {
+			OutputView.printRadeWin(player);
+			return;
+		}
+		printRadeInfo(boss, player);
+		OutputView.printRadeLoss(player);
 	}
 
 

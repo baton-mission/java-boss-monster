@@ -142,4 +142,8 @@ public class Player {
 	public String getAttackTypeName() {
 		return this.attackType.getTypeName();
 	}
+
+	public int getAttackCount() {
+		return attackCount;
+	}
 }

@@ -11,6 +11,9 @@ public class GameService {
 	public int attackPlayer(Boss boss, Player player) {
 		int attackDamage = boss.attackPlayer();
 		player.attacked(attackDamage);
+		if (!player.isAlive()) {
+			boss.setStatus(BossStatus.VICTORY);
+		}
 		return attackDamage;
 	}
 }
