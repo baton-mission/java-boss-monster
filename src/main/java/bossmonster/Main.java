@@ -32,55 +32,56 @@ public class Main {
     }
 
     static void 보스_몬스터_정보_입력() {
-        while (true) {
-            try {
-                System.out.println("보스 몬스터의 HP를 입력해주세요.");
-                보스몬스터_최대_HP = sc.nextInt();
-                보스몬스터_현재_HP = 보스몬스터_최대_HP;
-                sc.nextLine();
-                if (보스몬스터_최대_HP < 100 || 보스몬스터_최대_HP > 300) {
-                    throw new IllegalArgumentException("[ERROR] 보스몬스터의 체력은 100 이상 300 이하여야 합니다.");
-                }
-                return;
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+        try {
+            System.out.println("보스 몬스터의 HP를 입력해주세요.");
+            보스몬스터_최대_HP = sc.nextInt();
+            보스몬스터_현재_HP = 보스몬스터_최대_HP;
+            sc.nextLine();
+            if (보스몬스터_최대_HP < 100 || 보스몬스터_최대_HP > 300) {
+                throw new IllegalArgumentException("[ERROR] 보스몬스터의 체력은 100 이상 300 이하여야 합니다.");
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            보스_몬스터_정보_입력();
         }
     }
 
     static void 플레이어_정보_입력() {
-        while (true) {
-            try {
-                System.out.println("플레이어의 이름을 입력해주세요");
-                플레이어_이름 = sc.nextLine();
-                if (플레이어_이름.isEmpty() || 플레이어_이름.length() > 5) {
-                    throw new IllegalArgumentException("[ERROR] 플레이어의 이름은 없어서는 안되며, 5글자 이상이어야 합니다.");
-                }
-                break;
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+        플레이어_이름_입력();
+        플레이어_스테미너_입력();
+    }
+
+    private static void 플레이어_이름_입력() {
+        try {
+            System.out.println("플레이어의 이름을 입력해주세요");
+            플레이어_이름 = sc.nextLine();
+            if (플레이어_이름.isEmpty() || 플레이어_이름.length() > 5) {
+                throw new IllegalArgumentException("[ERROR] 플레이어의 이름은 없어서는 안되며, 5글자 이상이어야 합니다.");
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            플레이어_이름_입력();
         }
+    }
 
-        while (true) {
-            try {
-                System.out.println("플레이어의 HP와 MP를 입력해주세요.(,로 구분)");
-                String[] 플레이어_HP_MP = sc.nextLine().split(",");
-                플레이어_최대_HP = Integer.parseInt(플레이어_HP_MP[0]);
-                플레이어_HP = 플레이어_최대_HP;
-                플레이어_최대_MP = Integer.parseInt(플레이어_HP_MP[1]);
-                플레이어_MP = 플레이어_최대_MP;
+    private static void 플레이어_스테미너_입력() {
+        try {
+            System.out.println("플레이어의 HP와 MP를 입력해주세요.(,로 구분)");
+            String[] 플레이어_HP_MP = sc.nextLine().split(",");
+            플레이어_최대_HP = Integer.parseInt(플레이어_HP_MP[0]);
+            플레이어_HP = 플레이어_최대_HP;
+            플레이어_최대_MP = Integer.parseInt(플레이어_HP_MP[1]);
+            플레이어_MP = 플레이어_최대_MP;
 
-                if (플레이어_최대_HP + 플레이어_최대_MP != 200) {
-                    throw new IllegalArgumentException("[ERROR] 플레이어의 초기 HP와 MP 합은 200이다.");
-                }
-                if (플레이어_최대_HP < 0 || 플레이어_최대_MP <= 0) {
-                    throw new IllegalArgumentException("[ERROR] 플레이어의 초기 HP는 1 이상, MP는 0 이상이어야 합니다.");
-                }
-                return;
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+            if (플레이어_최대_HP + 플레이어_최대_MP != 200) {
+                throw new IllegalArgumentException("[ERROR] 플레이어의 초기 HP와 MP 합은 200이다.");
             }
+            if (플레이어_최대_HP < 0 || 플레이어_최대_MP <= 0) {
+                throw new IllegalArgumentException("[ERROR] 플레이어의 초기 HP는 1 이상, MP는 0 이상이어야 합니다.");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            플레이어_스테미너_입력();
         }
     }
 
@@ -150,21 +151,20 @@ public class Main {
     }
 
     static int 공격_입력받기() {
-        while (true) {
-            try {
-                System.out.println();
-                System.out.println("어떤 공격을 하시겠습니까?");
-                System.out.println("1. 물리 공격");
-                System.out.println("2. 마법 공격");
-                int 입력 = sc.nextInt();
-                sc.nextLine();
-                if (입력 != 물리_공격 && 입력 != 마법_공격) {
-                    throw new IllegalArgumentException("[ERROR] 1번 혹은 2번을 입력해주세요.");
-                }
-                return 입력;
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+        try {
+            System.out.println();
+            System.out.println("어떤 공격을 하시겠습니까?");
+            System.out.println("1. 물리 공격");
+            System.out.println("2. 마법 공격");
+            int 입력 = sc.nextInt();
+            sc.nextLine();
+            if (입력 != 물리_공격 && 입력 != 마법_공격) {
+                throw new IllegalArgumentException("[ERROR] 1번 혹은 2번을 입력해주세요.");
             }
+            return 입력;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return 공격_입력받기();
         }
     }
 
