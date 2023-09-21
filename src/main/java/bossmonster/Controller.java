@@ -30,16 +30,31 @@ public class Controller {
 	}
 
 	private Player initPlayer() {
+		Player player = new Player();
+		initPlayerName(player);
+		initPlayerHPAndMP(player);
+		return player;
+	}
+
+	private void initPlayerName(Player player) {
 		try {
-			String playerName = InputView.readPlayerName();
-			String playerInfoString = InputView.readPlayerInfo();
-			List<Integer> playerInfo = Arrays.stream(playerInfoString.split(DELIMITER))
-					.map(Converter::stringToInt)
-					.collect(Collectors.toList());
-			return new Player(playerName, playerInfo.get(HP_INDEX), playerInfo.get(MP_INDEX));
+			player.setName(InputView.readPlayerName());
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e);
-			return initPlayer();
+			initPlayerName(player);
+		}
+	}
+
+	private void initPlayerHPAndMP(Player player) {
+		try {
+			String playerStatsString = InputView.readPlayerInfo();
+			List<Integer> playerStats = Arrays.stream(playerStatsString.split(DELIMITER))
+					.map(Converter::stringToInt)
+					.collect(Collectors.toList());
+			player.setHpAndMp(playerStats);
+		} catch (IllegalArgumentException e) {
+			OutputView.printError(e);
+			initPlayerHPAndMP(player);
 		}
 	}
 }

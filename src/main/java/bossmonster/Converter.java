@@ -8,4 +8,6 @@ public class Converter {
 			throw new IllegalArgumentException(ExceptionMessage.NUMBER_FORMAT);
 		}
 	}
+
+
 }
