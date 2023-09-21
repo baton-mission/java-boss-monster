@@ -2,8 +2,6 @@ package bossmonster.domain;
 
 import bossmonster.ExceptionMessage;
 
-import java.util.Random;
-
 public class Boss {
 	private String name;
 	private int startHp;

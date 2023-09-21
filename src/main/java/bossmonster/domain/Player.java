@@ -118,7 +118,7 @@ public class Player {
 	}
 
 	private int getAttackDamage() {
-		if (attackType.equals(AttackType.MAGIC) && curMp < PLAYER_MAGIC_ATTACK_MP_COST) {
+		if (attackType.equals(AttackType.MAGIC) && isInsufficientMp()) {
 			return 0;
 		}
 		return attackType.getDamage();
@@ -130,9 +130,15 @@ public class Player {
 			return;
 		}
 		if (attackType.equals(AttackType.MAGIC)) {
+			if (isInsufficientMp()) {
+				return;
+			}
 			this.curMp = Math.max(PLAYER_MIN_MP, this.curMp - PLAYER_MAGIC_ATTACK_MP_COST);
-			return;
 		}
+	}
+
+	private boolean isInsufficientMp() {
+		return this.curMp < PLAYER_MAGIC_ATTACK_MP_COST;
 	}
 
 	public void attacked(int attackDamage) {
