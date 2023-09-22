@@ -24,12 +24,12 @@ public class BossMonsterGame {
 		BossMonster bossMonster = inputBossHp();
 		Player player = inputPlayer();
 		OutputView.printStartRaidMessage();
+		OutputView.printStartGameStatus(bossMonster, player);
 		play(bossMonster, player);
 	}
 
 	public void play(BossMonster bossMonster, Player player) {
-		while (bossMonster.bossHpZero() || player.playerHpZero()) {
-			OutputView.printGameStatus(bossMonster, player);
+		while (true) {
 			OutputView.printAttackType();
 			AttackType type = inputAttackType();
 			player.attack(type);
@@ -37,7 +37,16 @@ public class BossMonsterGame {
 			int damage = randomDamageGenerator.generate();
 			player.attackedByBossMonster(damage);
 			OutputView.printPlayerAttackDamage(type);
+			if (bossMonster.bossHpZero()) {
+				break;
+			}
 			OutputView.printBossAttackDamage(damage);
+			if (player.playerHpZero()) {
+				OutputView.printFailGameStatus(bossMonster, player);
+				OutputView.printPlayerHpZero(player.getName());
+				break;
+			}
+			OutputView.printPlayGameStatus(bossMonster, player);
 		}
 	}
 

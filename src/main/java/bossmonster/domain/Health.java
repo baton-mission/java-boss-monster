@@ -19,7 +19,7 @@ public class Health {
 	}
 
 	public boolean isHpZero() {
-		return hp != 0;
+		return hp <= 0;
 	}
 
 	public void spendHp(int damage) {

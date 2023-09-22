@@ -31,9 +31,21 @@ public class OutputView {
 		System.out.println("보스 레이드를 시작합니다!");
 	}
 
-	public static void printGameStatus(BossMonster bossMonster, Player player) {
+	public static void printStartGameStatus(BossMonster bossMonster, Player player) {
 		printBossHpStatus(bossMonster.remainedBossHp());
 		printStartBossImage();
+		printPlayerHealthStatus(player.getName(), player.getHealth());
+	}
+
+	public static void printPlayGameStatus(BossMonster bossMonster, Player player) {
+		printBossHpStatus(bossMonster.remainedBossHp());
+		printHitBossImage();
+		printPlayerHealthStatus(player.getName(), player.getHealth());
+	}
+
+	public static void printFailGameStatus(BossMonster bossMonster, Player player) {
+		printBossHpStatus(bossMonster.remainedBossHp());
+		printFailBossImage();
 		printPlayerHealthStatus(player.getName(), player.getHealth());
 	}
 
@@ -45,7 +57,7 @@ public class OutputView {
 
 	private static void printPlayerHealthStatus(String name, Health health) {
 		System.out.print(LINE_BREAK);
-		System.out.println(name + " HP [" + health.getHp() + "/100] MP [" + health.getMp() + "/100]");
+		System.out.println(name + " HP [" + "0/100] MP [" + health.getMp() + "/100]");
 		System.out.println("============================");
 	}
 
@@ -75,7 +87,7 @@ public class OutputView {
 		System.out.println("____________________________");
 	}
 
-	private static void printRaidBossImage() {
+	private static void printHitBossImage() {
 		System.out.println("____________________________");
 		System.out.println("   ^-^\n"
 			+ " / x x \\\n"
@@ -93,5 +105,11 @@ public class OutputView {
 			+ " \\  3  /\n"
 			+ "  - ^ -");
 		System.out.println("____________________________");
+	}
+
+	public static void printPlayerHpZero(String name) {
+		System.out.println(LINE_BREAK);
+		System.out.println(name + "의 HP가 0이 되었습니다.");
+		System.out.println("보스 레이드에 실패하였습니다.");
 	}
 }
