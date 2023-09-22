@@ -17,7 +17,7 @@ public class BossMonster {
     public void createHP(Integer input){
         hp = new HP(input);
     }
-    public void damaged(Integer input){
+    public void damaged(Integer input, Player attacker){
         showDamaged(input);
         avatar =
                 "   ^-^\n" +
@@ -31,9 +31,10 @@ public class BossMonster {
             return;
         }
         hp.decrease(input);
+        attack(attacker);
     }
     public void attack(Player target){
-        Integer damage = (int) (Math.random() % 21);
+        Integer damage = (int) ((Math.random() * 1000)%20);
         target.damaged(damage);
     }
     public void die(){

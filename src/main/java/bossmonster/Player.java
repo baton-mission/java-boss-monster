@@ -34,16 +34,16 @@ public class Player {
         throw new IllegalArgumentException("공격하셔야 합니다. 1또는 2를 입력해주세요.");
     }
     public void physicalAttack(BossMonster target){
-        target.damaged(10);
         mp.increase(10);
         attackCount ++;
+        target.damaged(10, this);
     }
     public void magicalAttack(BossMonster target){
         if(!mp.usableMagic(30))
             throw new IllegalArgumentException("MP가 30미만이라서 마법공격을 할 수 없습니다.");
-        target.damaged(20);
         mp.decrease(30);
         attackCount++;
+        target.damaged(20, this);
     }
     public void damaged(Integer input){
         showDamaged(input);
@@ -53,6 +53,7 @@ public class Player {
             return;
         }
         hp.decrease(input);
+        Application.turn();
     }
     public void die(){}
 
