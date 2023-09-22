@@ -15,6 +15,10 @@ public class BossMonster {
         }
         hp.decrease(input);
     }
+    public void attack(Player target){
+        Integer damage = (int) (Math.random() % 21);
+        target.damaged(damage);
+    }
     public void die(){
 
     }
