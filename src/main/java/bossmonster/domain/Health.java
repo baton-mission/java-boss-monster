@@ -2,8 +2,8 @@ package bossmonster.domain;
 
 public class Health {
 
-	private final int hp;
-	private final int mp;
+	private int hp;
+	private int mp;
 
 	public Health(int hp, int mp) {
 		this.hp = hp;
@@ -16,6 +16,10 @@ public class Health {
 
 	public boolean validatePlayerHpAndMp() {
 		return (hp + mp) != 200;
+	}
+
+	public void spendHp(AttackType attackType) {
+		hp -= attackType.getDamage();
 	}
 
 	public int getHp() {

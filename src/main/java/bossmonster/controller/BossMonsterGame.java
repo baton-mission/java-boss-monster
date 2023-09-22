@@ -25,7 +25,7 @@ public class BossMonsterGame {
 			OutputView.printGameStatus(bossMonster.remainedBossHp(), player.getName());
 			OutputView.printAttackType();
 			AttackType type = inputAttackType();
-
+			bossMonster.attackedByPlayer(type);
 		}
 	}
 

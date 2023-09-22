@@ -15,11 +15,15 @@ public class BossMonster {
 		}
 	}
 
-	public int remainedBossHp() {
-		return health.getHp();
-	}
-
 	public boolean bossHpZero() {
 		return health.getHp() != 0;
+	}
+
+	public void attackedByPlayer(AttackType attackType) {
+		health.spendHp(attackType);
+	}
+
+	public int remainedBossHp() {
+		return health.getHp();
 	}
 }
