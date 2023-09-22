@@ -1,5 +1,6 @@
 package bossmonster;
 
+import bossmonster.IO.Output;
 import bossmonster.VO.HP;
 
 public class BossMonster {
@@ -17,6 +18,7 @@ public class BossMonster {
         hp = new HP(input);
     }
     public void damaged(Integer input){
+        showDamaged(input);
         avatar =
                 "   ^-^\n" +
                 " / x x \\\n" +
@@ -33,7 +35,6 @@ public class BossMonster {
     public void attack(Player target){
         Integer damage = (int) (Math.random() % 21);
         target.damaged(damage);
-        System.out.println("보스가 공격 했습니다. (입힌 데미지: " + damage + ")");
     }
     public void die(){
 
@@ -42,5 +43,12 @@ public class BossMonster {
         System.out.println("BOSS HP " + hp.showNowMax());
         System.out.println("____________________________\n" + avatar +
                 "\n____________________________");
+    }
+    public void showDamaged(Integer damage){
+        String type = "물리";
+        if (damage > 10)
+            type = "마법";
+        System.out.println(type + " 공격을 했습니다. (입힌 데미지: " + hp.dealDamege(damage) + ")");
+
     }
 }

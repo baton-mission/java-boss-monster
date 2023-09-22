@@ -2,6 +2,7 @@ package bossmonster.IO;
 
 import bossmonster.BossMonster;
 import bossmonster.Player;
+import bossmonster.VO.HP;
 
 public class Output {
     public void startGame(Player player, BossMonster bossMonster){
@@ -15,4 +16,5 @@ public class Output {
         bossMonster.showState();
         player.showState();
     }
+
 }

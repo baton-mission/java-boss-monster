@@ -1,5 +1,6 @@
 package bossmonster;
 
+import bossmonster.IO.Output;
 import bossmonster.VO.HP;
 import bossmonster.VO.MP;
 import bossmonster.VO.Name;
@@ -36,7 +37,6 @@ public class Player {
         target.damaged(10);
         mp.increase(10);
         attackCount ++;
-        System.out.println("물리 공격을 했습니다. (입힌 데미지: 10)");
     }
     public void magicalAttack(BossMonster target){
         if(!mp.usableMagic(30))
@@ -44,9 +44,9 @@ public class Player {
         target.damaged(20);
         mp.decrease(30);
         attackCount++;
-        System.out.println("마법 공격을 했습니다. (입힌 데미지: 20)");
     }
     public void damaged(Integer input){
+        showDamaged(input);
         if(hp.canDie(input)){
             hp.toZero();
             die();
@@ -58,6 +58,9 @@ public class Player {
 
     public void showState(){
         System.out.println(name.showName() + " HP " + hp.showNowMax() + " MP " + mp.showNowMax());
+    }
+    public void showDamaged(Integer damage){
+        System.out.println("보스가 공격 했습니다. (입힌 데미지: " + hp.dealDamege(damage) + ")");
     }
 }
 
