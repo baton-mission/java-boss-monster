@@ -9,4 +9,11 @@ public class MP {
         this.nowValue = input;
         this.maxValue = input;
     }
+    public void increase(int input){
+        if (nowValue + input >= maxValue){
+            nowValue = maxValue;
+            return;
+        }
+        nowValue += input;
+    }
 }
