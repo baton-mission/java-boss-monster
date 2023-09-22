@@ -19,22 +19,10 @@ public class Player {
 	}
 
 	public int attackBoss() {
-		int attackDamage = getAttackDamage();
+		int attackDamage = stats.calculateAttackDamage(attackType);
 		stats.handleCost(attackType);
 		stats.addAttackCount();
 		return attackDamage;
-	}
-
-	private int getAttackDamage() {
-		if (isMagicAttackWithLackMp()) {
-			return 0;
-		}
-		return attackType.getDamage();
-	}
-
-	private boolean isMagicAttackWithLackMp() {
-		return attackType.equals(AttackType.MAGIC) &&
-				!stats.hasEnoughMp(PLAYER_MAGIC_ATTACK_MP_COST);
 	}
 
 	public void attacked(int attackDamage) {

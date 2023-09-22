@@ -21,7 +21,6 @@ public class Controller {
 		printResult(boss, player);
 	}
 
-	// TODO 제내릭으로 리펙터링
 	private Boss initBoss() {
 		try {
 			int bossHp = Converter.stringToInt(InputView.readBossHp());
@@ -94,4 +93,5 @@ public class Controller {
 		OutputView.printRadeInfo(boss, player);
 		OutputView.printRadeLoss(player);
 	}
+
 }

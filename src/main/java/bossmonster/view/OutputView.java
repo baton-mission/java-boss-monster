@@ -24,7 +24,6 @@ public class OutputView {
 		OutputView.printDoubleDiv();
 	}
 
-
 	private static void printDoubleDiv() {
 		System.out.println(Message.DOUBLE_DIV);
 	}

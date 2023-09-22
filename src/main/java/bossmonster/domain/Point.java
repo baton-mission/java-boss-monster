@@ -18,8 +18,16 @@ public class Point {
 		}
 	}
 
+	public boolean isMoreTHen(int amount) {
+		return curAmount > amount;
+	}
+
 	public boolean isEqualOrMoreThen(int amount) {
 		return curAmount >= amount;
+	}
+
+	public boolean isLowerThen(int amount) {
+		return this.curAmount < amount;
 	}
 
 	public void reduceAmount(int amount) {

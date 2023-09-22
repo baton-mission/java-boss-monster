@@ -5,8 +5,7 @@ import bossmonster.ExceptionMessage;
 import java.util.ArrayList;
 import java.util.List;
 
-import static bossmonster.domain.GameOption.PLAYER_MAGIC_ATTACK_MP_COST;
-import static bossmonster.domain.GameOption.PLAYER_MP_RECOVER;
+import static bossmonster.domain.GameOption.*;
 
 public class Stats {
 	private Point hp;
@@ -17,7 +16,7 @@ public class Stats {
 		validateStats(stats);
 		this.hp = new Point(stats.get(GameOption.HP_INDEX));
 		this.mp = new Point(stats.get(GameOption.MP_INDEX));
-		this.attackCount = attackCount;
+		this.attackCount = GameOption.INITIAL_ATTACK_COUNT;
 	}
 
 	private void validateStats(List<Integer> playerStats) {
@@ -41,36 +40,51 @@ public class Stats {
 	}
 
 	public boolean isAlive() {
-		return hp.isEqualOrMoreThen(1);
+		return hp.isMoreTHen(MIN_HP);
 	}
 
 	public void addAttackCount() {
 		attackCount++;
 	}
 
-	public int getAttackCount() {
-		return attackCount;
+	public int calculateAttackDamage(AttackType attackType) {
+		if (isMagicAttackWithLackMp(attackType)) {
+			return 0;
+		}
+		return attackType.getDamage();
 	}
 
-	public boolean hasEnoughMp(int amount) {
-		return mp.isEqualOrMoreThen(amount);
+	private boolean isMagicAttackWithLackMp(AttackType attackType) {
+		return attackType.equals(AttackType.MAGIC) &&
+				mp.isLowerThen(PLAYER_MAGIC_ATTACK_MP_COST);
 	}
 
 	public void handleCost(AttackType attackType) {
 		if (attackType.equals(AttackType.PHYSICAL)) {
-			mp.addAmount(PLAYER_MP_RECOVER);
-			return;
+			handlePhysicalAttack();
 		}
 		if (attackType.equals(AttackType.MAGIC)) {
-			if (!mp.isEqualOrMoreThen(PLAYER_MAGIC_ATTACK_MP_COST)) {
-				return;
-			}
-			mp.reduceAmount(PLAYER_MAGIC_ATTACK_MP_COST);
+			handlerMagicAttack();
 		}
+	}
+
+	private void handlePhysicalAttack() {
+		mp.addAmount(PLAYER_MP_RECOVER);
+	}
+
+	private void handlerMagicAttack() {
+		if (mp.isLowerThen(PLAYER_MAGIC_ATTACK_MP_COST)) {
+			return;
+		}
+		mp.reduceAmount(PLAYER_MAGIC_ATTACK_MP_COST);
 	}
 
 	public void reduceHp(int attackDamage) {
 		hp.reduceAmount(attackDamage);
+	}
+
+	public int getAttackCount() {
+		return attackCount;
 	}
 
 	public List<Integer> getHp() {
