@@ -33,6 +33,7 @@ public class BossMonster {
     public void attack(Player target){
         Integer damage = (int) (Math.random() % 21);
         target.damaged(damage);
+        System.out.println("보스가 공격 했습니다. (입힌 데미지: " + damage + ")");
     }
     public void die(){
 

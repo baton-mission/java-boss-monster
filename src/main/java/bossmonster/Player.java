@@ -36,6 +36,7 @@ public class Player {
         target.damaged(10);
         mp.increase(10);
         attackCount ++;
+        System.out.println("물리 공격을 했습니다. (입힌 데미지: 10)");
     }
     public void magicalAttack(BossMonster target){
         if(!mp.usableMagic(30))
@@ -43,6 +44,7 @@ public class Player {
         target.damaged(20);
         mp.decrease(30);
         attackCount++;
+        System.out.println("마법 공격을 했습니다. (입힌 데미지: 20)");
     }
     public void damaged(Integer input){
         if(hp.canDie(input)){
