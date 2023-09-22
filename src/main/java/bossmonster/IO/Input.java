@@ -24,4 +24,6 @@ public class Input {
         scanner = new Scanner(scanner.next()).useDelimiter("\\s*,\\s*");
         player.createHPMP(scanner.nextInt(),scanner.nextInt());
     }
+
+
 }

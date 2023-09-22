@@ -18,5 +18,9 @@ public class Player {
         this.mp = new MP(mp);
 
     }
+
+    public void physicalAttack(BossMonster target){
+
+    }
 }
 
