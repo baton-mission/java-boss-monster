@@ -1,5 +1,9 @@
 package bossmonster.domain;
 
+import bossmonster.domain.boss.Boss;
+import bossmonster.domain.boss.BossStatus;
+import bossmonster.domain.player.Player;
+
 public class GameService {
 
 	public int attackBoss(Boss boss, Player player) {
@@ -9,10 +13,11 @@ public class GameService {
 	}
 
 	public int attackPlayer(Boss boss, Player player) {
+		if (!boss.isAlive()) return 0;
 		int attackDamage = boss.attackPlayer();
 		player.attacked(attackDamage);
 		if (!player.isAlive()) {
-			boss.setStatus(BossStatus.VICTORY);
+			boss.handleBossStatus(false, true);
 		}
 		return attackDamage;
 	}

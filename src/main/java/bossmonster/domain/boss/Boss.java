@@ -1,6 +1,8 @@
-package bossmonster.domain;
+package bossmonster.domain.boss;
 
-import bossmonster.ExceptionMessage;
+import bossmonster.message.ExceptionMessage;
+import bossmonster.domain.GameOption;
+import bossmonster.domain.Point;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +22,10 @@ public class Boss {
 	}
 
 	private void validate(int hp) {
-		isInRange(hp);
+		isLegalHpRange(hp);
 	}
 
-	private void isInRange(int hp) {
+	private void isLegalHpRange(int hp) {
 		if (hp < GameOption.BOSS_HP_MIN_INCLUSIVE ||
 				hp > GameOption.BOSS_HP_MAX_INCLUSIVE) {
 			throw new IllegalArgumentException(ExceptionMessage.BOSS_HP_RANGE);
@@ -35,16 +37,20 @@ public class Boss {
 	}
 
 	public void attacked(int damage) {
-		handleBossStatus(damage > 0);
+		handleBossStatus(damage > 0, false);
 		hp.reduceAmount(damage);
 	}
 
-	private void handleBossStatus(boolean isAttacked) {
-		if (isAttacked) {
-			setStatus(BossStatus.ATTACKED);
+	public void handleBossStatus(boolean isAttacked, boolean isVictory) {
+		if (isVictory) {
+			status = BossStatus.VICTORY;
 			return;
 		}
-		setStatus(BossStatus.NORMAL);
+		if (isAttacked) {
+			status = BossStatus.ATTACKED;
+			return;
+		}
+		status = BossStatus.NORMAL;
 	}
 
 	public int attackPlayer() {
@@ -53,11 +59,6 @@ public class Boss {
 
 	private int getAttackDamage() {
 		return (int) (Math.random() * BOSS_DAMAGE_MAX_EXCLUSIVE);
-	}
-
-	// TODO Setter 없애는 방향으로 리펙터링
-	public void setStatus(BossStatus status) {
-		this.status = status;
 	}
 
 	public String getName() {

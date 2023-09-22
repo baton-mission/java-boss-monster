@@ -1,9 +1,9 @@
 package bossmonster;
 
-import bossmonster.domain.AttackType;
-import bossmonster.domain.Boss;
+import bossmonster.domain.player.AttackType;
+import bossmonster.domain.boss.Boss;
 import bossmonster.domain.GameService;
-import bossmonster.domain.Player;
+import bossmonster.domain.player.Player;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 import static bossmonster.domain.GameOption.DELIMITER;
 
-public class Controller {
+public class MainController {
 	public static final GameService service = new GameService();
 
 	public void run() {
@@ -60,14 +60,11 @@ public class Controller {
 
 	private void proceedRade(Boss boss, Player player) {
 		OutputView.printRadeStart();
-		int bossToPlayerDamage = 0;
 		while (boss.isAlive() && player.isAlive()) {
 			OutputView.printRadeInfo(boss, player);
 			initAttackType(player);
 			int playerToBossDamage = service.attackBoss(boss, player);
-			if (boss.isAlive()) {
-				bossToPlayerDamage = service.attackPlayer(boss, player);
-			}
+			int bossToPlayerDamage = service.attackPlayer(boss, player);
 			OutputView.printPlayerAttackResult(playerToBossDamage, player);
 			if (boss.isAlive()) {
 				OutputView.printBossAttackResult(bossToPlayerDamage);

@@ -1,4 +1,4 @@
-package bossmonster.domain;
+package bossmonster.domain.boss;
 
 public enum BossStatus {
 	NORMAL(0, "   ^-^\n" +

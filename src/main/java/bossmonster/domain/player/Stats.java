@@ -1,6 +1,8 @@
-package bossmonster.domain;
+package bossmonster.domain.player;
 
-import bossmonster.ExceptionMessage;
+import bossmonster.message.ExceptionMessage;
+import bossmonster.domain.GameOption;
+import bossmonster.domain.Point;
 
 import java.util.ArrayList;
 import java.util.List;

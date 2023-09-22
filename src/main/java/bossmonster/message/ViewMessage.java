@@ -1,6 +1,6 @@
-package bossmonster;
+package bossmonster.message;
 
-public enum Message {
+public enum ViewMessage {
 	READ_BOSS_HP("보스 몬스터의 HP를 입력해주세요."),
 	READ_PLAYER_NAME("플레이어의 이름을 입력해주세요."),
 	READ_PLAYER_HP_MP("플레이어의 HP와 MP를 입력해주세요.(,로 구분)"),
@@ -18,7 +18,7 @@ public enum Message {
 	RADE_LOSS_FORMAT("%s의 HP가 0이 되었습니다.\n보스 레이드에 실패했습니다.\n");
 	private final String message;
 
-	Message(String message) {
+	ViewMessage(String message) {
 		this.message = message;
 	}
 

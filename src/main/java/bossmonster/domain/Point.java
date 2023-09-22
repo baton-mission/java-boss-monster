@@ -1,6 +1,6 @@
 package bossmonster.domain;
 
-import bossmonster.ExceptionMessage;
+import bossmonster.message.ExceptionMessage;
 
 public class Point {
 	private int startAmount;

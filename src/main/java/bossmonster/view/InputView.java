@@ -1,7 +1,7 @@
 package bossmonster.view;
 
-import bossmonster.ExceptionMessage;
-import bossmonster.Message;
+import bossmonster.message.ExceptionMessage;
+import bossmonster.message.ViewMessage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,22 +11,22 @@ public class InputView {
 	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 	public static String readBossHp() {
-		System.out.println(Message.READ_BOSS_HP);
+		System.out.println(ViewMessage.READ_BOSS_HP);
 		return getValidatedString();
 	}
 
 	public static String readPlayerName() {
-		System.out.println(Message.READ_PLAYER_NAME);
+		System.out.println(ViewMessage.READ_PLAYER_NAME);
 		return getValidatedString();
 	}
 
 	public static String readPlayerInfo() {
-		System.out.println(Message.READ_PLAYER_HP_MP);
+		System.out.println(ViewMessage.READ_PLAYER_HP_MP);
 		return getValidatedString();
 	}
 
 	public static String readAttackType() {
-		System.out.println(Message.READ_ATTACK_TYPE);
+		System.out.println(ViewMessage.READ_ATTACK_TYPE);
 		return getValidatedString();
 	}
 

@@ -1,4 +1,4 @@
-package bossmonster;
+package bossmonster.message;
 
 import static bossmonster.domain.GameOption.*;
 
