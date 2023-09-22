@@ -27,7 +27,7 @@
 
 # 분류
 ## controller
-### BossMissionController
+### BossMonsterController
 - [ ] 객체 초기화
 - [ ] 입력 문구 출력 및 입력받기
 - [ ] 레이드 시작 문구 출력
@@ -71,6 +71,7 @@
 
 ## validation
 ### InputValidation
+- [ ] Boss HP, Player HP, MP 입력 값이 숫자인가
 - [ ] Boss HP가 100 이상 300 이하인가
 - [ ] Player의 이름이 5자 이하인가
 - [ ] Player의 HP, MP가 합 200인가
