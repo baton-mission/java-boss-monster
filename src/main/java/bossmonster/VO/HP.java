@@ -34,4 +34,7 @@ public class HP {
     public String showNowMax(){
         return "[" + nowValue + "/" + maxValue + "]";
     }
+    public Boolean isDameged(){
+        return (nowValue < maxValue);
+    }
 }

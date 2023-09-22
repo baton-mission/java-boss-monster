@@ -9,9 +9,11 @@ public class Output {
         Input input = new Input();
         battleField(player,bossMonster);
         input.playerAttack(player, bossMonster);
+        battleField(player, bossMonster);
     }
     public void battleField(Player player, BossMonster bossMonster){
         System.out.println("============================");
+        bossMonster.showState();
         player.showState();
     }
 }
