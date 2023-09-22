@@ -16,6 +16,9 @@ public class BossMonsterGame {
 		BossMonster bossMonster = inputBossHp();
 		Player player = inputPlayer();
 		OutputView.printStartRaidMessage();
+		OutputView.printBossHpStatus(bossMonster.remainedBossHp());
+		OutputView.printCommonBossImage();
+		OutputView.printPlayerHealthStatus(player.getName());
 	}
 
 	private BossMonster inputBossHp() {

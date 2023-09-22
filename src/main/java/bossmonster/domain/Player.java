@@ -23,4 +23,8 @@ public class Player {
 			throw new IllegalArgumentException("[ERROR] 플레이어의 초기 HP와 MP의 합은 200이어야 합니다.");
 		}
 	}
+
+	public String getName() {
+		return name;
+	}
 }

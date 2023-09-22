@@ -1,7 +1,5 @@
 package bossmonster.view;
 
-import bossmonster.domain.Health;
-
 public class OutputView {
 
 	private static final String LINE_BREAK = "\n";
@@ -28,18 +26,25 @@ public class OutputView {
 		System.out.println("보스 레이드를 시작합니다!");
 	}
 
-	public static void printBossHpStatus(Health health) {
-		System.out.println(LINE_BREAK);
-		System.out.print("============================");
-		System.out.println("BOSS HP [" + health.getHp() + "/" + health.getHp() + "]");
-		System.out.println("____________________________");
+	public static void printBossHpStatus(int hp) {
+		System.out.print(LINE_BREAK);
+		System.out.println("============================");
+		System.out.println("BOSS HP [" + hp + "/" + hp + "]");
 	}
 
 	public static void printCommonBossImage() {
-		System.out.println("  ^-^\n"
+		System.out.println("____________________________");
+		System.out.println("   ^-^\n"
 			+ " / 0 0 \\\n"
 			+ "(   \"   )\n"
 			+ " \\  -  /\n"
 			+ "  - ^ -");
+		System.out.println("____________________________");
+	}
+
+	public static void printPlayerHealthStatus(String name) {
+		System.out.print(LINE_BREAK);
+		System.out.println(name + " HP [100/100] MP [100/100]");
+		System.out.println("============================");
 	}
 }
