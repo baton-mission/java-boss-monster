@@ -9,16 +9,22 @@ public class InputView {
 	private InputView() {
 	}
 
-	public static int readBossHp() {
+	public static String readBossHp() {
 		String hp = scanner.next();
 		validateBlank(hp);
-		return Integer.parseInt(hp);
+		return hp;
 	}
 
 	public static String readPlayer() {
 		String playerName = scanner.next();
 		validateBlank(playerName);
 		return playerName;
+	}
+
+	public static String readPlayerHpAndMp() {
+		String hpAndMp = scanner.next();
+		validateBlank(hpAndMp);
+		return hpAndMp;
 	}
 
 	private static void validateBlank(String input) {
