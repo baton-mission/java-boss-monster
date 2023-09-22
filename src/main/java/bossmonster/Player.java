@@ -22,9 +22,17 @@ public class Player {
     }
 
     public void physicalAttack(BossMonster target){
-        target.damaged(20);
+        target.damaged(10);
         mp.increase(10);
         attackCount ++;
+    }
+    public void magicalAttack(BossMonster target){
+        if(!mp.usableMagic(30))
+            throw new IllegalArgumentException("MP가 30미만이라서 마법공격을 할 수 없습니다.");
+        target.damaged(20);
+        mp.decrease(30);
+        attackCount++;
+
     }
 }
 

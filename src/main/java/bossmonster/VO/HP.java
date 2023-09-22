@@ -28,8 +28,6 @@ public class HP {
     }
 
     public void decrease(int damage){
-        if (canDie(damage))
-            toZero();
         nowValue -= damage;
     }
 }

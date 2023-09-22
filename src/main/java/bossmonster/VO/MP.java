@@ -16,4 +16,10 @@ public class MP {
         }
         nowValue += input;
     }
+    public void decrease(int input){
+        nowValue -= input;
+    }
+    public Boolean usableMagic(int input){
+        return (input <= nowValue);
+    }
 }
