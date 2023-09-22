@@ -1,5 +1,6 @@
 package bossmonster.view;
 
+import bossmonster.domain.AttackType;
 import bossmonster.domain.BossMonster;
 import bossmonster.domain.Health;
 import bossmonster.domain.Player;
@@ -32,7 +33,7 @@ public class OutputView {
 
 	public static void printGameStatus(BossMonster bossMonster, Player player) {
 		printBossHpStatus(bossMonster.remainedBossHp());
-		printCommonBossImage();
+		printStartBossImage();
 		printPlayerHealthStatus(player.getName(), player.getHealth());
 	}
 
@@ -40,16 +41,6 @@ public class OutputView {
 		System.out.print(LINE_BREAK);
 		System.out.println("============================");
 		System.out.println("BOSS HP [" + hp + "/100]");
-	}
-
-	private static void printCommonBossImage() {
-		System.out.println("____________________________");
-		System.out.println("   ^-^\n"
-			+ " / 0 0 \\\n"
-			+ "(   \"   )\n"
-			+ " \\  -  /\n"
-			+ "  - ^ -");
-		System.out.println("____________________________");
 	}
 
 	private static void printPlayerHealthStatus(String name, Health health) {
@@ -63,5 +54,44 @@ public class OutputView {
 		System.out.println("어떤 공격을 하시겠습니까?");
 		System.out.println("1. 물리 공격");
 		System.out.println("2. 마법 공격");
+	}
+
+	public static void printPlayerAttackDamage(AttackType attackType) {
+		System.out.print(LINE_BREAK);
+		System.out.println(attackType.getAttackName() + "을 했습니다. (입힌 데미지: " + attackType.getDamage() + ")");
+	}
+
+	public static void printBossAttackDamage(int damage) {
+		System.out.println("보스가 공격 했습니다. (입힌 데미지: " + damage + ")");
+	}
+
+	private static void printStartBossImage() {
+		System.out.println("____________________________");
+		System.out.println("   ^-^\n"
+			+ " / 0 0 \\\n"
+			+ "(   \"   )\n"
+			+ " \\  -  /\n"
+			+ "  - ^ -");
+		System.out.println("____________________________");
+	}
+
+	private static void printRaidBossImage() {
+		System.out.println("____________________________");
+		System.out.println("   ^-^\n"
+			+ " / x x \\\n"
+			+ "(   \"\\  )\n"
+			+ " \\  ^  /\n"
+			+ "  - ^ -");
+		System.out.println("____________________________");
+	}
+
+	private static void printFailBossImage() {
+		System.out.println("____________________________");
+		System.out.println("   ^-^\n"
+			+ " / ^ ^ \\\n"
+			+ "(   \"   )\n"
+			+ " \\  3  /\n"
+			+ "  - ^ -");
+		System.out.println("____________________________");
 	}
 }

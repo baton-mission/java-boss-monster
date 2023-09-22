@@ -34,7 +34,10 @@ public class BossMonsterGame {
 			AttackType type = inputAttackType();
 			player.attack(type);
 			bossMonster.attackedByPlayer(type);
-			bossMonster.attack(player, randomDamageGenerator.generate());
+			int damage = randomDamageGenerator.generate();
+			player.attackedByBossMonster(damage);
+			OutputView.printPlayerAttackDamage(type);
+			OutputView.printBossAttackDamage(damage);
 		}
 	}
 
