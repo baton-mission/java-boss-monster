@@ -22,6 +22,10 @@ public class Health {
 		return hp != 0;
 	}
 
+	public void spendHp(int damage) {
+		hp -= damage;
+	}
+
 	public void spendHp(AttackType attackType) {
 		hp -= attackType.getDamage();
 	}

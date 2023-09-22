@@ -8,10 +8,17 @@ import bossmonster.domain.AttackType;
 import bossmonster.domain.BossMonster;
 import bossmonster.domain.Health;
 import bossmonster.domain.Player;
+import bossmonster.domain.RandomDamageGenerator;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
 
 public class BossMonsterGame {
+
+	private final RandomDamageGenerator randomDamageGenerator;
+
+	public BossMonsterGame(RandomDamageGenerator randomDamageGenerator) {
+		this.randomDamageGenerator = randomDamageGenerator;
+	}
 
 	public void startGame() {
 		BossMonster bossMonster = inputBossHp();
@@ -27,6 +34,7 @@ public class BossMonsterGame {
 			AttackType type = inputAttackType();
 			player.attack(type);
 			bossMonster.attackedByPlayer(type);
+			bossMonster.attack(player, randomDamageGenerator.generate());
 		}
 	}
 

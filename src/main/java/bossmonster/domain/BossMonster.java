@@ -19,6 +19,10 @@ public class BossMonster {
 		return health.isHpZero();
 	}
 
+	public void attack(Player player, int damage) {
+		player.attackedByBossMonster(damage);
+	}
+
 	public void attackedByPlayer(AttackType attackType) {
 		health.spendHp(attackType);
 	}

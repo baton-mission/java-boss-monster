@@ -28,6 +28,10 @@ public class Player {
 		health.calculateMp(type);
 	}
 
+	public void attackedByBossMonster(int damage) {
+		health.spendHp(damage);
+	}
+
 	public boolean playerHpZero() {
 		return health.isHpZero();
 	}
