@@ -24,6 +24,10 @@ public class Player {
 		}
 	}
 
+	public boolean playerHpZero() {
+		return health.getHp() != 0;
+	}
+
 	public String getName() {
 		return name;
 	}

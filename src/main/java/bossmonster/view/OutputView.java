@@ -26,13 +26,19 @@ public class OutputView {
 		System.out.println("보스 레이드를 시작합니다!");
 	}
 
-	public static void printBossHpStatus(int hp) {
+	public static void printGameStatus(int hp, String name) {
+		printBossHpStatus(hp);
+		printCommonBossImage();
+		printPlayerHealthStatus(name);
+	}
+
+	private static void printBossHpStatus(int hp) {
 		System.out.print(LINE_BREAK);
 		System.out.println("============================");
 		System.out.println("BOSS HP [" + hp + "/" + hp + "]");
 	}
 
-	public static void printCommonBossImage() {
+	private static void printCommonBossImage() {
 		System.out.println("____________________________");
 		System.out.println("   ^-^\n"
 			+ " / 0 0 \\\n"
@@ -42,9 +48,16 @@ public class OutputView {
 		System.out.println("____________________________");
 	}
 
-	public static void printPlayerHealthStatus(String name) {
+	private static void printPlayerHealthStatus(String name) {
 		System.out.print(LINE_BREAK);
 		System.out.println(name + " HP [100/100] MP [100/100]");
 		System.out.println("============================");
+	}
+
+	public static void printAttackType() {
+		System.out.println(LINE_BREAK);
+		System.out.println("어떤 공격을 하시겠습니까?");
+		System.out.println("1. 물리 공격");
+		System.out.println("2. 마법 공격");
 	}
 }

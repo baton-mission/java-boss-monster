@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import bossmonster.domain.AttackType;
 import bossmonster.domain.BossMonster;
 import bossmonster.domain.Health;
 import bossmonster.domain.Player;
@@ -16,9 +17,21 @@ public class BossMonsterGame {
 		BossMonster bossMonster = inputBossHp();
 		Player player = inputPlayer();
 		OutputView.printStartRaidMessage();
-		OutputView.printBossHpStatus(bossMonster.remainedBossHp());
-		OutputView.printCommonBossImage();
-		OutputView.printPlayerHealthStatus(player.getName());
+		play(bossMonster, player);
+	}
+
+	public void play(BossMonster bossMonster, Player player) {
+		while (bossMonster.bossHpZero() || player.playerHpZero()) {
+			OutputView.printGameStatus(bossMonster.remainedBossHp(), player.getName());
+			OutputView.printAttackType();
+			AttackType type = inputAttackType();
+
+		}
+	}
+
+	private AttackType inputAttackType() {
+		String type = InputView.readAttackType();
+		return AttackType.valueOfType(type);
 	}
 
 	private BossMonster inputBossHp() {

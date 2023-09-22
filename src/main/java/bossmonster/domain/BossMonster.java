@@ -18,4 +18,8 @@ public class BossMonster {
 	public int remainedBossHp() {
 		return health.getHp();
 	}
+
+	public boolean bossHpZero() {
+		return health.getHp() != 0;
+	}
 }

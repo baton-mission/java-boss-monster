@@ -27,6 +27,12 @@ public class InputView {
 		return hpAndMp;
 	}
 
+	public static String readAttackType() {
+		String type = scanner.next();
+		validateBlank(type);
+		return type;
+	}
+
 	private static void validateBlank(String input) {
 		if (input.isBlank()) {
 			throw new IllegalArgumentException("[ERROR] 값을 입력해야 합니다.");
