@@ -14,4 +14,8 @@ public class BossMonster {
 			throw new IllegalArgumentException("[ERROR] 보스 몬스터의 초기 HP는 100이상 300이하 입니다.");
 		}
 	}
+
+	public int getHp() {
+		return hp;
+	}
 }
