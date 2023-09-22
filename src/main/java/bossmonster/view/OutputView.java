@@ -107,6 +107,11 @@ public class OutputView {
 		System.out.println("____________________________");
 	}
 
+	public static void printRaidSuccessMessage(String name, int count) {
+		System.out.print(LINE_BREAK);
+		System.out.println(name + " 님이 " + count + "번의 전투 끝에 보스 몬스터를 잡았습니다.");
+	}
+
 	public static void printPlayerHpZero(String name) {
 		System.out.println(LINE_BREAK);
 		System.out.println(name + "의 HP가 0이 되었습니다.");
