@@ -22,9 +22,10 @@ public class BossMonsterGame {
 
 	public void play(BossMonster bossMonster, Player player) {
 		while (bossMonster.bossHpZero() || player.playerHpZero()) {
-			OutputView.printGameStatus(bossMonster.remainedBossHp(), player.getName());
+			OutputView.printGameStatus(bossMonster, player);
 			OutputView.printAttackType();
 			AttackType type = inputAttackType();
+			player.attack(type);
 			bossMonster.attackedByPlayer(type);
 		}
 	}

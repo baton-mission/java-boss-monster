@@ -3,15 +3,17 @@ package bossmonster.domain;
 import java.util.Arrays;
 
 public enum AttackType {
-	PHYSICAL("1", 10),
-	MAGIC("2", 20);
+	PHYSICAL("1", 10, 10),
+	MAGIC("2", 20, 30);
 
 	private final String type;
 	private final int damage;
+	private final int effect;
 
-	AttackType(String type, int damage) {
+	AttackType(String type, int damage, int effect) {
 		this.type = type;
 		this.damage = damage;
+		this.effect = effect;
 	}
 
 	public static AttackType valueOfType(String type) {
@@ -27,5 +29,9 @@ public enum AttackType {
 
 	public int getDamage() {
 		return damage;
+	}
+
+	public int getEffect() {
+		return effect;
 	}
 }

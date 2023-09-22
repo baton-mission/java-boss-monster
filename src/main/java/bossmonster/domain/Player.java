@@ -24,11 +24,19 @@ public class Player {
 		}
 	}
 
+	public void attack(AttackType type) {
+		health.calculateMp(type);
+	}
+
 	public boolean playerHpZero() {
 		return health.getHp() != 0;
 	}
 
 	public String getName() {
 		return name;
+	}
+
+	public Health getHealth() {
+		return health;
 	}
 }

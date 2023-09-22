@@ -22,6 +22,15 @@ public class Health {
 		hp -= attackType.getDamage();
 	}
 
+	public void calculateMp(AttackType attackType) {
+		if (attackType.equals(AttackType.PHYSICAL)) {
+			mp += attackType.getEffect();
+		}
+		if (attackType.equals(AttackType.MAGIC)) {
+			mp -= attackType.getEffect();
+		}
+	}
+
 	public int getHp() {
 		return hp;
 	}
