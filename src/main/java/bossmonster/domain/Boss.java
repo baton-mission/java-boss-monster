@@ -2,21 +2,20 @@ package bossmonster.domain;
 
 import bossmonster.ExceptionMessage;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static bossmonster.domain.GameOption.BOSS_DAMAGE_MAX_EXCLUSIVE;
+
 public class Boss {
 	private String name;
-	private int startHp;
-	private int startMp;
-	private int curHp;
-	private int curMp;
+	private Point hp;
 	private BossStatus status;
 
 	public Boss(int hp) {
 		validate(hp);
 		this.name = "BOSS";
-		this.startHp = hp;
-		this.startMp = hp;
-		this.curHp = hp;
-		this.curMp = hp;
+		this.hp = new Point(hp);
 		this.status = BossStatus.NORMAL;
 	}
 
@@ -32,12 +31,12 @@ public class Boss {
 	}
 
 	public boolean isAlive() {
-		return curHp > 0;
+		return hp.isEqualOrMoreThen(GameOption.MIN_HP);
 	}
 
 	public void attacked(int damage) {
 		handleBossStatus(damage > 0);
-		this.curHp = Math.max(curHp - damage, 0);
+		hp.reduceAmount(damage);
 	}
 
 	private void handleBossStatus(boolean isAttacked) {
@@ -48,6 +47,15 @@ public class Boss {
 		setStatus(BossStatus.NORMAL);
 	}
 
+	public int attackPlayer() {
+		return getAttackDamage();
+	}
+
+	private int getAttackDamage() {
+		return (int) (Math.random() * BOSS_DAMAGE_MAX_EXCLUSIVE);
+	}
+
+	// TODO Setter 없애는 방향으로 리펙터링
 	public void setStatus(BossStatus status) {
 		this.status = status;
 	}
@@ -56,23 +64,11 @@ public class Boss {
 		return name;
 	}
 
-	public int getCurHp() {
-		return curHp;
-	}
-
-	public int getStartHp() {
-		return startHp;
+	public List<Integer> getHp() {
+		return new ArrayList<>(List.of(hp.getCurAmount(), hp.getStartAmount()));
 	}
 
 	public String getStatusImg() {
 		return status.toString();
-	}
-
-	public int attackPlayer() {
-		return getAttackDamage();
-	}
-
-	private int getAttackDamage() {
-		return (int) (Math.random() * 21);
 	}
 }

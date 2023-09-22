@@ -6,7 +6,6 @@ import java.util.List;
 
 import static bossmonster.domain.GameOption.*;
 
-// TODO 책임 분리 필요
 public class Player {
 	private String name;
 	private Stats stats;
@@ -47,6 +46,23 @@ public class Player {
 		this.name = name;
 	}
 
+	private void validateName(String name) {
+		isBlank(name);
+		isLegalLength(name);
+	}
+
+	private void isBlank(String name) {
+		if (name.isBlank()) {
+			throw new IllegalArgumentException(ExceptionMessage.BLANK);
+		}
+	}
+
+	private void isLegalLength(String name) {
+		if (name.length() > PLAYER_NAME_MAX_INCLUSIVE) {
+			throw new IllegalArgumentException(ExceptionMessage.PLAYER_NAME_LENGTH);
+		}
+	}
+
 	public void setStats(List<Integer> playerStats) {
 		this.stats = new Stats(playerStats);
 	}
@@ -65,23 +81,6 @@ public class Player {
 
 	public String getName() {
 		return name;
-	}
-
-	private void validateName(String name) {
-		isBlank(name);
-		isLegalLength(name);
-	}
-
-	private void isBlank(String name) {
-		if (name.isBlank()) {
-			throw new IllegalArgumentException(ExceptionMessage.BLANK);
-		}
-	}
-
-	private void isLegalLength(String name) {
-		if (name.length() > PLAYER_NAME_MAX_INCLUSIVE) {
-			throw new IllegalArgumentException(ExceptionMessage.PLAYER_NAME_LENGTH);
-		}
 	}
 
 	public List<Integer> getHp() {

@@ -7,9 +7,7 @@ import bossmonster.domain.Player;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static bossmonster.domain.GameOption.DELIMITER;
 
@@ -20,12 +18,7 @@ public class Controller {
 		Boss boss = initBoss();
 		Player player = initPlayer();
 		proceedRade(boss, player);
-		if (player.isAlive()) {
-			OutputView.printRadeWin(player);
-			return;
-		}
-		printRadeInfo(boss, player);
-		OutputView.printRadeLoss(player);
+		printResult(boss, player);
 	}
 
 	// TODO 제내릭으로 리펙터링
@@ -58,9 +51,7 @@ public class Controller {
 	private void initPlayerHPAndMP(Player player) {
 		try {
 			String playerStatsString = InputView.readPlayerInfo();
-			List<Integer> playerStats = Arrays.stream(playerStatsString.split(DELIMITER))
-					.map(Converter::stringToInt)
-					.collect(Collectors.toList());
+			List<Integer> playerStats = Converter.stringToSplitInt(playerStatsString, DELIMITER);
 			player.setStats(playerStats);
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e);
@@ -72,7 +63,7 @@ public class Controller {
 		OutputView.printRadeStart();
 		int bossToPlayerDamage = 0;
 		while (boss.isAlive() && player.isAlive()) {
-			printRadeInfo(boss, player);
+			OutputView.printRadeInfo(boss, player);
 			initAttackType(player);
 			int playerToBossDamage = service.attackBoss(boss, player);
 			if (boss.isAlive()) {
@@ -85,13 +76,6 @@ public class Controller {
 		}
 	}
 
-	private void printRadeInfo(Boss boss, Player player) {
-		OutputView.printDoubleDiv();
-		OutputView.printBoss(boss);
-		OutputView.printPlayer(player);
-		OutputView.printDoubleDiv();
-	}
-
 	private void initAttackType(Player player) {
 		try {
 			int attackNumber = Converter.stringToInt(InputView.readAttackType());
@@ -102,4 +86,12 @@ public class Controller {
 		}
 	}
 
+	private void printResult(Boss boss, Player player) {
+		if (player.isAlive()) {
+			OutputView.printRadeWin(player);
+			return;
+		}
+		OutputView.printRadeInfo(boss, player);
+		OutputView.printRadeLoss(player);
+	}
 }

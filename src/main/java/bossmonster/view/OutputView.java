@@ -17,22 +17,30 @@ public class OutputView {
 		System.out.println(Message.START_RADE);
 	}
 
+	public static void printRadeInfo(Boss boss, Player player) {
+		OutputView.printDoubleDiv();
+		OutputView.printBoss(boss);
+		OutputView.printPlayer(player);
+		OutputView.printDoubleDiv();
+	}
 
-	public static void printDoubleDiv() {
+
+	private static void printDoubleDiv() {
 		System.out.println(Message.DOUBLE_DIV);
 	}
 
-	public static void printBoss(Boss boss) {
+	private static void printBoss(Boss boss) {
+		List<Integer> hp = boss.getHp();
 		System.out.printf(Message.HP_STATUS_FORMAT.toString(),
 				boss.getName(),
-				boss.getCurHp(),
-				boss.getStartHp());
+				hp.get(GameOption.CURRENT_POINT_IDX),
+				hp.get(GameOption.START_POINT_IDX));
 		System.out.println(Message.DIV);
 		System.out.println(boss.getStatusImg());
 		System.out.println(Message.DIV);
 	}
 
-	public static void printPlayer(Player player) {
+	private static void printPlayer(Player player) {
 		System.out.println();
 		List<Integer> hp = player.getHp();
 		List<Integer> mp = player.getMp();
