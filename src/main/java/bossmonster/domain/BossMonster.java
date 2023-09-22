@@ -16,7 +16,7 @@ public class BossMonster {
 	}
 
 	public boolean bossHpZero() {
-		return health.getHp() != 0;
+		return health.isHpZero();
 	}
 
 	public void attackedByPlayer(AttackType attackType) {

@@ -29,7 +29,7 @@ public class Player {
 	}
 
 	public boolean playerHpZero() {
-		return health.getHp() != 0;
+		return health.isHpZero();
 	}
 
 	public String getName() {

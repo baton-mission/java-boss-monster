@@ -18,6 +18,10 @@ public class Health {
 		return (hp + mp) != 200;
 	}
 
+	public boolean isHpZero() {
+		return hp != 0;
+	}
+
 	public void spendHp(AttackType attackType) {
 		hp -= attackType.getDamage();
 	}
