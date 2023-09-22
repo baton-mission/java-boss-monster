@@ -33,7 +33,7 @@ public class Boss {
 	}
 
 	public boolean isAlive() {
-		return hp.isEqualOrMoreThen(GameOption.MIN_HP);
+		return hp.isMoreTHen(GameOption.MIN_HP);
 	}
 
 	public void attacked(int damage) {
