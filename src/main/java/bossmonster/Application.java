@@ -13,6 +13,6 @@ public class Application {
         input.bossHP(bossMonster);
         input.playerName(player);
         input.playerHPMP(player);
-        input.playerAttack(player,bossMonster);
+        output.startGame(player,bossMonster);
     }
 }
