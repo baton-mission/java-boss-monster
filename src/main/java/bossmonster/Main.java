@@ -2,6 +2,7 @@ package bossmonster;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        MainController controller = new MainController();
+        controller.run();
     }
 }
