@@ -43,7 +43,15 @@ public class Player {
         target.damaged(20);
         mp.decrease(30);
         attackCount++;
-
     }
+    public void damaged(Integer input){
+        if(hp.canDie(input)){
+            hp.toZero();
+            die();
+            return;
+        }
+        hp.decrease(input);
+    }
+    public void die(){}
 }
 
