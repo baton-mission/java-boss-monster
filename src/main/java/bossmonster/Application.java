@@ -13,8 +13,6 @@ public class Application {
         input.bossHP(bossMonster);
         input.playerName(player);
         input.playerHPMP(player);
-        player.magicalAttack(bossMonster);
-        player.physicalAttack(bossMonster);
-
+        input.playerAttack(player,bossMonster);
     }
 }

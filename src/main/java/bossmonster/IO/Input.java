@@ -24,6 +24,11 @@ public class Input {
         scanner = new Scanner(scanner.next()).useDelimiter("\\s*,\\s*");
         player.createHPMP(scanner.nextInt(),scanner.nextInt());
     }
+    public void playerAttack(Player player,BossMonster bossMonster){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("어떤 공격을 하시겠습니까?\n1. 물리 공격\n2. 마법 공격");
+        player.attack(scanner.nextInt(),bossMonster);
+    }
 
 
 }

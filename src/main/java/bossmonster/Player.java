@@ -13,7 +13,7 @@ public class Player {
         this.name = new Name(input);
     }
     public void createHPMP(int hp, int mp){
-        if (!(hp + mp == 200))
+        if (hp + mp != 200)
             throw new IllegalArgumentException("플레이어의 초기 HP와 MP 합은 200이어야 합니다.");
         this.hp = new HP(hp);
         this.mp = new MP(mp);
@@ -21,6 +21,17 @@ public class Player {
 
     }
 
+    public void attack(Integer input,BossMonster target) {
+        if (input == 1){
+            physicalAttack(target);
+            return;
+        }
+        if (input == 2) {
+            magicalAttack(target);
+            return;
+        }
+        throw new IllegalArgumentException("공격하셔야 합니다. 1또는 2를 입력해주세요.");
+    }
     public void physicalAttack(BossMonster target){
         target.damaged(10);
         mp.increase(10);
