@@ -18,8 +18,8 @@ public class Point {
 		}
 	}
 
-	public boolean isMoreThen(int amount) {
-		return curAmount > amount;
+	public boolean isEqualOrMoreThen(int amount) {
+		return curAmount >= amount;
 	}
 
 	public void reduceAmount(int amount) {
@@ -28,5 +28,13 @@ public class Point {
 
 	public void addAmount(int amount) {
 		this.curAmount = Math.min(this.startAmount, this.curAmount + amount);
+	}
+
+	public int getStartAmount() {
+		return startAmount;
+	}
+
+	public int getCurAmount() {
+		return curAmount;
 	}
 }

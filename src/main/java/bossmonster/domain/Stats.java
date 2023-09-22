@@ -2,6 +2,7 @@ package bossmonster.domain;
 
 import bossmonster.ExceptionMessage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static bossmonster.domain.GameOption.PLAYER_MAGIC_ATTACK_MP_COST;
@@ -40,7 +41,7 @@ public class Stats {
 	}
 
 	public boolean isAlive() {
-		return hp.isMoreThen(0);
+		return hp.isEqualOrMoreThen(1);
 	}
 
 	public void addAttackCount() {
@@ -52,7 +53,7 @@ public class Stats {
 	}
 
 	public boolean hasEnoughMp(int amount) {
-		return mp.isMoreThen(amount);
+		return mp.isEqualOrMoreThen(amount);
 	}
 
 	public void handleCost(AttackType attackType) {
@@ -61,7 +62,7 @@ public class Stats {
 			return;
 		}
 		if (attackType.equals(AttackType.MAGIC)) {
-			if (!mp.isMoreThen(PLAYER_MAGIC_ATTACK_MP_COST)) {
+			if (!mp.isEqualOrMoreThen(PLAYER_MAGIC_ATTACK_MP_COST)) {
 				return;
 			}
 			mp.reduceAmount(PLAYER_MAGIC_ATTACK_MP_COST);
@@ -70,5 +71,13 @@ public class Stats {
 
 	public void reduceHp(int attackDamage) {
 		hp.reduceAmount(attackDamage);
+	}
+
+	public List<Integer> getHp() {
+		return new ArrayList<>(List.of(hp.getCurAmount(), hp.getStartAmount()));
+	}
+
+	public List<Integer> getMp() {
+		return new ArrayList<>(List.of(mp.getCurAmount(), mp.getStartAmount()));
 	}
 }

@@ -16,4 +16,7 @@ public class GameOption {
 	public static final int PLAYER_MP_RECOVER = 10;
 	public static final int PLAYER_MIN_HP = 0;
 	public static final int PLAYER_MIN_MP = 0;
+
+	public static final int CURRENT_POINT_IDX = 0;
+	public static final int START_POINT_IDX = 1;
 }

@@ -35,7 +35,7 @@ public class Player {
 
 	private boolean isMagicAttackWithLackMp() {
 		return attackType.equals(AttackType.MAGIC) &&
-				stats.hasEnoughMp(PLAYER_MAGIC_ATTACK_MP_COST);
+				!stats.hasEnoughMp(PLAYER_MAGIC_ATTACK_MP_COST);
 	}
 
 	public void attacked(int attackDamage) {
@@ -84,4 +84,11 @@ public class Player {
 		}
 	}
 
+	public List<Integer> getHp() {
+		return stats.getHp();
+	}
+
+	public List<Integer> getMp() {
+		return stats.getMp();
+	}
 }

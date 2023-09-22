@@ -3,7 +3,10 @@ package bossmonster.view;
 import bossmonster.ExceptionMessage;
 import bossmonster.Message;
 import bossmonster.domain.Boss;
+import bossmonster.domain.GameOption;
 import bossmonster.domain.Player;
+
+import java.util.List;
 
 public class OutputView {
 	public static void printError(IllegalArgumentException e) {
@@ -31,12 +34,14 @@ public class OutputView {
 
 	public static void printPlayer(Player player) {
 		System.out.println();
+		List<Integer> hp = player.getHp();
+		List<Integer> mp = player.getMp();
 		System.out.printf(Message.HP_AND_MP_STATUS_FORMAT.toString(),
 				player.getName(),
-				player.getCurHp(),
-				player.getStartHp(),
-				player.getCurMp(),
-				player.getStartMp());
+				hp.get(GameOption.CURRENT_POINT_IDX),
+				hp.get(GameOption.START_POINT_IDX),
+				mp.get(GameOption.CURRENT_POINT_IDX),
+				mp.get(GameOption.START_POINT_IDX));
 	}
 
 	public static void printPlayerAttackResult(int playerToBossDamage, Player player) {

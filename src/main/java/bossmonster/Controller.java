@@ -28,8 +28,6 @@ public class Controller {
 		OutputView.printRadeLoss(player);
 	}
 
-
-
 	// TODO 제내릭으로 리펙터링
 	private Boss initBoss() {
 		try {
