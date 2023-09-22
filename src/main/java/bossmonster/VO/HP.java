@@ -30,4 +30,8 @@ public class HP {
     public void decrease(int damage){
         nowValue -= damage;
     }
+
+    public String showNowMax(){
+        return "[" + nowValue + "/" + maxValue + "]";
+    }
 }

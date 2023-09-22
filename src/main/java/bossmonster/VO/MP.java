@@ -22,4 +22,7 @@ public class MP {
     public Boolean usableMagic(int input){
         return (input <= nowValue);
     }
+    public String showNowMax(){
+        return "[" + nowValue + "/" + maxValue + "]";
+    }
 }

@@ -7,4 +7,7 @@ public class Name {
             throw new IllegalArgumentException("플레이어 이름은 5자 이하만 가능합니다.");
         this.value = input;
     }
+    public String showName(){
+        return value;
+    }
 }

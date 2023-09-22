@@ -53,5 +53,9 @@ public class Player {
         hp.decrease(input);
     }
     public void die(){}
+
+    public void showState(){
+        System.out.println(name.showName() + " HP " + hp.showNowMax() + " MP " + mp.showNowMax());
+    }
 }
 
