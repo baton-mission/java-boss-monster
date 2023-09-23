@@ -56,10 +56,19 @@ public class Health {
 
 	public void calculateMp(AttackType attackType) {
 		if (attackType.equals(PHYSICAL)) {
-			mp += attackType.getEffect();
+			checkMaximumMp(attackType);
 		}
 		if (attackType.equals(MAGIC)) {
 			mp -= attackType.getEffect();
+		}
+	}
+
+	private void checkMaximumMp(AttackType attackType) {
+		if (mp + attackType.getEffect() > initMp) {
+			mp = initMp;
+		}
+		if (mp + attackType.getEffect() < initMp) {
+			mp += attackType.getEffect();
 		}
 	}
 
