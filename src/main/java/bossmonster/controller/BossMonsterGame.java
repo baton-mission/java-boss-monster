@@ -91,8 +91,16 @@ public class BossMonsterGame {
 	private BossMonster inputBossHp() {
 		OutputView.printBossHp();
 		String bossHp = InputView.readBossHp();
-		Health health = new Health(Integer.parseInt(bossHp));
+		Health health = new Health(toInteger(bossHp));
 		return new BossMonster(health);
+	}
+
+	private Integer toInteger(String number) {
+		try {
+			return Integer.valueOf(number);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("[ERROR] 보스의 체력은 숫자만 입력이 가능합니다.");
+		}
 	}
 
 	private Player inputPlayer() {
