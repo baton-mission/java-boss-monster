@@ -32,32 +32,33 @@ public class OutputView {
 	}
 
 	public static void printStartGameStatus(BossMonster bossMonster, Player player) {
-		printBossHpStatus(bossMonster.remainedBossHp());
+		printBossHpStatus(bossMonster.remainedBossHp(), bossMonster.getInitHp());
 		printStartBossImage();
-		printPlayerHealthStatus(player.getName(), player.getHealth());
+		printPlayerHealthStatus(player.getName(), player.getHealth(), player.getInitHp(), player.getInitMp());
 	}
 
 	public static void printPlayGameStatus(BossMonster bossMonster, Player player) {
-		printBossHpStatus(bossMonster.remainedBossHp());
+		printBossHpStatus(bossMonster.remainedBossHp(), bossMonster.getInitHp());
 		printHitBossImage();
-		printPlayerHealthStatus(player.getName(), player.getHealth());
+		printPlayerHealthStatus(player.getName(), player.getHealth(), player.getInitHp(), player.getInitMp());
 	}
 
 	public static void printFailGameStatus(BossMonster bossMonster, Player player) {
-		printBossHpStatus(bossMonster.remainedBossHp());
+		printBossHpStatus(bossMonster.remainedBossHp(), bossMonster.getInitHp());
 		printFailBossImage();
-		printPlayerHealthStatus(player.getName(), player.getHealth());
+		printPlayerHealthStatus(player.getName(), player.getHealth(), player.getInitHp(), player.getInitMp());
 	}
 
-	private static void printBossHpStatus(int hp) {
+	private static void printBossHpStatus(int hp, int initHp) {
 		System.out.print(LINE_BREAK);
 		System.out.println("============================");
-		System.out.println("BOSS HP [" + hp + "/100]");
+		System.out.println("BOSS HP [" + hp + "/" + initHp + "]");
 	}
 
-	private static void printPlayerHealthStatus(String name, Health health) {
+	private static void printPlayerHealthStatus(String name, Health health, int initHp, int initMp) {
 		System.out.print(LINE_BREAK);
-		System.out.println(name + " HP [" + health.getHp() + "/100] MP [" + health.getMp() + "/100]");
+		System.out.println(
+			name + " HP [" + health.getHp() + "/" + initHp + "] MP [" + health.getMp() + "/" + initMp + "]");
 		System.out.println("============================");
 	}
 

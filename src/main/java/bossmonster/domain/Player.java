@@ -50,4 +50,12 @@ public class Player {
 	public Health getHealth() {
 		return health;
 	}
+
+	public int getInitHp() {
+		return health.getInitHp();
+	}
+
+	public int getInitMp() {
+		return health.getInitMp();
+	}
 }

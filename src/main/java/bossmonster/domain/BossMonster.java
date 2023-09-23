@@ -30,4 +30,8 @@ public class BossMonster {
 	public Health getHealth() {
 		return health;
 	}
+
+	public int getInitHp() {
+		return health.getInitHp();
+	}
 }
