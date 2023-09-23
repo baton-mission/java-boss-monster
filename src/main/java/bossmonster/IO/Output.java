@@ -5,7 +5,6 @@ import bossmonster.BossMonster;
 import bossmonster.Player;
 
 public class Output {
-    Input input = new Input();
     public static  void startGame(){
         System.out.println("\n보스 레이드를 시작합니다!\n");
         Application.turn();

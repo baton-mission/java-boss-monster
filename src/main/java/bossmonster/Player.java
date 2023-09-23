@@ -23,9 +23,7 @@ public class Player {
             return;
         }
         throw new IllegalArgumentException("2개의 자연수를 콤마(,)를 기준으로 나눠서 입력해주세요.");
-
     }
-
     public void attack(Integer input,BossMonster target) {
         if (input == 1){
             physicalAttack(target);
@@ -64,14 +62,12 @@ public class Player {
         Output.battleField(this,attacker);
         System.out.println("\n" + name.showName() + "의 HP가 0이 되었습니다. \n보스 레이드에 실패했습니다.");
     }
-
     public void showState(){
         System.out.println(name.showName() + " HP " + hp.showNowMax() + " MP " + mp.showNowMax());
     }
     public void showDamaged(Integer damage){
         System.out.println("보스가 공격 했습니다. (입힌 데미지: " + hp.dealDamege(damage) + ")");
     }
-
     public void victory(){
         System.out.println("\n" + name.showName() + " 님이 " + attackCount + "번의 전투 끝에 보스 몬스터를 잡았습니다.");
     }

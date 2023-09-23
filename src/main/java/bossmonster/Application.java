@@ -4,21 +4,16 @@ import bossmonster.IO.Input;
 import bossmonster.IO.Output;
 
 public class Application {
-
-
-    private static Input input = new Input();
-    private static Output output = new Output();
-    private static Player player = new Player();
-    private static BossMonster bossMonster = new BossMonster();;
+    private static final Player player = new Player();
+    private static final BossMonster bossMonster = new BossMonster();
     public static void main(String[] args) {
-
-        input.bossHP(bossMonster);
-        input.playerName(player);
-        input.playerHPMP(player);
-        output.startGame();
+        Input.bossHP(bossMonster);
+        Input.playerName(player);
+        Input.playerHPMP(player);
+        Output.startGame();
     }
     public static void turn(){
-        output.battleField(player,bossMonster);
-        input.playerAttack(player,bossMonster);
+        Output.battleField(player,bossMonster);
+        Input.playerAttack(player,bossMonster);
     }
 }
