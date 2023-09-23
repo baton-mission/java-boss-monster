@@ -15,7 +15,7 @@ public class BossMonster {
                 "  - ^ -";
     }
     public void createHP(Integer input){
-        hp = new HP(input);
+        hp = HP.boss(input);
     }
     public void damaged(Integer input, Player attacker){
         showDamaged(input);

@@ -16,9 +16,13 @@ public class Player {
     public void createHPMP(int hp, int mp){
         if (hp + mp != 200)
             throw new IllegalArgumentException("플레이어의 초기 HP와 MP 합은 200이어야 합니다.");
-        this.hp = new HP(hp);
-        this.mp = new MP(mp);
-        this.attackCount = 0;
+        if (hp + mp == 200) {
+            this.hp = new HP(hp);
+            this.mp = new MP(mp);
+            this.attackCount = 0;
+            return;
+        }
+        throw new IllegalArgumentException("2개의 자연수를 콤마(,)를 기준으로 나눠서 입력해주세요.");
 
     }
 
