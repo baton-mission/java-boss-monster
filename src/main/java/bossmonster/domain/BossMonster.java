@@ -26,4 +26,8 @@ public class BossMonster {
 	public int remainedBossHp() {
 		return health.getHp();
 	}
+
+	public Health getHealth() {
+		return health;
+	}
 }
