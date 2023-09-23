@@ -3,7 +3,6 @@ package bossmonster.IO;
 import bossmonster.Application;
 import bossmonster.BossMonster;
 import bossmonster.Player;
-import bossmonster.VO.HP;
 
 public class Output {
     Input input = new Input();

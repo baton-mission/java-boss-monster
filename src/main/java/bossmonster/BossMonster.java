@@ -1,6 +1,5 @@
 package bossmonster;
 
-import bossmonster.IO.Output;
 import bossmonster.VO.HP;
 
 public class BossMonster {

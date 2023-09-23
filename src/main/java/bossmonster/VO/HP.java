@@ -1,12 +1,6 @@
 package bossmonster.VO;
 
-import bossmonster.IO.Input;
-
-import java.util.List;
-
-public class HP {
-    private Integer nowValue;
-    private Integer maxValue;
+public class HP extends Resource{
     public static HP boss(int input){
         if ( input >= 100 && input <= 300 ) {
             return new HP(input);
@@ -29,13 +23,7 @@ public class HP {
         this.nowValue = 0;
     }
 
-    public void decrease(int damage){
-        nowValue -= damage;
-    }
 
-    public String showNowMax(){
-        return "[" + nowValue + "/" + maxValue + "]";
-    }
     public Integer dealDamege(Integer input){
         if (nowValue <= input)
             return nowValue;
