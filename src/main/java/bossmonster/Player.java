@@ -45,17 +45,19 @@ public class Player {
         attackCount++;
         target.damaged(20, this);
     }
-    public void damaged(Integer input){
+    public void damaged(Integer input, BossMonster attacker){
         showDamaged(input);
         if(hp.canDie(input)){
             hp.toZero();
-            die();
+            die(attacker);
             return;
         }
         hp.decrease(input);
         Application.turn();
     }
-    public void die(){
+    public void die(BossMonster attacker){
+        attacker.victory();
+        Output.battleField(this,attacker);
         System.out.println("\n" + name.showName() + "의 HP가 0이 되었습니다. \n보스 레이드에 실패했습니다.");
     }
 

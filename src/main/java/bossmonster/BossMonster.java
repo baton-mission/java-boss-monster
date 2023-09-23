@@ -35,7 +35,7 @@ public class BossMonster {
     }
     public void attack(Player target){
         Integer damage = (int) ((Math.random() * 1000)%20);
-        target.damaged(damage);
+        target.damaged(damage, this);
     }
     public void die(Player attcker){
         attcker.victory();
@@ -51,5 +51,13 @@ public class BossMonster {
             type = "마법";
         System.out.println("\n" + type + " 공격을 했습니다. (입힌 데미지: " + hp.dealDamege(damage) + ")");
 
+    }
+    public void victory(){
+        this.avatar =
+                "   ^-^\n" +
+                " / ^ ^ \\\n" +
+                "(   \"   )\n" +
+                " \\  3  /\n" +
+                "  - ^ -";
     }
 }
