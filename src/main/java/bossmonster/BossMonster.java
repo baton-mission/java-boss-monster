@@ -12,7 +12,7 @@ public class BossMonster {
                 " / 0 0 \\\n" +
                 "(   \"   )\n" +
                 " \\  -  /\n" +
-                "  - ^ -\n";
+                "  - ^ -";
     }
     public void createHP(Integer input){
         hp = new HP(input);
@@ -49,7 +49,7 @@ public class BossMonster {
         String type = "물리";
         if (damage > 10)
             type = "마법";
-        System.out.println(type + " 공격을 했습니다. (입힌 데미지: " + hp.dealDamege(damage) + ")");
+        System.out.println("\n" + type + " 공격을 했습니다. (입힌 데미지: " + hp.dealDamege(damage) + ")");
 
     }
 }

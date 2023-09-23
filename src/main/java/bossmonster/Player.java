@@ -56,7 +56,7 @@ public class Player {
         Application.turn();
     }
     public void die(){
-        System.out.println(name.showName() + "의 HP가 0이 되었습니다. \n보스 레이드에 실패했습니다.");
+        System.out.println("\n" + name.showName() + "의 HP가 0이 되었습니다. \n보스 레이드에 실패했습니다.");
     }
 
     public void showState(){
