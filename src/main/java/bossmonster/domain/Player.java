@@ -24,6 +24,13 @@ public class Player {
 		}
 	}
 
+	public boolean validateRemainMP(AttackType type) {
+		if (health.checkPlayerMp(type)) {
+			throw new IllegalArgumentException("[ERROR] MP가 부족합니다.");
+		}
+		return true;
+	}
+
 	public void attack(AttackType type) {
 		health.calculateMp(type);
 	}

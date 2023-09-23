@@ -57,12 +57,12 @@ public class OutputView {
 
 	private static void printPlayerHealthStatus(String name, Health health) {
 		System.out.print(LINE_BREAK);
-		System.out.println(name + " HP [" + "0/100] MP [" + health.getMp() + "/100]");
+		System.out.println(name + " HP [" + health.getHp() + "/100] MP [" + health.getMp() + "/100]");
 		System.out.println("============================");
 	}
 
 	public static void printAttackType() {
-		System.out.println(LINE_BREAK);
+		System.out.print(LINE_BREAK);
 		System.out.println("어떤 공격을 하시겠습니까?");
 		System.out.println("1. 물리 공격");
 		System.out.println("2. 마법 공격");
@@ -113,8 +113,12 @@ public class OutputView {
 	}
 
 	public static void printPlayerHpZero(String name) {
-		System.out.println(LINE_BREAK);
+		System.out.print(LINE_BREAK);
 		System.out.println(name + "의 HP가 0이 되었습니다.");
 		System.out.println("보스 레이드에 실패하였습니다.");
+	}
+
+	public static void printError(Exception e) {
+		System.out.println(e.getMessage());
 	}
 }

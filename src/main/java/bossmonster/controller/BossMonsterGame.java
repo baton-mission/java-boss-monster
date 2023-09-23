@@ -2,6 +2,7 @@ package bossmonster.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import bossmonster.domain.AttackType;
@@ -21,54 +22,83 @@ public class BossMonsterGame {
 	}
 
 	public void startGame() {
-		BossMonster bossMonster = inputBossHp();
-		Player player = inputPlayer();
+		BossMonster bossMonster = repeat(this::inputBossHp);
+		Player player = repeat(this::inputPlayer);
 		OutputView.printStartRaidMessage();
 		int count = 0;
 		OutputView.printStartGameStatus(bossMonster, player);
 		play(bossMonster, player, count);
 	}
 
-	public void play(BossMonster bossMonster, Player player, int count) {
+	private void play(BossMonster bossMonster, Player player, int count) {
 		while (true) {
 			count++;
 			OutputView.printAttackType();
-			AttackType type = inputAttackType();
-			player.attack(type);
-			bossMonster.attackedByPlayer(type);
-			int damage = randomDamageGenerator.generate();
-			player.attackedByBossMonster(damage);
+			AttackType type = repeat(() -> inputAttackType(player));
+			attackBossByPlayer(bossMonster, player, type);
+			int damage = attackPlayerByBoss(player);
 			OutputView.printPlayerAttackDamage(type);
-			if (bossMonster.bossHpZero()) {
-				OutputView.printRaidSuccessMessage(player.getName(), count);
+			if (checkBossHpZero(bossMonster, player, count)) {
 				break;
 			}
 			OutputView.printBossAttackDamage(damage);
-			if (player.playerHpZero()) {
-				OutputView.printFailGameStatus(bossMonster, player);
-				OutputView.printPlayerHpZero(player.getName());
+			if (checkPlayerHpZero(bossMonster, player)) {
 				break;
 			}
 			OutputView.printPlayGameStatus(bossMonster, player);
 		}
 	}
 
-	private AttackType inputAttackType() {
+	private boolean checkPlayerHpZero(BossMonster bossMonster, Player player) {
+		if (player.playerHpZero()) {
+			OutputView.printFailGameStatus(bossMonster, player);
+			OutputView.printPlayerHpZero(player.getName());
+			return true;
+		}
+		return false;
+	}
+
+	private boolean checkBossHpZero(BossMonster bossMonster, Player player, int count) {
+		if (bossMonster.bossHpZero()) {
+			OutputView.printRaidSuccessMessage(player.getName(), count);
+			return true;
+		}
+		return false;
+	}
+
+	private int attackPlayerByBoss(Player player) {
+		int damage = randomDamageGenerator.generate();
+		player.attackedByBossMonster(damage);
+		return damage;
+	}
+
+	private void attackBossByPlayer(BossMonster bossMonster, Player player, AttackType type) {
+		if (player.validateRemainMP(type)) {
+			player.attack(type);
+			bossMonster.attackedByPlayer(type);
+		}
+	}
+
+	private AttackType inputAttackType(Player player) {
 		String type = InputView.readAttackType();
-		return AttackType.valueOfType(type);
+		AttackType attackType = AttackType.valueOfType(type);
+		if (player.validateRemainMP(attackType)) {
+			return attackType;
+		}
+		throw new IllegalArgumentException("");
 	}
 
 	private BossMonster inputBossHp() {
 		OutputView.printBossHp();
 		String bossHp = InputView.readBossHp();
-		Health health = new Health(Integer.parseInt(bossHp), 0);
+		Health health = new Health(Integer.parseInt(bossHp));
 		return new BossMonster(health);
 	}
 
 	private Player inputPlayer() {
 		OutputView.printPlayerName();
 		String playerName = InputView.readPlayer();
-		List<Integer> health = inputPlayerHpAndMp();
+		List<Integer> health = repeat(this::inputPlayerHpAndMp);
 		return new Player(playerName, new Health(health.get(0), health.get(1)));
 	}
 
@@ -78,5 +108,14 @@ public class BossMonsterGame {
 		return Arrays.stream(hpAndMp.split(","))
 			.map(Integer::parseInt)
 			.collect(Collectors.toList());
+	}
+
+	private <T> T repeat(Supplier<T> inputReader) {
+		try {
+			return inputReader.get();
+		} catch (IllegalArgumentException e) {
+			OutputView.printError(e);
+			return repeat(inputReader);
+		}
 	}
 }
