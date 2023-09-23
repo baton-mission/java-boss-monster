@@ -27,7 +27,7 @@ public class BossMonster {
                 "  - ^ -";
         if(hp.canDie(input)){
             hp.toZero();
-            die();
+            die(attacker);
             return;
         }
         hp.decrease(input);
@@ -37,8 +37,8 @@ public class BossMonster {
         Integer damage = (int) ((Math.random() * 1000)%20);
         target.damaged(damage);
     }
-    public void die(){
-
+    public void die(Player attcker){
+        attcker.victory();
     }
     public void showState(){
         System.out.println("BOSS HP " + hp.showNowMax());

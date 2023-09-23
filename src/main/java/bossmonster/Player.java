@@ -65,5 +65,9 @@ public class Player {
     public void showDamaged(Integer damage){
         System.out.println("보스가 공격 했습니다. (입힌 데미지: " + hp.dealDamege(damage) + ")");
     }
+
+    public void victory(){
+        System.out.println("\n" + name.showName() + " 님이 " + attackCount + "번의 전투 끝에 보스 몬스터를 잡았습니다.");
+    }
 }
 
