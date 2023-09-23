@@ -23,9 +23,7 @@ public class BossMonsterGame {
 
 	public void startGame() {
 		BossMonster bossMonster = repeat(this::inputBossHp);
-		String playerName = repeat(this::inputPlayer);
-		List<Integer> health = repeat(this::inputPlayerHpAndMp);
-		Player player = generatePlayer(playerName, health);
+		Player player = repeat(this::inputPlayer);
 		OutputView.printStartRaidMessage();
 		int count = 0;
 		OutputView.printStartGameStatus(bossMonster, player);
@@ -105,13 +103,11 @@ public class BossMonsterGame {
 		}
 	}
 
-	private Player generatePlayer(String name, List<Integer> health) {
-		return new Player(name, new Health(health.get(0), health.get(1)));
-	}
-
-	private String inputPlayer() {
+	private Player inputPlayer() {
 		OutputView.printPlayerName();
-		return InputView.readPlayer();
+		String playerName = InputView.readPlayer();
+		List<Integer> health = repeat(this::inputPlayerHpAndMp);
+		return new Player(playerName, new Health(health.get(0), health.get(1)));
 	}
 
 	private List<Integer> inputPlayerHpAndMp() {
