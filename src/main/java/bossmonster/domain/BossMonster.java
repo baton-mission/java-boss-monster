@@ -26,12 +26,16 @@ public class BossMonster {
 		}
 	}
 
+	public int generateBossHitDamage() {
+		return randomDamageGenerator.generate();
+	}
+
 	public boolean bossHpZero() {
 		return health.isDead();
 	}
 
 	public void attackedByPlayer(AttackType attackType) {
-		health.spendHp(attackType);
+		health.spendHp(attackType.getDamage());
 	}
 
 	public int remainedBossHp() {
