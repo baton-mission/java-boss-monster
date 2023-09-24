@@ -34,7 +34,7 @@ public class Health {
 		return (hp + mp) != SUM_HP_MP;
 	}
 
-	public boolean isHpZero() {
+	public boolean isDead() {
 		if (hp <= HP_ZERO) {
 			setHpZero();
 			return true;

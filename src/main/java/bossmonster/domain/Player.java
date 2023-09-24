@@ -41,8 +41,8 @@ public class Player {
 		health.spendHp(damage);
 	}
 
-	public boolean playerHpZero() {
-		return health.isHpZero();
+	public boolean isPlayerDead() {
+		return health.isDead();
 	}
 
 	public String getName() {

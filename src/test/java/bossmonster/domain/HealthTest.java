@@ -34,10 +34,10 @@ class HealthTest {
 
 	@Test
 	void isHpZero_메서드는_HP가_0이면_true_를_반환한다() {
-		assertFalse(health.isHpZero());
+		assertFalse(health.isDead());
 
 		Health newHealth = new Health(0, 50);
-		assertTrue(newHealth.isHpZero());
+		assertTrue(newHealth.isDead());
 	}
 
 	@Test
@@ -47,10 +47,10 @@ class HealthTest {
 	}
 
 	@Test
-	void calculateMP_메서드는_물리_공격을_하면_마나가_30_줄어든다() {
+	void calculateMP_메서드는_물리_공격을_하면_마나가_10_증가한다() {
 		health.calculateMp(AttackType.PHYSICAL);
 
-		assertEquals(60, health.getMp());
+		assertEquals(50, health.getMp());  // 최대 마나가 50이므로 물리 공격을 해도 60이 되지 않는다.
 	}
 
 	@Test

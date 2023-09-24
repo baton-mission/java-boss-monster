@@ -34,7 +34,7 @@ class PlayerTest {
 
 		player.attackedByBossMonster(150);
 
-		assertTrue(player.playerHpZero());
+		assertTrue(player.isPlayerDead());
 	}
 
 	@Test

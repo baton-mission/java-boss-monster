@@ -16,7 +16,7 @@ public class BossMonster {
 	}
 
 	public boolean bossHpZero() {
-		return health.isHpZero();
+		return health.isDead();
 	}
 
 	public void attackedByPlayer(AttackType attackType) {

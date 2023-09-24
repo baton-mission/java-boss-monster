@@ -113,7 +113,7 @@ public class OutputView {
 		System.out.println(name + " 님이 " + count + "번의 전투 끝에 보스 몬스터를 잡았습니다.");
 	}
 
-	public static void printPlayerHpZero(String name) {
+	public static void printFail(String name) {
 		System.out.print(LINE_BREAK);
 		System.out.println(name + "의 HP가 0이 되었습니다.");
 		System.out.println("보스 레이드에 실패하였습니다.");

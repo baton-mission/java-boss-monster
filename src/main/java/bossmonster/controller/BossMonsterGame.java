@@ -64,7 +64,9 @@ public class BossMonsterGame {
 				break;
 			}
 			OutputView.printBossAttackDamage(damage);
-			if (checkPlayerHpZero(bossMonster, player)) {
+			if (checkPlayerDead(player)) {
+				OutputView.printFailGameStatus(bossMonster, player);
+				OutputView.printFail(player.getName());
 				break;
 			}
 			OutputView.printPlayGameStatus(bossMonster, player);
@@ -101,13 +103,8 @@ public class BossMonsterGame {
 		return false;
 	}
 
-	private boolean checkPlayerHpZero(BossMonster bossMonster, Player player) {
-		if (player.playerHpZero()) {
-			OutputView.printFailGameStatus(bossMonster, player);
-			OutputView.printPlayerHpZero(player.getName());
-			return true;
-		}
-		return false;
+	private boolean checkPlayerDead(Player player) {
+		return player.isPlayerDead();
 	}
 
 	private Integer toInteger(String number) {
