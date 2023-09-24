@@ -7,7 +7,7 @@ import bossmonster.domain.Player;
 
 public class OutputView {
 
-	private static final String LINE_BREAK = "\n";
+	private static final String LINE_BREAK = System.lineSeparator();
 
 	private OutputView() {
 	}
