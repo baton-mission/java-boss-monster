@@ -16,13 +16,13 @@ public class Player {
 
 	private void validatePlayerLength(String name) {
 		if (name.length() > MAX_PLAYER_LENGTH) {
-			throw new IllegalArgumentException("[ERROR] 플레이어의 이름은 5자 이하만 가능합니다.");
+			throw new IllegalArgumentException("[ERROR] 이름의 길이가 유효하지 않습니다.");
 		}
 	}
 
 	private void validateHPAndMp(Health health) {
 		if (health.validatePlayerHpAndMp()) {
-			throw new IllegalArgumentException("[ERROR] 플레이어의 초기 HP와 MP의 합은 200이어야 합니다.");
+			throw new IllegalArgumentException("[ERROR] 플레이어의 초기 HP와 MP의 합이 올바르지 않습니다.");
 		}
 	}
 
