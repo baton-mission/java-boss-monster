@@ -25,12 +25,12 @@ public class BossMonsterGame {
 		BossMonster bossMonster = repeat(this::inputBossHp);
 		Player player = repeat(this::inputPlayer);
 		OutputView.printStartRaidMessage();
-		int count = 0;
 		OutputView.printStartGameStatus(bossMonster, player);
-		play(bossMonster, player, count);
+		play(bossMonster, player);
 	}
 
-	private void play(BossMonster bossMonster, Player player, int count) {
+	private void play(BossMonster bossMonster, Player player) {
+		int count = 0;
 		while (true) {
 			count++;
 			OutputView.printAttackType();
