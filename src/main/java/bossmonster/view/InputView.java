@@ -27,10 +27,10 @@ public class InputView {
 		return hpAndMp;
 	}
 
-	public static String readAttackType() {
+	public static int readAttackType() {
 		String type = scanner.next();
 		validateBlank(type);
-		return type;
+		return toInteger(type);
 	}
 
 	private static void validateBlank(String input) {

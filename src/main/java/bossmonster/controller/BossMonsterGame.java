@@ -74,7 +74,7 @@ public class BossMonsterGame {
 	}
 
 	private AttackType inputAttackType() {
-		String type = InputView.readAttackType();
+		int type = InputView.readAttackType();
 		return AttackType.valueOfType(type);
 	}
 

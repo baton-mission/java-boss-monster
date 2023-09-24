@@ -1,32 +1,27 @@
 package bossmonster.domain;
 
-import java.util.Arrays;
-
 public enum AttackType {
-	PHYSICAL("1", 10, 10, "물리 공격"),
-	MAGIC("2", 20, 30, "마법 공격");
+	PHYSICAL(10, 10, "물리 공격"),
+	MAGIC(20, 30, "마법 공격");
 
-	private final String type;
+	public static final int PHYSICAL_TYPE = 1;
+	public static final int MAGIC_TYPE = 2;
+
 	private final int damage;
 	private final int manaValue;
 	private final String attackName;
 
-	AttackType(String type, int damage, int manaValue, String attackName) {
-		this.type = type;
+	AttackType(int damage, int manaValue, String attackName) {
 		this.damage = damage;
 		this.manaValue = manaValue;
 		this.attackName = attackName;
 	}
 
-	public static AttackType valueOfType(String type) {
-		return Arrays.stream(AttackType.values())
-			.filter(attackType -> attackType.getType().equals(type))
-			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException("[ERROR] 1 또는 2를 입력해주세요"));
-	}
-
-	public String getType() {
-		return type;
+	public static AttackType valueOfType(int type) {
+		if (type < PHYSICAL_TYPE || type > MAGIC_TYPE) {
+			throw new IllegalArgumentException("[ERROR] 올바른 값을 입력해주세요.");
+		}
+		return AttackType.values()[type - 1];
 	}
 
 	public int getDamage() {
