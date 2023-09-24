@@ -29,6 +29,28 @@ public class BossMonsterGame {
 		play(bossMonster, player);
 	}
 
+	private BossMonster inputBossHp() {
+		OutputView.printBossHp();
+		String bossHp = InputView.readBossHp();
+		Health health = new Health(toInteger(bossHp));
+		return new BossMonster(health);
+	}
+
+	private Player inputPlayer() {
+		OutputView.printPlayerName();
+		String playerName = InputView.readPlayer();
+		List<Integer> health = repeat(this::inputPlayerHpAndMp);
+		return new Player(playerName, new Health(health.get(0), health.get(1)));
+	}
+
+	private List<Integer> inputPlayerHpAndMp() {
+		OutputView.printPlayerHpAndMp();
+		String hpAndMp = InputView.readPlayerHpAndMp();
+		return Arrays.stream(hpAndMp.split(","))
+			.map(Integer::parseInt)
+			.collect(Collectors.toList());
+	}
+
 	private void play(BossMonster bossMonster, Player player) {
 		int count = 0;
 		while (true) {
@@ -49,13 +71,26 @@ public class BossMonsterGame {
 		}
 	}
 
-	private boolean checkPlayerHpZero(BossMonster bossMonster, Player player) {
-		if (player.playerHpZero()) {
-			OutputView.printFailGameStatus(bossMonster, player);
-			OutputView.printPlayerHpZero(player.getName());
-			return true;
+	private AttackType inputAttackType(Player player) {
+		String type = InputView.readAttackType();
+		AttackType attackType = AttackType.valueOfType(type);
+		if (player.validateRemainMP(attackType)) {
+			return attackType;
 		}
-		return false;
+		throw new IllegalArgumentException("");
+	}
+
+	private void attackBossByPlayer(BossMonster bossMonster, Player player, AttackType type) {
+		if (player.validateRemainMP(type)) {
+			player.attack(type);
+			bossMonster.attackedByPlayer(type);
+		}
+	}
+
+	private int attackPlayerByBoss(Player player) {
+		int damage = randomDamageGenerator.generate();
+		player.attackedByBossMonster(damage);
+		return damage;
 	}
 
 	private boolean checkBossHpZero(BossMonster bossMonster, Player player, int count) {
@@ -66,33 +101,13 @@ public class BossMonsterGame {
 		return false;
 	}
 
-	private int attackPlayerByBoss(Player player) {
-		int damage = randomDamageGenerator.generate();
-		player.attackedByBossMonster(damage);
-		return damage;
-	}
-
-	private void attackBossByPlayer(BossMonster bossMonster, Player player, AttackType type) {
-		if (player.validateRemainMP(type)) {
-			player.attack(type);
-			bossMonster.attackedByPlayer(type);
+	private boolean checkPlayerHpZero(BossMonster bossMonster, Player player) {
+		if (player.playerHpZero()) {
+			OutputView.printFailGameStatus(bossMonster, player);
+			OutputView.printPlayerHpZero(player.getName());
+			return true;
 		}
-	}
-
-	private AttackType inputAttackType(Player player) {
-		String type = InputView.readAttackType();
-		AttackType attackType = AttackType.valueOfType(type);
-		if (player.validateRemainMP(attackType)) {
-			return attackType;
-		}
-		throw new IllegalArgumentException("");
-	}
-
-	private BossMonster inputBossHp() {
-		OutputView.printBossHp();
-		String bossHp = InputView.readBossHp();
-		Health health = new Health(toInteger(bossHp));
-		return new BossMonster(health);
+		return false;
 	}
 
 	private Integer toInteger(String number) {
@@ -101,21 +116,6 @@ public class BossMonsterGame {
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException("[ERROR] 보스의 체력은 숫자만 입력이 가능합니다.");
 		}
-	}
-
-	private Player inputPlayer() {
-		OutputView.printPlayerName();
-		String playerName = InputView.readPlayer();
-		List<Integer> health = repeat(this::inputPlayerHpAndMp);
-		return new Player(playerName, new Health(health.get(0), health.get(1)));
-	}
-
-	private List<Integer> inputPlayerHpAndMp() {
-		OutputView.printPlayerHpAndMp();
-		String hpAndMp = InputView.readPlayerHpAndMp();
-		return Arrays.stream(hpAndMp.split(","))
-			.map(Integer::parseInt)
-			.collect(Collectors.toList());
 	}
 
 	private <T> T repeat(Supplier<T> inputReader) {
