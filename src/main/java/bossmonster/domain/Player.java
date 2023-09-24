@@ -3,6 +3,7 @@ package bossmonster.domain;
 public class Player {
 
 	private static final int MAX_PLAYER_LENGTH = 5;
+	private static final int SUM_HP_MP = 200;
 
 	private final String name;
 	private final Health health;
@@ -21,7 +22,7 @@ public class Player {
 	}
 
 	private void validateHPAndMp(Health health) {
-		if (health.validatePlayerHpAndMp()) {
+		if (health.isValidSumHpAndMp(SUM_HP_MP)) {
 			throw new IllegalArgumentException("[ERROR] 플레이어의 초기 HP와 MP의 합이 올바르지 않습니다.");
 		}
 	}

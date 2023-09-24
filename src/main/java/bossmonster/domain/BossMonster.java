@@ -3,6 +3,8 @@ package bossmonster.domain;
 public class BossMonster {
 
 	private static final int MAX_BOSS_HIT_DAMAGE = 20;
+	private static final int MIN_BOSS_HP = 100;
+	private static final int MAX_BOSS_HP = 300;
 
 	private final Health health;
 	private final RandomDamageGenerator randomDamageGenerator;
@@ -15,7 +17,7 @@ public class BossMonster {
 	}
 
 	private void validateHpRange(Health health) {
-		if (health.validateBossHpRange()) {
+		if (health.isValidHpRange(MIN_BOSS_HP, MAX_BOSS_HP)) {
 			throw new IllegalArgumentException("[ERROR] 보스 몬스터의 초기 HP의 범위가 유효하지 않습니다.");
 		}
 	}

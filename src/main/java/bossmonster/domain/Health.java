@@ -5,9 +5,6 @@ import static bossmonster.domain.AttackType.*;
 public class Health {
 
 	private static final int HP_ZERO = 0;
-	private static final int MIN_BOSS_HP = 100;
-	private static final int MAX_BOSS_HP = 300;
-	private static final int SUM_HP_MP = 200;
 
 	private int hp;
 	private int mp;
@@ -26,12 +23,12 @@ public class Health {
 		initMp = mp;
 	}
 
-	public boolean validateBossHpRange() {
-		return hp < MIN_BOSS_HP || hp > MAX_BOSS_HP;
+	public boolean isValidHpRange(int minHp, int maxHp) {
+		return hp < minHp || hp > maxHp;
 	}
 
-	public boolean validatePlayerHpAndMp() {
-		return (hp + mp) != SUM_HP_MP;
+	public boolean isValidSumHpAndMp(int sumHpAndMp) {
+		return (hp + mp) != sumHpAndMp;
 	}
 
 	public boolean isDead() {
