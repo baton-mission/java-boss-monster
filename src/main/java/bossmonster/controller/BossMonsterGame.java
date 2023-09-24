@@ -22,8 +22,8 @@ public class BossMonsterGame {
 	}
 
 	public void startGame() {
-		BossMonster bossMonster = repeat(this::inputBossHp);
-		Player player = repeat(this::inputPlayer);
+		BossMonster bossMonster = repeatForInvalidValue(this::inputBossHp);
+		Player player = repeatForInvalidValue(this::inputPlayer);
 		OutputView.printStartRaidMessage();
 		OutputView.printStartGameStatus(bossMonster, player);
 		play(bossMonster, player);
@@ -39,7 +39,7 @@ public class BossMonsterGame {
 	private Player inputPlayer() {
 		OutputView.printPlayerName();
 		String playerName = InputView.readPlayer();
-		List<Integer> health = repeat(this::inputPlayerHpAndMp);
+		List<Integer> health = repeatForInvalidValue(this::inputPlayerHpAndMp);
 		return new Player(playerName, new Health(health.get(0), health.get(1)));
 	}
 
@@ -56,7 +56,7 @@ public class BossMonsterGame {
 		while (true) {
 			count++;
 			OutputView.printSelectType();
-			AttackType type = repeat(this::inputAttackType);
+			AttackType type = repeatForInvalidValue(this::inputAttackType);
 			attackBossBy(bossMonster, player, type);
 			int damage = attackPlayerBy(bossMonster, player);
 			OutputView.printPlayerAttackDamage(type);
@@ -103,12 +103,12 @@ public class BossMonsterGame {
 		return player.isPlayerDead();
 	}
 
-	private <T> T repeat(Supplier<T> inputReader) {
+	private <T> T repeatForInvalidValue(Supplier<T> inputReader) {
 		try {
 			return inputReader.get();
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e);
-			return repeat(inputReader);
+			return repeatForInvalidValue(inputReader);
 		}
 	}
 }
