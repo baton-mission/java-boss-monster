@@ -2,6 +2,8 @@ package bossmonster.domain;
 
 public class Player {
 
+	private static final int MAX_PLAYER_LENGTH = 5;
+
 	private final String name;
 	private final Health health;
 
@@ -13,7 +15,7 @@ public class Player {
 	}
 
 	private void validatePlayerLength(String name) {
-		if (name.length() > 5) {
+		if (name.length() > MAX_PLAYER_LENGTH) {
 			throw new IllegalArgumentException("[ERROR] 플레이어의 이름은 5자 이하만 가능합니다.");
 		}
 	}
