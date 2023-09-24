@@ -9,10 +9,10 @@ public class InputView {
 	private InputView() {
 	}
 
-	public static String readBossHp() {
+	public static int readBossHp() {
 		String hp = scanner.next();
 		validateBlank(hp);
-		return hp;
+		return toInteger(hp);
 	}
 
 	public static String readPlayer() {
@@ -36,6 +36,14 @@ public class InputView {
 	private static void validateBlank(String input) {
 		if (input.isBlank()) {
 			throw new IllegalArgumentException("[ERROR] 값을 입력해야 합니다.");
+		}
+	}
+
+	private static Integer toInteger(String number) {
+		try {
+			return Integer.valueOf(number);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("[ERROR] 숫자를 입력해 주세요.");
 		}
 	}
 }
