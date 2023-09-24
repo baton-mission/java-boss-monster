@@ -32,11 +32,14 @@ public class Health {
 	}
 
 	public boolean isDead() {
-		if (hp <= HP_ZERO) {
+		validateHpRange(hp);
+		return hp <= HP_ZERO;
+	}
+
+	private void validateHpRange(int hp) {
+		if (hp < 0) {
 			setHpZero();
-			return true;
 		}
-		return false;
 	}
 
 	private void setHpZero() {
