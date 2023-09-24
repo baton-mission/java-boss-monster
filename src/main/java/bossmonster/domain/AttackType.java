@@ -8,13 +8,13 @@ public enum AttackType {
 
 	private final String type;
 	private final int damage;
-	private final int effect;
+	private final int manaValue;
 	private final String attackName;
 
-	AttackType(String type, int damage, int effect, String attackName) {
+	AttackType(String type, int damage, int manaValue, String attackName) {
 		this.type = type;
 		this.damage = damage;
-		this.effect = effect;
+		this.manaValue = manaValue;
 		this.attackName = attackName;
 	}
 
@@ -33,8 +33,8 @@ public enum AttackType {
 		return damage;
 	}
 
-	public int getEffect() {
-		return effect;
+	public int getManaValue() {
+		return manaValue;
 	}
 
 	public String getAttackName() {
