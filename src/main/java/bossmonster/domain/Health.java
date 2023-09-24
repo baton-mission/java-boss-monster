@@ -50,10 +50,6 @@ public class Health {
 		hp -= damage;
 	}
 
-	public void spendHp(AttackType attackType) {
-		hp -= attackType.getDamage();
-	}
-
 	public void calculateMp(AttackType attackType) {
 		if (attackType.equals(PHYSICAL)) {
 			checkMaximumMp(attackType);
@@ -72,8 +68,8 @@ public class Health {
 		}
 	}
 
-	public boolean checkPlayerMp(AttackType type) {
-		return mp < type.getEffect();
+	public boolean isRemainPlayerMp(AttackType type) {
+		return mp > type.getEffect();
 	}
 
 	public int getHp() {

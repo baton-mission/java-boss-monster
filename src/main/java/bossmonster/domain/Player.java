@@ -26,19 +26,19 @@ public class Player {
 		}
 	}
 
-	public boolean validateRemainMP(AttackType type) {
-		if (health.checkPlayerMp(type)) {
-			throw new IllegalArgumentException("[ERROR] MP가 부족합니다.");
+	public boolean isRemainMP(AttackType type) {
+		if (health.isRemainPlayerMp(type)) {
+			return true;
 		}
-		return true;
+		throw new IllegalArgumentException("[ERROR] MP가 부족합니다.");
 	}
 
 	public void attack(AttackType type) {
 		health.calculateMp(type);
 	}
 
-	public void attackedByBossMonster(int damage) {
-		health.spendHp(damage);
+	public void attackedBy(int bossHitDamage) {
+		health.spendHp(bossHitDamage);
 	}
 
 	public boolean isPlayerDead() {

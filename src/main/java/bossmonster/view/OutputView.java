@@ -62,7 +62,7 @@ public class OutputView {
 		System.out.println("============================");
 	}
 
-	public static void printAttackType() {
+	public static void printSelectType() {
 		System.out.print(LINE_BREAK);
 		System.out.println("어떤 공격을 하시겠습니까?");
 		System.out.println("1. 물리 공격");
