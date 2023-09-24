@@ -49,24 +49,28 @@ public class Health {
 
 	public void calculateMp(AttackType attackType) {
 		if (attackType.equals(PHYSICAL)) {
-			checkMaximumMp(attackType);
+			setMp(attackType);
 		}
 		if (attackType.equals(MAGIC)) {
 			mp -= attackType.getManaValue();
 		}
 	}
 
-	private void checkMaximumMp(AttackType attackType) {
-		if (mp + attackType.getManaValue() > initMp) {
+	private void setMp(AttackType attackType) {
+		if (checkMaximumMp(attackType)) {
 			mp = initMp;
 		}
-		if (mp + attackType.getManaValue() < initMp) {
+		if (!checkMaximumMp(attackType)) {
 			mp += attackType.getManaValue();
 		}
 	}
 
+	private boolean checkMaximumMp(AttackType attackType) {
+		return mp + attackType.getManaValue() > initMp;
+	}
+
 	public boolean isRemainPlayerMp(AttackType type) {
-		return mp > type.getManaValue();
+		return mp >= type.getManaValue();
 	}
 
 	public int getHp() {
