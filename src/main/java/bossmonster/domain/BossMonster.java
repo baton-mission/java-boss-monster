@@ -2,16 +2,27 @@ package bossmonster.domain;
 
 public class BossMonster {
 
-	private final Health health;
+	private static final int MAX_BOSS_HIT_DAMAGE = 20;
 
-	public BossMonster(Health health) {
+	private final Health health;
+	private final RandomDamageGenerator randomDamageGenerator;
+
+	public BossMonster(Health health, RandomDamageGenerator randomDamageGenerator) {
 		validateHpRange(health);
+		validateBossHitDamage(randomDamageGenerator);
 		this.health = health;
+		this.randomDamageGenerator = randomDamageGenerator;
 	}
 
 	private void validateHpRange(Health health) {
 		if (health.validateBossHpRange()) {
-			throw new IllegalArgumentException("[ERROR] 보스 몬스터의 초기 HP는 100이상 300이하 입니다.");
+			throw new IllegalArgumentException("[ERROR] 보스 몬스터의 초기 HP의 범위가 유효하지 않습니다.");
+		}
+	}
+
+	private void validateBossHitDamage(RandomDamageGenerator randomDamageGenerator) {
+		if (randomDamageGenerator.generate() > MAX_BOSS_HIT_DAMAGE) {
+			throw new IllegalArgumentException("[ERROR] 데미지에 오류가 발생하였습니다.");
 		}
 	}
 
