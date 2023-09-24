@@ -30,7 +30,7 @@ public class BossMonster {
 		return randomDamageGenerator.generate();
 	}
 
-	public boolean bossHpZero() {
+	public boolean isBossDead() {
 		return health.isDead();
 	}
 

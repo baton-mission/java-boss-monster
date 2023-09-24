@@ -60,7 +60,7 @@ public class BossMonsterGame {
 			attackBossBy(bossMonster, player, type);
 			int damage = attackPlayerBy(bossMonster, player);
 			OutputView.printPlayerAttackDamage(type);
-			if (checkBossHpZero(bossMonster, player, count)) {
+			if (checkBossDead(bossMonster, player, count)) {
 				break;
 			}
 			OutputView.printBossAttackDamage(damage);
@@ -91,8 +91,8 @@ public class BossMonsterGame {
 		return boss;
 	}
 
-	private boolean checkBossHpZero(BossMonster bossMonster, Player player, int count) {
-		if (bossMonster.bossHpZero()) {
+	private boolean checkBossDead(BossMonster bossMonster, Player player, int count) {
+		if (bossMonster.isBossDead()) {
 			OutputView.printRaidSuccessMessage(player.getName(), count);
 			return true;
 		}
