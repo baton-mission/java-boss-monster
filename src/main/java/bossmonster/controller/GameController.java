@@ -10,6 +10,7 @@ import java.util.List;
 
 public class GameController {
 
+    int turnCount;
     Player player;
     BossMonster bossMonster;
     InitialSetting initialSetting;
@@ -21,10 +22,12 @@ public class GameController {
     }
 
     public void play() {
+        turnCount = 1;
         progressInitialSetting();
+        progressBattle();
     }
 
-    public void progressInitialSetting() {
+    private void progressInitialSetting() {
         /**
          * 임시 데이터 삽입
          */
@@ -38,5 +41,20 @@ public class GameController {
 
         initialSetting.setPlayerStatus(playerName, playerStatus);
         initialSetting.setBossMonsterStatus(bossMonsterHp);
+    }
+
+    private void progressBattle() {
+        while (true) {
+            // TODO: 뷰에서 데이터 받아와서 공격 타입 삽입
+            battle.attackBossMonster(player, bossMonster, 1);
+            if (battle.isVictory(bossMonster)) {
+                break;
+            }
+
+            battle.attackPlayer(player);
+            if (battle.isDefeat(player)) {
+                break;
+            }
+        }
     }
 }
