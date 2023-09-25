@@ -19,9 +19,10 @@ public class Battle {
         }
     }
 
-    public void attackPlayer(Player player) {
+    public int attackPlayer(Player player) {
         int damage = (int) (Math.random() * 20);
         player.reduceHp(damage);
+        return damage;
     }
 
     public boolean isVictory(BossMonster bossMonster) {
