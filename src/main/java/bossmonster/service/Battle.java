@@ -9,7 +9,7 @@ public class Battle {
 
     public void attackBossMonster(Player player, BossMonster bossMonster, int attackType) {
         if (attackType == PHYSICAL_ATTACK) {
-            player.getMp();
+            player.gainMp();
             bossMonster.reduceHp(10);
         }
 
@@ -22,5 +22,20 @@ public class Battle {
     public void attackPlayer(Player player, BossMonster bossMonster) {
         int damage = (int) Math.random() * 20;
         player.reduceHp(damage);
+    }
+
+    public boolean isVictory(BossMonster bossMonster) {
+        if (bossMonster.getHp() <= 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean isDefeat(Player player) {
+        if (player.getHp() <= 0) {
+            return true;
+        }
+        return false;
     }
 }
