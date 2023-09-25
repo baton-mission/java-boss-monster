@@ -2,8 +2,10 @@ package bossmonster.controller;
 
 import bossmonster.domain.BossMonster;
 import bossmonster.domain.Player;
+import bossmonster.dto.StatusDto;
 import bossmonster.service.Battle;
 import bossmonster.service.InitialSetting;
+import bossmonster.view.GameView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +17,12 @@ public class GameController {
     BossMonster bossMonster;
     InitialSetting initialSetting;
     Battle battle;
+    GameView gameView;
 
     public GameController() {
         initialSetting = new InitialSetting();
         battle = new Battle();
+        gameView = new GameView();
     }
 
     public void play() {
@@ -28,16 +32,9 @@ public class GameController {
     }
 
     private void progressInitialSetting() {
-        /**
-         * 임시 데이터 삽입
-         */
-        String playerName = "testName";
-        List<Integer> playerStatus = new ArrayList<>();
-        playerStatus.add(150);
-        playerStatus.add(50);
-        int bossMonsterHp = 150;
-
-        // TODO: 뷰에서 데이터 받아와서 삽입
+        int bossMonsterHp = gameView.printBossHpSettingView();
+        String playerName = gameView.printPlayerNameSettingView();
+        List<Integer> playerStatus = gameView.printPlayerStatusSettingView();
 
         initialSetting.setPlayerStatus(playerName, playerStatus);
         initialSetting.setBossMonsterStatus(bossMonsterHp);
@@ -46,15 +43,26 @@ public class GameController {
     private void progressBattle() {
         while (true) {
             // TODO: 뷰에서 데이터 받아와서 공격 타입 삽입
+            StatusDto statusDto = new StatusDto(bossMonster, player);
             battle.attackBossMonster(player, bossMonster, 1);
             if (battle.isVictory(bossMonster)) {
+                endGameByVictory();
                 break;
             }
 
-            battle.attackPlayer(player);
+            int bossDamage = battle.attackPlayer(player);
             if (battle.isDefeat(player)) {
+                endGameByDefeat();
                 break;
             }
         }
+    }
+
+    private void endGameByVictory() {
+
+    }
+
+    private void endGameByDefeat() {
+
     }
 }
