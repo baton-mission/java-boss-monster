@@ -17,4 +17,8 @@ public class BossMonster {
     public int getTurnCount() {
         return turnCount;
     }
+
+    public void reduceHp(int damage) {
+        hp -= damage;
+    }
 }

@@ -25,4 +25,14 @@ public class Player {
         status.add(mp);
         return status;
     }
+
+    public void getMp() {
+        if (mp < 100) {
+            mp += 10;
+        }
+    }
+
+    public void consumeMp() {
+        mp -= 30;
+    }
 }
