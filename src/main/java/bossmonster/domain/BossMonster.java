@@ -3,13 +3,19 @@ package bossmonster.domain;
 public class BossMonster {
 
     int hp;
+    int maxHp;
 
-    public BossMonster(int hp) {
-        this.hp = hp;
+    public BossMonster(int initialHp) {
+        this.hp = initialHp;
+        this.maxHp = initialHp;
     }
 
     public int getHp() {
         return hp;
+    }
+
+    public int getMaxHp() {
+        return maxHp;
     }
 
     public void reduceHp(int damage) {
