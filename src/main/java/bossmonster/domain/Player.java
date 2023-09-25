@@ -8,11 +8,13 @@ public class Player {
     String name;
     int hp;
     int mp;
+    int maxMp;
 
     public Player(String name, List<Integer> status) {
         this.name = name;
         this.hp = status.get(0);
         this.mp = status.get(1);
+        this.maxMp = status.get(1);
     }
 
     public String getName() {
@@ -28,7 +30,7 @@ public class Player {
     }
 
     public void gainMp() {
-        if (mp < 100) {
+        if (mp < maxMp) {
             mp += 10;
         }
     }
