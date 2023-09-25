@@ -19,7 +19,7 @@ public class Battle {
         }
     }
 
-    public void attackPlayer(Player player, BossMonster bossMonster) {
+    public void attackPlayer(Player player) {
         int damage = (int) (Math.random() * 20);
         player.reduceHp(damage);
     }

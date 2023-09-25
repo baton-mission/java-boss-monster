@@ -64,10 +64,9 @@ class BattleTest {
     void attackPlayer() {
         //given
         Player player = new Player(name, status);
-        BossMonster bossMonster = new BossMonster(150);
 
         //when
-        battle.attackPlayer(player, bossMonster);
+        battle.attackPlayer(player);
 
         //then
         assertThat(player.getHp()).isLessThan(150);
