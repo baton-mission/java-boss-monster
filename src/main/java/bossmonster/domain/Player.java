@@ -35,4 +35,8 @@ public class Player {
     public void consumeMp() {
         mp -= 30;
     }
+
+    public void reduceHp(int damage) {
+        hp -= damage;
+    }
 }
