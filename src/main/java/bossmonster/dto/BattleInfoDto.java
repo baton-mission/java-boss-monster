@@ -3,18 +3,21 @@ package bossmonster.dto;
 import bossmonster.domain.BossMonster;
 import bossmonster.domain.Player;
 
-public class StatusDto {
+public class BattleInfoDto {
 
     int bossHp;
     int bossMaxHp;
+
+    String playerName;
     int playerHp;
     int playerMaxHp;
     int playerMp;
     int playerMaxMp;
 
-    public StatusDto(BossMonster bossMonster, Player player) {
+    public BattleInfoDto(BossMonster bossMonster, Player player) {
         this.bossHp = bossMonster.getHp();
         this.bossMaxHp = bossMonster.getMaxHp();
+        this.playerName = player.getName();
         this.playerHp = player.getHp();
         this.playerMaxHp = player.getMaxHp();
         this.playerMp = player.getMp();
@@ -27,6 +30,10 @@ public class StatusDto {
 
     public int getBossMaxHp() {
         return bossMaxHp;
+    }
+
+    public String getPlayerName() {
+        return playerName;
     }
 
     public int getPlayerHp() {

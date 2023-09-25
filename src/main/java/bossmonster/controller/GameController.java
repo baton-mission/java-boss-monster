@@ -2,12 +2,11 @@ package bossmonster.controller;
 
 import bossmonster.domain.BossMonster;
 import bossmonster.domain.Player;
-import bossmonster.dto.StatusDto;
+import bossmonster.dto.BattleInfoDto;
 import bossmonster.service.Battle;
 import bossmonster.service.InitialSetting;
 import bossmonster.view.GameView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameController {
@@ -43,7 +42,7 @@ public class GameController {
     private void progressBattle() {
         while (true) {
             // TODO: 뷰에서 데이터 받아와서 공격 타입 삽입
-            StatusDto statusDto = new StatusDto(bossMonster, player);
+            BattleInfoDto battleInfoDto = new BattleInfoDto(bossMonster, player);
             battle.attackBossMonster(player, bossMonster, 1);
             if (battle.isVictory(bossMonster)) {
                 endGameByVictory();
