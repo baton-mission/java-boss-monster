@@ -30,8 +30,8 @@ class InitialSettingTest {
 
         //then
         assertThat(player.getName()).isEqualTo("testName");
-        assertThat(player.getStatus().get(0)).isEqualTo(150);
-        assertThat(player.getStatus().get(1)).isEqualTo(50);
+        assertThat(player.getHp()).isEqualTo(150);
+        assertThat(player.getMp()).isEqualTo(50);
     }
 
     @DisplayName("보스 몬스터 정보 세팅 테스트")

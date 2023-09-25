@@ -19,14 +19,15 @@ public class Player {
         return name;
     }
 
-    public List<Integer> getStatus() {
-        List<Integer> status = new ArrayList<>();
-        status.add(hp);
-        status.add(mp);
-        return status;
+    public int getHp() {
+        return hp;
     }
 
-    public void getMp() {
+    public int getMp() {
+        return mp;
+    }
+
+    public void gainMp() {
         if (mp < 100) {
             mp += 10;
         }
