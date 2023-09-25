@@ -9,4 +9,12 @@ public class BossMonster {
         this.hp = hp;
         turnCount = 1;
     }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public int getTurnCount() {
+        return turnCount;
+    }
 }
