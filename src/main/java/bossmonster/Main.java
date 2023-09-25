@@ -1,7 +1,10 @@
 package bossmonster;
 
+import bossmonster.action.Play;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Play play = new Play();
+        play.start();
     }
 }
