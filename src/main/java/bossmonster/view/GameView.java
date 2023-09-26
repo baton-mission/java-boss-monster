@@ -156,11 +156,13 @@ public class GameView {
 
         int attackType = Integer.parseInt(inputString);
 
-        try {
-            validator.validateMpConsume(battleInfoDto.getPlayerMp());
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return printPlayerPhaseView(battleInfoDto, turnCount);
+        if (attackType == 2) {
+            try {
+                validator.validateMpConsume(battleInfoDto.getPlayerMp());
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+                return printPlayerPhaseView(battleInfoDto, turnCount);
+            }
         }
 
         return attackType;
