@@ -8,10 +8,16 @@ public class BossHp {
     private static final int MAX_HP = 300;
 
     private final int bossHp;
+    private final int initialBossHp;
 
-    private BossHp(int bossHp) {
+    private BossHp(int bossHp, int initialBossHp) {
         validate(bossHp);
         this.bossHp = bossHp;
+        this.initialBossHp = initialBossHp;
+    }
+
+    private BossHp(int bossHp) {
+        this(bossHp, bossHp);
     }
 
     private void validate(int bossHp) {
@@ -30,5 +36,9 @@ public class BossHp {
 
     public static BossHp from(int bossHp) {
         return new BossHp(bossHp);
+    }
+
+    public int getBossHp() {
+        return bossHp;
     }
 }
