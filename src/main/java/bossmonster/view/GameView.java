@@ -66,7 +66,17 @@ public class GameView {
         System.out.println("1. 물리 공격");
         System.out.println("2. 마법 공격");
 
-        int attackType = Integer.parseInt(scanner.nextLine());
+        String inputString = scanner.nextLine();
+
+        try {
+            validator.validateAttackType(inputString);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return printPlayerPhaseView(battleInfoDto, turnCount);
+        }
+
+        int attackType = Integer.parseInt(inputString);
+
         if (attackType == 1) {
             System.out.println("\n물리 공격을 했습니다. (입힌 대미지: 10)");
         }
