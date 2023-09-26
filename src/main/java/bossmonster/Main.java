@@ -1,7 +1,10 @@
 package bossmonster;
 
+import bossmonster.controller.BossGameController;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        BossGameController bossGameController = new BossGameController();
+        bossGameController.run();
     }
 }
