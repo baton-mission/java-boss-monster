@@ -48,4 +48,8 @@ public class PlayerMp {
     public int getInitialPlayerMp() {
         return initialPlayerMp;
     }
+
+    public PlayerMp effectedBy(AttackType attackType) {
+        return new PlayerMp(attackType.effectMp(playerMp), initialPlayerMp);
+    }
 }

@@ -45,4 +45,8 @@ public class BossHp {
     public int getInitialBossHp() {
         return initialBossHp;
     }
+
+    public BossHp effectedBy(AttackType attackType) {
+        return new BossHp(attackType.effectHp(bossHp), initialBossHp);
+    }
 }

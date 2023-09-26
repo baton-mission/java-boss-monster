@@ -4,6 +4,7 @@ import static bossmonster.util.RetryUtil.read;
 
 import bossmonster.domain.AttackType;
 import bossmonster.domain.Boss;
+import bossmonster.domain.BossGame;
 import bossmonster.domain.Player;
 import bossmonster.domain.PlayerName;
 import bossmonster.domain.PlayerStatus;
@@ -29,6 +30,8 @@ public class BossGameController {
 
         AttackType attackType = read(this::scanAttackType);
 
+        BossGame bossGame = BossGame.init(boss, player);
+        bossGame.attack(attackType);
 
     }
 

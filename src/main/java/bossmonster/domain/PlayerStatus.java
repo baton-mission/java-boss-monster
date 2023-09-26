@@ -6,9 +6,9 @@ public class PlayerStatus {
 
     private static final int TOTAL_SUM = 200;
 
-    private final PlayerHp playerHp;
+    private PlayerHp playerHp;
 
-    private final PlayerMp playerMp;
+    private PlayerMp playerMp;
 
     private PlayerStatus(PlayerHp playerHp, PlayerMp playerMp) {
         validate(playerHp, playerMp);
@@ -53,5 +53,9 @@ public class PlayerStatus {
 
     public int getInitialPlayerMp() {
         return playerMp.getInitialPlayerMp();
+    }
+
+    public void effectedBy(AttackType attackType) {
+        playerMp = playerMp.effectedBy(attackType);
     }
 }

@@ -34,4 +34,8 @@ public class Player {
     public int getInitialPlayerMp() {
         return playerStatus.getInitialPlayerMp();
     }
+
+    public void effectedBy(AttackType attackType) {
+        playerStatus.effectedBy(attackType);
+    }
 }

@@ -2,7 +2,7 @@ package bossmonster.domain;
 
 public class Boss {
 
-    private final BossHp bossHp;
+    private BossHp bossHp;
 
     private Boss(BossHp bossHp) {
         this.bossHp = bossHp;
@@ -22,5 +22,9 @@ public class Boss {
 
     public int getInitialBossHp() {
         return bossHp.getInitialBossHp();
+    }
+
+    public void effectedBy(AttackType attackType) {
+        bossHp = bossHp.effectedBy(attackType);
     }
 }
