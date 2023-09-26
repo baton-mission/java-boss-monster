@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import bossmonster.dto.request.BossHpDto;
-import bossmonster.dto.request.PlayerInfoDto;
 import bossmonster.dto.request.PlayerNameDto;
+import bossmonster.dto.request.PlayerStatusInfoDto;
 import bossmonster.util.InputConverter;
 import bossmonster.util.InputValidator;
 
@@ -38,12 +38,12 @@ public enum InputView {
         return new PlayerNameDto(rawPlayerName);
     }
 
-    public PlayerInfoDto scanPlayerHpAndMp() {
+    public PlayerStatusInfoDto scanPlayerHpAndMp() {
         System.out.println(PLAYER_HP_AND_MP_MESSAGE);
         String rawPlayerHpAndMp = SCANNER.nextLine();
         printEmptyLine();
         InputValidator.validatePlayerHpAndMp(rawPlayerHpAndMp);
         List<Integer> PlayerHpAndMp = InputConverter.convertPlayerHpAndMp(rawPlayerHpAndMp);
-        return new PlayerInfoDto(PlayerHpAndMp);
+        return new PlayerStatusInfoDto(PlayerHpAndMp);
     }
 }
