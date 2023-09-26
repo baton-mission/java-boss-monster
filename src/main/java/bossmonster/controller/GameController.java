@@ -41,27 +41,29 @@ public class GameController {
 
     private void progressBattle() {
         while (true) {
-            // TODO: 뷰에서 데이터 받아와서 공격 타입 삽입
             BattleInfoDto battleInfoDto = new BattleInfoDto(bossMonster, player);
-            battle.attackBossMonster(player, bossMonster, 1);
+            int attackType = gameView.printPlayerPhaseView(battleInfoDto, turnCount);
+            battle.attackBossMonster(player, bossMonster, attackType);
             if (battle.isVictory(bossMonster)) {
-                endGameByVictory();
+                endGameByVictory(battleInfoDto, turnCount);
                 break;
             }
 
             int bossDamage = battle.attackPlayer(player);
+            gameView.printBossPhaseView(bossDamage);
             if (battle.isDefeat(player)) {
-                endGameByDefeat();
+                endGameByDefeat(battleInfoDto, turnCount);
                 break;
             }
+            turnCount++;
         }
     }
 
-    private void endGameByVictory() {
-
+    private void endGameByVictory(BattleInfoDto battleInfoDto, int turnCount) {
+        gameView.printEndGameByVictoryView(battleInfoDto, turnCount);
     }
 
-    private void endGameByDefeat() {
-
+    private void endGameByDefeat(BattleInfoDto battleInfoDto, int turnCount) {
+        gameView.printEndGameByDefeatView(battleInfoDto, turnCount);
     }
 }
