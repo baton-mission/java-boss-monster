@@ -3,6 +3,7 @@ package bossmonster.util;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public final class InputConverter {
     // 콤마 구분자
@@ -28,7 +29,7 @@ public final class InputConverter {
 
     private static List<Integer> splitToInt(String format, String input) {
         // TODO : 원하는 구분자에 맞게 구현
-        return List.of(input.split(format)).stream()
+        return Stream.of(input.split(format))
                 .map(Integer::parseInt)
                 .collect(toList());
     }
@@ -41,5 +42,9 @@ public final class InputConverter {
 
     public static int convertBossHp(String rawBossHp) {
         return parseToInt(rawBossHp);
+    }
+
+    public static List<Integer> convertPlayerHpAndMp(String rawPlayerHpAndMp) {
+        return splitToInt(COMMA_DELIMITER, rawPlayerHpAndMp);
     }
 }

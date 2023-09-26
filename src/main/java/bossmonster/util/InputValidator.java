@@ -41,6 +41,9 @@ public final class InputValidator {
     // 숫자만 가능, "," 구분자, 공백 false, 구분자 없고 숫자 1개만 있어도 true
     private static final Pattern NUMBER_COMMA_FORMAT = Pattern.compile("[0-9]+(,[0-9]+)*");
 
+    // 숫자만 가능, "," 구분자, 공백 false, 구분자 없고 숫자 2개만 가능 => TODO : 확인 필요
+    private static final Pattern NUMBER_COMMA_TWO_COUNT_FORMAT = Pattern.compile("[0-9]+(,[0-9]+){1}");
+
     // 숫자만 가능, ", " 구분자, 공백 false, 구분자 없고 숫자 1개만 있어도 true
     private static final Pattern NUMBER_COMMA_SPACE_FORMAT = Pattern.compile("[0-9]+(,\\s[0-9]+)*");
 
@@ -52,6 +55,9 @@ public final class InputValidator {
 
     // 단순히 3개의 요소 및 "," 구분자 (핵심은 3개만 올 수 있다), 공백 false
     private static final Pattern THREE_COMMA_FORMAT = Pattern.compile("[^,]+(,[^,]+){2}");
+
+    // 단순히 2개의 요소 및 "," 구분자 (핵심은 2개만 올 수 있다), 공백 false TODO : 확인 필요
+    private static final Pattern TWO_COMMA_FORMAT = Pattern.compile("[^,]+(,[^,]+){1}");
 
     private static final String BLANK_EXCEPTION_MESSAGE = "공백은 입력할 수 없습니다.";
     private static final String FORMAT_EXCEPTION_MESSAGE = "형식에 맞지 않습니다.";
@@ -74,6 +80,15 @@ public final class InputValidator {
             throw new IllegalArgumentException(BLANK_EXCEPTION_MESSAGE);
         }
         if (!isRightFormat(ENG_KOR_FORMAT, rawPlayerName)) {
+            throw new IllegalArgumentException(FORMAT_EXCEPTION_MESSAGE);
+        }
+    }
+
+    public static void validatePlayerHpAndMp(String rawPlayerHpAndMp) {
+        if (isBlank(rawPlayerHpAndMp)) {
+            throw new IllegalArgumentException(BLANK_EXCEPTION_MESSAGE);
+        }
+        if (!isRightFormat(NUMBER_COMMA_TWO_COUNT_FORMAT, rawPlayerHpAndMp)) {
             throw new IllegalArgumentException(FORMAT_EXCEPTION_MESSAGE);
         }
     }
