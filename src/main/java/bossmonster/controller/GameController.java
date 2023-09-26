@@ -55,6 +55,7 @@ public class GameController {
                 endGameByDefeat(battleInfoDto, turnCount);
                 break;
             }
+
             turnCount++;
         }
     }
