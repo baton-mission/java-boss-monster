@@ -24,7 +24,7 @@ public class Boss {
         return bossHp.getInitialBossHp();
     }
 
-    public void effectedBy(AttackType attackType) {
+    public void effectedHpBy(AttackType attackType) {
         bossHp = bossHp.effectedBy(attackType);
     }
 }
