@@ -19,13 +19,13 @@ public class BossHp {
     }
 
     private void validateRange(int bossHp) {
-        if (isRightHpRange(bossHp)) {
+        if (!isRightHpRange(bossHp)) {
             throw new IllegalArgumentException(BOSS_HP_RANGE_EXCEPTION_MESSAGE);
         }
     }
 
     private static boolean isRightHpRange(int bossHp) {
-        return bossHp < MIN_HP || bossHp > 300;
+        return bossHp >= MIN_HP && bossHp <= MAX_HP;
     }
 
     public static BossHp from(int bossHp) {
