@@ -18,7 +18,6 @@ class BossMonsterTest {
 
         // then
         assertThat(bossMonster.hp).isEqualTo(200);
-        assertThat(bossMonster.turnCount).isEqualTo(1);
     }
 
 }

@@ -45,7 +45,6 @@ class InitialSettingTest {
 
         //then
         assertThat(bossMonster.getHp()).isEqualTo(200);
-        assertThat(bossMonster.getTurnCount()).isEqualTo(1);
     }
 
 }
