@@ -7,4 +7,8 @@ public class BossHpDto {
     public BossHpDto(int bossHp) {
         this.bossHp = bossHp;
     }
+
+    public int getHp() {
+        return bossHp;
+    }
 }

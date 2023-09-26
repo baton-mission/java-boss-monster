@@ -2,6 +2,7 @@ package bossmonster.controller;
 
 import static bossmonster.util.RetryUtil.read;
 
+import bossmonster.domain.Boss;
 import bossmonster.dto.request.BossHpDto;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
@@ -12,7 +13,13 @@ public class BossGameController {
     private static final OutputView OUTPUT_VIEW = OutputView.INSTANCE;
 
     public void run() {
-        BossHpDto bossHpDto = read(INPUT_VIEW::scanBossHp);
+        Boss boss = read(this::createBoss);
 
+
+    }
+
+    private Boss createBoss() {
+        BossHpDto bossHpDto = read(INPUT_VIEW::scanBossHp);
+        return Boss.from(bossHpDto.getHp());
     }
 }
