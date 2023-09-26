@@ -6,6 +6,7 @@ import bossmonster.exception.Validator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class GameView {
 
@@ -47,6 +48,14 @@ public class GameView {
     public List<Integer> printPlayerStatusSettingView() {
         System.out.println("플레이어의 HP와 MP를 입력해주세요.");
         String inputString = scanner.nextLine();
+
+        try {
+            validator.validatePlayerStatus(inputString);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return printPlayerStatusSettingView();
+        }
+
         System.out.println("\n보스 레이드를 시작합니다!\n");
         return parseToIntegerList(inputString);
     }
@@ -124,9 +133,9 @@ public class GameView {
     }
 
     private List<Integer> parseToIntegerList(String inputString) {
-        String[] inputStringArray = inputString.split(",");
-        int playerHp = Integer.parseInt(inputStringArray[0]);
-        int playerMp = Integer.parseInt(inputStringArray[1]);
+        StringTokenizer stringTokenizer = new StringTokenizer(inputString, ",");
+        int playerHp = Integer.parseInt(stringTokenizer.nextToken());
+        int playerMp = Integer.parseInt(stringTokenizer.nextToken());
         List<Integer> status = new ArrayList<>();
         status.add(playerHp);
         status.add(playerMp);

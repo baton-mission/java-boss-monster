@@ -1,6 +1,7 @@
 package bossmonster.exception;
 
 import java.awt.print.PrinterIOException;
+import java.util.StringTokenizer;
 
 public class Validator {
 
@@ -21,6 +22,28 @@ public class Validator {
     public void validatePlayerName(String playerName) {
         if (playerName.length() > 5) {
             throw new IllegalArgumentException(PREFIX + "플레이어의 이름은 5자 이하만 가능합니다.");
+        }
+    }
+
+    public void validatePlayerStatus(String status) {
+        StringTokenizer st = new StringTokenizer(status, ",");
+        String hp = st.nextToken();
+
+        if (!st.hasMoreTokens()) {
+            throw new IllegalArgumentException(PREFIX + "HP와 MP를 콤마(,)로 구분하여 입력해주세요. (예: 100,100)");
+        }
+
+        String mp = st.nextToken();
+
+        if (!hp.matches(regex) || !mp.matches(regex)) {
+            throw new IllegalArgumentException(PREFIX + "HP와 MP를 콤마(,)로 구분하여 정수로 입력해주세요. (예: 100,100)");
+        }
+
+        int hpNum = Integer.parseInt(hp);
+        int mpNum = Integer.parseInt(mp);
+
+        if (hpNum + mpNum != 200) {
+            throw new IllegalArgumentException(PREFIX + "HP와 MP의 합이 200이 되도록 입력해주세요.");
         }
     }
 }
