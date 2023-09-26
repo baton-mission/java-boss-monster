@@ -15,8 +15,13 @@ public enum InputView {
     public BossHpDto scanBossHp() {
         System.out.println(BOSS_HP_MESSAGE);
         String rawBossHp = SCANNER.nextLine();
+        printEmptyLine();
         InputValidator.validateBossHp(rawBossHp);
         int bossHp = InputConverter.convertBossHp(rawBossHp);
         return new BossHpDto(bossHp);
+    }
+
+    private void printEmptyLine() {
+        System.out.println();
     }
 }
