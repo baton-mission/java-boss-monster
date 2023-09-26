@@ -22,7 +22,7 @@ public class BossGameController {
 
         Player player = read(this::createPlayer);
 
-
+        OUTPUT_VIEW.printStartMessage();
     }
 
     private Player createPlayer() {
