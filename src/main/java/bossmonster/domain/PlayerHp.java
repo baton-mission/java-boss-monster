@@ -1,5 +1,7 @@
 package bossmonster.domain;
 
+import static bossmonster.domain.ExceptionMessage.PLAYER_HP_EXCEPTION_MESSAGE;
+
 public class PlayerHp {
 
     private static final int MIN_HP = 0;
@@ -16,7 +18,7 @@ public class PlayerHp {
 
     private void validateUnderMinHp(int playerHp) {
         if (isUnderMinHp(playerHp)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(PLAYER_HP_EXCEPTION_MESSAGE);
         }
     }
 
