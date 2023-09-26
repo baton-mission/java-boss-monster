@@ -27,5 +27,6 @@ public class BossGame {
         turnCount = turnCount.increase();
         player.effectedMpBy(attackType);
         boss.effectedHpBy(attackType);
+        boss.attackTo(player);
     }
 }

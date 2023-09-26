@@ -2,6 +2,9 @@ package bossmonster.domain;
 
 public class Boss {
 
+    private static final int MIN_DAMAGE = 0;
+    private static final int MAX_DAMAGE = 20;
+
     private BossHp bossHp;
 
     private final DamageStrategy damageStrategy;
@@ -29,5 +32,9 @@ public class Boss {
 
     public void effectedHpBy(AttackType attackType) {
         bossHp = bossHp.effectedBy(attackType);
+    }
+
+    public void attackTo(Player player) {
+        player.effectedHpBy(damageStrategy.pickDamage(MIN_DAMAGE, MAX_DAMAGE));
     }
 }

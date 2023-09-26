@@ -58,4 +58,8 @@ public class PlayerStatus {
     public void effectedMpBy(AttackType attackType) {
         playerMp = playerMp.effectedBy(attackType);
     }
+
+    public void effectedHpBy(int damageFromBoss) {
+        playerHp = playerHp.effectedBy(damageFromBoss);
+    }
 }

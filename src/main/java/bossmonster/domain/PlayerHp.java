@@ -47,4 +47,8 @@ public class PlayerHp {
     public int getInitialPlayerHp() {
         return initialPlayerHp;
     }
+
+    public PlayerHp effectedBy(int damageFromBoss) {
+        return new PlayerHp(playerHp - damageFromBoss, initialPlayerHp);
+    }
 }

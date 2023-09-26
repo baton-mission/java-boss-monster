@@ -38,4 +38,8 @@ public class Player {
     public void effectedMpBy(AttackType attackType) {
         playerStatus.effectedMpBy(attackType);
     }
+
+    public void effectedHpBy(int damageFromBoss) {
+        playerStatus.effectedHpBy(damageFromBoss);
+    }
 }

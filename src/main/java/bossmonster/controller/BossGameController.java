@@ -5,6 +5,7 @@ import static bossmonster.util.RetryUtil.read;
 import bossmonster.domain.AttackType;
 import bossmonster.domain.Boss;
 import bossmonster.domain.BossGame;
+import bossmonster.domain.DamageStrategy;
 import bossmonster.domain.Player;
 import bossmonster.domain.PlayerName;
 import bossmonster.domain.PlayerStatus;
@@ -22,6 +23,12 @@ public class BossGameController {
     private static final InputView INPUT_VIEW = InputView.INSTANCE;
     private static final OutputView OUTPUT_VIEW = OutputView.INSTANCE;
 
+    private final DamageStrategy damageStrategy;
+
+    public BossGameController(DamageStrategy damageStrategy) {
+        this.damageStrategy = damageStrategy;
+    }
+
     public void run() {
         Boss boss = read(this::createBoss);
         Player player = read(this::createPlayer);
@@ -32,6 +39,37 @@ public class BossGameController {
 
         BossGame bossGame = BossGame.init(boss, player);
         bossGame.attack(attackType);
+
+//        if (bossGame.isBossDead()) {
+//            /**
+//             * 마법 공격을 했습니다. (입힌 데미지: 20)
+//             *
+//             * dori 님이 6번의 전투 끝에 보스 몬스터를 잡았습니다.
+//             */
+//        }
+//
+//        if (bossGame.isPlayerDead()) {
+//            /**
+//             * 물리 공격을 했습니다. (입힌 데미지: 10)
+//             * 보스가 공격 했습니다. (입힌 데미지: 16)
+//             *
+//             * ============================
+//             * BOSS HP [290/300]
+//             * ____________________________
+//             *    ^-^
+//             *  / ^ ^ \
+//             * (   "   )
+//             *  \  3  /
+//             *   - ^ -
+//             * ____________________________
+//             *
+//             * dori HP [0/10] MP [190/190]
+//             * ============================
+//             *
+//             * dori의 HP가 0이 되었습니다.
+//             * 보스 레이드에 실패했습니다.
+//             */
+//        }
 
     }
 
@@ -68,6 +106,6 @@ public class BossGameController {
 
     private Boss createBoss() {
         BossHpDto bossHpDto = read(INPUT_VIEW::scanBossHp);
-        return Boss.from(bossHpDto.getHp());
+        return Boss.from(bossHpDto.getHp(), damageStrategy);
     }
 }
