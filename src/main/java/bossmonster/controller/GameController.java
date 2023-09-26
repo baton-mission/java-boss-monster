@@ -35,8 +35,8 @@ public class GameController {
         String playerName = gameView.printPlayerNameSettingView();
         List<Integer> playerStatus = gameView.printPlayerStatusSettingView();
 
-        initialSetting.setPlayerStatus(playerName, playerStatus);
-        initialSetting.setBossMonsterStatus(bossMonsterHp);
+        player = initialSetting.setPlayerStatus(playerName, playerStatus);
+        bossMonster = initialSetting.setBossMonsterStatus(bossMonsterHp);
     }
 
     private void progressBattle() {
