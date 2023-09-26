@@ -1,5 +1,9 @@
 package bossmonster.domain;
 
+import static bossmonster.domain.ExceptionMessage.ATTACK_TYPE_EXCEPTION_MESSAGE;
+
+import java.util.stream.Stream;
+
 public enum AttackType {
 
     PHYSICAL(1, "물리 공격", 10, 10, 0),
@@ -21,5 +25,19 @@ public enum AttackType {
         this.reduceMp = reduceMp;
     }
 
+    public static AttackType fromCode(int attackTypeCode) {
+        return Stream.of(values())
+                .filter(attackType -> attackType.attackTypeCode == attackTypeCode)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(ATTACK_TYPE_EXCEPTION_MESSAGE));
+    }
 
+
+    public int getAttackTypeCode() {
+        return attackTypeCode;
+    }
+
+    public String getAttackTypeName() {
+        return attackTypeName;
+    }
 }

@@ -93,6 +93,15 @@ public final class InputValidator {
         }
     }
 
+    public static void validateAttackType(String rawAttackType) {
+        if (isBlank(rawAttackType)) {
+            throw new IllegalArgumentException(BLANK_EXCEPTION_MESSAGE);
+        }
+        if (!isRightFormat(NUMBER_FORMAT, rawAttackType)) {
+            throw new IllegalArgumentException(FORMAT_EXCEPTION_MESSAGE);
+        }
+    }
+
 
     /**
      * 공백 및 빈 문자열 체크

@@ -2,13 +2,16 @@ package bossmonster.controller;
 
 import static bossmonster.util.RetryUtil.read;
 
+import bossmonster.domain.AttackType;
 import bossmonster.domain.Boss;
 import bossmonster.domain.Player;
 import bossmonster.domain.PlayerName;
 import bossmonster.domain.PlayerStatus;
+import bossmonster.dto.request.AttackTypeCodeDto;
 import bossmonster.dto.request.BossHpDto;
 import bossmonster.dto.request.PlayerNameDto;
 import bossmonster.dto.request.PlayerStatusInfoDto;
+import bossmonster.dto.response.AttackTypeDto;
 import bossmonster.dto.response.BossAndPlayerStatusDto;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
@@ -23,6 +26,16 @@ public class BossGameController {
         Player player = read(this::createPlayer);
         printStartMessage();
         printBossAndPlayerStatus(boss, player);
+
+        AttackType attackType = read(this::scanAttackType);
+
+
+    }
+
+    private AttackType scanAttackType() {
+        AttackTypeDto attackTypeDto = new AttackTypeDto();
+        AttackTypeCodeDto attackTypeCodeDto = read(INPUT_VIEW::scanAttackType, attackTypeDto);
+        return AttackType.fromCode(attackTypeCodeDto.getAttackTypeCode());
     }
 
     private static void printStartMessage() {

@@ -47,4 +47,8 @@ public final class InputConverter {
     public static List<Integer> convertPlayerHpAndMp(String rawPlayerHpAndMp) {
         return splitToInt(COMMA_DELIMITER, rawPlayerHpAndMp);
     }
+
+    public static int convertAttackTypeCode(String rawAttackTypeCode) {
+        return parseToInt(rawAttackTypeCode);
+    }
 }
