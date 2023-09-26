@@ -6,10 +6,16 @@ public class PlayerHp {
 
     private static final int MIN_HP = 0;
     private final int playerHp;
+    private final int initialPlayerHp;
 
-    private PlayerHp(int playerHp) {
+    private PlayerHp(int playerHp, int initialPlayerHp) {
         validate(playerHp);
         this.playerHp = playerHp;
+        this.initialPlayerHp = initialPlayerHp;
+    }
+
+    private PlayerHp(int playerHp) {
+        this(playerHp, playerHp);
     }
 
     private void validate(int playerHp) {
@@ -32,5 +38,9 @@ public class PlayerHp {
 
     public int plus(PlayerMp playerMp) {
         return playerMp.plus(playerHp);
+    }
+
+    public int getPlayerHp() {
+        return playerHp;
     }
 }
