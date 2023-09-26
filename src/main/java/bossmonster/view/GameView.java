@@ -68,14 +68,7 @@ public class GameView {
 
         String inputString = scanner.nextLine();
 
-        try {
-            validator.validateAttackType(inputString);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return printPlayerPhaseView(battleInfoDto, turnCount);
-        }
-
-        int attackType = Integer.parseInt(inputString);
+        int attackType = validateAttackType(battleInfoDto, turnCount, inputString);
 
         if (attackType == 1) {
             System.out.println("\n물리 공격을 했습니다. (입힌 대미지: 10)");
@@ -151,5 +144,25 @@ public class GameView {
         status.add(playerMp);
 
         return status;
+    }
+
+    private int validateAttackType(BattleInfoDto battleInfoDto, int turnCount, String inputString) {
+        try {
+            validator.validateAttackType(inputString);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return printPlayerPhaseView(battleInfoDto, turnCount);
+        }
+
+        int attackType = Integer.parseInt(inputString);
+
+        try {
+            validator.validateMpConsume(battleInfoDto.getPlayerMp());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return printPlayerPhaseView(battleInfoDto, turnCount);
+        }
+
+        return attackType;
     }
 }
