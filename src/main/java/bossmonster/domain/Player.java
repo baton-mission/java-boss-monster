@@ -14,4 +14,24 @@ public class Player {
     public static Player from(PlayerName playerName, PlayerStatus playerStatus) {
         return new Player(playerName, playerStatus);
     }
+
+    public int getPlayerHp() {
+        return playerStatus.getPlayerHp();
+    }
+
+    public int getPlayerMp() {
+        return playerStatus.getPlayerMp();
+    }
+
+    public String getPlayerName() {
+        return playerName.getPlayerName();
+    }
+
+    public int getInitialPlayerHp() {
+        return playerStatus.getInitialPlayerHp();
+    }
+
+    public int getInitialPlayerMp() {
+        return playerStatus.getInitialPlayerMp();
+    }
 }

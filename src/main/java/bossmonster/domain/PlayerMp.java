@@ -44,4 +44,8 @@ public class PlayerMp {
     public int getPlayerMp() {
         return playerMp;
     }
+
+    public int getInitialPlayerMp() {
+        return initialPlayerMp;
+    }
 }

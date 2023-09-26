@@ -43,4 +43,8 @@ public class PlayerHp {
     public int getPlayerHp() {
         return playerHp;
     }
+
+    public int getInitialPlayerHp() {
+        return initialPlayerHp;
+    }
 }

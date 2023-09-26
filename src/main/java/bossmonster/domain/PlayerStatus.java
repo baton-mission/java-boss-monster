@@ -38,4 +38,20 @@ public class PlayerStatus {
     public static PlayerStatus from(int playerHp, int playerMp) {
         return new PlayerStatus(playerHp, playerMp);
     }
+
+    public int getPlayerHp() {
+        return playerHp.getPlayerHp();
+    }
+
+    public int getPlayerMp() {
+        return playerMp.getPlayerMp();
+    }
+
+    public int getInitialPlayerHp() {
+        return playerHp.getInitialPlayerHp();
+    }
+
+    public int getInitialPlayerMp() {
+        return playerMp.getInitialPlayerMp();
+    }
 }

@@ -29,4 +29,8 @@ public class PlayerName {
     public static PlayerName from(String playerName) {
         return new PlayerName(playerName);
     }
+
+    public String getPlayerName() {
+        return playerName;
+    }
 }

@@ -9,6 +9,7 @@ import bossmonster.domain.PlayerStatus;
 import bossmonster.dto.request.BossHpDto;
 import bossmonster.dto.request.PlayerNameDto;
 import bossmonster.dto.request.PlayerStatusInfoDto;
+import bossmonster.dto.response.BossAndPlayerStatusDto;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
 
@@ -19,10 +20,18 @@ public class BossGameController {
 
     public void run() {
         Boss boss = read(this::createBoss);
-
         Player player = read(this::createPlayer);
+        printStartMessage();
+        printBossAndPlayerStatus(boss, player);
+    }
 
+    private static void printStartMessage() {
         OUTPUT_VIEW.printStartMessage();
+    }
+
+    private void printBossAndPlayerStatus(Boss boss, Player player) {
+        BossAndPlayerStatusDto bossAndPlayerStatusDto = new BossAndPlayerStatusDto(boss, player);
+        OUTPUT_VIEW.printBossAndPlayerStatus(bossAndPlayerStatusDto);
     }
 
     private Player createPlayer() {

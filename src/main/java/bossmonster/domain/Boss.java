@@ -15,4 +15,12 @@ public class Boss {
     public static Boss from(int bossHp) {
         return new Boss(bossHp);
     }
+
+    public int getBossHp() {
+        return bossHp.getBossHp();
+    }
+
+    public int getInitialBossHp() {
+        return bossHp.getInitialBossHp();
+    }
 }

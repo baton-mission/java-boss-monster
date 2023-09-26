@@ -41,4 +41,8 @@ public class BossHp {
     public int getBossHp() {
         return bossHp;
     }
+
+    public int getInitialBossHp() {
+        return initialBossHp;
+    }
 }
