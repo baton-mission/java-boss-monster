@@ -3,9 +3,11 @@ package bossmonster;
 import bossmonster.VO.HP;
 
 public class BossMonster {
+
     private HP hp;
     private String avatar;
-    BossMonster(){
+
+    BossMonster() {
         this.avatar =
                 "   ^-^\n" +
                 " / 0 0 \\\n" +
@@ -13,10 +15,12 @@ public class BossMonster {
                 " \\  -  /\n" +
                 "  - ^ -";
     }
-    public void createHP(Integer input){
+
+    public void createHP(Integer input) {
         hp = HP.boss(input);
     }
-    public void damaged(Integer input, Player attacker){
+
+    public void damaged(Integer input, Player attacker) {
         showDamaged(input);
         avatar =
                 "   ^-^\n" +
@@ -24,7 +28,7 @@ public class BossMonster {
                 "(   \"\\  )\n" +
                 " \\  ^  /\n" +
                 "  - ^ -";
-        if(hp.canDie(input)){
+        if(hp.canDie(input)) {
             hp.toZero();
             die(attacker);
             return;
@@ -32,26 +36,31 @@ public class BossMonster {
         hp.decrease(input);
         attack(attacker);
     }
-    public void attack(Player target){
+
+    public void attack(Player target) {
         Integer damage = (int) ((Math.random() * 1000)%20);
         target.damaged(damage, this);
     }
-    public void die(Player attcker){
+
+    public void die(Player attcker) {
         attcker.victory();
     }
-    public void showState(){
+
+    public void showState() {
         System.out.println("BOSS HP " + hp.showNowMax());
         System.out.println("____________________________\n" + avatar +
                 "\n____________________________");
     }
-    public void showDamaged(Integer damage){
-        String type = "물리";
-        if (damage > 10)
-            type = "마법";
-        System.out.println("\n" + type + " 공격을 했습니다. (입힌 데미지: " + hp.dealDamege(damage) + ")");
 
+    public void showDamaged(Integer damage) {
+        String type = "물리";
+        if (damage > 10) {
+            type = "마법";
+        }
+        System.out.println("\n" + type + " 공격을 했습니다. (입힌 데미지: " + hp.dealDamege(damage) + ")");
     }
-    public void victory(){
+
+    public void victory() {
         this.avatar =
                 "   ^-^\n" +
                 " / ^ ^ \\\n" +
