@@ -15,6 +15,8 @@ import bossmonster.dto.request.PlayerNameDto;
 import bossmonster.dto.request.PlayerStatusInfoDto;
 import bossmonster.dto.response.AttackTypeDto;
 import bossmonster.dto.response.BossAndPlayerStatusDto;
+import bossmonster.dto.response.BossAttackDto;
+import bossmonster.dto.response.PlayerBossInfoDto;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
 
@@ -34,43 +36,51 @@ public class BossGameController {
         Player player = read(this::createPlayer);
         printStartMessage();
         printBossAndPlayerStatus(boss, player);
-
-        AttackType attackType = read(this::scanAttackType);
-
         BossGame bossGame = BossGame.init(boss, player);
-        bossGame.attack(attackType);
+        playingGame(bossGame);
 
-//        if (bossGame.isBossDead()) {
-//            /**
-//             * 마법 공격을 했습니다. (입힌 데미지: 20)
-//             *
-//             * dori 님이 6번의 전투 끝에 보스 몬스터를 잡았습니다.
-//             */
-//        }
-//
-//        if (bossGame.isPlayerDead()) {
-//            /**
-//             * 물리 공격을 했습니다. (입힌 데미지: 10)
-//             * 보스가 공격 했습니다. (입힌 데미지: 16)
-//             *
-//             * ============================
-//             * BOSS HP [290/300]
-//             * ____________________________
-//             *    ^-^
-//             *  / ^ ^ \
-//             * (   "   )
-//             *  \  3  /
-//             *   - ^ -
-//             * ____________________________
-//             *
-//             * dori HP [0/10] MP [190/190]
-//             * ============================
-//             *
-//             * dori의 HP가 0이 되었습니다.
-//             * 보스 레이드에 실패했습니다.
-//             */
-//        }
+    }
 
+    private void playingGame(BossGame bossGame) {
+        AttackType attackType = read(this::scanAttackType);
+        int bossDamage = bossGame.attack(attackType);
+
+        /**
+         * 물리 공격을 했습니다. (입힌 데미지: 10)
+         * 보스가 공격 했습니다. (입힌 데미지: 10)
+         *
+         * ============================
+         * BOSS HP [30/100]
+         * ____________________________
+         *    ^-^
+         *  / x x \
+         * (   "\  )
+         *  \  ^  /
+         *   - ^ -
+         * ____________________________
+         *
+         * dori HP [50/100] MP [20/100]
+         * ============================
+         */
+
+        if (bossGame.isBossDead()) {
+            BossAttackDto bossDeadResponseDto = new BossAttackDto(attackType, bossGame);
+            OUTPUT_VIEW.printBossDeadMessage(bossDeadResponseDto);
+            // 종료 되어야 한다.
+            return;
+        }
+
+        if (bossGame.isPlayerDead()) {
+            PlayerBossInfoDto playerBossInfoResponseDto = new PlayerBossInfoDto(attackType, bossDamage, bossGame);
+            OUTPUT_VIEW.printPlayerDeadMessage(playerBossInfoResponseDto);
+            // 종료 되어야 한다.
+            return;
+        }
+
+        // 일반적인 경우 => 공격 턴 재시도
+        PlayerBossInfoDto playerBossInfoResponseDto = new PlayerBossInfoDto(attackType, bossDamage, bossGame);
+        OUTPUT_VIEW.printGameCurrentStatus(playerBossInfoResponseDto);
+        playingGame(bossGame);
     }
 
     private AttackType scanAttackType() {

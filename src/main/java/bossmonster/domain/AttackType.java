@@ -47,4 +47,8 @@ public enum AttackType {
     public int effectHp(int bossHp) {
         return bossHp - this.attackPower;
     }
+
+    public int getAttackDamage() {
+        return attackPower;
+    }
 }

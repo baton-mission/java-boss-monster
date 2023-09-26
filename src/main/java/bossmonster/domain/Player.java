@@ -42,4 +42,8 @@ public class Player {
     public void effectedHpBy(int damageFromBoss) {
         playerStatus.effectedHpBy(damageFromBoss);
     }
+
+    public boolean isDead() {
+        return playerStatus.isHpUnderMin();
+    }
 }

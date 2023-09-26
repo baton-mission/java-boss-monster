@@ -34,7 +34,13 @@ public class Boss {
         bossHp = bossHp.effectedBy(attackType);
     }
 
-    public void attackTo(Player player) {
-        player.effectedHpBy(damageStrategy.pickDamage(MIN_DAMAGE, MAX_DAMAGE));
+    public int attackTo(Player player) {
+        int bossDamage = damageStrategy.pickDamage(MIN_DAMAGE, MAX_DAMAGE);
+        player.effectedHpBy(bossDamage);
+        return bossDamage;
+    }
+
+    public boolean isDead() {
+        return bossHp.isUnderZero();
     }
 }

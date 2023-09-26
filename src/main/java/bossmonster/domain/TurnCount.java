@@ -19,4 +19,8 @@ public class TurnCount {
     public TurnCount increase() {
         return new TurnCount(turnCount + 1);
     }
+
+    public int getTurnCount() {
+        return turnCount;
+    }
 }

@@ -1,6 +1,8 @@
 package bossmonster.view;
 
 import bossmonster.dto.response.BossAndPlayerStatusDto;
+import bossmonster.dto.response.BossAttackDto;
+import bossmonster.dto.response.PlayerBossInfoDto;
 
 public enum OutputView {
     INSTANCE;
@@ -24,6 +26,15 @@ public enum OutputView {
             " \\  -  /\n" +
             "  - ^ -\n";
 
+    private static final String BOSS_WIN_FACE = "   ^-^\n" +
+            " / ^ ^ \\\n" +
+            "(   \"   )\n" +
+            " \\  3  /\n" +
+            "  - ^ -\n";
+
+    private static final String ATTACK_MESSAGE_FORMAT = "%s을 했습니다. (입힌 데미지: %d)\n";
+    private static final String BOSS_DEAD_MESSAGE_FORMAT = "%s 님이 %d번의 전투 끝에 보스 몬스터를 잡았습니다.\n";
+
     public void printExceptionMessage(String message) {
         System.out.printf(EXCEPTION_MESSAGE_FORMAT, message);
     }
@@ -38,23 +49,126 @@ public enum OutputView {
     }
 
     public void printBossAndPlayerStatus(BossAndPlayerStatusDto bossAndPlayerStatusDto) {
-        String bossHpStatus = getBossHpMessage(bossAndPlayerStatusDto);
-        String playerStatus = getPlayerStatusMessage(bossAndPlayerStatusDto);
-        System.out.printf(BOSS_PLAYER_STATUS_FORMAT, bossHpStatus, BOSS_INIT_FACE, playerStatus);
-        printEmptyLine();
-    }
-
-    private static String getPlayerStatusMessage(BossAndPlayerStatusDto bossAndPlayerStatusDto) {
-        return String.format(PLAYER_STATUS_FORMAT,
+        printBossAndPlayer(bossAndPlayerStatusDto.getCurrentBossHp(),
+                bossAndPlayerStatusDto.getInitialBossHp(),
                 bossAndPlayerStatusDto.getPlayerName(),
                 bossAndPlayerStatusDto.getCurrentPlayerHp(),
                 bossAndPlayerStatusDto.getInitialPlayerHp(),
                 bossAndPlayerStatusDto.getCurrentPlayerMp(),
-                bossAndPlayerStatusDto.getInitialPlayerMp());
+                bossAndPlayerStatusDto.getInitialPlayerMp(),
+                BOSS_INIT_FACE);
     }
 
-    private static String getBossHpMessage(BossAndPlayerStatusDto bossAndPlayerStatusDto) {
-        return String.format(BOSS_HP_STATUS_FORMAT,
-                bossAndPlayerStatusDto.getCurrentBossHp(), bossAndPlayerStatusDto.getInitialBossHp());
+    private void printBossAndPlayer(int currentBossHp, int initialBossHp, String playerName, int currentPlayerHp,
+                                    int initialPlayerHp, int currentPlayerMp, int initialPlayerMp, String bossFace) {
+        String bossHpStatus = getBossHpMessage(currentBossHp,
+                initialBossHp);
+        String playerStatus = getPlayerStatusMessage(playerName,
+                currentPlayerHp,
+                initialPlayerHp,
+                currentPlayerMp,
+                initialPlayerMp);
+        System.out.printf(BOSS_PLAYER_STATUS_FORMAT, bossHpStatus, bossFace, playerStatus);
+        printEmptyLine();
+    }
+
+    private static String getPlayerStatusMessage(String playerName, int currentPlayerHp, int initialPlayerHp,
+                                                 int currentPlayerMp, int initialPlayerMp) {
+        return String.format(PLAYER_STATUS_FORMAT, playerName, currentPlayerHp, initialPlayerHp,
+                currentPlayerMp, initialPlayerMp);
+    }
+
+    private static String getBossHpMessage(int currentBossHp, int initialBossHp) {
+        return String.format(BOSS_HP_STATUS_FORMAT, currentBossHp, initialBossHp);
+    }
+
+    /**
+     * 마법 공격을 했습니다. (입힌 데미지: 20)
+     * <p>
+     * dori 님이 6번의 전투 끝에 보스 몬스터를 잡았습니다.
+     */
+    public void printBossDeadMessage(BossAttackDto bossDeadResponseDto) {
+        printPlayerAttackMessage(bossDeadResponseDto.getAttackTypeName(), bossDeadResponseDto.getAttackDamage());
+        System.out.printf(BOSS_DEAD_MESSAGE_FORMAT,
+                bossDeadResponseDto.getAttackerPlayerName(), bossDeadResponseDto.getTotalTryCount());
+    }
+
+    private void printPlayerAttackMessage(String attackTypeName, int attackDamage) {
+        System.out.printf(ATTACK_MESSAGE_FORMAT, attackTypeName, attackDamage);
+    }
+
+    /**
+     * /**
+     * * 물리 공격을 했습니다. (입힌 데미지: 10)
+     * * 보스가 공격 했습니다. (입힌 데미지: 16)
+     * *
+     * * ============================
+     * * BOSS HP [290/300]
+     * * ____________________________
+     * *    ^-^
+     * *  / ^ ^ \
+     * * (   "   )
+     * *  \  3  /
+     * *   - ^ -
+     * * ____________________________
+     * *
+     * * dori HP [0/10] MP [190/190]
+     * * ============================
+     * *
+     * * dori의 HP가 0이 되었습니다.
+     * * 보스 레이드에 실패했습니다.
+     */
+
+    public void printPlayerDeadMessage(PlayerBossInfoDto playerDeadResponseDto) {
+        printPlayerAttackMessage(playerDeadResponseDto.getAttackTypeName(), playerDeadResponseDto.getAttackDamage());
+        printBossAttackMessage(playerDeadResponseDto.getBossAttackDamage());
+        printEmptyLine();
+        printBossAndPlayer(playerDeadResponseDto.getBossCurrentHp(),
+                playerDeadResponseDto.getBossInitialHp(),
+                playerDeadResponseDto.getPlayerName(),
+                playerDeadResponseDto.getPlayerCurrentHp(),
+                playerDeadResponseDto.getPlayerInitialHp(),
+                playerDeadResponseDto.getPlayerCurrentMp(),
+                playerDeadResponseDto.getPlayerInitialMp(),
+                BOSS_WIN_FACE);
+        System.out.printf("%s의 HP가 0이 되었습니다.\n", playerDeadResponseDto.getPlayerName());
+        System.out.println("보스 레이드에 실패했습니다.");
+    }
+
+    private void printBossAttackMessage(int bossAttackDamage) {
+        System.out.printf("보스가 공격 했습니다. (입힌 데미지: %d)\n", bossAttackDamage);
+    }
+
+    /**
+     * 물리 공격을 했습니다. (입힌 데미지: 10)
+     * 보스가 공격 했습니다. (입힌 데미지: 10)
+     * <p>
+     * ============================
+     * BOSS HP [30/100]
+     * ____________________________
+     * ^-^
+     * / x x \
+     * (   "\  )
+     * \  ^  /
+     * - ^ -
+     * ____________________________
+     * <p>
+     * dori HP [50/100] MP [20/100]
+     * ============================
+     *
+     * @param playerBossInfoResponseDto
+     */
+    public void printGameCurrentStatus(PlayerBossInfoDto playerBossInfoResponseDto) {
+        printPlayerAttackMessage(playerBossInfoResponseDto.getAttackTypeName(), playerBossInfoResponseDto.getAttackDamage());
+        printBossAttackMessage(playerBossInfoResponseDto.getBossAttackDamage());
+        printEmptyLine();
+        printBossAndPlayer(playerBossInfoResponseDto.getBossCurrentHp(),
+                playerBossInfoResponseDto.getBossInitialHp(),
+                playerBossInfoResponseDto.getPlayerName(),
+                playerBossInfoResponseDto.getPlayerCurrentHp(),
+                playerBossInfoResponseDto.getPlayerInitialHp(),
+                playerBossInfoResponseDto.getPlayerCurrentMp(),
+                playerBossInfoResponseDto.getPlayerInitialMp(),
+                BOSS_INIT_FACE);
     }
 }

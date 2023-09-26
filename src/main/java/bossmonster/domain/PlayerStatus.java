@@ -62,4 +62,8 @@ public class PlayerStatus {
     public void effectedHpBy(int damageFromBoss) {
         playerHp = playerHp.effectedBy(damageFromBoss);
     }
+
+    public boolean isHpUnderMin() {
+        return playerHp.isUnderMinHp();
+    }
 }

@@ -51,4 +51,8 @@ public class PlayerHp {
     public PlayerHp effectedBy(int damageFromBoss) {
         return new PlayerHp(playerHp - damageFromBoss, initialPlayerHp);
     }
+
+    public boolean isUnderMinHp() {
+        return playerHp <= MIN_HP;
+    }
 }
