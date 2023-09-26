@@ -6,16 +6,16 @@ public enum AttackType {
     MAGICAL(2, "마법 공격", 20, 0, 30);
 
     private final int attackTypeCode;
-    private final String attackType;
+    private final String attackTypeName;
     private final int attackPower;
 
     private final int recoveryMp;
 
     private final int reduceMp;
 
-    AttackType(int attackTypeCode, String attackType, int attackPower, int recoveryMp, int reduceMp) {
+    AttackType(int attackTypeCode, String attackTypeName, int attackPower, int recoveryMp, int reduceMp) {
         this.attackTypeCode = attackTypeCode;
-        this.attackType = attackType;
+        this.attackTypeName = attackTypeName;
         this.attackPower = attackPower;
         this.recoveryMp = recoveryMp;
         this.reduceMp = reduceMp;
