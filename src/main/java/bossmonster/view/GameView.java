@@ -19,7 +19,6 @@ public class GameView {
     public int printBossHpSettingView() {
         System.out.println("보스 몬스터의 HP를 입력해주세요.");
         String bossHp = scanner.nextLine();
-        System.out.println(bossHp);
 
         try {
             validator.validateBossStatus(bossHp);
@@ -34,6 +33,14 @@ public class GameView {
     public String printPlayerNameSettingView() {
         System.out.println("플레이어의 이름을 입력해주세요.");
         String playerName = scanner.nextLine();
+
+        try {
+            validator.validatePlayerName(playerName);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return printPlayerNameSettingView();
+        }
+
         return playerName;
     }
 
