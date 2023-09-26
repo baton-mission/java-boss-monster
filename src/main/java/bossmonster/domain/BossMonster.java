@@ -20,5 +20,8 @@ public class BossMonster {
 
     public void reduceHp(int damage) {
         hp -= damage;
+        if (hp < 0) {
+            hp = 0;
+        }
     }
 }
