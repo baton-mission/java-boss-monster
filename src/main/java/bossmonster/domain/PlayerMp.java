@@ -30,4 +30,8 @@ public class PlayerMp {
     public static PlayerMp from(int playerMp) {
         return new PlayerMp(playerMp);
     }
+
+    public int plus(int playerHp) {
+        return playerHp + playerMp;
+    }
 }

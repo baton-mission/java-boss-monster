@@ -29,4 +29,8 @@ public class PlayerHp {
     public static PlayerHp from(int playerHp) {
         return new PlayerHp(playerHp);
     }
+
+    public int plus(PlayerMp playerMp) {
+        return playerMp.plus(playerHp);
+    }
 }
