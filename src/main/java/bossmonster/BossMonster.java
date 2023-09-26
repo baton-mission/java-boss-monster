@@ -6,14 +6,27 @@ public class BossMonster {
 
     private HP hp;
     private String avatar;
+    private static final String NORMAL_FORM
+                = "   ^-^\n"
+                + " / 0 0 \\\n"
+                + "(   \"   )\n"
+                + " \\  -  /\n"
+                + "  - ^ -";
+    private static final String DAMAGED_FORM
+                = "   ^-^\n"
+                + " / x x \\\n"
+                + "(   \"\\  )\n"
+                + " \\  ^  /\n"
+                + "  - ^ -";
+    private static final String VICTORY_FORM
+                = "   ^-^\n"
+                + " / ^ ^ \\\n"
+                + "(   \"   )\n"
+                + " \\  3  /\n"
+                + "  - ^ -";
 
     BossMonster() {
-        this.avatar =
-                "   ^-^\n" +
-                " / 0 0 \\\n" +
-                "(   \"   )\n" +
-                " \\  -  /\n" +
-                "  - ^ -";
+        this.avatar = NORMAL_FORM;
     }
 
     public void createHP(Integer input) {
@@ -22,12 +35,7 @@ public class BossMonster {
 
     public void damaged(Integer input, Player attacker) {
         showDamaged(input);
-        avatar =
-                "   ^-^\n" +
-                " / x x \\\n" +
-                "(   \"\\  )\n" +
-                " \\  ^  /\n" +
-                "  - ^ -";
+        avatar = DAMAGED_FORM;
         if(hp.canDie(input)) {
             hp.toZero();
             die(attacker);
@@ -38,7 +46,7 @@ public class BossMonster {
     }
 
     public void attack(Player target) {
-        Integer damage = (int) ((Math.random() * 1000)%20);
+        Integer damage = (int) ((Math.random() * 1000) % 20);
         target.damaged(damage, this);
     }
 
@@ -48,8 +56,8 @@ public class BossMonster {
 
     public void showState() {
         System.out.println("BOSS HP " + hp.showNowMax());
-        System.out.println("____________________________\n" + avatar +
-                "\n____________________________");
+        System.out.println("____________________________\n" + avatar
+                + "\n____________________________");
     }
 
     public void showDamaged(Integer damage) {
@@ -61,11 +69,6 @@ public class BossMonster {
     }
 
     public void victory() {
-        this.avatar =
-                "   ^-^\n" +
-                " / ^ ^ \\\n" +
-                "(   \"   )\n" +
-                " \\  3  /\n" +
-                "  - ^ -";
+        this.avatar = VICTORY_FORM;
     }
 }
