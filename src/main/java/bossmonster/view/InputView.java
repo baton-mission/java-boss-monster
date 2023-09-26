@@ -3,6 +3,7 @@ package bossmonster.view;
 import java.util.Scanner;
 
 import bossmonster.dto.request.BossHpDto;
+import bossmonster.dto.request.PlayerNameDto;
 import bossmonster.util.InputConverter;
 import bossmonster.util.InputValidator;
 
@@ -11,6 +12,7 @@ public enum InputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String BOSS_HP_MESSAGE = "보스 몬스터의 HP를 입력해주세요.";
+    private static final String PLAYER_NAME_MESSAGE = "플레이어의 이름을 입력해주세요.";
 
     public BossHpDto scanBossHp() {
         System.out.println(BOSS_HP_MESSAGE);
@@ -23,5 +25,13 @@ public enum InputView {
 
     private void printEmptyLine() {
         System.out.println();
+    }
+
+    public PlayerNameDto scanPlayerNames() {
+        System.out.println(PLAYER_NAME_MESSAGE);
+        String rawPlayerName = SCANNER.nextLine();
+        printEmptyLine();
+        InputValidator.validatePlayerName(rawPlayerName);
+        return new PlayerNameDto(rawPlayerName);
     }
 }

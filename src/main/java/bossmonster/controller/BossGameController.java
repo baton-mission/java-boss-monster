@@ -4,6 +4,7 @@ import static bossmonster.util.RetryUtil.read;
 
 import bossmonster.domain.Boss;
 import bossmonster.dto.request.BossHpDto;
+import bossmonster.dto.request.PlayerNameDto;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
 
@@ -14,6 +15,7 @@ public class BossGameController {
 
     public void run() {
         Boss boss = read(this::createBoss);
+        PlayerNameDto playerNameDto = read(INPUT_VIEW::scanPlayerNames);
 
 
     }

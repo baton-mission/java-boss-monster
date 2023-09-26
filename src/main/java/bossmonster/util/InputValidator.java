@@ -26,6 +26,9 @@ public final class InputValidator {
     // 영어만 가능, ", " 구분자, 공백 false, 구분자가 없고 영어 단어 1개만 있어도 true
     private static final Pattern ENG_COMMA_SPACE_FORMAT = Pattern.compile("[A-Za-z-]+(,\\s[A-Za-z-]+)*");
 
+    // 한글, 영어 모두 가능 (한영 조합도 가능), 구분자 없음, 공백 false
+    private static final Pattern ENG_KOR_FORMAT = Pattern.compile("[A-Za-z가-힣]+");
+
     // 한글, 영어 모두 가능 (한영 조합도 가능) , "," 구분자 , 공백 false, 구분자가 없고 한영 단어 1개만 있어도 true
     private static final Pattern ENG_KOR_COMMA_FORMAT = Pattern.compile("[A-Za-z가-힣]+(,[A-Za-z가-힣]+)*");
 
@@ -62,6 +65,15 @@ public final class InputValidator {
             throw new IllegalArgumentException(BLANK_EXCEPTION_MESSAGE);
         }
         if (!isRightFormat(NUMBER_FORMAT, rawBossHp)) {
+            throw new IllegalArgumentException(FORMAT_EXCEPTION_MESSAGE);
+        }
+    }
+
+    public static void validatePlayerName(String rawPlayerName) {
+        if (isBlank(rawPlayerName)) {
+            throw new IllegalArgumentException(BLANK_EXCEPTION_MESSAGE);
+        }
+        if (!isRightFormat(ENG_KOR_FORMAT, rawPlayerName)) {
             throw new IllegalArgumentException(FORMAT_EXCEPTION_MESSAGE);
         }
     }
