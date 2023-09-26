@@ -26,7 +26,7 @@ public class Battle {
     }
 
     public boolean isVictory(BossMonster bossMonster) {
-        if (bossMonster.getHp() <= 0) {
+        if (bossMonster.getHp() == 0) {
             return true;
         }
 
@@ -34,7 +34,7 @@ public class Battle {
     }
 
     public boolean isDefeat(Player player) {
-        if (player.getHp() <= 0) {
+        if (player.getHp() == 0) {
             return true;
         }
         return false;
