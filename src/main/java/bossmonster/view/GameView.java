@@ -1,6 +1,7 @@
 package bossmonster.view;
 
 import bossmonster.dto.BattleInfoDto;
+import bossmonster.exception.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +14,21 @@ public class GameView {
     final int BOSS_WIN = 2;
 
     Scanner scanner = new Scanner(System.in);
+    Validator validator = new Validator();
 
     public int printBossHpSettingView() {
         System.out.println("보스 몬스터의 HP를 입력해주세요.");
-        int bossHp = Integer.valueOf(scanner.nextLine());
-        return bossHp;
+        String bossHp = scanner.nextLine();
+        System.out.println(bossHp);
+
+        try {
+            validator.validateBossStatus(bossHp);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return printBossHpSettingView();
+        }
+
+        return Integer.parseInt(bossHp);
     }
 
     public String printPlayerNameSettingView() {
