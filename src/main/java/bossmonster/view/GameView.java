@@ -29,7 +29,7 @@ public class GameView {
     public List<Integer> printPlayerStatusSettingView() {
         System.out.println("플레이어의 HP와 MP를 입력해주세요.");
         String inputString = scanner.nextLine();
-        System.out.println("\n보스 레이드를 시작합니다!");
+        System.out.println("\n보스 레이드를 시작합니다!\n");
         return parseToIntegerList(inputString);
     }
 
@@ -41,22 +41,22 @@ public class GameView {
 
         int attackType = Integer.parseInt(scanner.nextLine());
         if (attackType == 1) {
-            System.out.println("물리 공격을 했습니다. (입힌 대미지: 10)");
+            System.out.println("\n물리 공격을 했습니다. (입힌 대미지: 10)");
         }
 
         if (attackType == 2) {
-            System.out.println("마법 공격을 했습니다. (입힌 대미지: 20)");
+            System.out.println("\n마법 공격을 했습니다. (입힌 대미지: 20)");
         }
 
         return attackType;
     }
 
     public void printBossPhaseView(int bossDamage) {
-        System.out.println("보스가 공격했습니다. (입힌 대미지: " + bossDamage + ")");
+        System.out.println("보스가 공격했습니다. (입힌 대미지: " + bossDamage + ")\n");
     }
 
     public void printEndGameByVictoryView(BattleInfoDto battleInfoDto, int turnCount) {
-        System.out.println(battleInfoDto.getPlayerName() + " 님이 " + turnCount + "번의 전투 끝에 보스 몬스터를 잡았습니다.");
+        System.out.println("\n" + battleInfoDto.getPlayerName() + " 님이 " + turnCount + "번의 전투 끝에 보스 몬스터를 잡았습니다.");
     }
 
     public void printEndGameByDefeatView(BattleInfoDto battleInfoDto, int turnCount) {
@@ -91,16 +91,16 @@ public class GameView {
 
     private void printBossMonsterView(int bossCondition) {
         if (bossCondition == BOSS_NORMAL) {
-            System.out.println("  ^-^\n / 0 0 \\\n(   \"   )\n \\  -  /\n  - ^ -");
+            System.out.println("   ^-^\n / 0 0 \\\n(   \"   )\n \\  -  /\n  - ^ -");
         }
 
         if (bossCondition == BOSS_DAMAGED) {
-            System.out.println("  ^-^\n / x x \\\n(   \"   )\n \\  -  /\n  - ^ -");
+            System.out.println("   ^-^\n / x x \\\n(   \"   )\n \\  -  /\n  - ^ -");
 
         }
 
         if (bossCondition == BOSS_WIN) {
-            System.out.println("  ^-^\n / ^ ^ \\\n(   \"   )\n \\  -  /\n  - ^ -");
+            System.out.println("   ^-^\n / ^ ^ \\\n(   \"   )\n \\  -  /\n  - ^ -");
 
         }
     }
