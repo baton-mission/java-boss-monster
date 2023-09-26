@@ -1,5 +1,7 @@
 package bossmonster.exception;
 
+import bossmonster.domain.Player;
+
 import java.awt.print.PrinterIOException;
 import java.util.StringTokenizer;
 
@@ -54,6 +56,12 @@ public class Validator {
         int attackTypeNum = Integer.parseInt(attackType);
         if (!(attackTypeNum == 1 || attackTypeNum == 2)) {
             throw new IllegalArgumentException(PREFIX + "공격하셔야 합니다. 1 또는 2를 입력해주세요.");
+        }
+    }
+
+    public void validateMpConsume(int playerMp) {
+        if (playerMp < 30) {
+            throw new IllegalArgumentException(PREFIX + "마법 공격에 필요한 MP가 부족합니다. 물리 공격을 해주세요.");
         }
     }
 }
