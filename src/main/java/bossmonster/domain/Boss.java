@@ -4,16 +4,19 @@ public class Boss {
 
     private BossHp bossHp;
 
-    private Boss(BossHp bossHp) {
+    private final DamageStrategy damageStrategy;
+
+    private Boss(BossHp bossHp, DamageStrategy damageStrategy) {
         this.bossHp = bossHp;
+        this.damageStrategy = damageStrategy;
     }
 
-    private Boss(int bossHp) {
-        this(BossHp.from(bossHp));
+    private Boss(int bossHp, DamageStrategy damageStrategy) {
+        this(BossHp.from(bossHp), damageStrategy);
     }
 
-    public static Boss from(int bossHp) {
-        return new Boss(bossHp);
+    public static Boss from(int bossHp, DamageStrategy damageStrategy) {
+        return new Boss(bossHp, damageStrategy);
     }
 
     public int getBossHp() {
