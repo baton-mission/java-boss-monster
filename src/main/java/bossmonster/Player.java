@@ -7,6 +7,8 @@ import bossmonster.VO.Name;
 
 public class Player {
 
+    private final int SUM_HP_MP = 200;
+
     private Name name;
     private HP hp;
     private MP mp;
@@ -17,11 +19,11 @@ public class Player {
     }
 
     public void createHPMP(int hp, int mp) {
-        if (hp + mp != 200) {
+        if (hp + mp != SUM_HP_MP) {
             throw new IllegalArgumentException("[ERROR] 플레이어의 초기 HP와 MP 합은 200이어야 합니다.");
         }
 
-        if (hp + mp == 200) {
+        if (hp + mp == SUM_HP_MP) {
             this.hp = new HP(hp);
             this.mp = new MP(mp);
             this.attackCount = 0;
