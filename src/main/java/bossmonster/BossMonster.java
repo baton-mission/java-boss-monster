@@ -30,19 +30,19 @@ public class BossMonster {
         this.avatar = NORMAL_FORM;
     }
 
-    public void createHP(Integer input) {
-        hp = HP.boss(input);
+    public void createHP(int userInput) {
+        hp = HP.boss(userInput);
     }
 
-    public void damaged(Integer input, Player attacker) {
-        showDamaged(input);
+    public void damaged(Integer damageValue, Player attacker) {
+        showDamaged(damageValue);
         avatar = DAMAGED_FORM;
-        if(hp.canDie(input)) {
+        if(hp.canDie(damageValue)) {
             hp.toZero();
             die(attacker);
             return;
         }
-        hp.decrease(input);
+        hp.decrease(damageValue);
         attack(attacker);
     }
 

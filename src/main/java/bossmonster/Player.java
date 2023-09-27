@@ -12,8 +12,8 @@ public class Player {
     private MP mp;
     private Integer attackCount;
 
-    public void createName(String input) {
-        this.name = new Name(input);
+    public void createName(String userInput) {
+        this.name = new Name(userInput);
     }
 
     public void createHPMP(int hp, int mp) {
@@ -31,12 +31,12 @@ public class Player {
         throw new IllegalArgumentException("2개의 자연수를 콤마(,)를 기준으로 나눠서 입력해주세요.");
     }
 
-    public void attack(Integer input,BossMonster target) {
-        if (input == 1) {
+    public void attack(Integer userInput,BossMonster target) {
+        if (userInput == 1) {
             physicalAttack(target);
             return;
         }
-        if (input == 2) {
+        if (userInput == 2) {
             magicalAttack(target);
             return;
         }
@@ -53,7 +53,7 @@ public class Player {
         if(!mp.usableMagic(30))
             throw new IllegalArgumentException("MP가 30미만이라서 마법공격을 할 수 없습니다.");
         mp.decrease(30);
-        attackCount++;
+        attackCount ++;
         target.damaged(20, this);
     }
 
