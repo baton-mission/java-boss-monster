@@ -1,7 +1,9 @@
 package bossmonster;
 
-import bossmonster.IO.Input;
-import bossmonster.IO.Output;
+import bossmonster.character.BossMonster;
+import bossmonster.character.Player;
+import bossmonster.io.Input;
+import bossmonster.io.Output;
 
 public class Application {
 

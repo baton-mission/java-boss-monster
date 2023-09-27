@@ -1,4 +1,4 @@
-package bossmonster.VO;
+package bossmonster.resources;
 
 public class MP extends Resource{
     public MP(int userInput) {

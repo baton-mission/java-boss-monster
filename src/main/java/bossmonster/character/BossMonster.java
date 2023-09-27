@@ -1,6 +1,6 @@
-package bossmonster;
+package bossmonster.character;
 
-import bossmonster.VO.HP;
+import bossmonster.resources.HP;
 
 public class BossMonster {
 
@@ -26,12 +26,9 @@ public class BossMonster {
     private HP hp;
     private String avatar;
 
-    BossMonster() {
-        this.avatar = NORMAL_FORM;
-    }
-
     public void createHP(int userInput) {
         hp = HP.boss(userInput);
+        this.avatar = NORMAL_FORM;
     }
 
     public void damaged(Integer damageValue, Player attacker) {

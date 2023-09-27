@@ -1,9 +1,9 @@
-package bossmonster.IO;
+package bossmonster.io;
 
 import java.util.Scanner;
 
-import bossmonster.BossMonster;
-import bossmonster.Player;
+import bossmonster.character.BossMonster;
+import bossmonster.character.Player;
 
 public class Input {
     public static void playerName(Player player) {

@@ -1,14 +1,14 @@
-package bossmonster;
+package bossmonster.character;
 
-import bossmonster.IO.Output;
-import bossmonster.VO.HP;
-import bossmonster.VO.MP;
-import bossmonster.VO.Name;
+import bossmonster.Application;
+import bossmonster.io.Output;
+import bossmonster.resources.HP;
+import bossmonster.resources.MP;
+import bossmonster.resources.Name;
 
 public class Player {
 
     private final int SUM_HP_MP = 200;
-
     private Name name;
     private HP hp;
     private MP mp;

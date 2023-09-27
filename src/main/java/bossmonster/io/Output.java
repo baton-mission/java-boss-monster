@@ -1,8 +1,8 @@
-package bossmonster.IO;
+package bossmonster.io;
 
 import bossmonster.Application;
-import bossmonster.BossMonster;
-import bossmonster.Player;
+import bossmonster.character.BossMonster;
+import bossmonster.character.Player;
 
 public class Output {
     public static  void startGame() {

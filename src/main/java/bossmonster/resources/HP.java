@@ -1,4 +1,4 @@
-package bossmonster.VO;
+package bossmonster.resources;
 
 public class HP extends Resource{
     public static HP boss(int userInput){
