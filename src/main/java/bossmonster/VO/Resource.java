@@ -5,8 +5,8 @@ public class Resource {
     Integer nowValue;
     Integer maxValue;
 
-    public void decrease(int input) {
-        nowValue -= input;
+    public void decrease(int decreaseAmount) {
+        nowValue -= decreaseAmount;
     }
 
     public String showNowMax() {
