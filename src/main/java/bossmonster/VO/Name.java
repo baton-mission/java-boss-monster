@@ -9,7 +9,7 @@ public class Name {
             this.value = userInput;
             return;
         }
-        throw new IllegalArgumentException("플레이어 이름은 5자 이하만 가능합니다.");
+        throw new IllegalArgumentException("[ERROR] 플레이어 이름은 5자 이하만 가능합니다.");
     }
 
     public String showName() {

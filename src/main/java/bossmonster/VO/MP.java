@@ -7,7 +7,7 @@ public class MP extends Resource{
            this.maxValue = userInput;
            return;
         }
-        throw new IllegalArgumentException("MP 초기값은 0또는 양수인 정수를 입력해야합니다.");
+        throw new IllegalArgumentException("[ERROR] MP 초기값은 0또는 양수인 정수를 입력해야합니다.");
     }
 
     public void increase(int restoreValue) {

@@ -18,7 +18,7 @@ public class Player {
 
     public void createHPMP(int hp, int mp) {
         if (hp + mp != 200) {
-            throw new IllegalArgumentException("플레이어의 초기 HP와 MP 합은 200이어야 합니다.");
+            throw new IllegalArgumentException("[ERROR] 플레이어의 초기 HP와 MP 합은 200이어야 합니다.");
         }
 
         if (hp + mp == 200) {
@@ -28,7 +28,7 @@ public class Player {
             return;
         }
 
-        throw new IllegalArgumentException("2개의 자연수를 콤마(,)를 기준으로 나눠서 입력해주세요.");
+        throw new IllegalArgumentException("[ERROR] 2개의 자연수를 콤마(,)를 기준으로 나눠서 입력해주세요.");
     }
 
     public void attack(Integer userInput,BossMonster target) {
@@ -40,7 +40,7 @@ public class Player {
             magicalAttack(target);
             return;
         }
-        throw new IllegalArgumentException("공격하셔야 합니다. 1또는 2를 입력해주세요.");
+        throw new IllegalArgumentException("[ERROR] 공격하셔야 합니다. 1또는 2를 입력해주세요.");
     }
 
     public void physicalAttack(BossMonster target) {
@@ -51,7 +51,7 @@ public class Player {
 
     public void magicalAttack(BossMonster target) {
         if(!mp.usableMagic(30))
-            throw new IllegalArgumentException("MP가 30미만이라서 마법공격을 할 수 없습니다.");
+            throw new IllegalArgumentException("[ERROR] MP가 30미만이라서 마법공격을 할 수 없습니다.");
         mp.decrease(30);
         attackCount ++;
         target.damaged(20, this);

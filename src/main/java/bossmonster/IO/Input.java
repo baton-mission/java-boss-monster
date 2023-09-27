@@ -12,7 +12,7 @@ public class Input {
         try {
            player.createName(scanner.next());
         } catch (Exception e) {
-            System.out.println("[ERROR] " + e.getMessage());
+            System.out.println(e.getMessage());
             playerName(player);
         }
     }
@@ -23,7 +23,7 @@ public class Input {
         try {
             bossMonster.createHP(scanner.nextInt());
         } catch (Exception e) {
-            System.out.println("[ERROR] " + e.getMessage());
+            System.out.println(e.getMessage());
             bossHP(bossMonster);
         }
     }
@@ -35,7 +35,7 @@ public class Input {
         try {
             player.createHPMP(scanner.nextInt(), scanner.nextInt());
         } catch (Exception e) {
-            System.out.println("[ERROR] " + e.getMessage());
+            System.out.println(e.getMessage());
             playerHPMP(player);
         }
     }
@@ -46,7 +46,7 @@ public class Input {
         try {
             player.attack(scanner.nextInt(), bossMonster);
         } catch (Exception e) {
-            System.out.println("[ERROR] " + e.getMessage());
+            System.out.println(e.getMessage());
             playerAttack(player, bossMonster);
         }
     }

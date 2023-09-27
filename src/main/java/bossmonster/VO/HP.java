@@ -5,7 +5,7 @@ public class HP extends Resource{
         if (userInput >= 100 && userInput <= 300) {
             return new HP(userInput);
         }
-        throw new IllegalArgumentException("보스의 초기 HP는 100이상 300이하인 자연수여야 합니다.");
+        throw new IllegalArgumentException("[ERROR] 보스의 초기 HP는 100이상 300이하인 자연수여야 합니다.");
     }
 
     public HP(int userInput) {
@@ -14,7 +14,7 @@ public class HP extends Resource{
             this.maxValue = userInput;
             return;
         }
-        throw new IllegalArgumentException("양수인 정수를 입력해야 합니다.");
+        throw new IllegalArgumentException("[ERROR] 양수인 정수를 입력해야 합니다.");
     }
 
     public Boolean canDie(int damage) {
