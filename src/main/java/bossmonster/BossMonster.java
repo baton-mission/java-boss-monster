@@ -4,8 +4,6 @@ import bossmonster.VO.HP;
 
 public class BossMonster {
 
-    private HP hp;
-    private String avatar;
     private static final String NORMAL_FORM
                 = "   ^-^\n"
                 + " / 0 0 \\\n"
@@ -24,6 +22,9 @@ public class BossMonster {
                 + "(   \"   )\n"
                 + " \\  3  /\n"
                 + "  - ^ -";
+
+    private HP hp;
+    private String avatar;
 
     BossMonster() {
         this.avatar = NORMAL_FORM;
