@@ -18,7 +18,7 @@ public class MP extends Resource{
         nowValue += restoreValue;
     }
 
-    public Boolean usableMagic(int Remains) {
-        return (Remains <= nowValue);
+    public Boolean usableMagic(int remains) {
+        return (remains <= nowValue);
     }
 }
