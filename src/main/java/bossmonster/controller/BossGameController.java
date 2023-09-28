@@ -42,27 +42,35 @@ public class BossGameController {
 
 
     private void playingGame(BossGame bossGame) {
-        AttackType attackType = read(this::getAttackType, bossGame);
-        int bossDamage = bossGame.attack(attackType);
+        while (true) {
+            AttackType attackType = read(this::getAttackType, bossGame);
+            int bossDamage = bossGame.attack(attackType);
 
-        if (bossGame.isBossDead()) {
-            BossAttackDto bossDeadResponseDto = new BossAttackDto(attackType, bossGame);
-            OUTPUT_VIEW.printBossDeadMessage(bossDeadResponseDto);
-            // 종료 되어야 한다.
-            return;
+            if (bossGame.isBossDead()) {
+                printBossDeadMessage(bossGame, attackType);
+                return;
+            }
+            if (bossGame.isPlayerDead()) {
+                printPlayerDeadMessage(bossGame, attackType, bossDamage);
+                return;
+            }
+            printGameCurrentStatus(bossGame, attackType, bossDamage);
         }
+    }
 
-        if (bossGame.isPlayerDead()) {
-            PlayerBossInfoDto playerBossInfoResponseDto = new PlayerBossInfoDto(attackType, bossDamage, bossGame);
-            OUTPUT_VIEW.printPlayerDeadMessage(playerBossInfoResponseDto);
-            // 종료 되어야 한다.
-            return;
-        }
+    private void printPlayerDeadMessage(BossGame bossGame, AttackType attackType, int bossDamage) {
+        PlayerBossInfoDto playerBossInfoResponseDto = new PlayerBossInfoDto(attackType, bossDamage, bossGame);
+        OUTPUT_VIEW.printPlayerDeadMessage(playerBossInfoResponseDto);
+    }
 
-        // 일반적인 경우 => 공격 턴 재시도
+    private void printBossDeadMessage(BossGame bossGame, AttackType attackType) {
+        BossAttackDto bossDeadResponseDto = new BossAttackDto(attackType, bossGame);
+        OUTPUT_VIEW.printBossDeadMessage(bossDeadResponseDto);
+    }
+
+    private void printGameCurrentStatus(BossGame bossGame, AttackType attackType, int bossDamage) {
         PlayerBossInfoDto playerBossInfoResponseDto = new PlayerBossInfoDto(attackType, bossDamage, bossGame);
         OUTPUT_VIEW.printGameCurrentStatus(playerBossInfoResponseDto);
-        playingGame(bossGame);
     }
 
     private AttackType getAttackType(BossGame bossGame) {
