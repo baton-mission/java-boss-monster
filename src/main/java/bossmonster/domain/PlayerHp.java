@@ -2,6 +2,8 @@ package bossmonster.domain;
 
 import static bossmonster.domain.ExceptionMessage.PLAYER_HP_EXCEPTION_MESSAGE;
 
+import java.util.Objects;
+
 public class PlayerHp {
 
     private static final int MIN_HP = 0;
@@ -36,6 +38,10 @@ public class PlayerHp {
         return new PlayerHp(playerHp);
     }
 
+    public static PlayerHp fromTest(int playerHp, int initialPlayerHp) {
+        return new PlayerHp(playerHp, initialPlayerHp);
+    }
+
     public int plus(PlayerMp playerMp) {
         return playerMp.plus(playerHp);
     }
@@ -63,5 +69,19 @@ public class PlayerHp {
 
     public boolean isUnderMinHp() {
         return playerHp <= MIN_HP;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PlayerHp playerHp1 = (PlayerHp) o;
+        return playerHp == playerHp1.playerHp && initialPlayerHp == playerHp1.initialPlayerHp;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(playerHp, initialPlayerHp);
     }
 }
