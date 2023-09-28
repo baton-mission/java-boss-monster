@@ -56,7 +56,7 @@ public class PlayerMp {
         return initialPlayerMp;
     }
 
-    public void effectedBy(AttackType attackType) {
+    public void effectedMpByAttackType(AttackType attackType) {
         int effectedPlayerMp = attackType.effectMp(playerMp);
         if (isUnderMinMp(effectedPlayerMp)) {
             throw new IllegalArgumentException(SKILL_MP_EXCEPTION_MESSAGE);

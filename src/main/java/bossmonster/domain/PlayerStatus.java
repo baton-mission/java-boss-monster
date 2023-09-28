@@ -20,6 +20,10 @@ public class PlayerStatus {
         this(PlayerHp.from(playerHp), PlayerMp.from(playerMp));
     }
 
+    public static PlayerStatus fromTest(PlayerHp playerHp, PlayerMp playerMp) {
+        return new PlayerStatus(playerHp, playerMp);
+    }
+
     private void validate(PlayerHp playerHp, PlayerMp playerMp) {
         validateTotalSum(playerHp, playerMp);
     }
@@ -55,11 +59,11 @@ public class PlayerStatus {
         return playerMp.getInitialPlayerMp();
     }
 
-    public void effectedMpBy(AttackType attackType) {
-        playerMp.effectedBy(attackType);
+    public void effectedMpByAttackType(AttackType attackType) {
+        playerMp.effectedMpByAttackType(attackType);
     }
 
-    public void effectedByBossDamage(int damageFromBoss) {
+    public void effectedHpByBossDamage(int damageFromBoss) {
         playerHp.effectedByBossDamage(damageFromBoss);
     }
 

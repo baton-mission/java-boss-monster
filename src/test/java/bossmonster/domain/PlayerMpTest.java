@@ -34,14 +34,14 @@ class PlayerMpTest {
 
         assertThat(totalHpAndMp).isEqualTo(200);
     }
-    
+
     @Test
     void effectedBy는_마법공격을_하는_경우_MP가_감소한다() {
         PlayerMp playerMp = PlayerMp.from(100);
         AttackType attackType = AttackType.MAGICAL;
         PlayerMp expectedPlayerMp = PlayerMp.fromTest(70, 100);
 
-        playerMp.effectedBy(attackType);
+        playerMp.effectedMpByAttackType(attackType);
 
         assertThat(playerMp).isEqualTo(expectedPlayerMp);
     }
@@ -51,7 +51,7 @@ class PlayerMpTest {
         PlayerMp playerMp = PlayerMp.from(10);
         AttackType attackType = AttackType.MAGICAL;
 
-        assertThatThrownBy(() -> playerMp.effectedBy(attackType))
+        assertThatThrownBy(() -> playerMp.effectedMpByAttackType(attackType))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -61,7 +61,7 @@ class PlayerMpTest {
         AttackType attackType = AttackType.PHYSICAL;
         PlayerMp expectedPlayerMp = PlayerMp.fromTest(90, 100);
 
-        playerMp.effectedBy(attackType);
+        playerMp.effectedMpByAttackType(attackType);
 
         assertThat(playerMp).isEqualTo(expectedPlayerMp);
     }
@@ -72,7 +72,7 @@ class PlayerMpTest {
         AttackType attackType = AttackType.PHYSICAL;
         PlayerMp expectedPlayerMp = PlayerMp.from(100);
 
-        playerMp.effectedBy(attackType);
+        playerMp.effectedMpByAttackType(attackType);
 
         assertThat(playerMp).isEqualTo(expectedPlayerMp);
     }
