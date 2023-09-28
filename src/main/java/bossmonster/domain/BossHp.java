@@ -2,6 +2,8 @@ package bossmonster.domain;
 
 import static bossmonster.domain.ExceptionMessage.BOSS_HP_RANGE_EXCEPTION_MESSAGE;
 
+import java.util.Objects;
+
 public class BossHp {
 
     private static final int MIN_HP = 100;
@@ -58,5 +60,19 @@ public class BossHp {
 
     public boolean isUnderZero() {
         return bossHp <= 0;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BossHp bossHp1 = (BossHp) o;
+        return bossHp == bossHp1.bossHp && initialBossHp == bossHp1.initialBossHp;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(bossHp, initialBossHp);
     }
 }
