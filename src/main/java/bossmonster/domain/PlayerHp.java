@@ -5,7 +5,7 @@ import static bossmonster.domain.ExceptionMessage.PLAYER_HP_EXCEPTION_MESSAGE;
 public class PlayerHp {
 
     private static final int MIN_HP = 0;
-    private final int playerHp;
+    private int playerHp;
     private final int initialPlayerHp;
 
     private PlayerHp(int playerHp, int initialPlayerHp) {
@@ -48,8 +48,17 @@ public class PlayerHp {
         return initialPlayerHp;
     }
 
-    public PlayerHp effectedBy(int damageFromBoss) {
-        return new PlayerHp(playerHp - damageFromBoss, initialPlayerHp);
+    public void effectedBy(int damageFromBoss) {
+        int effectedPlayerHp = effectedPlayerHp(damageFromBoss);
+        setPlayerHpNotToUnderMin(effectedPlayerHp);
+    }
+
+    private void setPlayerHpNotToUnderMin(int effectedPlayerHp) {
+        this.playerHp = Math.max(MIN_HP, effectedPlayerHp);
+    }
+
+    private int effectedPlayerHp(int damageFromBoss) {
+        return playerHp - damageFromBoss;
     }
 
     public boolean isUnderMinHp() {
