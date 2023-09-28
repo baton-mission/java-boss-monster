@@ -6,6 +6,7 @@ public class BossHp {
 
     private static final int MIN_HP = 100;
     private static final int MAX_HP = 300;
+    private static final int BOSS_ZERO_HP = 0;
 
     private int bossHp;
     private final int initialBossHp;
@@ -46,8 +47,13 @@ public class BossHp {
         return initialBossHp;
     }
 
-    public BossHp effectedBy(AttackType attackType) {
-        return new BossHp(attackType.effectHp(bossHp), initialBossHp);
+    public void attackedBy(AttackType attackType) {
+        int bossHpFromAttack = attackType.attack(bossHp);
+        setBossMpNotToUnderMin(bossHpFromAttack);
+    }
+
+    private void setBossMpNotToUnderMin(int bossHpFromAttack) {
+        this.bossHp = Math.max(BOSS_ZERO_HP, bossHpFromAttack);
     }
 
     public boolean isUnderZero() {
