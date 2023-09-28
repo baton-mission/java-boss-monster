@@ -3,6 +3,8 @@ package bossmonster.domain;
 import static bossmonster.domain.ExceptionMessage.PLAYER_MP_EXCEPTION_MESSAGE;
 import static bossmonster.domain.ExceptionMessage.SKILL_MP_EXCEPTION_MESSAGE;
 
+import java.util.Objects;
+
 public class PlayerMp {
 
     private static final int MIN_MP = 0;
@@ -18,6 +20,10 @@ public class PlayerMp {
 
     private PlayerMp(int playerMp) {
         this(playerMp, playerMp);
+    }
+
+    public static PlayerMp fromTest(int playerMp, int initialPlayerMp) {
+        return new PlayerMp(playerMp, initialPlayerMp);
     }
 
     private void validate(int playerMp) {
@@ -60,5 +66,18 @@ public class PlayerMp {
 
     private void setPlayerMpNotToOverMax(int effectedPlayerMp) {
         this.playerMp = Math.min(effectedPlayerMp, initialPlayerMp);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PlayerMp playerMp1 = (PlayerMp) o;
+        return playerMp == playerMp1.playerMp && initialPlayerMp == playerMp1.initialPlayerMp;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(playerMp, initialPlayerMp);
     }
 }
