@@ -40,7 +40,7 @@ public class Player {
     }
 
     public void attackedBy(int damageFromBoss) {
-        playerStatus.effectedBy(damageFromBoss);
+        playerStatus.effectedByBossDamage(damageFromBoss);
     }
 
     public boolean isDead() {

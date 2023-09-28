@@ -59,8 +59,8 @@ public class PlayerStatus {
         playerMp.effectedBy(attackType);
     }
 
-    public void effectedBy(int damageFromBoss) {
-        playerHp.effectedBy(damageFromBoss);
+    public void effectedByBossDamage(int damageFromBoss) {
+        playerHp.effectedByBossDamage(damageFromBoss);
     }
 
     public boolean isHpUnderMin() {

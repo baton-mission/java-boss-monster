@@ -48,8 +48,8 @@ public class PlayerHp {
         return initialPlayerHp;
     }
 
-    public void effectedBy(int damageFromBoss) {
-        int effectedPlayerHp = effectedPlayerHp(damageFromBoss);
+    public void effectedByBossDamage(int damageFromBoss) {
+        int effectedPlayerHp = effectedPlayerHpFromBossDamage(damageFromBoss);
         setPlayerHpNotToUnderMin(effectedPlayerHp);
     }
 
@@ -57,7 +57,7 @@ public class PlayerHp {
         this.playerHp = Math.max(MIN_HP, effectedPlayerHp);
     }
 
-    private int effectedPlayerHp(int damageFromBoss) {
+    private int effectedPlayerHpFromBossDamage(int damageFromBoss) {
         return playerHp - damageFromBoss;
     }
 
