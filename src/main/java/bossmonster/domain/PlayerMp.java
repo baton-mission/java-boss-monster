@@ -1,12 +1,13 @@
 package bossmonster.domain;
 
 import static bossmonster.domain.ExceptionMessage.PLAYER_MP_EXCEPTION_MESSAGE;
+import static bossmonster.domain.ExceptionMessage.SKILL_MP_EXCEPTION_MESSAGE;
 
 public class PlayerMp {
 
     private static final int MIN_MP = 0;
 
-    private final int playerMp;
+    private int playerMp;
     private final int initialPlayerMp;
 
     private PlayerMp(int playerMp, int initialPlayerMp) {
@@ -30,7 +31,7 @@ public class PlayerMp {
     }
 
     private boolean isUnderMinMp(int playerMp) {
-        return playerMp <= MIN_MP;
+        return playerMp < MIN_MP;
     }
 
     public static PlayerMp from(int playerMp) {
@@ -49,7 +50,15 @@ public class PlayerMp {
         return initialPlayerMp;
     }
 
-    public PlayerMp effectedBy(AttackType attackType) {
-        return new PlayerMp(attackType.effectMp(playerMp), initialPlayerMp);
+    public void effectedBy(AttackType attackType) {
+        int effectedPlayerMp = attackType.effectMp(playerMp);
+        if (isUnderMinMp(effectedPlayerMp)) {
+            throw new IllegalArgumentException(SKILL_MP_EXCEPTION_MESSAGE);
+        }
+        setPlayerMpNotToOverMax(effectedPlayerMp);
+    }
+
+    private void setPlayerMpNotToOverMax(int effectedPlayerMp) {
+        this.playerMp = Math.min(effectedPlayerMp, initialPlayerMp);
     }
 }
