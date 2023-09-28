@@ -11,4 +11,8 @@ public class Hp {
     public boolean isOutOfRange(int min, int max) {
         return !(min <= hp && hp <= max);
     }
+
+    public int getHp() {
+        return hp;
+    }
 }
