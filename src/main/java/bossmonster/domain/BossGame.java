@@ -22,13 +22,18 @@ public class BossGame {
         return new BossGame(boss, player);
     }
 
-    // TODO : turnCount를 외부로 return 해서 로직을 제어하진 않는 이상 내부 변수이고 값이 바뀐다면 final을 제거하고 재할당한다.
+    public void effectPlayerMpWith(AttackType attackType) {
+        player.effectedMpBy(attackType);
+    }
+
+
     public int attack(AttackType attackType) {
         turnCount = turnCount.increase();
-        player.effectedMpBy(attackType);
-        boss.effectedHpBy(attackType);
-        int bossDamage = boss.attackTo(player);
-        return bossDamage;
+        boss.attackedByPlayer(attackType);
+        if (boss.isDead()) {
+            return boss.zeroDamage();
+        }
+        return boss.attackTo(player);
     }
 
     public boolean isBossDead() {
@@ -70,4 +75,6 @@ public class BossGame {
     public int getPlayerInitialMp() {
         return player.getInitialPlayerMp();
     }
+
+
 }

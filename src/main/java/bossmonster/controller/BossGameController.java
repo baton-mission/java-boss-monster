@@ -38,30 +38,12 @@ public class BossGameController {
         printBossAndPlayerStatus(boss, player);
         BossGame bossGame = BossGame.init(boss, player);
         playingGame(bossGame);
-
     }
 
-    private void playingGame(BossGame bossGame) {
-        AttackType attackType = read(this::scanAttackType);
-        int bossDamage = bossGame.attack(attackType);
 
-        /**
-         * 물리 공격을 했습니다. (입힌 데미지: 10)
-         * 보스가 공격 했습니다. (입힌 데미지: 10)
-         *
-         * ============================
-         * BOSS HP [30/100]
-         * ____________________________
-         *    ^-^
-         *  / x x \
-         * (   "\  )
-         *  \  ^  /
-         *   - ^ -
-         * ____________________________
-         *
-         * dori HP [50/100] MP [20/100]
-         * ============================
-         */
+    private void playingGame(BossGame bossGame) {
+        AttackType attackType = read(this::getAttackType, bossGame);
+        int bossDamage = bossGame.attack(attackType);
 
         if (bossGame.isBossDead()) {
             BossAttackDto bossDeadResponseDto = new BossAttackDto(attackType, bossGame);
@@ -81,6 +63,18 @@ public class BossGameController {
         PlayerBossInfoDto playerBossInfoResponseDto = new PlayerBossInfoDto(attackType, bossDamage, bossGame);
         OUTPUT_VIEW.printGameCurrentStatus(playerBossInfoResponseDto);
         playingGame(bossGame);
+    }
+
+    private AttackType getAttackType(BossGame bossGame) {
+        AttackType attackType = readAttackType();
+        bossGame.effectPlayerMpWith(attackType);
+        return attackType;
+    }
+
+
+    private AttackType readAttackType() {
+        AttackType attackType = read(this::scanAttackType);
+        return attackType;
     }
 
     private AttackType scanAttackType() {

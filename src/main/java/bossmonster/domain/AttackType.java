@@ -44,7 +44,7 @@ public enum AttackType {
         return this.mpStatus.effect(playerMp);
     }
 
-    public int effectHp(int bossHp) {
+    public int attack(int bossHp) {
         return bossHp - this.attackPower;
     }
 

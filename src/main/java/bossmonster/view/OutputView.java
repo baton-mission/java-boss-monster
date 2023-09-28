@@ -32,6 +32,12 @@ public enum OutputView {
             " \\  3  /\n" +
             "  - ^ -\n";
 
+    private static final String BOSS_BAD_FACE = "   ^-^\n" +
+            " / x x \\\n" +
+            "(   \"\\  )\n" +
+            " \\  ^  /\n" +
+            "  - ^ -\n";
+
     private static final String ATTACK_MESSAGE_FORMAT = "%s을 했습니다. (입힌 데미지: %d)\n";
     private static final String BOSS_DEAD_MESSAGE_FORMAT = "%s 님이 %d번의 전투 끝에 보스 몬스터를 잡았습니다.\n";
 
@@ -89,6 +95,7 @@ public enum OutputView {
      */
     public void printBossDeadMessage(BossAttackDto bossDeadResponseDto) {
         printPlayerAttackMessage(bossDeadResponseDto.getAttackTypeName(), bossDeadResponseDto.getAttackDamage());
+        printEmptyLine();
         System.out.printf(BOSS_DEAD_MESSAGE_FORMAT,
                 bossDeadResponseDto.getAttackerPlayerName(), bossDeadResponseDto.getTotalTryCount());
     }
@@ -169,6 +176,6 @@ public enum OutputView {
                 playerBossInfoResponseDto.getPlayerInitialHp(),
                 playerBossInfoResponseDto.getPlayerCurrentMp(),
                 playerBossInfoResponseDto.getPlayerInitialMp(),
-                BOSS_INIT_FACE);
+                BOSS_BAD_FACE);
     }
 }

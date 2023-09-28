@@ -4,8 +4,9 @@ public class Boss {
 
     private static final int MIN_DAMAGE = 0;
     private static final int MAX_DAMAGE = 20;
+    private static final int NO_DAMAGE = 0;
 
-    private BossHp bossHp;
+    private final BossHp bossHp;
 
     private final DamageStrategy damageStrategy;
 
@@ -30,17 +31,21 @@ public class Boss {
         return bossHp.getInitialBossHp();
     }
 
-    public void effectedHpBy(AttackType attackType) {
-        bossHp = bossHp.effectedBy(attackType);
+    public void attackedByPlayer(AttackType attackType) {
+        bossHp.attackedBy(attackType);
     }
 
     public int attackTo(Player player) {
         int bossDamage = damageStrategy.pickDamage(MIN_DAMAGE, MAX_DAMAGE);
-        player.effectedHpBy(bossDamage);
+        player.attackedBy(bossDamage);
         return bossDamage;
     }
 
     public boolean isDead() {
         return bossHp.isUnderZero();
+    }
+
+    public int zeroDamage() {
+        return NO_DAMAGE;
     }
 }

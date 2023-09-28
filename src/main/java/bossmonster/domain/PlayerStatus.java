@@ -6,9 +6,9 @@ public class PlayerStatus {
 
     private static final int TOTAL_SUM = 200;
 
-    private PlayerHp playerHp;
+    private final PlayerHp playerHp;
 
-    private PlayerMp playerMp;
+    private final PlayerMp playerMp;
 
     private PlayerStatus(PlayerHp playerHp, PlayerMp playerMp) {
         validate(playerHp, playerMp);
@@ -56,11 +56,11 @@ public class PlayerStatus {
     }
 
     public void effectedMpBy(AttackType attackType) {
-        playerMp = playerMp.effectedBy(attackType);
+        playerMp.effectedBy(attackType);
     }
 
-    public void effectedHpBy(int damageFromBoss) {
-        playerHp = playerHp.effectedBy(damageFromBoss);
+    public void effectedBy(int damageFromBoss) {
+        playerHp.effectedBy(damageFromBoss);
     }
 
     public boolean isHpUnderMin() {

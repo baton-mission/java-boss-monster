@@ -8,6 +8,7 @@ public final class ExceptionMessage {
     public static final String PLAYER_MP_EXCEPTION_MESSAGE = "초기 플레이어 MP는 0보다 커야 합니다.";
     public static final String PLAYER_NAME_LENGTH_EXCEPTION_MESSAGE = "플레이어 이름은 5자 이하만 가능합니다.";
     public static final String ATTACK_TYPE_EXCEPTION_MESSAGE = "존재하지 않는 공격 타입입니다.";
+    public static final String SKILL_MP_EXCEPTION_MESSAGE = "스킬 사용에 MP가 부족합니다.";
 
 
     private ExceptionMessage() {

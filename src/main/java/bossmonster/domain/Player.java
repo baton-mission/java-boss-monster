@@ -39,8 +39,8 @@ public class Player {
         playerStatus.effectedMpBy(attackType);
     }
 
-    public void effectedHpBy(int damageFromBoss) {
-        playerStatus.effectedHpBy(damageFromBoss);
+    public void attackedBy(int damageFromBoss) {
+        playerStatus.effectedBy(damageFromBoss);
     }
 
     public boolean isDead() {
