@@ -14,12 +14,12 @@ public class Player {
     private Stat stat;
 
     public Player(Name name, Stat stat) {
-        validate(name);
+        validate(name, stat);
         this.name = name;
         this.stat = stat;
     }
 
-    private void validate(Name name) {
+    private void validate(Name name, Stat stat) {
         if (name.isLengthOver(MAX_NAME_LENGTH)) {
             throw new IllegalArgumentException(ERROR_PLAYER_NAME_LENGTH_OVER.formatted(MAX_NAME_LENGTH));
         }
