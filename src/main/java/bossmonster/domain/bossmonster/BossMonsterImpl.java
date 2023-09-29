@@ -1,5 +1,7 @@
 package bossmonster.domain.bossmonster;
 
+import bossmonster.dto.BossMonsterInfo;
+
 public class BossMonsterImpl
         implements BossMonster {
 
@@ -21,5 +23,13 @@ public class BossMonsterImpl
         }
 
         return true;
+    }
+
+    @Override
+    public BossMonsterInfo getBossMonsterInfo() {
+        return BossMonsterInfo.of(
+                bossMonsterHp.getMaximumHp(),
+                bossMonsterHp.getCurrentHp()
+        );
     }
 }
