@@ -2,8 +2,6 @@ package bossmonster.monster;
 
 import static bossmonster.utils.ErrorMessage.*;
 
-import java.util.Random;
-
 import bossmonster.Hp;
 import bossmonster.player.Player;
 
@@ -13,7 +11,7 @@ public class BossMonster {
     private static final int MAX_HP = 300;
 
     private Hp hp;
-    private Appearance appearance;
+    private BossMonsterAppearance appearance;
 
     public BossMonster(Hp hp) {
         validate(hp);
@@ -28,7 +26,7 @@ public class BossMonster {
 
     public void takeDamaged(int damage) {
         hp.reduceByDamage(damage);
-        appearance = Appearance.SICK;
+        appearance = BossMonsterAppearance.SICK;
     }
 
     public void attack(int damage, Player player) {

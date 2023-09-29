@@ -1,6 +1,6 @@
 package bossmonster.monster;
 
-public enum Appearance {
+public enum BossMonsterAppearance {
 
     DEFAULT("   ^-^\n" +
             " / 0 0 \\\n" +
@@ -20,7 +20,7 @@ public enum Appearance {
 
     private String appearance;
 
-    Appearance(String appearance) {
+    BossMonsterAppearance(String appearance) {
         this.appearance = appearance;
     }
 }
