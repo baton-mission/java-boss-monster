@@ -20,6 +20,10 @@ public class BossMonsterHp {
         return currentHp;
     }
 
+    public void decreaseCurrentHp(int decreaseHp) {
+        this.currentHp -= decreaseHp;
+    }
+
     private void validateHp(int hp) {
         if (BOSS_MONSTER_MINIMUM_HP_LIMIT > hp || BOSS_MONSTER_MAXIMUM_HP_LIMIT < hp) {
             throw new IllegalArgumentException("Invalid Boss Monster HP");

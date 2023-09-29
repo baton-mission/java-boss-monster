@@ -51,4 +51,23 @@ class BossMonsterHpTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Invalid Boss Monster HP");
     }
+
+    @DisplayName("주어진 감소량 만큼, 현재 HP를 감소시킨다.")
+    @Test
+    void 현재_HP_감소_테스트() throws Exception {
+        // Given
+        int firstHp = 200;
+        BossMonsterHp bossMonsterHp = setBossMonsterHp(firstHp);
+        int decreaseHp = 128;
+
+        // When
+        bossMonsterHp.decreaseCurrentHp(decreaseHp);
+
+        // Then
+        assertThat(bossMonsterHp.getCurrentHp()).isEqualTo(firstHp - decreaseHp);
+    }
+
+    private BossMonsterHp setBossMonsterHp(int hp) {
+        return new BossMonsterHp(hp);
+    }
 }
