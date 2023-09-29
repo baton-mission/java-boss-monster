@@ -4,9 +4,10 @@ import static bossmonster.domain.ExceptionMessage.TURN_COUNT_EXCEPTION_MESSAGE;
 
 import java.util.Objects;
 
-public class TurnCount {
+public final class TurnCount {
 
     private static final int MIN_TURN_COUNT = 0;
+    private static final int INCREASE_COUNT = 1;
 
     private final int turnCount;
 
@@ -42,7 +43,7 @@ public class TurnCount {
     }
 
     public TurnCount increase() {
-        return new TurnCount(turnCount + 1);
+        return new TurnCount(turnCount + INCREASE_COUNT);
     }
 
     public int getTurnCount() {
