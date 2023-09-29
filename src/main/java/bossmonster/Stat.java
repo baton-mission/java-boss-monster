@@ -17,4 +17,8 @@ public class Stat {
     private int getSumOfHpAndMp() {
         return hp.getHp() + mp.getMp();
     }
+
+    public void consumeMp(int mpConsumption) {
+        this.mp.consume(mpConsumption);
+    }
 }

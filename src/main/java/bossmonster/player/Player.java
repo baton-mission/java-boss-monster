@@ -1,9 +1,12 @@
 package bossmonster.player;
 
+import static bossmonster.Attack.*;
 import static bossmonster.utils.ErrorMessage.*;
 
+import bossmonster.Attack;
 import bossmonster.Name;
 import bossmonster.Stat;
+import bossmonster.monster.BossMonster;
 
 public class Player {
 
@@ -26,5 +29,10 @@ public class Player {
         if (stat.isNotSumOfInitialHpAndMp(SUM_OF_INITIAL_HP_AND_MP)) {
             throw new IllegalArgumentException(ERROR_SUM_OF_INITIAL_HP_AND_MP.formatted(SUM_OF_INITIAL_HP_AND_MP));
         }
+    }
+
+    public void attack(Attack attack, BossMonster bossMonster) {
+        this.stat.consumeMp(attack.getMpConsumption());
+        bossMonster.takeDamaged(attack.getDamage());
     }
 }

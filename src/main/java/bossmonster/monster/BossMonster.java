@@ -10,6 +10,7 @@ public class BossMonster {
     private static final int MAX_HP = 300;
 
     private Hp hp;
+    private Appearance appearance;
 
     public BossMonster(Hp hp) {
         validate(hp);
@@ -20,5 +21,10 @@ public class BossMonster {
         if (hp.isOutOfRange(MIN_HP, MAX_HP)) {
             throw new IllegalArgumentException(BOSS_MONSTER_HP_OUT_OF_RANGE.formatted(MIN_HP, MAX_HP));
         }
+    }
+
+    public void takeDamaged(int damage) {
+        hp.decrease(damage);
+        appearance = Appearance.SICK;
     }
 }

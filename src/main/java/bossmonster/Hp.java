@@ -15,4 +15,8 @@ public class Hp {
     public int getHp() {
         return hp;
     }
+
+    public void decrease(int damage) {
+        hp -= damage;
+    }
 }
