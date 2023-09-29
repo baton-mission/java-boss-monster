@@ -13,4 +13,13 @@ public class BossMonsterImpl
     public void takeDamage(int damage) {
         bossMonsterHp.decreaseCurrentHp(damage);
     }
+
+    @Override
+    public boolean isAlive() {
+        if (bossMonsterHp.isCurrentHpZeroOrBelow()) {
+            return false;
+        }
+
+        return true;
+    }
 }
