@@ -1,4 +1,4 @@
-package bossmonster.domain.bossmonster;
+package bossmonster.domain.bossmonster.constant;
 
 public class BossMonsterOption {
 

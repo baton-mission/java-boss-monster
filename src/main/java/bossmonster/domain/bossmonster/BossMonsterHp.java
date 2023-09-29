@@ -1,6 +1,6 @@
 package bossmonster.domain.bossmonster;
 
-import static bossmonster.domain.bossmonster.BossMonsterOption.*;
+import static bossmonster.domain.bossmonster.constant.BossMonsterOption.*;
 
 public class BossMonsterHp {
     private final int maximumHp;
