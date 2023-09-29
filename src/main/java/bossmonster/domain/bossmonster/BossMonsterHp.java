@@ -21,7 +21,7 @@ public class BossMonsterHp {
     }
 
     public void decreaseCurrentHp(int decreaseHp) {
-        this.currentHp -= decreaseHp;
+        currentHp -= decreaseHp;
     }
 
     public boolean isCurrentHpZeroOrBelow() {
