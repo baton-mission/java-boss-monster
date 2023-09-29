@@ -1,6 +1,5 @@
 package bossmonster.player;
 
-import static bossmonster.Attack.*;
 import static bossmonster.utils.ErrorMessage.*;
 
 import bossmonster.Attack;
@@ -34,5 +33,9 @@ public class Player {
     public void attack(Attack attack, BossMonster bossMonster) {
         this.stat.consumeMp(attack.getMpConsumption());
         bossMonster.takeDamaged(attack.getDamage());
+    }
+
+    public void takeDamaged(int damage) {
+        stat.reduceByDamage(damage);
     }
 }

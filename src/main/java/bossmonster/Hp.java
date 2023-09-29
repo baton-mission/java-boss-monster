@@ -16,7 +16,7 @@ public class Hp {
         return hp;
     }
 
-    public void decrease(int damage) {
+    public void reduceByDamage(int damage) {
         hp -= damage;
     }
 }

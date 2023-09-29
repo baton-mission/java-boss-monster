@@ -21,4 +21,8 @@ public class Stat {
     public void consumeMp(int mpConsumption) {
         this.mp.consume(mpConsumption);
     }
+
+    public void reduceByDamage(int damage) {
+        hp.reduceByDamage(damage);
+    }
 }

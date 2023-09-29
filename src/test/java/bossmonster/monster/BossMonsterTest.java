@@ -6,6 +6,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import bossmonster.Hp;
+import bossmonster.Mp;
+import bossmonster.Name;
+import bossmonster.Stat;
+import bossmonster.player.Player;
 
 class BossMonsterTest {
 
@@ -29,5 +33,23 @@ class BossMonsterTest {
         // when, then
         assertThatThrownBy(() -> new BossMonster(hp))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("플레이어 공격 시 플레이어의 HP가 공격 데미지만큼 감소한다.")
+    @Test
+    void reducePlayerHp_Success_ByAttack() {
+        // given
+        Name name = new Name("jam");
+        Hp playerHp = new Hp(100);
+        Mp playerMp = new Mp(100);
+        Player player = new Player(name, new Stat(playerHp, playerMp));
+
+        BossMonster bossMonster = new BossMonster(new Hp(100));
+
+        // when
+        bossMonster.attack(15, player);
+
+        // then
+        assertThat(playerHp.getHp()).isEqualTo(85);
     }
 }
