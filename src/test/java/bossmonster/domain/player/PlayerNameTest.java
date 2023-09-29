@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("플레이어 이름 기능 테스트")
 class PlayerNameTest {
-    @DisplayName("[성공 테스트] PlayerName 인스턴스 생성 시 유효한 플레이어 이름을 전달하면, PlayerName 인스턴스가 생성된다.")
+    @DisplayName("[성공 테스트] PlayerName 인스턴스 생성 시 유효한 플레이어 이름을 전달하면, 인스턴스가 생성된다.")
     @Test
     void 유효한_플레이어_이름_객체_생성_테스트() throws Exception {
         // Given

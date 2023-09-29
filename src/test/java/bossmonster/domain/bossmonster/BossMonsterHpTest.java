@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.*;
 @DisplayName("보스 몬스터 HP 기능 테스트")
 class BossMonsterHpTest {
 
-    @DisplayName("[성공 테스트] 유효한 범위의 HP 값으로 BossMonsterHp 생성자를 호출하면, BossMonsterHp 인스턴스가 생성된다.")
+    @DisplayName("[성공 테스트] BossMonsterHp 인스턴스 생성 시 유효 범위의 HP를 전달하면, 인스턴스가 생성된다.")
     @Test
     void 유효한_범위_HP_테스트() throws Exception {
         // Given
@@ -22,7 +22,7 @@ class BossMonsterHpTest {
         assertThat(createBossMonsterHp.getCurrentHp()).isEqualTo(validHp);
     }
 
-    @DisplayName("[예외 테스트] 유효범위보다 낮은 HP 값으로 BossMonsterHp 생성자를 호출하면, 예외가 발생한다.")
+    @DisplayName("[예외 테스트] BossMonsterHp 인스턴스 생성 시 유효 범위보다 낮은 HP를 전달하면, 예외가 발생한다.")
     @Test
     void 유효범위보다_낮은_HP_테스트() throws Exception {
         // Given
@@ -37,7 +37,7 @@ class BossMonsterHpTest {
                 .hasMessage("Invalid Boss Monster HP");
     }
 
-    @DisplayName("[예외 테스트] 유효범위보다 높은 HP 값으로 BossMonsterHp 생성자를 호출하면, 예외가 발생한다.")
+    @DisplayName("[예외 테스트] BossMonsterHp 인스턴스 생성 시 유효 범위보다 높은 HP를 전달하면, 예외가 발생한다.")
     @Test
     void 유효범위보다_높은_HP_테스트() throws Exception {
         // Given
