@@ -2,6 +2,8 @@ package bossmonster.domain;
 
 import static bossmonster.domain.ExceptionMessage.SKILL_MP_EXCEPTION_MESSAGE;
 
+import java.util.Objects;
+
 public final class CurrentPlayerMp {
 
     private static final int MIN_CURRENT_MP_TO_USE = 0;
@@ -40,5 +42,16 @@ public final class CurrentPlayerMp {
         return new CurrentPlayerMp(normalizedPlayerMp);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CurrentPlayerMp that = (CurrentPlayerMp) o;
+        return currentPlayerMp == that.currentPlayerMp;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(currentPlayerMp);
+    }
 }
