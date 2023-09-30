@@ -6,6 +6,10 @@ public class OutputView {
         System.out.println("보스 레이드를 시작합니다!");
     }
 
+    public static void printBossMonsterAppearance(String appearance) {
+        System.out.println(appearance);
+    }
+
     public static void printBoldBoundary() {
         System.out.println("============================");
     }
