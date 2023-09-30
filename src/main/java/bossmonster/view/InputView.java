@@ -10,9 +10,11 @@ import java.util.StringTokenizer;
 
 public class InputView {
 
+    private final int PHYSICAL_ATTACK = 1;
+    private final int MAGIC_ATTACK = 2;
+
     Scanner scanner = new Scanner(System.in);
     Validator validator = new Validator();
-    OutputView outputView = new OutputView();
 
     public int readBossMonsterHp() {
         System.out.println("보스 몬스터의 HP를 입력해주세요.");
@@ -32,13 +34,6 @@ public class InputView {
         System.out.println("플레이어의 이름을 입력해주세요.");
         String playerName = scanner.nextLine();
 
-        try {
-            validator.validatePlayerName(playerName);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return readPlayerName();
-        }
-
         return playerName;
     }
 
@@ -53,48 +48,30 @@ public class InputView {
             return readPlayerHpAndMp();
         }
 
-        System.out.println("\n보스 레이드를 시작합니다!\n");
         return parseToIntegerList(inputString);
     }
 
-    public int readAttackType(BattleInfoDto battleInfoDto) {
+    public int readAttackType() {
         System.out.println("어떤 공격을 하시겠습니까?");
         System.out.println("1. 물리 공격");
         System.out.println("2. 마법 공격");
 
         String inputString = scanner.nextLine();
 
-        int attackType = validateAttackType(battleInfoDto, inputString);
-
-        if (attackType == 1) {
-            System.out.println("\n물리 공격을 했습니다. (입힌 대미지: 10)");
-        }
-
-        if (attackType == 2) {
-            System.out.println("\n마법 공격을 했습니다. (입힌 대미지: 20)");
-        }
+        int attackType = validateAttackType(inputString);
 
         return attackType;
     }
 
-    private int validateAttackType(BattleInfoDto battleInfoDto, String inputString) {
+    private int validateAttackType(String inputString) {
         try {
             validator.validateAttackType(inputString);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return readAttackType(battleInfoDto);
+            return readAttackType();
         }
 
         int attackType = Integer.parseInt(inputString);
-
-        if (attackType == 2) {
-            try {
-                validator.validateMpConsume(battleInfoDto.getPlayerMp());
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-                return readAttackType(battleInfoDto);
-            }
-        }
 
         return attackType;
     }

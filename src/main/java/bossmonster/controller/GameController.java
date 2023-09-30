@@ -68,7 +68,7 @@ public class GameController {
         try {
             player.setStatus(playerStatus.get(0), playerStatus.get(1));
         } catch (IllegalArgumentException e) {
-            System.out.println("HP와 MP의 합이 200이 되도록 입력해주세요.");
+            System.out.println("[ERROR] HP와 MP의 합이 200이 되도록 입력해주세요.");
             return progressPlayerStatusSetting(player);
         }
 
@@ -76,13 +76,13 @@ public class GameController {
     }
 
     private void progressBattle(Player player, BossMonster bossMonster) {
+        outputView.printBattleStartView();
+
         while (true) {
             BattleInfoDto battleInfoDto = new BattleInfoDto(bossMonster, player);
 
             outputView.printBattleInfoView(battleInfoDto, turnCount);
-            int attackTypeNum = inputView.readAttackType(battleInfoDto);
-            AttackType attackType = new AttackType(attackTypeNum);
-            player.attackBossMonster(bossMonster, attackType);
+            progressPlayerPhase(player, bossMonster);
             if (player.isVictory(bossMonster)) {
                 endGameByPlayerVictory(battleInfoDto, turnCount);
                 break;
@@ -97,6 +97,28 @@ public class GameController {
 
             turnCount++;
         }
+    }
+
+    private int progressPlayerPhase(Player player, BossMonster bossMonster) {
+        int attackTypeNum = inputView.readAttackType();
+        AttackType attackType = new AttackType();
+
+        try {
+            attackType.setType(attackTypeNum);
+        } catch (IllegalArgumentException e) {
+            System.out.println("[ERROR] 1 또는 2를 입력해주세요.");
+            return progressPlayerPhase(player, bossMonster);
+        }
+
+        try {
+            player.attackBossMonster(bossMonster, attackType);
+        } catch (IllegalArgumentException e) {
+            System.out.println("[ERROR] 마법 공격에 필요한 MP가 부족합니다.");
+            return progressPlayerPhase(player, bossMonster);
+        }
+        outputView.printPlayerPhaseView(attackType);
+
+        return END;
     }
 
     private void endGameByPlayerVictory(BattleInfoDto battleInfoDto, int turnCount) {

@@ -13,7 +13,20 @@ public class AttackType {
     private int damage;
     private int mpChange;
 
-    public AttackType(int typeNum) {
+    public int getTypeNum() {
+        return typeNum;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public int getMpChange() {
+        return mpChange;
+    }
+
+    public void setType(int typeNum) {
+        validateAttackType(typeNum);
         this.typeNum = typeNum;
 
         if (typeNum == PHYSICAL_ATTACK) {
@@ -27,11 +40,9 @@ public class AttackType {
         }
     }
 
-    public int getDamage() {
-        return damage;
-    }
-
-    public int getMpChange() {
-        return mpChange;
+    private void validateAttackType(int typeNum) {
+        if (!(typeNum == PHYSICAL_ATTACK) && !(typeNum == MAGIC_ATTACK)) {
+            throw new IllegalArgumentException();
+        }
     }
 }

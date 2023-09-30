@@ -1,17 +1,31 @@
 package bossmonster.view;
 
+import bossmonster.AttackType;
 import bossmonster.dto.BattleInfoDto;
 
 import java.util.Scanner;
 
 public class OutputView {
 
-    final int BOSS_NORMAL = 0;
-    final int BOSS_DAMAGED = 1;
-    final int BOSS_WIN = 2;
+    final int PHYSICAL_ATTACK = 1;
+    final int MAGIC_ATTACK = 2;
+    final int BOSS_NORMAL = 100;
+    final int BOSS_DAMAGED = 101;
+    final int BOSS_WIN = 102;
 
-    Scanner scanner = new Scanner(System.in);
+    public void printBattleStartView() {
+        System.out.println("\n보스 레이드를 시작합니다!\n");
+    }
 
+    public void printPlayerPhaseView(AttackType attackType) {
+        if (attackType.getTypeNum() == PHYSICAL_ATTACK) {
+            System.out.println("\n물리 공격을 했습니다. (입힌 대미지: " + attackType.getDamage() + ")");
+        }
+
+        if (attackType.getTypeNum() == MAGIC_ATTACK) {
+            System.out.println("\n마법 공격을 했습니다. (입힌 대미지: " + attackType.getDamage() + ")");
+        }
+    }
     public void printBossPhaseView(int bossDamage) {
         System.out.println("보스가 공격했습니다. (입힌 대미지: " + bossDamage + ")\n");
     }
