@@ -34,4 +34,8 @@ public class Mp {
     private boolean exceedConsumedMp(int consumed) {
         return consumed > initialMp;
     }
+
+    public int getInitialMp() {
+        return initialMp;
+    }
 }
