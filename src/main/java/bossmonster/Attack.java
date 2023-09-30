@@ -31,6 +31,10 @@ public enum Attack {
         return number;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public int getDamage() {
         return damage;
     }
