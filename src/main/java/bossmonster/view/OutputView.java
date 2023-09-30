@@ -39,4 +39,13 @@ public class OutputView {
     public static void printBossMonsterAttackResult(int bossMonsterDamage) {
         System.out.printf("보스가 공격 했습니다. (입힌 데미지: %d)\n", bossMonsterDamage);
     }
+
+    public static void printWinningMessage(String name, int count) {
+        System.out.printf("%s 님이 %d번의 전투 끝에 보스 몬스터를 잡았습니다.\n", name, count);
+    }
+
+    public static void printDefeatMessage(String name) {
+        System.out.printf("%s의 HP가 0이 되었습니다.\n", name);
+        System.out.println("보스 레이드에 실패했습니다.");
+    }
 }
