@@ -1,7 +1,5 @@
 package bossmonster.domain;
 
-import java.util.Objects;
-
 public class PlayerMp {
 
     private CurrentPlayerMp currentPlayerMp;
@@ -37,17 +35,4 @@ public class PlayerMp {
         this.currentPlayerMp = currentPlayerMp.effectMpByAttackType(attackType, initialPlayerMp);
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PlayerMp playerMp = (PlayerMp) o;
-        return Objects.equals(currentPlayerMp, playerMp.currentPlayerMp) && Objects.equals(initialPlayerMp, playerMp.initialPlayerMp);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(currentPlayerMp, initialPlayerMp);
-    }
 }
