@@ -1,8 +1,5 @@
 package bossmonster.exception;
 
-import bossmonster.domain.Player;
-
-import java.awt.print.PrinterIOException;
 import java.util.StringTokenizer;
 
 public class Validator {

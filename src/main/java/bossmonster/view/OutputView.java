@@ -1,7 +1,8 @@
 package bossmonster.view;
 
 import bossmonster.domain.AttackType;
-import bossmonster.dto.BattleInfoDto;
+import bossmonster.domain.BossMonster;
+import bossmonster.domain.Player;
 
 public class OutputView {
 
@@ -29,37 +30,37 @@ public class OutputView {
         System.out.println("보스가 공격했습니다. (입힌 대미지: " + bossDamage + ")\n");
     }
 
-    public void printEndGameByVictoryView(BattleInfoDto battleInfoDto, int turnCount) {
-        System.out.println("\n" + battleInfoDto.getPlayerName() + " 님이 " + turnCount + "번의 전투 끝에 보스 몬스터를 잡았습니다.");
+    public void printEndGameByVictoryView(Player player, int turnCount) {
+        System.out.println("\n" + player.getName() + " 님이 " + turnCount + "번의 전투 끝에 보스 몬스터를 잡았습니다.");
     }
 
-    public void printEndGameByDefeatView(BattleInfoDto battleInfoDto, int turnCount) {
-        printBattleInfoView(battleInfoDto, turnCount);
-        System.out.println(battleInfoDto.getPlayerName() + "의 HP가 0이 되었습니다");
+    public void printEndGameByDefeatView(Player player, BossMonster bossMonster, int turnCount) {
+        printBattleInfoView(player, bossMonster, turnCount);
+        System.out.println(player.getName() + "의 HP가 0이 되었습니다");
         System.out.println("보스 레이드에 실패했습니다.");
     }
 
-    public void printBattleInfoView(BattleInfoDto battleInfoDto, int turnCount) {
+    public void printBattleInfoView(Player player, BossMonster bossMonster, int turnCount) {
         System.out.println("============================");
-        System.out.println("BOSS HP [" + battleInfoDto.getBossHp() + "/" + battleInfoDto.getBossMaxHp() + "]");
+        System.out.println("BOSS HP [" + bossMonster.getHp() + "/" + bossMonster.getMaxHp() + "]");
         System.out.println("____________________________");
 
         if (turnCount == 1) {
             printBossMonsterView(BOSS_NORMAL);
         }
 
-        if (turnCount > 1 && battleInfoDto.getPlayerHp() > 0) {
+        if (turnCount > 1 && player.getHp() > 0) {
             printBossMonsterView(BOSS_DAMAGED);
         }
 
-        if (turnCount > 1 && battleInfoDto.getPlayerHp() == 0) {
+        if (turnCount > 1 && player.getHp() == 0) {
             printBossMonsterView(BOSS_WIN);
         }
 
         System.out.println("____________________________");
-        System.out.println(battleInfoDto.getPlayerName()
-                + " HP [" + battleInfoDto.getPlayerHp() + "/" + battleInfoDto.getPlayerMaxHp()
-                + "] MP [" + battleInfoDto.getPlayerMp() + "/" + battleInfoDto.getPlayerMaxMp() +"]");
+        System.out.println(player.getName()
+                + " HP [" + player.getHp() + "/" + player.getMaxHp()
+                + "] MP [" + player.getMp() + "/" + player.getMaxMp() +"]");
         System.out.println("============================\n");
     }
 

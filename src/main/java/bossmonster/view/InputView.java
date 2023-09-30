@@ -1,6 +1,5 @@
 package bossmonster.view;
 
-import bossmonster.dto.BattleInfoDto;
 import bossmonster.exception.Validator;
 
 import java.util.ArrayList;

@@ -3,7 +3,6 @@ package bossmonster.controller;
 import bossmonster.domain.AttackType;
 import bossmonster.domain.BossMonster;
 import bossmonster.domain.Player;
-import bossmonster.dto.BattleInfoDto;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
 
@@ -79,19 +78,17 @@ public class GameController {
         outputView.printBattleStartView();
 
         while (true) {
-            BattleInfoDto battleInfoDto = new BattleInfoDto(bossMonster, player);
-
-            outputView.printBattleInfoView(battleInfoDto, turnCount);
+            outputView.printBattleInfoView(player, bossMonster, turnCount);
             progressPlayerPhase(player, bossMonster);
             if (player.isVictory(bossMonster)) {
-                endGameByPlayerVictory(battleInfoDto, turnCount);
+                endGameByPlayerVictory(player, turnCount);
                 break;
             }
 
             int bossDamage = bossMonster.attackPlayer(player);
             outputView.printBossPhaseView(bossDamage);
             if (bossMonster.isVictory(player)) {
-                endGameByPlayerDefeat(battleInfoDto, turnCount);
+                endGameByPlayerDefeat(player, bossMonster, turnCount);
                 break;
             }
 
@@ -121,11 +118,11 @@ public class GameController {
         return END;
     }
 
-    private void endGameByPlayerVictory(BattleInfoDto battleInfoDto, int turnCount) {
-        outputView.printEndGameByVictoryView(battleInfoDto, turnCount);
+    private void endGameByPlayerVictory(Player player, int turnCount) {
+        outputView.printEndGameByVictoryView(player, turnCount);
     }
 
-    private void endGameByPlayerDefeat(BattleInfoDto battleInfoDto, int turnCount) {
-        outputView.printEndGameByDefeatView(battleInfoDto, turnCount);
+    private void endGameByPlayerDefeat(Player player, BossMonster bossMonster, int turnCount) {
+        outputView.printEndGameByDefeatView(player, bossMonster, turnCount);
     }
 }
