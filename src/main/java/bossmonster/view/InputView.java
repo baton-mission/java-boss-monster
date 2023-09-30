@@ -9,9 +9,6 @@ import java.util.StringTokenizer;
 
 public class InputView {
 
-    private final int PHYSICAL_ATTACK = 1;
-    private final int MAGIC_ATTACK = 2;
-
     private Scanner scanner = new Scanner(System.in);
     private Validator validator = new Validator();
 
