@@ -24,7 +24,7 @@ public class Boss {
     }
 
     public int getBossHp() {
-        return bossHp.getBossHp();
+        return bossHp.getCurrentBossHp();
     }
 
     public int getInitialBossHp() {
