@@ -1,5 +1,7 @@
 package bossmonster.domain;
 
+import bossmonster.AttackType;
+
 public class BossMonster {
 
     int hp;
@@ -19,7 +21,14 @@ public class BossMonster {
         this.maxHp = hp;
     }
 
-    public void reduceHp(int damage) {
+    public int attackPlayer(Player player) {
+        int damage = (int) (Math.random() * 20);
+        player.attacked(damage);
+        return damage;
+    }
+
+    public void attacked(AttackType attackType) {
+        int damage = attackType.getDamage();
         hp -= damage;
         if (hp < 0) {
             hp = 0;

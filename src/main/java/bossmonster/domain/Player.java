@@ -1,5 +1,7 @@
 package bossmonster.domain;
 
+import bossmonster.AttackType;
+
 public class Player {
 
     String name;
@@ -41,17 +43,19 @@ public class Player {
         this.maxMp = mp;
     }
 
-    public void gainMp() {
-        if (mp < maxMp) {
-            mp += 10;
+    public void attackBossMonster(BossMonster bossMonster, AttackType attackType) {
+        if (!canAttack(attackType)) {
+            throw new IllegalArgumentException();
+        }
+
+        bossMonster.attacked(attackType);
+        mp += attackType.getMpChange();
+        if (mp > maxMp) {
+            mp = maxMp;
         }
     }
 
-    public void consumeMp() {
-        mp -= 30;
-    }
-
-    public void reduceHp(int damage) {
+    public void attacked(int damage) {
         hp -= damage;
         if (hp < 0) {
             hp = 0;
@@ -68,5 +72,15 @@ public class Player {
         if (hp + mp != 200) {
             throw new IllegalArgumentException();
         }
+    }
+
+    private boolean canAttack(AttackType attackType) {
+        int mpChange = attackType.getMpChange();
+
+        if (mp + mpChange < 0) {
+            return false;
+        }
+
+        return true;
     }
 }

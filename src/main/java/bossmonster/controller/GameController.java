@@ -1,5 +1,6 @@
 package bossmonster.controller;
 
+import bossmonster.AttackType;
 import bossmonster.domain.BossMonster;
 import bossmonster.domain.Player;
 import bossmonster.dto.BattleInfoDto;
@@ -78,14 +79,15 @@ public class GameController {
     private void progressBattle() {
         while (true) {
             BattleInfoDto battleInfoDto = new BattleInfoDto(bossMonster, player);
-            int attackType = gameView.printPlayerPhaseView(battleInfoDto, turnCount);
-            battle.attackBossMonster(player, bossMonster, attackType);
+            int attackTypeNum = gameView.printPlayerPhaseView(battleInfoDto, turnCount);
+            AttackType attackType = new AttackType(attackTypeNum);
+            player.attackBossMonster(bossMonster, attackType);
             if (battle.isVictory(bossMonster)) {
                 endGameByVictory(battleInfoDto, turnCount);
                 break;
             }
 
-            int bossDamage = battle.attackPlayer(player);
+            int bossDamage = bossMonster.attackPlayer(player);
             gameView.printBossPhaseView(bossDamage);
             if (battle.isDefeat(player)) {
                 endGameByDefeat(battleInfoDto, turnCount);
