@@ -1,5 +1,7 @@
 package bossmonster.domain;
 
+import java.util.Objects;
+
 public final class CurrentBossHp {
 
     private static final int BOSS_ZERO_HP = 0;
@@ -29,5 +31,18 @@ public final class CurrentBossHp {
 
     public boolean isUnderZero() {
         return currentBossHp <= BOSS_ZERO_HP;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CurrentBossHp that = (CurrentBossHp) o;
+        return currentBossHp == that.currentBossHp;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(currentBossHp);
     }
 }
