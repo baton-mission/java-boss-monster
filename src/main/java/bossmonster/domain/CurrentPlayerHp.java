@@ -1,5 +1,7 @@
 package bossmonster.domain;
 
+import java.util.Objects;
+
 public final class CurrentPlayerHp {
 
     private static final int MIN_HP = 0;
@@ -34,5 +36,18 @@ public final class CurrentPlayerHp {
 
     public boolean isUnderMinHp() {
         return currentPlayerHp <= MIN_HP;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CurrentPlayerHp that = (CurrentPlayerHp) o;
+        return currentPlayerHp == that.currentPlayerHp;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(currentPlayerHp);
     }
 }
