@@ -1,5 +1,7 @@
 package bossmonster.domain.player;
 
+import bossmonster.dto.PlayerInfo;
+
 public class PlayerImpl
         implements Player {
     private final PlayerName playerName;
@@ -28,5 +30,16 @@ public class PlayerImpl
         }
 
         return true;
+    }
+
+    @Override
+    public PlayerInfo getPlayerInfo() {
+        return PlayerInfo.of(
+                playerName.getPlayerName(),
+                playerHp.getMaximumHp(),
+                playerHp.getCurrentHp(),
+                playerMp.getMaximumMp(),
+                playerMp.getCurrentMp()
+        );
     }
 }
