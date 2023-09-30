@@ -25,19 +25,6 @@ class PlayerStatusTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    /**
-     * public void effectedMpBy(AttackType attackType) {
-     * playerMp.effectedBy(attackType);
-     * }
-     * <p>
-     * public void effectedHpByBossDamage(int damageFromBoss) {
-     * playerHp.effectedByBossDamage(damageFromBoss);
-     * }
-     * <p>
-     * public boolean isHpUnderMin() {
-     * return playerHp.isUnderMinHp();
-     * }
-     */
     @Test
     void effectedMpBy는_마법공격을_하는_경우_playerMP에게_메시지를_보낸다() {
         PlayerMp spyPlayerMp = Mockito.spy(PlayerMp.from(100));
