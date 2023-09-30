@@ -18,14 +18,12 @@ public class GameController {
     Battle battle;
     GameView gameView;
 
-    public GameController() {
+    public void play() {
+        turnCount = 1;
         initialSetting = new InitialSetting();
         battle = new Battle();
         gameView = new GameView();
-    }
 
-    public void play() {
-        turnCount = 1;
         progressInitialSetting();
         progressBattle();
     }
