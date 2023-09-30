@@ -1,83 +1,53 @@
 package bossmonster.domain;
 
-import static bossmonster.domain.ExceptionMessage.PLAYER_MP_EXCEPTION_MESSAGE;
-import static bossmonster.domain.ExceptionMessage.SKILL_MP_EXCEPTION_MESSAGE;
-
 import java.util.Objects;
 
 public class PlayerMp {
 
-    private static final int MIN_MP = 0;
+    private CurrentPlayerMp currentPlayerMp;
+    private final InitialPlayerMp initialPlayerMp;
 
-    private int playerMp;
-    private final int initialPlayerMp;
-
-    private PlayerMp(int playerMp, int initialPlayerMp) {
-        validate(playerMp);
-        this.playerMp = playerMp;
+    private PlayerMp(CurrentPlayerMp currentPlayerMp, InitialPlayerMp initialPlayerMp) {
+        this.currentPlayerMp = currentPlayerMp;
         this.initialPlayerMp = initialPlayerMp;
     }
 
     private PlayerMp(int playerMp) {
-        this(playerMp, playerMp);
+        this(CurrentPlayerMp.from(playerMp), InitialPlayerMp.from(playerMp));
     }
 
-    public static PlayerMp fromTest(int playerMp, int initialPlayerMp) {
-        return new PlayerMp(playerMp, initialPlayerMp);
-    }
-
-    private void validate(int playerMp) {
-        validateUnderMinMp(playerMp);
-    }
-
-    private void validateUnderMinMp(int playerMp) {
-        if (isUnderMinMp(playerMp)) {
-            throw new IllegalArgumentException(PLAYER_MP_EXCEPTION_MESSAGE);
-        }
-    }
-
-    private boolean isUnderMinMp(int playerMp) {
-        return playerMp < MIN_MP;
-    }
 
     public static PlayerMp from(int playerMp) {
         return new PlayerMp(playerMp);
     }
 
-    public int plus(int playerHp) {
-        return playerHp + playerMp;
+    public int plusWithHp(int playerHp) {
+        return initialPlayerMp.plusWithHp(playerHp);
     }
 
     public int getPlayerMp() {
-        return playerMp;
+        return currentPlayerMp.getCurrentPlayerMp();
     }
 
     public int getInitialPlayerMp() {
-        return initialPlayerMp;
+        return initialPlayerMp.getInitialPlayerMp();
     }
 
     public void effectedMpByAttackType(AttackType attackType) {
-        int effectedPlayerMp = attackType.effectMp(playerMp);
-        if (isUnderMinMp(effectedPlayerMp)) {
-            throw new IllegalArgumentException(SKILL_MP_EXCEPTION_MESSAGE);
-        }
-        setPlayerMpNotToOverMax(effectedPlayerMp);
+        this.currentPlayerMp = currentPlayerMp.effectMpByAttackType(attackType, initialPlayerMp);
     }
 
-    private void setPlayerMpNotToOverMax(int effectedPlayerMp) {
-        this.playerMp = Math.min(effectedPlayerMp, initialPlayerMp);
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PlayerMp playerMp1 = (PlayerMp) o;
-        return playerMp == playerMp1.playerMp && initialPlayerMp == playerMp1.initialPlayerMp;
+        PlayerMp playerMp = (PlayerMp) o;
+        return Objects.equals(currentPlayerMp, playerMp.currentPlayerMp) && Objects.equals(initialPlayerMp, playerMp.initialPlayerMp);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(playerMp, initialPlayerMp);
+        return Objects.hash(currentPlayerMp, initialPlayerMp);
     }
 }

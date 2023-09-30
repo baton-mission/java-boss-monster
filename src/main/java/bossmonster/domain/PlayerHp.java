@@ -43,7 +43,7 @@ public class PlayerHp {
     }
 
     public int plus(PlayerMp playerMp) {
-        return playerMp.plus(playerHp);
+        return playerMp.plusWithHp(playerHp);
     }
 
     public int getPlayerHp() {

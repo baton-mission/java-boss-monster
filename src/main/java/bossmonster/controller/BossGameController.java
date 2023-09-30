@@ -81,8 +81,7 @@ public class BossGameController {
 
 
     private AttackType readAttackType() {
-        AttackType attackType = read(this::scanAttackType);
-        return attackType;
+        return read(this::scanAttackType);
     }
 
     private AttackType scanAttackType() {
