@@ -1,4 +1,4 @@
-package bossmonster.domain.util;
+package bossmonster.util;
 
 import java.util.Random;
 

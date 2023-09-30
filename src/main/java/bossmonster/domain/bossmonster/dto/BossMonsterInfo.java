@@ -1,4 +1,4 @@
-package bossmonster.dto;
+package bossmonster.domain.bossmonster.dto;
 
 public class BossMonsterInfo {
     private final int maximumBossMonsterHp;

@@ -1,10 +1,10 @@
 package bossmonster.domain.bossmonster;
 
 import bossmonster.domain.player.Player;
-import bossmonster.dto.BossMonsterInfo;
+import bossmonster.domain.bossmonster.dto.BossMonsterInfo;
 
 import static bossmonster.domain.bossmonster.constant.BossMonsterOption.*;
-import static bossmonster.domain.util.GenerateRandomNumber.*;
+import static bossmonster.util.GenerateRandomNumber.*;
 
 public class BossMonsterImpl
         implements BossMonster {

@@ -1,6 +1,6 @@
 package bossmonster.domain.bossmonster;
 
-import bossmonster.dto.BossMonsterInfo;
+import bossmonster.domain.bossmonster.dto.BossMonsterInfo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

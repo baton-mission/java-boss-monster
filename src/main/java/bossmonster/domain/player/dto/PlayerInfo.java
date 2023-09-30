@@ -1,4 +1,4 @@
-package bossmonster.dto;
+package bossmonster.domain.player.dto;
 
 public class PlayerInfo {
     private final String playerName;

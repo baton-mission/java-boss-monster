@@ -1,6 +1,6 @@
 package bossmonster.domain.player;
 
-import bossmonster.dto.PlayerInfo;
+import bossmonster.domain.player.dto.PlayerInfo;
 
 public class PlayerImpl
         implements Player {
