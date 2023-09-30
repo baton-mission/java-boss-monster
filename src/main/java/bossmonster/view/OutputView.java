@@ -73,7 +73,7 @@ public class OutputView {
     }
 
     public void printPlayerStatusException() {
-        System.out.println(PREFIX + "HP와 MP의 합이 200이 되도록 입력해주세요.");
+        System.out.println(PREFIX + "HP는 1이상, HP와 MP의 합이 200이 되도록 입력해주세요.");
     }
 
     public void printAttackTypeException() {

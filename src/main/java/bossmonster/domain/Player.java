@@ -74,7 +74,7 @@ public class Player {
     }
 
     private void validatePlayerStatus(int hp, int mp) {
-        if (hp + mp != 200) {
+        if (hp < 1 || hp + mp != 200) {
             throw new IllegalArgumentException();
         }
     }
