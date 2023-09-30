@@ -17,7 +17,7 @@ public class OutputView {
         Integer mp = info.get("mp");
         Integer initialHp = info.get("initialHp");
         Integer initialMp = info.get("initialMp");
-        System.out.printf("%s HP [%d/%d] MP [%d/%d]", name, hp, initialHp, mp, initialMp);
+        System.out.printf("%s HP [%d/%d] MP [%d/%d]\n", name, hp, initialHp, mp, initialMp);
     }
 
     public static void printBossMonsterAppearance(String appearance) {
