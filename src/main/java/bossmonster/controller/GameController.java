@@ -27,15 +27,27 @@ public class GameController {
     }
 
     private void progressInitialSetting() {
-        int bossMonsterHp = gameView.printBossHpSettingView();
         player = new Player();
-        bossMonster = new BossMonster(bossMonsterHp);
+        bossMonster = new BossMonster();
 
+        progressBossHpSetting();
         progressPlayerNameSetting();
         progressPlayerStatusSetting();
+
     }
 
+    private int progressBossHpSetting() {
+        int bossMonsterHp = gameView.printBossHpSettingView();
 
+        try {
+            bossMonster.setHp(bossMonsterHp);
+        } catch (IllegalArgumentException e) {
+            System.out.println("[ERROR] 보스 체력은 100이상, 300이하여야합니다.");
+            return progressBossHpSetting();
+        }
+
+        return END;
+    }
 
     private int progressPlayerNameSetting() {
         String playerName = gameView.printPlayerNameSettingView();
