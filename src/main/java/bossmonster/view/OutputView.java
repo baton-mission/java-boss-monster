@@ -6,12 +6,12 @@ import bossmonster.domain.Player;
 
 public class OutputView {
 
-    final int PHYSICAL_ATTACK = 1;
-    final int MAGIC_ATTACK = 2;
-    final int BOSS_NORMAL = 100;
-    final int BOSS_DAMAGED = 101;
-    final int BOSS_WIN = 102;
-    final String PREFIX = "[ERROR] ";
+    private final int PHYSICAL_ATTACK = 1;
+    private final int MAGIC_ATTACK = 2;
+    private final int BOSS_NORMAL = 100;
+    private final int BOSS_DAMAGED = 101;
+    private final int BOSS_WIN = 102;
+    private final String PREFIX = "[ERROR] ";
 
     public void printBattleStartView() {
         System.out.println("\n보스 레이드를 시작합니다!\n");

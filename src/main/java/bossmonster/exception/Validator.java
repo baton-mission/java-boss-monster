@@ -4,7 +4,7 @@ import java.util.StringTokenizer;
 
 public class Validator {
 
-    final String PREFIX = "[ERROR] ";
+    private final String PREFIX = "[ERROR] ";
 
     public void validateBossStatus(String hp) {
         validateDigit(hp);

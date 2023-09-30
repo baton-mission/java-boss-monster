@@ -12,8 +12,8 @@ public class InputView {
     private final int PHYSICAL_ATTACK = 1;
     private final int MAGIC_ATTACK = 2;
 
-    Scanner scanner = new Scanner(System.in);
-    Validator validator = new Validator();
+    private Scanner scanner = new Scanner(System.in);
+    private Validator validator = new Validator();
 
     public int readBossMonsterHp() {
         System.out.println("보스 몬스터의 HP를 입력해주세요.");

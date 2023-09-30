@@ -2,11 +2,11 @@ package bossmonster.domain;
 
 public class Player {
 
-    String name;
-    int hp;
-    int mp;
-    int maxHp;
-    int maxMp;
+    private String name;
+    private int hp;
+    private int mp;
+    private int maxHp;
+    private int maxMp;
 
     public String getName() {
         return name;

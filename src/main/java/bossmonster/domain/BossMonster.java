@@ -2,8 +2,8 @@ package bossmonster.domain;
 
 public class BossMonster {
 
-    int hp;
-    int maxHp;
+    private int hp;
+    private int maxHp;
 
     public int getHp() {
         return hp;
