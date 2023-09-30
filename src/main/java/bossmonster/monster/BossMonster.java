@@ -1,5 +1,6 @@
 package bossmonster.monster;
 
+import static bossmonster.monster.BossMonsterAppearance.*;
 import static bossmonster.utils.ErrorMessage.*;
 
 import bossmonster.Hp;
@@ -16,6 +17,7 @@ public class BossMonster {
     public BossMonster(Hp hp) {
         validate(hp);
         this.hp = hp;
+        this.appearance = DEFAULT; 
     }
 
     private void validate(Hp hp) {
@@ -26,7 +28,7 @@ public class BossMonster {
 
     public void takeDamaged(int damage) {
         hp.reduceByDamage(damage);
-        appearance = BossMonsterAppearance.SICK;
+        appearance = SICK;
     }
 
     public void attack(int damage, Player player) {
