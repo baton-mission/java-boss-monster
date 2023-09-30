@@ -42,7 +42,7 @@ public class GameController {
         try {
             bossMonster.setHp(bossMonsterHp);
         } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] 보스 체력은 100이상, 300이하여야합니다.");
+            outputView.printBossHpException();
             return progressBossHpSetting(bossMonster);
         }
 
@@ -55,7 +55,7 @@ public class GameController {
         try {
             player.setName(playerName);
         } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] 플레이어의 이름은 5자 이하만 가능합니다.");
+            outputView.printPlayerNameException();
             return progressPlayerNameSetting(player);
         }
 
@@ -68,7 +68,7 @@ public class GameController {
         try {
             player.setStatus(playerStatus.get(0), playerStatus.get(1));
         } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] HP와 MP의 합이 200이 되도록 입력해주세요.");
+            outputView.printPlayerStatusException();
             return progressPlayerStatusSetting(player);
         }
 
@@ -106,14 +106,14 @@ public class GameController {
         try {
             attackType.setType(attackTypeNum);
         } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] 1 또는 2를 입력해주세요.");
+            outputView.printAttackTypeException();
             return progressPlayerPhase(player, bossMonster);
         }
 
         try {
             player.attackBossMonster(bossMonster, attackType);
         } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] 마법 공격에 필요한 MP가 부족합니다.");
+            outputView.printLackOfMPException();
             return progressPlayerPhase(player, bossMonster);
         }
         outputView.printPlayerPhaseView(attackType);

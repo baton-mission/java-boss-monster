@@ -12,6 +12,7 @@ public class OutputView {
     final int BOSS_NORMAL = 100;
     final int BOSS_DAMAGED = 101;
     final int BOSS_WIN = 102;
+    final String PREFIX = "[ERROR] ";
 
     public void printBattleStartView() {
         System.out.println("\n보스 레이드를 시작합니다!\n");
@@ -63,6 +64,27 @@ public class OutputView {
                 + "] MP [" + battleInfoDto.getPlayerMp() + "/" + battleInfoDto.getPlayerMaxMp() +"]");
         System.out.println("============================\n");
     }
+
+    public void printBossHpException() {
+        System.out.println(PREFIX + "보스 체력은 100이상, 300이하여야합니다.");
+    }
+
+    public void printPlayerNameException() {
+        System.out.println(PREFIX + "플레이어의 이름은 5자 이하만 가능합니다.");
+    }
+
+    public void printPlayerStatusException() {
+        System.out.println(PREFIX + "HP와 MP의 합이 200이 되도록 입력해주세요.");
+    }
+
+    public void printAttackTypeException() {
+        System.out.println(PREFIX + "1 또는 2를 입력해주세요.");
+    }
+
+    public void printLackOfMPException() {
+        System.out.println(PREFIX + "마법 공격에 필요한 MP가 부족합니다.");
+    }
+
 
     private void printBossMonsterView(int bossCondition) {
         if (bossCondition == BOSS_NORMAL) {
