@@ -10,84 +10,83 @@ import java.util.List;
 
 public class GameController {
 
-    final int END = 0;
-    int turnCount;
-    Player player;
-    BossMonster bossMonster;
-    GameView gameView;
+    private final int END = 0;
+
+    private int turnCount;
+    private GameView gameView;
 
     public void play() {
-        turnCount = 1;
+        Player player = new Player();
+        BossMonster bossMonster = new BossMonster();
+
         gameView = new GameView();
+        turnCount = 1;
 
-        progressInitialSetting();
-        progressBattle();
+        progressInitialSetting(player, bossMonster);
+        progressBattle(player, bossMonster);
     }
 
-    private void progressInitialSetting() {
-        player = new Player();
-        bossMonster = new BossMonster();
-
-        progressBossHpSetting();
-        progressPlayerNameSetting();
-        progressPlayerStatusSetting();
+    private void progressInitialSetting(Player player, BossMonster bossMonster) {
+        progressBossHpSetting(bossMonster);
+        progressPlayerNameSetting(player);
+        progressPlayerStatusSetting(player);
 
     }
 
-    private int progressBossHpSetting() {
+    private int progressBossHpSetting(BossMonster bossMonster) {
         int bossMonsterHp = gameView.printBossHpSettingView();
 
         try {
             bossMonster.setHp(bossMonsterHp);
         } catch (IllegalArgumentException e) {
             System.out.println("[ERROR] 보스 체력은 100이상, 300이하여야합니다.");
-            return progressBossHpSetting();
+            return progressBossHpSetting(bossMonster);
         }
 
         return END;
     }
 
-    private int progressPlayerNameSetting() {
+    private int progressPlayerNameSetting(Player player) {
         String playerName = gameView.printPlayerNameSettingView();
 
         try {
             player.setName(playerName);
         } catch (IllegalArgumentException e) {
             System.out.println("[ERROR] 플레이어의 이름은 5자 이하만 가능합니다.");
-            return progressPlayerNameSetting();
+            return progressPlayerNameSetting(player);
         }
 
         return END;
     }
 
-    private int progressPlayerStatusSetting() {
+    private int progressPlayerStatusSetting(Player player) {
         List<Integer> playerStatus = gameView.printPlayerStatusSettingView();
 
         try {
             player.setStatus(playerStatus.get(0), playerStatus.get(1));
         } catch (IllegalArgumentException e) {
             System.out.println("HP와 MP의 합이 200이 되도록 입력해주세요.");
-            return progressPlayerStatusSetting();
+            return progressPlayerStatusSetting(player);
         }
 
         return END;
     }
 
-    private void progressBattle() {
+    private void progressBattle(Player player, BossMonster bossMonster) {
         while (true) {
             BattleInfoDto battleInfoDto = new BattleInfoDto(bossMonster, player);
             int attackTypeNum = gameView.printPlayerPhaseView(battleInfoDto, turnCount);
             AttackType attackType = new AttackType(attackTypeNum);
             player.attackBossMonster(bossMonster, attackType);
             if (player.isVictory(bossMonster)) {
-                endGameByVictory(battleInfoDto, turnCount);
+                endGameByPlayerVictory(battleInfoDto, turnCount);
                 break;
             }
 
             int bossDamage = bossMonster.attackPlayer(player);
             gameView.printBossPhaseView(bossDamage);
             if (bossMonster.isVictory(player)) {
-                endGameByDefeat(battleInfoDto, turnCount);
+                endGameByPlayerDefeat(battleInfoDto, turnCount);
                 break;
             }
 
@@ -95,11 +94,11 @@ public class GameController {
         }
     }
 
-    private void endGameByVictory(BattleInfoDto battleInfoDto, int turnCount) {
+    private void endGameByPlayerVictory(BattleInfoDto battleInfoDto, int turnCount) {
         gameView.printEndGameByVictoryView(battleInfoDto, turnCount);
     }
 
-    private void endGameByDefeat(BattleInfoDto battleInfoDto, int turnCount) {
+    private void endGameByPlayerDefeat(BattleInfoDto battleInfoDto, int turnCount) {
         gameView.printEndGameByDefeatView(battleInfoDto, turnCount);
     }
 }
