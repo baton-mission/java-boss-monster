@@ -1,7 +1,5 @@
 package bossmonster.domain;
 
-import java.util.Objects;
-
 public class PlayerHp {
     private CurrentPlayerHp currentPlayerHp;
     private final InitialPlayerHp initialPlayerHp;
@@ -42,16 +40,4 @@ public class PlayerHp {
     }
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PlayerHp playerHp1 = (PlayerHp) o;
-        return currentPlayerHp == playerHp1.currentPlayerHp && initialPlayerHp == playerHp1.initialPlayerHp;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(currentPlayerHp, initialPlayerHp);
-    }
 }
