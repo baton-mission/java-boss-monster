@@ -1,8 +1,5 @@
 package bossmonster.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Player {
 
     String name;
@@ -10,14 +7,6 @@ public class Player {
     int mp;
     int maxHp;
     int maxMp;
-
-    public Player(String name, List<Integer> status) {
-        this.name = name;
-        this.hp = status.get(0);
-        this.maxHp = status.get(0);
-        this.mp = status.get(1);
-        this.maxMp = status.get(1);
-    }
 
     public String getName() {
         return name;
@@ -39,6 +28,19 @@ public class Player {
         return maxMp;
     }
 
+    public void setName(String name) {
+        validatePlayerName(name);
+        this.name = name;
+    }
+
+    public void setStatus(int hp, int mp) {
+        validatePlayerStatus(hp, mp);
+        this.hp = hp;
+        this.maxHp = hp;
+        this.mp = mp;
+        this.maxMp = mp;
+    }
+
     public void gainMp() {
         if (mp < maxMp) {
             mp += 10;
@@ -53,6 +55,18 @@ public class Player {
         hp -= damage;
         if (hp < 0) {
             hp = 0;
+        }
+    }
+
+    private void validatePlayerName(String name) {
+        if (name.length() > 5) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void validatePlayerStatus(int hp, int mp) {
+        if (hp + mp != 200) {
+            throw new IllegalArgumentException();
         }
     }
 }

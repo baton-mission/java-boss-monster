@@ -10,6 +10,7 @@ import java.util.List;
 
 public class GameController {
 
+    final int END = 0;
     int turnCount;
     Player player;
     BossMonster bossMonster;
@@ -27,11 +28,39 @@ public class GameController {
 
     private void progressInitialSetting() {
         int bossMonsterHp = gameView.printBossHpSettingView();
+        player = new Player();
+        bossMonster = new BossMonster(bossMonsterHp);
+
+        progressPlayerNameSetting();
+        progressPlayerStatusSetting();
+    }
+
+
+
+    private int progressPlayerNameSetting() {
         String playerName = gameView.printPlayerNameSettingView();
+
+        try {
+            player.setName(playerName);
+        } catch (IllegalArgumentException e) {
+            System.out.println("[ERROR] 플레이어의 이름은 5자 이하만 가능합니다.");
+            return progressPlayerNameSetting();
+        }
+
+        return END;
+    }
+
+    private int progressPlayerStatusSetting() {
         List<Integer> playerStatus = gameView.printPlayerStatusSettingView();
 
-        player = new Player(playerName, playerStatus);
-        bossMonster = new BossMonster(bossMonsterHp);
+        try {
+            player.setStatus(playerStatus.get(0), playerStatus.get(1));
+        } catch (IllegalArgumentException e) {
+            System.out.println("HP와 MP의 합이 200이 되도록 입력해주세요.");
+            return progressPlayerStatusSetting();
+        }
+
+        return END;
     }
 
     private void progressBattle() {
