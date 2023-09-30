@@ -4,7 +4,6 @@ import bossmonster.domain.BossMonster;
 import bossmonster.domain.Player;
 import bossmonster.dto.BattleInfoDto;
 import bossmonster.service.Battle;
-import bossmonster.service.InitialSetting;
 import bossmonster.view.GameView;
 
 import java.util.List;
@@ -14,13 +13,11 @@ public class GameController {
     int turnCount;
     Player player;
     BossMonster bossMonster;
-    InitialSetting initialSetting;
     Battle battle;
     GameView gameView;
 
     public void play() {
         turnCount = 1;
-        initialSetting = new InitialSetting();
         battle = new Battle();
         gameView = new GameView();
 
@@ -33,8 +30,8 @@ public class GameController {
         String playerName = gameView.printPlayerNameSettingView();
         List<Integer> playerStatus = gameView.printPlayerStatusSettingView();
 
-        player = initialSetting.setPlayerStatus(playerName, playerStatus);
-        bossMonster = initialSetting.setBossMonsterStatus(bossMonsterHp);
+        player = new Player(playerName, playerStatus);
+        bossMonster = new BossMonster(bossMonsterHp);
     }
 
     private void progressBattle() {
