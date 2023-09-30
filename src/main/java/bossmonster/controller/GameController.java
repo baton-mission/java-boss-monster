@@ -4,7 +4,8 @@ import bossmonster.AttackType;
 import bossmonster.domain.BossMonster;
 import bossmonster.domain.Player;
 import bossmonster.dto.BattleInfoDto;
-import bossmonster.view.GameView;
+import bossmonster.view.InputView;
+import bossmonster.view.OutputView;
 
 import java.util.List;
 
@@ -13,13 +14,15 @@ public class GameController {
     private final int END = 0;
 
     private int turnCount;
-    private GameView gameView;
+    private InputView inputView;
+    private OutputView outputView;
 
     public void play() {
         Player player = new Player();
         BossMonster bossMonster = new BossMonster();
 
-        gameView = new GameView();
+        inputView = new InputView();
+        outputView = new OutputView();
         turnCount = 1;
 
         progressInitialSetting(player, bossMonster);
@@ -34,7 +37,7 @@ public class GameController {
     }
 
     private int progressBossHpSetting(BossMonster bossMonster) {
-        int bossMonsterHp = gameView.printBossHpSettingView();
+        int bossMonsterHp = inputView.readBossMonsterHp();
 
         try {
             bossMonster.setHp(bossMonsterHp);
@@ -47,7 +50,7 @@ public class GameController {
     }
 
     private int progressPlayerNameSetting(Player player) {
-        String playerName = gameView.printPlayerNameSettingView();
+        String playerName = inputView.readPlayerName();
 
         try {
             player.setName(playerName);
@@ -60,7 +63,7 @@ public class GameController {
     }
 
     private int progressPlayerStatusSetting(Player player) {
-        List<Integer> playerStatus = gameView.printPlayerStatusSettingView();
+        List<Integer> playerStatus = inputView.readPlayerHpAndMp();
 
         try {
             player.setStatus(playerStatus.get(0), playerStatus.get(1));
@@ -75,7 +78,9 @@ public class GameController {
     private void progressBattle(Player player, BossMonster bossMonster) {
         while (true) {
             BattleInfoDto battleInfoDto = new BattleInfoDto(bossMonster, player);
-            int attackTypeNum = gameView.printPlayerPhaseView(battleInfoDto, turnCount);
+
+            outputView.printBattleInfoView(battleInfoDto, turnCount);
+            int attackTypeNum = inputView.readAttackType(battleInfoDto);
             AttackType attackType = new AttackType(attackTypeNum);
             player.attackBossMonster(bossMonster, attackType);
             if (player.isVictory(bossMonster)) {
@@ -84,7 +89,7 @@ public class GameController {
             }
 
             int bossDamage = bossMonster.attackPlayer(player);
-            gameView.printBossPhaseView(bossDamage);
+            outputView.printBossPhaseView(bossDamage);
             if (bossMonster.isVictory(player)) {
                 endGameByPlayerDefeat(battleInfoDto, turnCount);
                 break;
@@ -95,10 +100,10 @@ public class GameController {
     }
 
     private void endGameByPlayerVictory(BattleInfoDto battleInfoDto, int turnCount) {
-        gameView.printEndGameByVictoryView(battleInfoDto, turnCount);
+        outputView.printEndGameByVictoryView(battleInfoDto, turnCount);
     }
 
     private void endGameByPlayerDefeat(BattleInfoDto battleInfoDto, int turnCount) {
-        gameView.printEndGameByDefeatView(battleInfoDto, turnCount);
+        outputView.printEndGameByDefeatView(battleInfoDto, turnCount);
     }
 }

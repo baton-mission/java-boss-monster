@@ -1,17 +1,9 @@
 package bossmonster.controller;
 
 import bossmonster.IOTest;
-import bossmonster.view.GameView;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.Scanner;
-
-import static org.assertj.core.api.Assertions.*;
 
 
 class GameControllerTest extends IOTest {
