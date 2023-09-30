@@ -16,4 +16,22 @@ public class PlayerMp {
     public int getCurrentMp() {
         return currentMp;
     }
+
+    public boolean hasEnoughMpForAttack(int enoughMp) {
+        if (enoughMp <= currentMp) {
+            return true;
+        }
+        return false;
+    }
+
+    public void increaseCurrentMp(int increaseMp) {
+        currentMp += increaseMp;
+        if (currentMp > maximumMp) {
+            currentMp = maximumMp;
+        }
+    }
+
+    public void decreaseCurrentMp(int decreaseMp) {
+        currentMp -= decreaseMp;
+    }
 }

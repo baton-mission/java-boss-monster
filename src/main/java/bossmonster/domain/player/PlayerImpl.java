@@ -1,5 +1,7 @@
 package bossmonster.domain.player;
 
+import bossmonster.domain.bossmonster.BossMonster;
+import bossmonster.domain.player.constant.PlayerAttackOption;
 import bossmonster.domain.player.dto.PlayerInfo;
 
 public class PlayerImpl
@@ -41,5 +43,19 @@ public class PlayerImpl
                 playerMp.getMaximumMp(),
                 playerMp.getCurrentMp()
         );
+    }
+
+    @Override
+    public void attackBossMonster(
+            BossMonster bossMonster,
+            PlayerAttackOption attackOption
+    ) {
+        if (!playerMp.hasEnoughMpForAttack(attackOption.getNeedMp())) {
+            throw new IllegalStateException("공격을 수행하기 위한 플레이어의 MP가 부족합니다.");
+        }
+
+        playerMp.decreaseCurrentMp(attackOption.getNeedMp());
+        bossMonster.takeDamage(attackOption.getDamage());
+        playerMp.increaseCurrentMp(attackOption.getRecoveryMp());
     }
 }
