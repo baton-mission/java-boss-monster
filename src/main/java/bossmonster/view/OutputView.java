@@ -6,6 +6,10 @@ public class OutputView {
         System.out.println("보스 레이드를 시작합니다!");
     }
 
+    public static void printBossMonsterInfo(int hp, int initialHp) {
+        System.out.printf("BOSS HP [%d/%d]\n", hp, initialHp);
+    }
+
     public static void printBossMonsterAppearance(String appearance) {
         System.out.println(appearance);
     }
