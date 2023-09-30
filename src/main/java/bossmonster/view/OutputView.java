@@ -1,9 +1,7 @@
 package bossmonster.view;
 
-import bossmonster.AttackType;
+import bossmonster.domain.AttackType;
 import bossmonster.dto.BattleInfoDto;
-
-import java.util.Scanner;
 
 public class OutputView {
 

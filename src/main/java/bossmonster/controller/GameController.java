@@ -1,6 +1,6 @@
 package bossmonster.controller;
 
-import bossmonster.AttackType;
+import bossmonster.domain.AttackType;
 import bossmonster.domain.BossMonster;
 import bossmonster.domain.Player;
 import bossmonster.dto.BattleInfoDto;

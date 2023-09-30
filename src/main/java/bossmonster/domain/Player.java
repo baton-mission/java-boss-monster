@@ -1,7 +1,5 @@
 package bossmonster.domain;
 
-import bossmonster.AttackType;
-
 public class Player {
 
     String name;
