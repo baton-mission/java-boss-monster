@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class InputView {
 
-    public static int readBossMonsterHp() {
-        return new Scanner(System.in).nextInt();
+    public static int readBossMonsterHp(Scanner scanner) {
+        return scanner.nextInt();
     }
 }
