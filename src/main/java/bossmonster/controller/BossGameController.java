@@ -44,7 +44,8 @@ public class BossGameController {
     private void playingGame(BossGame bossGame) {
         while (true) {
             AttackType attackType = read(this::getAttackType, bossGame);
-            int bossDamage = bossGame.attack(attackType);
+            bossGame.attackToBossFromPlayer(attackType);
+            int bossDamage = bossGame.attackPlayerFromBoss();
 
             if (bossGame.isBossDead()) {
                 printBossDeadMessage(bossGame, attackType);

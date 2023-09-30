@@ -27,9 +27,12 @@ public class BossGame {
     }
 
 
-    public int attack(AttackType attackType) {
+    public void attackToBossFromPlayer(AttackType attackType) {
         turnCount = turnCount.increase();
         boss.attackedByPlayer(attackType);
+    }
+
+    public int attackPlayerFromBoss() {
         if (isBossDead()) {
             return boss.zeroDamage();
         }
