@@ -17,7 +17,7 @@ public class BossMonster {
     public BossMonster(Hp hp) {
         validate(hp);
         this.hp = hp;
-        this.appearance = DEFAULT; 
+        this.appearance = DEFAULT;
     }
 
     private void validate(Hp hp) {
@@ -33,5 +33,9 @@ public class BossMonster {
 
     public void attack(int damage, Player player) {
         player.takeDamaged(damage);
+    }
+
+    public BossMonsterAppearance getAppearance() {
+        return appearance;
     }
 }

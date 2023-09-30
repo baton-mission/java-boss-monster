@@ -23,4 +23,8 @@ public enum BossMonsterAppearance {
     BossMonsterAppearance(String appearance) {
         this.appearance = appearance;
     }
+
+    public String getAppearance() {
+        return appearance;
+    }
 }
