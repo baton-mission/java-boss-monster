@@ -19,11 +19,11 @@ public final class CurrentBossHp {
 
     public CurrentBossHp attackedBy(AttackType attackType) {
         int bossHpFromAttack = attackType.attack(currentBossHp);
-        int currentBossHp = setBossHpNotToUnderMin(bossHpFromAttack);
+        int currentBossHp = calculateBossHpNotToUnderMin(bossHpFromAttack);
         return new CurrentBossHp(currentBossHp);
     }
 
-    private int setBossHpNotToUnderMin(int bossHpFromAttack) {
+    private int calculateBossHpNotToUnderMin(int bossHpFromAttack) {
         return Math.max(BOSS_ZERO_HP, bossHpFromAttack);
     }
 

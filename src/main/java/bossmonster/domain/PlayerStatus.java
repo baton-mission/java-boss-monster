@@ -44,7 +44,7 @@ public class PlayerStatus {
     }
 
     public int getPlayerHp() {
-        return playerHp.getPlayerHp();
+        return playerHp.getCurrentPlayerHp();
     }
 
     public int getPlayerMp() {
