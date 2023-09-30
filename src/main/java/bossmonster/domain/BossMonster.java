@@ -35,6 +35,13 @@ public class BossMonster {
         }
     }
 
+    public boolean isVictory(Player player) {
+        if (player.getHp() == 0) {
+            return true;
+        }
+        return false;
+    }
+
     private void validateBossStatus(int hp) {
         if (hp < 100 || hp > 300) {
             throw new IllegalArgumentException();

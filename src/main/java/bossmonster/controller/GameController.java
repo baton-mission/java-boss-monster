@@ -4,7 +4,6 @@ import bossmonster.AttackType;
 import bossmonster.domain.BossMonster;
 import bossmonster.domain.Player;
 import bossmonster.dto.BattleInfoDto;
-import bossmonster.service.Battle;
 import bossmonster.view.GameView;
 
 import java.util.List;
@@ -15,12 +14,10 @@ public class GameController {
     int turnCount;
     Player player;
     BossMonster bossMonster;
-    Battle battle;
     GameView gameView;
 
     public void play() {
         turnCount = 1;
-        battle = new Battle();
         gameView = new GameView();
 
         progressInitialSetting();
@@ -82,14 +79,14 @@ public class GameController {
             int attackTypeNum = gameView.printPlayerPhaseView(battleInfoDto, turnCount);
             AttackType attackType = new AttackType(attackTypeNum);
             player.attackBossMonster(bossMonster, attackType);
-            if (battle.isVictory(bossMonster)) {
+            if (player.isVictory(bossMonster)) {
                 endGameByVictory(battleInfoDto, turnCount);
                 break;
             }
 
             int bossDamage = bossMonster.attackPlayer(player);
             gameView.printBossPhaseView(bossDamage);
-            if (battle.isDefeat(player)) {
+            if (bossMonster.isVictory(player)) {
                 endGameByDefeat(battleInfoDto, turnCount);
                 break;
             }

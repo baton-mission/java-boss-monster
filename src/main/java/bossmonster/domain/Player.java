@@ -62,6 +62,13 @@ public class Player {
         }
     }
 
+    public boolean isVictory(BossMonster bossMonster) {
+        if (bossMonster.getHp() == 0) {
+            return true;
+        }
+        return false;
+    }
+
     private void validatePlayerName(String name) {
         if (name.length() > 5) {
             throw new IllegalArgumentException();
