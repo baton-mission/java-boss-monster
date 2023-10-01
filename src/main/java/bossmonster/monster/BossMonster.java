@@ -3,6 +3,8 @@ package bossmonster.monster;
 import static bossmonster.monster.BossMonsterAppearance.*;
 import static bossmonster.utils.ErrorMessage.*;
 
+import java.util.List;
+
 import bossmonster.Hp;
 import bossmonster.player.Player;
 
@@ -35,7 +37,13 @@ public class BossMonster {
         player.takeDamaged(damage);
     }
 
-    public BossMonsterAppearance getAppearance() {
-        return appearance;
+    public List<Integer> hpAndInitialHp() {
+        int hp = this.hp.getHp();
+        int initialHp = this.hp.getInitialHp();
+        return List.of(hp, initialHp);
+    }
+
+    public String appearance() {
+        return appearance.getAppearance();
     }
 }

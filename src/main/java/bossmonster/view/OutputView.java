@@ -2,14 +2,23 @@ package bossmonster.view;
 
 import java.util.Map;
 
+import bossmonster.dto.BossMonsterInfo;
+
 public class OutputView {
 
     public static void printStartMessage() {
         System.out.println("보스 레이드를 시작합니다!");
     }
 
-    public static void printBossMonsterInfo(Map<String, Integer> info) {
-        System.out.printf("BOSS HP [%d/%d]\n", info.get("hp"), info.get("initialHp"));
+    public static void printBossMonsterInfo(BossMonsterInfo info) {
+        System.out.printf("BOSS HP [%d/%d]\n", info.getHp(), info.getInitialHp());
+        printThinBoundary();
+        System.out.println(info.getAppearance());
+        printThinBoundary();
+    }
+
+    private static void printThinBoundary() {
+        System.out.println("____________________________");
     }
 
     public static void printPlayerInfo(String name, Map<String, Integer> info) {
@@ -20,16 +29,8 @@ public class OutputView {
         System.out.printf("%s HP [%d/%d] MP [%d/%d]\n", name, hp, initialHp, mp, initialMp);
     }
 
-    public static void printBossMonsterAppearance(String appearance) {
-        System.out.println(appearance);
-    }
-
     public static void printBoldBoundary() {
         System.out.println("============================");
-    }
-
-    public static void printThinBoundary() {
-        System.out.println("____________________________");
     }
 
     public static void printPlayerAttackResult(String attackName, int damage) {
