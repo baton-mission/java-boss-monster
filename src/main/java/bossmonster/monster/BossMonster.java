@@ -38,7 +38,7 @@ public class BossMonster {
     }
 
     public boolean isDead() {
-        return hp.isZero();
+        return hp.isNegative();
     }
 
     public List<Integer> hpAndInitialHp() {

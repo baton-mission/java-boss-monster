@@ -32,7 +32,7 @@ public class Stat {
         return List.of(hp.getHp(), hp.getInitialHp(), mp.getMp(), mp.getInitialMp());
     }
 
-    public boolean isHpZero() {
-        return hp.isZero();
+    public boolean isHpNegative() {
+        return hp.isNegative();
     }
 }
