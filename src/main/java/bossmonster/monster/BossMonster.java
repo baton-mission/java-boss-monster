@@ -41,6 +41,10 @@ public class BossMonster {
         return hp.isNegative();
     }
 
+    public void changeAppearance(BossMonsterAppearance appearance) {
+        this.appearance = appearance;
+    }
+
     public List<Integer> hpAndInitialHp() {
         return List.of(hp.getHp(), hp.getInitialHp());
     }
