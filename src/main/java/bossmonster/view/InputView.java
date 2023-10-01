@@ -1,51 +1,81 @@
 package bossmonster.view;
 
-import java.util.Scanner;
-
 import bossmonster.AttackType;
 import bossmonster.domain.BossMonster;
 import bossmonster.domain.Player;
 
-public class InputView {
-    private static Scanner scan = new Scanner(System.in);
+public class OutputView {
 
-    public int inputBossHp() {
-        System.out.println("Enter boss monster's health : ");
-        try {
-            return BossMonster.validateBossHp(Integer.parseInt(scan.nextLine()));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return inputBossHp();
-        }
+    public static void bossDefault(BossMonster bossMonster, Player player) {
+        System.out.println("============================");
+        System.out.println("BOSS HP [" + bossMonster.getCurrentHp() + "/" +
+                bossMonster.getMaxHp() + "]");
+        System.out.println("____________________________");
+        System.lineSeparator();
+        System.out.println("   ^-^");
+        System.out.println(" / 0 0 \\");
+        System.out.println("(   \"   )");
+        System.out.println(" \\  -  /");
+        System.out.println("  - ^ -");
+        System.lineSeparator();
+        System.out.println("____________________________");
+        System.lineSeparator();
+        System.out.println(player.getName() + " HP [" + player.getCurrentHp()
+                + "/" + player.getMaxHp() + "] MP [" + player.getCurrentMp() + "/"
+                + player.getMaxMp() + "]");
     }
 
-    public String inputPlayerName() {
-        System.out.println("Enter Player's name : ");
-        try {
-            return Player.validateName(scan.next().trim());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return inputPlayerName();
-        }
+    public static void bossSad(BossMonster bossMonster, Player player) {
+        System.out.println("============================");
+        System.out.println("BOSS HP [" + bossMonster.getCurrentHp() + "/" +
+                bossMonster.getMaxHp() + "]");
+        System.out.println("____________________________");
+        System.lineSeparator();
+        System.out.println("   ^-^");
+        System.out.println(" / x x \\");
+        System.out.println("(   \"\\   )");
+        System.out.println(" \\  ^  /");
+        System.out.println("  - ^ -");
+        System.lineSeparator();
+        System.out.println("____________________________");
+        System.lineSeparator();
+        System.out.println(player.getName() + " HP [" + player.getCurrentHp()
+                + "/" + player.getMaxHp() + "] MP [" + player.getCurrentMp() + "/"
+                + player.getMaxMp() + "]");
     }
 
-    public int[] inputHpMp() {
-        System.out.println("Enter Players HP and MP : ");
-        try {
-            return Player.validatesumOfHpMp(scan.nextInt(), scan.nextInt());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return inputHpMp();
-        }
+    public static void bossHappy(BossMonster bossMonster, Player player) {
+        System.out.println("============================");
+        System.out.println("BOSS HP [" + bossMonster.getCurrentHp() + "/" +
+                bossMonster.getMaxHp() + "]");
+        System.out.println("____________________________");
+        System.lineSeparator();
+        System.out.println("   ^-^");
+        System.out.println(" / ^ ^ \\");
+        System.out.println("(   \"   )");
+        System.out.println(" \\  -  /");
+        System.out.println("  - ^ -");
+        System.lineSeparator();
+        System.out.println("____________________________");
+        System.lineSeparator();
+        System.out.println(player.getName() + " HP [" + player.getCurrentHp()
+                + "/" + player.getMaxHp() + "] MP [" + player.getCurrentMp() + "/"
+                + player.getMaxMp() + "]");
     }
 
-    public AttackType inputAttackType() {
-        System.out.println("1 : Physical Attack    2 : Magical Attack");
-        try {
-            return AttackType.validateTypeNum(scan.nextInt());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return inputAttackType();
-        }
+    public static void playerWin(Player player, int count) { // shoild i get name by string?
+        System.out.println(player.getName() + "won after " + count + " turn");
+    }
+
+    public static void bossMonsterWin(Player player, int count) {
+        System.out.println(player.getName() + " lost after " + count + " turn");
+    }
+
+    public static void damageByBossMonster(int damage) {
+        System.out.println("Attack by boss (damage : " + damage + ")");
+    }
+
+    public static void damageByPlayer(AttackType attackType) {
+        System.out.println("Magical Attack! (damage : " + attackType.getDamage() + ")");
     }
 }
