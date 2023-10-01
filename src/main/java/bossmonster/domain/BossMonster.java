@@ -23,7 +23,11 @@ public class BossMonster {
         return this.maxHp;
     }
 
-    public int attack() {
-        return rand.nextInt(19) + 1;
+    public static int validateBossHp(int hp) {
+        if (hp > MAX_HP_SIZE || hp < MIN_HP_SIZE) {
+            throw new IllegalArgumentException(
+                    "[Error] Boss monster's health should be in between 100 to 300");
+        }
+        return hp;
     }
 }
