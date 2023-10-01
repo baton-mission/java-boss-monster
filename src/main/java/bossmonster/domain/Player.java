@@ -63,4 +63,8 @@ public class Player{
 
         return attacktype.getDamage();
     }
+
+    public void attacked(int bossDamage) {
+        this.currentHp -= bossDamage;
+    }
 }
