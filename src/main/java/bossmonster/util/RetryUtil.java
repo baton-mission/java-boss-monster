@@ -1,8 +1,6 @@
 package bossmonster.util;
 
 
-import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -45,31 +43,6 @@ public final class RetryUtil {
         } catch (IllegalArgumentException e) {
             OUTPUT_VIEW.printExceptionMessage(e.getMessage());
             return read(function, input);
-        }
-    }
-
-
-    /**
-     * 매개변수 T U, 반환값 R
-     */
-    public static <T, U, R> R read(BiFunction<T, U, R> function, T t, U u) {
-        try {
-            return function.apply(t, u);
-        } catch (IllegalArgumentException e) {
-            OUTPUT_VIEW.printExceptionMessage(e.getMessage());
-            return read(function, t, u);
-        }
-    }
-
-    /**
-     * 매개변수 T U, 반환값 X
-     */
-    public static <T, U> void read(BiConsumer<T, U> function, T t, U u) {
-        try {
-            function.accept(t, u);
-        } catch (IllegalArgumentException e) {
-            OUTPUT_VIEW.printExceptionMessage(e.getMessage());
-            read(function, t, u);
         }
     }
 

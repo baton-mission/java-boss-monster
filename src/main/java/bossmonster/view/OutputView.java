@@ -88,11 +88,6 @@ public enum OutputView {
         return String.format(BOSS_HP_STATUS_FORMAT, currentBossHp, initialBossHp);
     }
 
-    /**
-     * 마법 공격을 했습니다. (입힌 데미지: 20)
-     * <p>
-     * dori 님이 6번의 전투 끝에 보스 몬스터를 잡았습니다.
-     */
     public void printBossDeadMessage(BossAttackDto bossDeadResponseDto) {
         printPlayerAttackMessage(bossDeadResponseDto.getAttackTypeName(), bossDeadResponseDto.getAttackDamage());
         printEmptyLine();
@@ -103,28 +98,6 @@ public enum OutputView {
     private void printPlayerAttackMessage(String attackTypeName, int attackDamage) {
         System.out.printf(ATTACK_MESSAGE_FORMAT, attackTypeName, attackDamage);
     }
-
-    /**
-     * /**
-     * * 물리 공격을 했습니다. (입힌 데미지: 10)
-     * * 보스가 공격 했습니다. (입힌 데미지: 16)
-     * *
-     * * ============================
-     * * BOSS HP [290/300]
-     * * ____________________________
-     * *    ^-^
-     * *  / ^ ^ \
-     * * (   "   )
-     * *  \  3  /
-     * *   - ^ -
-     * * ____________________________
-     * *
-     * * dori HP [0/10] MP [190/190]
-     * * ============================
-     * *
-     * * dori의 HP가 0이 되었습니다.
-     * * 보스 레이드에 실패했습니다.
-     */
 
     public void printPlayerDeadMessage(PlayerBossInfoDto playerDeadResponseDto) {
         printPlayerAttackMessage(playerDeadResponseDto.getAttackTypeName(), playerDeadResponseDto.getAttackDamage());
@@ -146,25 +119,6 @@ public enum OutputView {
         System.out.printf("보스가 공격 했습니다. (입힌 데미지: %d)\n", bossAttackDamage);
     }
 
-    /**
-     * 물리 공격을 했습니다. (입힌 데미지: 10)
-     * 보스가 공격 했습니다. (입힌 데미지: 10)
-     * <p>
-     * ============================
-     * BOSS HP [30/100]
-     * ____________________________
-     * ^-^
-     * / x x \
-     * (   "\  )
-     * \  ^  /
-     * - ^ -
-     * ____________________________
-     * <p>
-     * dori HP [50/100] MP [20/100]
-     * ============================
-     *
-     * @param playerBossInfoResponseDto
-     */
     public void printGameCurrentStatus(PlayerBossInfoDto playerBossInfoResponseDto) {
         printPlayerAttackMessage(playerBossInfoResponseDto.getAttackTypeName(), playerBossInfoResponseDto.getAttackDamage());
         printBossAttackMessage(playerBossInfoResponseDto.getBossAttackDamage());
