@@ -2,12 +2,12 @@ package bossmonster;
 
 public class Hp {
 
-    private final int initialHp;
     private int hp;
+    private final int initialHp;
 
     public Hp(int hp) {
-        this.initialHp = hp;
         this.hp = hp;
+        this.initialHp = hp;
     }
 
     public boolean isOutOfRange(int min, int max) {
@@ -18,11 +18,11 @@ public class Hp {
         hp -= damage;
     }
 
-    public int getInitialHp() {
-        return initialHp;
-    }
-
     public int getHp() {
         return hp;
+    }
+
+    public int getInitialHp() {
+        return initialHp;
     }
 }

@@ -4,12 +4,12 @@ import bossmonster.utils.ErrorMessage;
 
 public class Mp {
 
-    private final int initialMp;
     private int mp;
+    private final int initialMp;
 
     public Mp(int mp) {
-        this.initialMp = mp;
         this.mp = mp;
+        this.initialMp = mp;
     }
 
     public int getMp() {
