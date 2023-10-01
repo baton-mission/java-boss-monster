@@ -67,4 +67,9 @@ public class Player{
     public void attacked(int bossDamage) {
         this.currentHp -= bossDamage;
     }
+
+    public boolean isDead(){
+        if(this.currentHp <= 0) return true;
+        return false;
+    }
 }
