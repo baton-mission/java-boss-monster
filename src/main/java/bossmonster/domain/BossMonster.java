@@ -34,4 +34,8 @@ public class BossMonster {
     public int attack() {
         return rand.nextInt(19) + 1;
     }
+
+    public void attacked(int playerDamage) {
+        this.currentHp -= playerDamage;
+    }
 }
