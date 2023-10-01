@@ -38,9 +38,7 @@ public class BossMonster {
     }
 
     public List<Integer> hpAndInitialHp() {
-        int hp = this.hp.getHp();
-        int initialHp = this.hp.getInitialHp();
-        return List.of(hp, initialHp);
+        return List.of(hp.getHp(), hp.getInitialHp());
     }
 
     public String appearance() {
