@@ -43,12 +43,12 @@ public class OutputView {
         System.out.printf("보스가 공격 했습니다. (입힌 데미지: %d)\n", bossMonsterDamage);
     }
 
-    public static void printWinningMessage(String playerName, int numberOfTurns) {
-        System.out.printf("%s 님이 %d번의 전투 끝에 보스 몬스터를 잡았습니다.\n", playerName, numberOfTurns);
+    public static void printWinningMessage(PlayerInfo info, int numberOfTurns) {
+        System.out.printf("%s 님이 %d번의 전투 끝에 보스 몬스터를 잡았습니다.\n", info.getName(), numberOfTurns);
     }
 
-    public static void printDefeatMessage(String playerName) {
-        System.out.printf("%s의 HP가 0이 되었습니다.\n", playerName);
+    public static void printDefeatMessage(PlayerInfo info) {
+        System.out.printf("%s의 HP가 %d이 되었습니다.\n", info.getName(), info.getHp());
         System.out.println("보스 레이드에 실패했습니다.");
     }
 }

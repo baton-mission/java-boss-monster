@@ -45,11 +45,11 @@ public class Player {
         return stat.isHpNegative();
     }
 
-    public String name() {
-        return name.getName();
-    }
-
     public List<Integer> stat() {
         return stat.hpAndInitialHpAndMpAndInitialMp();
+    }
+
+    public String name() {
+        return name.getName();
     }
 }
