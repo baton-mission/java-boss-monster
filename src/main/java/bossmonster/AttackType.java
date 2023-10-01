@@ -30,4 +30,13 @@ public enum AttackType {
     public int getReGenMp() {
         return this.reGenMp;
     }
+
+    public static AttackType validateTypeNum(int userInput) {
+        for (AttackType attackType : AttackType.values()) {
+            if (userInput == attackType.getTypeNum()) {
+                return attackType;
+            }
+        }
+        throw new IllegalArgumentException("[Error] Plz choose from given option!");
+    }
 }
