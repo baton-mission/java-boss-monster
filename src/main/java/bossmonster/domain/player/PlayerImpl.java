@@ -50,12 +50,16 @@ public class PlayerImpl
             BossMonster bossMonster,
             PlayerAttackOption attackOption
     ) {
-        if (!playerMp.hasEnoughMpForAttack(attackOption.getNeedMp())) {
-            throw new IllegalStateException("공격을 수행하기 위한 플레이어의 MP가 부족합니다.");
-        }
+        checkEnoughMp(attackOption.getNeedMp());
 
         playerMp.decreaseCurrentMp(attackOption.getNeedMp());
         bossMonster.takeDamage(attackOption.getDamage());
         playerMp.increaseCurrentMp(attackOption.getRecoveryMp());
+    }
+
+    private void checkEnoughMp(int needMp) {
+        if (!playerMp.hasEnoughMpForAttack(needMp)) {
+            throw new IllegalStateException("공격을 수행하기 위한 플레이어의 MP가 부족합니다.");
+        }
     }
 }
