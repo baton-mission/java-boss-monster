@@ -62,4 +62,20 @@ public class OutputView {
                 + "/" + player.getMaxHp() + "] MP [" + player.getCurrentMp() + "/"
                 + player.getMaxMp() + "]");
     }
+
+    public static void playerWin(Player player, int count) { // shoild i get name by string?
+        System.out.println(player.getName() + "won after " + count + " turn");
+    }
+
+    public static void bossMonsterWin(Player player, int count) {
+        System.out.println(player.getName() + " lost after " + count + " turn");
+    }
+
+    public static void damageByBossMonster(int damage) {
+        System.out.println("Attack by boss (damage : " + damage + ")");
+    }
+
+    public static void damageByPlayer(AttackType attackType) {
+        System.out.println("Magical Attack! (damage : " + attackType.getDamage() + ")");
+    }
 }
