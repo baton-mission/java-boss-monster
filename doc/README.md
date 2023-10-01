@@ -1,0 +1,12 @@
+- player, bossmonster 정의하기
+  - 죽은 상태, maxHP, maxMP, currentHP, currentMP
+- 공격 타입  enum 정의하기
+- input 받기, 검증하기 **예외처리**
+- player가 공격할때의 method
+- player가 공격 받을 때의 method
+- bossmonster가 공격할때의 method
+- bossmonster가 공격 받을 때의 method
+- 기본 bossmonster 출력
+- 웃는 bossmonster 출력
+- x x bossmonster 출력
+- 만들 객체들로 controller 구성하기
