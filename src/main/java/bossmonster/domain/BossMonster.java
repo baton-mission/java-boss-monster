@@ -30,4 +30,8 @@ public class BossMonster {
         }
         return hp;
     }
+
+    public int attack() {
+        return rand.nextInt(19) + 1;
+    }
 }
