@@ -37,4 +37,20 @@ public class Player{
     public String getName(){
         return this.name;
     }
+    
+    public static int[] validatesumOfHpMp(int hp, int mp) {
+        if(hp + mp != SUM_OF_HP_MP){
+            throw new IllegalArgumentException("[Error] Sum of Hp and Mp should be 200");
+        }
+        int[] hpMp = {hp, mp};
+        return hpMp;
+    }
+
+    public static String validateName(String inputName) {
+        if(inputName.length() > MAX_NAME_SIZE){
+            throw new IllegalArgumentException(
+                "[Error] size of name should be less than 6");
+        }
+        return inputName;
+    }
 }
