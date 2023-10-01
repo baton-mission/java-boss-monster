@@ -38,4 +38,10 @@ public class BossMonster {
     public void attacked(int playerDamage) {
         this.currentHp -= playerDamage;
     }
+
+    public boolean isDead() {
+        if (currentHp <= 0)
+            return true;
+        return false;
+    }
 }
