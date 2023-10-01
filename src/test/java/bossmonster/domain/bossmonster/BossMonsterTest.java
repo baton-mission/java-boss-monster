@@ -1,20 +1,44 @@
 package bossmonster.domain.bossmonster;
 
 import bossmonster.domain.bossmonster.dto.BossMonsterInfo;
+import bossmonster.domain.player.*;
+import bossmonster.domain.player.dto.PlayerInfo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static bossmonster.domain.bossmonster.constant.BossMonsterOption.BOSS_MONSTER_MAXIMUM_RANDOM_DAMAGE_LIMIT;
+import static bossmonster.domain.bossmonster.constant.BossMonsterOption.BOSS_MONSTER_MINIMUM_RANDOM_DAMAGE_LIMIT;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("보스 몬스터 기능 테스트")
 class BossMonsterTest {
-    
-    @DisplayName("[성공 테스트] 보스 몬스터의 생존 확인 시 현재 HP가 1 이상이면, true를 반환한다.")
+
+    @DisplayName("[성공 테스트] 보스 몬스터 피격 시, 주어진 데미지 만큼 현재 HP가 감소한다.")
     @Test
-    void 보스_몬스터_생존_판단_테스트() throws Exception {
+    void takeDamage_test() throws Exception {
         // Given
-        BossMonsterHp bossMonsterHp = new BossMonsterHp(200);
-        BossMonster bossMonster = setBossMonster(bossMonsterHp);
+        int firstHp = 200;
+        int damage = 100;
+        BossMonster bossMonster = new BossMonsterImpl(
+                new BossMonsterHp(firstHp)
+        );
+
+        // When
+        bossMonster.takeDamage(damage);
+        BossMonsterInfo bossMonsterInfo = bossMonster.getBossMonsterInfo();
+
+        // Then
+        assertThat(bossMonsterInfo.getCurrentBossMonsterHp()).isEqualTo(firstHp - damage);
+    }
+
+    @DisplayName("[성공 테스트] 보스 몬스터의 생존 여부를 조회 시, 현재 HP가 1 이상이면 true를 반환한다.")
+    @Test
+    void is_alive_true_test() throws Exception {
+        // Given
+        int currentHp = 200;
+        BossMonster bossMonster = new BossMonsterImpl(
+                new BossMonsterHp(currentHp)
+        );
 
         // When
         boolean alive = bossMonster.isAlive();
@@ -23,40 +47,66 @@ class BossMonsterTest {
         assertThat(alive).isTrue();
     }
 
-    @DisplayName("[성공 테스트] 보스 몬스터의 생존 확인 시 현재 HP가 0 이하이면, false를 반환한다.")
+    @DisplayName("[성공 테스트] 보스 몬스터의 생존 여부를 조회 시, 현재 HP가 0 이하이면 false를 반환한다.")
     @Test
-    void 보스_몬스터_미생존_판단_테스트() throws Exception {
+    void is_alive_false_test() throws Exception {
         // Given
-        int bossMonsterFirstHp = 100;
-        BossMonsterHp bossMonsterHp = new BossMonsterHp(bossMonsterFirstHp);
-        BossMonster bossMonster = setBossMonster(bossMonsterHp);
-        int bigDamage = 200;
+        int currentHp = 200;
+        int damageHigherThanCurrentHp = 300;
+        BossMonster bossMonster = new BossMonsterImpl(
+                new BossMonsterHp(currentHp)
+        );
 
         // When
-        bossMonster.takeDamage(bigDamage);
+        bossMonster.takeDamage(damageHigherThanCurrentHp);
         boolean alive = bossMonster.isAlive();
 
         // Then
         assertThat(alive).isFalse();
     }
 
-    @DisplayName("[성공 테스트] 보스 몬스터 정보 조회시, 보스 몬스터의 정보를 반환한다.")
+    @DisplayName("[성공 테스트] 보스 몬스터 정보 조회시, 보스 몬스터의 최대 HP & 현재 HP 정보가 담긴 객체를 반환한다.")
     @Test
-    void 보스_몬스터_정보_반환() throws Exception {
+    void get_boss_monster_info_test() throws Exception {
         // Given
-        int setHp = 200;
-        BossMonsterHp bossMonsterHp = new BossMonsterHp(setHp);
-        BossMonster bossMonster = setBossMonster(bossMonsterHp);
+        int firstHp = 200;
+        int damage = 30;
+        BossMonster bossMonster = new BossMonsterImpl(
+                new BossMonsterHp(firstHp)
+        );
 
         // When
+        bossMonster.takeDamage(damage);
         BossMonsterInfo bossMonsterInfo = bossMonster.getBossMonsterInfo();
 
         // Then
-        assertThat(bossMonsterInfo.getMaximumBossMonsterHp()).isEqualTo(setHp);
-        assertThat(bossMonsterInfo.getCurrentBossMonsterHp()).isEqualTo(setHp);
+        assertThat(bossMonsterInfo.getMaximumBossMonsterHp()).isEqualTo(firstHp);
+        assertThat(bossMonsterInfo.getCurrentBossMonsterHp()).isEqualTo(firstHp - damage);
     }
 
-    private BossMonster setBossMonster(BossMonsterHp bossMonsterHp) {
-        return new BossMonsterImpl(bossMonsterHp);
+    @DisplayName("[성공 테스트] 보스 몬스터가 플레이어를 공격 시, 0 ~ 20 범위의 랜덤한 데미지 만큼 플레이어의 현재 HP를 감소시킨다.")
+    @Test
+    void attack_player_test() throws Exception {
+        // Given
+        int playerFirstHp = 100;
+        Player player = new PlayerImpl(
+                new PlayerName("test"),
+                new PlayerHp(playerFirstHp),
+                new PlayerMp(200 - playerFirstHp)
+        );
+        BossMonster bossMonster = new BossMonsterImpl(
+                new BossMonsterHp(200)
+        );
+
+        // When
+        bossMonster.attackPlayer(player);
+        PlayerInfo playerInfo = player.getPlayerInfo();
+
+        // Then
+        assertThat(playerInfo.getPlayerCurrentHp())
+                .isBetween(
+                        playerFirstHp - BOSS_MONSTER_MAXIMUM_RANDOM_DAMAGE_LIMIT,
+                        playerFirstHp - BOSS_MONSTER_MINIMUM_RANDOM_DAMAGE_LIMIT
+                );
     }
 }

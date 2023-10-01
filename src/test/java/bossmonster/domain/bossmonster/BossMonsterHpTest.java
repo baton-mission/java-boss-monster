@@ -8,23 +8,23 @@ import static org.assertj.core.api.Assertions.*;
 @DisplayName("보스 몬스터 HP 기능 테스트")
 class BossMonsterHpTest {
 
-    @DisplayName("[성공 테스트] BossMonsterHp 인스턴스 생성 시 유효 범위의 HP를 전달하면, 인스턴스가 생성된다.")
+    @DisplayName("[성공 테스트] 보스 몬스터 HP 설정 시, 유효한 범위의 값이 입력되면 인스턴스가 정상적으로 생성된다.")
     @Test
-    void 유효한_범위_HP_테스트() throws Exception {
+    void validate_hp_test() throws Exception {
         // Given
-        int validHp = 200;
+        int validateHp = 200;
 
         // When
-        BossMonsterHp createBossMonsterHp = new BossMonsterHp(validHp);
+        BossMonsterHp bossMonsterHp = new BossMonsterHp(validateHp);
 
         // Then
-        assertThat(createBossMonsterHp.getMaximumHp()).isEqualTo(validHp);
-        assertThat(createBossMonsterHp.getCurrentHp()).isEqualTo(validHp);
+        assertThat(bossMonsterHp.getMaximumHp()).isEqualTo(validateHp);
+        assertThat(bossMonsterHp.getCurrentHp()).isEqualTo(validateHp);
     }
 
-    @DisplayName("[예외 테스트] BossMonsterHp 인스턴스 생성 시 유효 범위보다 낮은 HP를 전달하면, 예외가 발생한다.")
+    @DisplayName("[예외 테스트] 보스 몬스터 HP 설정 시, 유효한 범위 보다 낮은 값이 입력되면 예외가 발생한다.")
     @Test
-    void 유효범위보다_낮은_HP_테스트() throws Exception {
+    void validate_lower_hp_test() throws Exception {
         // Given
         int invalidHp = 50;
 
@@ -37,9 +37,9 @@ class BossMonsterHpTest {
                 .hasMessage("Invalid Boss Monster HP");
     }
 
-    @DisplayName("[예외 테스트] BossMonsterHp 인스턴스 생성 시 유효 범위보다 높은 HP를 전달하면, 예외가 발생한다.")
+    @DisplayName("[예외 테스트] 보스 몬스터 HP 설정 시, 유효한 범위 보다 높은 값이 입력되면 예외가 발생한다.")
     @Test
-    void 유효범위보다_높은_HP_테스트() throws Exception {
+    void validate_higher_hp_test() throws Exception {
         // Given
         int invalidHp = 1000;
 
@@ -52,12 +52,12 @@ class BossMonsterHpTest {
                 .hasMessage("Invalid Boss Monster HP");
     }
 
-    @DisplayName("[성공 테스트] 주어진 감소량 만큼, 현재 HP를 감소시킨다.")
+    @DisplayName("[성공 테스트] 주어진 감소량 만큼 현재 HP를 감소시킨다.")
     @Test
-    void 현재_HP_감소_테스트() throws Exception {
+    void decrease_current_hp_test() throws Exception {
         // Given
         int firstHp = 200;
-        BossMonsterHp bossMonsterHp = setBossMonsterHp(firstHp);
+        BossMonsterHp bossMonsterHp = new BossMonsterHp(firstHp);
         int decreaseHp = 128;
 
         // When
@@ -67,36 +67,35 @@ class BossMonsterHpTest {
         assertThat(bossMonsterHp.getCurrentHp()).isEqualTo(firstHp - decreaseHp);
     }
 
-    @DisplayName("[성공 테스트] 현재 HP가 0 이하라면 true를 반환한다.")
+    @DisplayName("[성공 테스트] 현재 HP의 0 이하 여부를 조회시, 0 이하가 맞으면 true를 반환한다.")
     @Test
-    void 현재_HP가_0이하면_true_반환_검증_테스트() throws Exception {
+    void is_current_hp_zero_or_below_true() throws Exception {
         // Given
-        int firstHp = 100;
-        BossMonsterHp bossMonsterHp = setBossMonsterHp(firstHp);
+        int currentHp = 100;
+        int bigDecreaseHp = 200;
+        BossMonsterHp bossMonsterHp = new BossMonsterHp(currentHp);
 
         // When
-        bossMonsterHp.decreaseCurrentHp(firstHp + 100);
+        bossMonsterHp.decreaseCurrentHp(bigDecreaseHp);
         boolean currentHpZeroOrBelow = bossMonsterHp.isCurrentHpZeroOrBelow();
 
         // Then
         assertThat(currentHpZeroOrBelow).isTrue();
     }
 
-    @DisplayName("[성공 테스트] 현재 HP가 0 이하가 아니라면 false를 반환한다.")
+    @DisplayName("[성공 테스트] 현재 HP의 0 이하 여부를 조회시, 0 이하가 아니면 false를 반환한다.")
     @Test
-    void 현재_HP가_0이하가_아니라면_false_반환_검증_테스트() throws Exception {
+    void is_current_hp_zero_or_below_false() throws Exception {
         // Given
-        int firstHp = 100;
-        BossMonsterHp bossMonsterHp = setBossMonsterHp(firstHp);
+        int currentHp = 100;
+        int smallDecreaseHp = 50;
+        BossMonsterHp bossMonsterHp = new BossMonsterHp(currentHp);
 
         // When
+        bossMonsterHp.decreaseCurrentHp(smallDecreaseHp);
         boolean currentHpZeroOrBelow = bossMonsterHp.isCurrentHpZeroOrBelow();
 
         // Then
         assertThat(currentHpZeroOrBelow).isFalse();
-    }
-
-    private BossMonsterHp setBossMonsterHp(int hp) {
-        return new BossMonsterHp(hp);
     }
 }
