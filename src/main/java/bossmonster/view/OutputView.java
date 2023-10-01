@@ -3,6 +3,7 @@ package bossmonster.view;
 import java.util.Map;
 
 import bossmonster.dto.BossMonsterInfo;
+import bossmonster.dto.PlayerInfo;
 
 public class OutputView {
 
@@ -21,12 +22,13 @@ public class OutputView {
         System.out.println("____________________________");
     }
 
-    public static void printPlayerInfo(String name, Map<String, Integer> info) {
-        Integer hp = info.get("hp");
-        Integer mp = info.get("mp");
-        Integer initialHp = info.get("initialHp");
-        Integer initialMp = info.get("initialMp");
-        System.out.printf("%s HP [%d/%d] MP [%d/%d]\n", name, hp, initialHp, mp, initialMp);
+    public static void printPlayerInfo(PlayerInfo info) {
+        System.out.printf("%s HP [%d/%d] MP [%d/%d]\n",
+                info.getName(),
+                info.getHp(),
+                info.getInitialHp(),
+                info.getMp(),
+                info.getInitialMp());
     }
 
     public static void printBoldBoundary() {

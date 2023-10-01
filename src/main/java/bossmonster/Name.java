@@ -11,4 +11,8 @@ public class Name {
     public boolean isLengthOver(int maxLength) {
         return name.length() > maxLength;
     }
+
+    public String getName() {
+        return name;
+    }
 }

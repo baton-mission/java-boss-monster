@@ -1,5 +1,7 @@
 package bossmonster;
 
+import java.util.List;
+
 public class Stat {
 
     private Hp hp;
@@ -24,5 +26,9 @@ public class Stat {
 
     public void reduceByDamage(int damage) {
         hp.reduceByDamage(damage);
+    }
+
+    public List<Integer> hpAndInitialHpAndMpAndInitialMp() {
+        return List.of(hp.getHp(), hp.getInitialHp(), mp.getMp(), mp.getInitialMp());
     }
 }

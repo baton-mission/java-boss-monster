@@ -2,6 +2,8 @@ package bossmonster.player;
 
 import static bossmonster.utils.ErrorMessage.*;
 
+import java.util.List;
+
 import bossmonster.Attack;
 import bossmonster.Name;
 import bossmonster.Stat;
@@ -37,5 +39,13 @@ public class Player {
 
     public void takeDamaged(int damage) {
         stat.reduceByDamage(damage);
+    }
+
+    public String name() {
+        return name.getName();
+    }
+
+    public List<Integer> stat() {
+        return stat.hpAndInitialHpAndMpAndInitialMp();
     }
 }
