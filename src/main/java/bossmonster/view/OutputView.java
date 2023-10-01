@@ -43,8 +43,8 @@ public class OutputView {
         System.out.printf("보스가 공격 했습니다. (입힌 데미지: %d)\n", bossMonsterDamage);
     }
 
-    public static void printWinningMessage(String name, int count) {
-        System.out.printf("%s 님이 %d번의 전투 끝에 보스 몬스터를 잡았습니다.\n", name, count);
+    public static void printWinningMessage(String name, int numberOfTurns) {
+        System.out.printf("%s 님이 %d번의 전투 끝에 보스 몬스터를 잡았습니다.\n", name, numberOfTurns);
     }
 
     public static void printDefeatMessage(String name) {
