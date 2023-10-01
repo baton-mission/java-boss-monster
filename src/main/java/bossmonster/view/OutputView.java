@@ -41,6 +41,12 @@ public enum OutputView {
     private static final String ATTACK_MESSAGE_FORMAT = "%s을 했습니다. (입힌 데미지: %d)\n";
     private static final String BOSS_DEAD_MESSAGE_FORMAT = "%s 님이 %d번의 전투 끝에 보스 몬스터를 잡았습니다.\n";
 
+    private static final String BOSS_ATTACK_MESSAGE_FORMAT = "보스가 공격 했습니다. (입힌 데미지: %d)\n";
+
+    private static final String PLAYER_DEAD_MESSAGE_FORMAT = "%s의 HP가 0이 되었습니다.\n";
+
+    private static final String BOSS_GAME_FAIL_MESSAGE = "보스 레이드에 실패했습니다.\n";
+
     public void printExceptionMessage(String message) {
         System.out.printf(EXCEPTION_MESSAGE_FORMAT, message);
     }
@@ -111,12 +117,12 @@ public enum OutputView {
                 playerDeadResponseDto.getPlayerCurrentMp(),
                 playerDeadResponseDto.getPlayerInitialMp(),
                 BOSS_WIN_FACE);
-        System.out.printf("%s의 HP가 0이 되었습니다.\n", playerDeadResponseDto.getPlayerName());
-        System.out.println("보스 레이드에 실패했습니다.");
+        System.out.printf(PLAYER_DEAD_MESSAGE_FORMAT, playerDeadResponseDto.getPlayerName());
+        System.out.println(BOSS_GAME_FAIL_MESSAGE);
     }
 
     private void printBossAttackMessage(int bossAttackDamage) {
-        System.out.printf("보스가 공격 했습니다. (입힌 데미지: %d)\n", bossAttackDamage);
+        System.out.printf(BOSS_ATTACK_MESSAGE_FORMAT, bossAttackDamage);
     }
 
     public void printGameCurrentStatus(PlayerBossInfoDto playerBossInfoResponseDto) {
