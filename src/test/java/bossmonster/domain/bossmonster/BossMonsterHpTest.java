@@ -3,7 +3,9 @@ package bossmonster.domain.bossmonster;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static bossmonster.util.BossMonsterFixture.createBossMonsterHp;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 @DisplayName("보스 몬스터 HP 기능 테스트")
 class BossMonsterHpTest {
@@ -57,7 +59,7 @@ class BossMonsterHpTest {
     void decrease_current_hp_test() throws Exception {
         // Given
         int firstHp = 200;
-        BossMonsterHp bossMonsterHp = new BossMonsterHp(firstHp);
+        BossMonsterHp bossMonsterHp = createBossMonsterHp(firstHp);
         int decreaseHp = 128;
 
         // When
@@ -73,7 +75,7 @@ class BossMonsterHpTest {
         // Given
         int currentHp = 100;
         int bigDecreaseHp = 200;
-        BossMonsterHp bossMonsterHp = new BossMonsterHp(currentHp);
+        BossMonsterHp bossMonsterHp = createBossMonsterHp(currentHp);
 
         // When
         bossMonsterHp.decreaseCurrentHp(bigDecreaseHp);
@@ -89,7 +91,7 @@ class BossMonsterHpTest {
         // Given
         int currentHp = 100;
         int smallDecreaseHp = 50;
-        BossMonsterHp bossMonsterHp = new BossMonsterHp(currentHp);
+        BossMonsterHp bossMonsterHp = createBossMonsterHp(currentHp);
 
         // When
         bossMonsterHp.decreaseCurrentHp(smallDecreaseHp);

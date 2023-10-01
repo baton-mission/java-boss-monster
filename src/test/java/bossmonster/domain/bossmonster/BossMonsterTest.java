@@ -1,13 +1,15 @@
 package bossmonster.domain.bossmonster;
 
 import bossmonster.domain.bossmonster.dto.BossMonsterInfo;
-import bossmonster.domain.player.*;
+import bossmonster.domain.player.Player;
 import bossmonster.domain.player.dto.PlayerInfo;
+import bossmonster.util.PlayerFixture;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static bossmonster.domain.bossmonster.constant.BossMonsterOption.BOSS_MONSTER_MAXIMUM_RANDOM_DAMAGE_LIMIT;
 import static bossmonster.domain.bossmonster.constant.BossMonsterOption.BOSS_MONSTER_MINIMUM_RANDOM_DAMAGE_LIMIT;
+import static bossmonster.util.BossMonsterFixture.createBossMonster;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("보스 몬스터 기능 테스트")
@@ -19,9 +21,7 @@ class BossMonsterTest {
         // Given
         int firstHp = 200;
         int damage = 100;
-        BossMonster bossMonster = new BossMonsterImpl(
-                new BossMonsterHp(firstHp)
-        );
+        BossMonster bossMonster = createBossMonster(firstHp);
 
         // When
         bossMonster.takeDamage(damage);
@@ -36,9 +36,7 @@ class BossMonsterTest {
     void is_alive_true_test() throws Exception {
         // Given
         int currentHp = 200;
-        BossMonster bossMonster = new BossMonsterImpl(
-                new BossMonsterHp(currentHp)
-        );
+        BossMonster bossMonster = createBossMonster(currentHp);
 
         // When
         boolean alive = bossMonster.isAlive();
@@ -53,9 +51,7 @@ class BossMonsterTest {
         // Given
         int currentHp = 200;
         int damageHigherThanCurrentHp = 300;
-        BossMonster bossMonster = new BossMonsterImpl(
-                new BossMonsterHp(currentHp)
-        );
+        BossMonster bossMonster = createBossMonster(currentHp);
 
         // When
         bossMonster.takeDamage(damageHigherThanCurrentHp);
@@ -71,9 +67,7 @@ class BossMonsterTest {
         // Given
         int firstHp = 200;
         int damage = 30;
-        BossMonster bossMonster = new BossMonsterImpl(
-                new BossMonsterHp(firstHp)
-        );
+        BossMonster bossMonster = createBossMonster(firstHp);
 
         // When
         bossMonster.takeDamage(damage);
@@ -89,14 +83,8 @@ class BossMonsterTest {
     void attack_player_test() throws Exception {
         // Given
         int playerFirstHp = 100;
-        Player player = new PlayerImpl(
-                new PlayerName("test"),
-                new PlayerHp(playerFirstHp),
-                new PlayerMp(200 - playerFirstHp)
-        );
-        BossMonster bossMonster = new BossMonsterImpl(
-                new BossMonsterHp(200)
-        );
+        Player player = PlayerFixture.createPlayer(playerFirstHp);
+        BossMonster bossMonster = createBossMonster();
 
         // When
         bossMonster.attackPlayer(player);
