@@ -31,4 +31,8 @@ public class Stat {
     public List<Integer> hpAndInitialHpAndMpAndInitialMp() {
         return List.of(hp.getHp(), hp.getInitialHp(), mp.getMp(), mp.getInitialMp());
     }
+
+    public boolean isHpZero() {
+        return hp.isZero();
+    }
 }

@@ -37,6 +37,10 @@ public class BossMonster {
         player.takeDamaged(damage);
     }
 
+    public boolean isDead() {
+        return hp.isZero();
+    }
+
     public List<Integer> hpAndInitialHp() {
         return List.of(hp.getHp(), hp.getInitialHp());
     }

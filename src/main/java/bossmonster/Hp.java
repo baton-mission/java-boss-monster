@@ -18,6 +18,10 @@ public class Hp {
         hp -= damage;
     }
 
+    public boolean isZero() {
+        return hp == 0;
+    }
+
     public int getHp() {
         return hp;
     }

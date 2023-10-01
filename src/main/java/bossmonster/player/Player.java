@@ -41,6 +41,10 @@ public class Player {
         stat.reduceByDamage(damage);
     }
 
+    public boolean isDead() {
+        return stat.isHpZero();
+    }
+
     public String name() {
         return name.getName();
     }
