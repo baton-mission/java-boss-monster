@@ -11,8 +11,7 @@ import bossmonster.dto.response.AttackTypeDto;
 import bossmonster.util.InputConverter;
 import bossmonster.util.InputValidator;
 
-public enum InputView {
-    INSTANCE;
+public class InputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String BOSS_HP_MESSAGE = "보스 몬스터의 HP를 입력해주세요.";
@@ -20,6 +19,17 @@ public enum InputView {
     private static final String PLAYER_HP_AND_MP_MESSAGE = "플레이어의 HP와 MP를 입력해주세요.(,로 구분)";
     private static final String ATTACK_TYPE_MESSAGE = "어떤 공격을 하시겠습니까?";
     private static final String ATTACK_TYPE_FORMAT = "%d. %s\n";
+
+    private static class LazyHolder {
+        private static final InputView INSTANCE = new InputView();
+    }
+
+    private InputView() {
+    }
+
+    public static InputView getInstance() {
+        return LazyHolder.INSTANCE;
+    }
 
     public BossHpDto scanBossHp() {
         System.out.println(BOSS_HP_MESSAGE);

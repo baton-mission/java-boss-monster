@@ -4,8 +4,7 @@ import bossmonster.dto.response.BossAndPlayerStatusDto;
 import bossmonster.dto.response.BossAttackDto;
 import bossmonster.dto.response.PlayerBossInfoDto;
 
-public enum OutputView {
-    INSTANCE;
+public class OutputView {
 
     private static final String EXCEPTION_MESSAGE_FORMAT = "[ERROR] %s\n";
     private static final String BOSS_GAME_START_MESSAGE = "보스 레이드를 시작합니다!";
@@ -19,33 +18,37 @@ public enum OutputView {
             "\n" +
             "%s\n" +
             "============================\n";
-
     private static final String BOSS_INIT_FACE = "   ^-^\n" +
             " / 0 0 \\\n" +
             "(   \"   )\n" +
             " \\  -  /\n" +
             "  - ^ -\n";
-
     private static final String BOSS_WIN_FACE = "   ^-^\n" +
             " / ^ ^ \\\n" +
             "(   \"   )\n" +
             " \\  3  /\n" +
             "  - ^ -\n";
-
     private static final String BOSS_BAD_FACE = "   ^-^\n" +
             " / x x \\\n" +
             "(   \"\\  )\n" +
             " \\  ^  /\n" +
             "  - ^ -\n";
-
     private static final String ATTACK_MESSAGE_FORMAT = "%s을 했습니다. (입힌 데미지: %d)\n";
     private static final String BOSS_DEAD_MESSAGE_FORMAT = "%s 님이 %d번의 전투 끝에 보스 몬스터를 잡았습니다.\n";
-
     private static final String BOSS_ATTACK_MESSAGE_FORMAT = "보스가 공격 했습니다. (입힌 데미지: %d)\n";
-
     private static final String PLAYER_DEAD_MESSAGE_FORMAT = "%s의 HP가 0이 되었습니다.\n";
-
     private static final String BOSS_GAME_FAIL_MESSAGE = "보스 레이드에 실패했습니다.\n";
+
+    private static class LazyHolder {
+        private static final OutputView INSTANCE = new OutputView();
+    }
+
+    private OutputView() {
+    }
+
+    public static OutputView getInstance() {
+        return LazyHolder.INSTANCE;
+    }
 
     public void printExceptionMessage(String message) {
         System.out.printf(EXCEPTION_MESSAGE_FORMAT, message);

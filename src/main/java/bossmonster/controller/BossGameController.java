@@ -22,12 +22,13 @@ import bossmonster.view.OutputView;
 
 public class BossGameController {
 
-    private static final InputView INPUT_VIEW = InputView.INSTANCE;
-    private static final OutputView OUTPUT_VIEW = OutputView.INSTANCE;
-
+    private final InputView inputView;
+    private final OutputView outputView;
     private final DamageStrategy damageStrategy;
 
-    public BossGameController(DamageStrategy damageStrategy) {
+    public BossGameController(InputView inputView, OutputView outputView, DamageStrategy damageStrategy) {
+        this.inputView = inputView;
+        this.outputView = outputView;
         this.damageStrategy = damageStrategy;
     }
 
@@ -61,17 +62,17 @@ public class BossGameController {
 
     private void printPlayerDeadMessage(BossGame bossGame, AttackType attackType, int bossDamage) {
         PlayerBossInfoDto playerBossInfoResponseDto = new PlayerBossInfoDto(attackType, bossDamage, bossGame);
-        OUTPUT_VIEW.printPlayerDeadMessage(playerBossInfoResponseDto);
+        outputView.printPlayerDeadMessage(playerBossInfoResponseDto);
     }
 
     private void printBossDeadMessage(BossGame bossGame, AttackType attackType) {
         BossAttackDto bossDeadResponseDto = new BossAttackDto(attackType, bossGame);
-        OUTPUT_VIEW.printBossDeadMessage(bossDeadResponseDto);
+        outputView.printBossDeadMessage(bossDeadResponseDto);
     }
 
     private void printGameCurrentStatus(BossGame bossGame, AttackType attackType, int bossDamage) {
         PlayerBossInfoDto playerBossInfoResponseDto = new PlayerBossInfoDto(attackType, bossDamage, bossGame);
-        OUTPUT_VIEW.printGameCurrentStatus(playerBossInfoResponseDto);
+        outputView.printGameCurrentStatus(playerBossInfoResponseDto);
     }
 
     private AttackType getAttackType(BossGame bossGame) {
@@ -87,17 +88,17 @@ public class BossGameController {
 
     private AttackType scanAttackType() {
         AttackTypeDto attackTypeDto = new AttackTypeDto();
-        AttackTypeCodeDto attackTypeCodeDto = read(INPUT_VIEW::scanAttackType, attackTypeDto);
+        AttackTypeCodeDto attackTypeCodeDto = read(inputView::scanAttackType, attackTypeDto);
         return AttackType.fromCode(attackTypeCodeDto.getAttackTypeCode());
     }
 
     private static void printStartMessage() {
-        OUTPUT_VIEW.printStartMessage();
+        outputView.printStartMessage();
     }
 
     private void printBossAndPlayerStatus(Boss boss, Player player) {
         BossAndPlayerStatusDto bossAndPlayerStatusDto = new BossAndPlayerStatusDto(boss, player);
-        OUTPUT_VIEW.printBossAndPlayerStatus(bossAndPlayerStatusDto);
+        outputView.printBossAndPlayerStatus(bossAndPlayerStatusDto);
     }
 
     private Player createPlayer() {
@@ -107,17 +108,17 @@ public class BossGameController {
     }
 
     private PlayerStatus createPlayerStatus() {
-        PlayerStatusInfoDto statusInfoDto = read(INPUT_VIEW::scanPlayerHpAndMp);
+        PlayerStatusInfoDto statusInfoDto = read(inputView::scanPlayerHpAndMp);
         return PlayerStatus.from(statusInfoDto.getPlayerHp(), statusInfoDto.getPlayerMp());
     }
 
     private PlayerName createPlayerName() {
-        PlayerNameDto playerNameDto = read(INPUT_VIEW::scanPlayerNames);
+        PlayerNameDto playerNameDto = read(inputView::scanPlayerNames);
         return PlayerName.from(playerNameDto.getPlayerName());
     }
 
     private Boss createBoss() {
-        BossHpDto bossHpDto = read(INPUT_VIEW::scanBossHp);
+        BossHpDto bossHpDto = read(inputView::scanBossHp);
         return Boss.from(bossHpDto.getHp(), damageStrategy);
     }
 }
