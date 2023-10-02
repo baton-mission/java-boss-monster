@@ -1,6 +1,6 @@
 package bossmonster.controller;
 
-import static bossmonster.util.RetryUtil.read;
+import static bossmonster.util.RetryUtil.retryOnFail;
 
 import bossmonster.domain.AttackType;
 import bossmonster.domain.Boss;
@@ -33,8 +33,8 @@ public class BossGameController {
     }
 
     public void run() {
-        Boss boss = read(this::createBoss);
-        Player player = read(this::createPlayer);
+        Boss boss = retryOnFail(this::initBoss);
+        Player player = retryOnFail(this::createPlayer);
         printStartMessage();
         printBossAndPlayerStatus(boss, player);
         BossGame bossGame = BossGame.init(boss, player);
@@ -44,7 +44,7 @@ public class BossGameController {
 
     private void playingGame(BossGame bossGame) {
         while (true) {
-            AttackType attackType = read(this::getAttackType, bossGame);
+            AttackType attackType = retryOnFail(this::getAttackType, bossGame);
             bossGame.attackToBossFromPlayer(attackType);
             int bossDamage = bossGame.attackPlayerFromBoss();
 
@@ -83,16 +83,16 @@ public class BossGameController {
 
 
     private AttackType readAttackType() {
-        return read(this::scanAttackType);
+        return retryOnFail(this::scanAttackType);
     }
 
     private AttackType scanAttackType() {
         AttackTypeDto attackTypeDto = new AttackTypeDto();
-        AttackTypeCodeDto attackTypeCodeDto = read(inputView::scanAttackType, attackTypeDto);
+        AttackTypeCodeDto attackTypeCodeDto = retryOnFail(inputView::scanAttackType, attackTypeDto);
         return AttackType.fromCode(attackTypeCodeDto.getAttackTypeCode());
     }
 
-    private static void printStartMessage() {
+    private void printStartMessage() {
         outputView.printStartMessage();
     }
 
@@ -102,23 +102,23 @@ public class BossGameController {
     }
 
     private Player createPlayer() {
-        PlayerName playerName = read(this::createPlayerName);
-        PlayerStatus playerStatus = read(this::createPlayerStatus);
+        PlayerName playerName = retryOnFail(this::createPlayerName);
+        PlayerStatus playerStatus = retryOnFail(this::createPlayerStatus);
         return Player.from(playerName, playerStatus);
     }
 
     private PlayerStatus createPlayerStatus() {
-        PlayerStatusInfoDto statusInfoDto = read(inputView::scanPlayerHpAndMp);
+        PlayerStatusInfoDto statusInfoDto = retryOnFail(inputView::scanPlayerHpAndMp);
         return PlayerStatus.from(statusInfoDto.getPlayerHp(), statusInfoDto.getPlayerMp());
     }
 
     private PlayerName createPlayerName() {
-        PlayerNameDto playerNameDto = read(inputView::scanPlayerNames);
+        PlayerNameDto playerNameDto = retryOnFail(inputView::scanPlayerNames);
         return PlayerName.from(playerNameDto.getPlayerName());
     }
 
-    private Boss createBoss() {
-        BossHpDto bossHpDto = read(inputView::scanBossHp);
+    private Boss initBoss() {
+        BossHpDto bossHpDto = retryOnFail(inputView::scanBossHp);
         return Boss.from(bossHpDto.getHp(), damageStrategy);
     }
 }
