@@ -5,7 +5,6 @@ public enum MpStatus {
     REDUCE(30),
     RECOVERY(10);
 
-
     private final int effectValue;
 
     MpStatus(int effectValue) {

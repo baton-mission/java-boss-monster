@@ -5,6 +5,7 @@ import static bossmonster.domain.ExceptionMessage.PLAYER_MP_EXCEPTION_MESSAGE;
 public final class InitialPlayerMp {
 
     private static final int MIN_MP = 0;
+
     private final int initialPlayerMp;
 
     private InitialPlayerMp(int initialPlayerMp) {

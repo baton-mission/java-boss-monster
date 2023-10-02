@@ -11,7 +11,6 @@ public final class ExceptionMessage {
     public static final String SKILL_MP_EXCEPTION_MESSAGE = "스킬 사용에 MP가 부족합니다.";
     public static final String TURN_COUNT_EXCEPTION_MESSAGE = "시도 횟수는 0밑으로 내려갈 수 없습니다.";
 
-
     private ExceptionMessage() {
     }
 }

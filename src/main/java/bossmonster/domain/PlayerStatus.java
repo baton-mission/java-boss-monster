@@ -7,7 +7,6 @@ public class PlayerStatus {
     private static final int TOTAL_SUM = 200;
 
     private final PlayerHp playerHp;
-
     private final PlayerMp playerMp;
 
     private PlayerStatus(PlayerHp playerHp, PlayerMp playerMp) {

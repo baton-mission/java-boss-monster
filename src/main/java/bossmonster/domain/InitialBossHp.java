@@ -8,6 +8,7 @@ public final class InitialBossHp {
 
     private static final int MIN_HP = 100;
     private static final int MAX_HP = 300;
+
     private final int initialBossHp;
 
     private InitialBossHp(int initialBossHp) {

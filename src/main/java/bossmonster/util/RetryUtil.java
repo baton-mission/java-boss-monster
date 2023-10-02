@@ -12,11 +12,11 @@ import bossmonster.view.OutputView;
  * 주로 사용자로부터 입력 값을 받아들이기에 대부분인 Return 값이 존재한다.
  */
 public final class RetryUtil {
+
     private static final OutputView OUTPUT_VIEW = OutputView.getInstance();
 
     private RetryUtil() {
     }
-
 
     /**
      * 매개변수 X, 반환값 O
@@ -45,6 +45,4 @@ public final class RetryUtil {
             return retryOnFail(function, input);
         }
     }
-
-
 }

@@ -7,6 +7,7 @@ import java.util.Objects;
 public final class CurrentPlayerMp {
 
     private static final int MIN_CURRENT_MP_TO_USE = 0;
+
     private final int currentPlayerMp;
 
     private CurrentPlayerMp(int currentPlayerMp) {

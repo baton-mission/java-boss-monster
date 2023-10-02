@@ -14,7 +14,6 @@ public class PlayerMp {
         this(CurrentPlayerMp.from(playerMp), InitialPlayerMp.from(playerMp));
     }
 
-
     public static PlayerMp from(int playerMp) {
         return new PlayerMp(playerMp);
     }
@@ -34,5 +33,4 @@ public class PlayerMp {
     public void effectedMpByAttackType(AttackType attackType) {
         this.currentPlayerMp = currentPlayerMp.effectMpByAttackType(attackType, initialPlayerMp);
     }
-
 }

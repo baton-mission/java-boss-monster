@@ -7,7 +7,6 @@ public class Boss {
     private static final int NO_DAMAGE = 0;
 
     private final BossHp bossHp;
-
     private final DamageStrategy damageStrategy;
 
     private Boss(BossHp bossHp, DamageStrategy damageStrategy) {

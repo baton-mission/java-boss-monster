@@ -3,9 +3,7 @@ package bossmonster.domain;
 public class BossGame {
 
     private final Boss boss;
-
     private final Player player;
-
     private TurnCount turnCount;
 
     private BossGame(Boss boss, Player player, TurnCount turnCount) {
@@ -78,6 +76,4 @@ public class BossGame {
     public int getPlayerInitialMp() {
         return player.getInitialPlayerMp();
     }
-
-
 }

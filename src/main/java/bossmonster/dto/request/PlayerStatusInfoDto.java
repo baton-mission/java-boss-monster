@@ -19,7 +19,6 @@ public class PlayerStatusInfoDto {
         this(playerHpAndMp.get(PLAYER_HP_INDEX), playerHpAndMp.get(PLAYER_MP_INDEX));
     }
 
-
     public int getPlayerHp() {
         return playerHp;
     }
@@ -27,5 +26,4 @@ public class PlayerStatusInfoDto {
     public int getPlayerMp() {
         return playerMp;
     }
-
 }

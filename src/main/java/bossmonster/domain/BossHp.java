@@ -14,7 +14,6 @@ public class BossHp {
         this(CurrentBossHp.from(bossHp), InitialBossHp.from(bossHp));
     }
 
-
     public static BossHp from(int bossHp) {
         return new BossHp(bossHp);
     }
@@ -30,7 +29,6 @@ public class BossHp {
     public void attackedBy(AttackType attackType) {
         this.currentBossHp = currentBossHp.attackedBy(attackType);
     }
-
 
     public boolean isUnderZero() {
         return currentBossHp.isUnderZero();

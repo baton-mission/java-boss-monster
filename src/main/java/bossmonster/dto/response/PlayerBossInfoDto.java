@@ -5,25 +5,15 @@ import bossmonster.domain.BossGame;
 
 public class PlayerBossInfoDto {
 
-    // 공격 타입
     private final String attackTypeName;
-    // 공격 데미지
     private final int attackDamage;
-    // 보스 공격 데미지
     private final int bossAttackDamage;
-    // 보스 현재 체력
     private final int bossCurrentHp;
-    // 보스 초기 체력
     private final int bossInitialHp;
-    // 플레이어 이름
     private final String playerName;
-    // 플레이어 현재 hp
     private final int playerCurrentHp;
-    // 플레이어 초기 hp
     private final int playerInitialHp;
-    // 플레이어 현재 mp
     private final int playerCurrentMp;
-    // 플레이어 초기 mp
     private final int playerInitialMp;
 
     public PlayerBossInfoDto(AttackType attackType, int bossAttackDamage, BossGame bossGame) {

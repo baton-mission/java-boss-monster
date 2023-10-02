@@ -14,7 +14,6 @@ public enum AttackType {
     private final int attackTypeCode;
     private final String attackTypeName;
     private final int attackPower;
-
     private final MpStatus mpStatus;
 
     AttackType(int attackTypeCode, String attackTypeName, int attackPower, MpStatus mpStatus) {
@@ -31,6 +30,13 @@ public enum AttackType {
                 .orElseThrow(() -> new IllegalArgumentException(ATTACK_TYPE_EXCEPTION_MESSAGE));
     }
 
+    public int effectMp(int playerMp) {
+        return this.mpStatus.effect(playerMp);
+    }
+
+    public int attack(int bossHp) {
+        return bossHp - this.attackPower;
+    }
 
     public int getAttackTypeCode() {
         return attackTypeCode;
@@ -38,14 +44,6 @@ public enum AttackType {
 
     public String getAttackTypeName() {
         return attackTypeName;
-    }
-
-    public int effectMp(int playerMp) {
-        return this.mpStatus.effect(playerMp);
-    }
-
-    public int attack(int bossHp) {
-        return bossHp - this.attackPower;
     }
 
     public int getAttackDamage() {

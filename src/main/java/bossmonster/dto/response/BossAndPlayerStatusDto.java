@@ -7,17 +7,11 @@ public class BossAndPlayerStatusDto {
 
     private final int initialBossHp;
     private final int currentBossHp;
-
     private final String playerName;
-
     private final int initialPlayerHp;
-
     private final int initialPlayerMp;
-
     private final int currentPlayerHp;
-
     private final int currentPlayerMp;
-
 
     public BossAndPlayerStatusDto(Boss boss, Player player) {
         this.initialBossHp = boss.getInitialBossHp();

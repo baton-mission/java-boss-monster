@@ -6,12 +6,8 @@ import bossmonster.domain.BossGame;
 public class BossAttackDto {
 
     private final String attackTypeName;
-
     private final int attackDamage;
-
-
     private final String attackerPlayerName;
-
     private final int totalTryCount;
 
     public BossAttackDto(AttackType attackType, BossGame bossGame) {

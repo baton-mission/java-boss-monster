@@ -6,22 +6,18 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public final class InputConverter {
-    // 콤마 구분자
+
     private static final String COMMA_DELIMITER = ",";
 
-
     private static List<Integer> splitToInt(String format, String input) {
-        // TODO : 원하는 구분자에 맞게 구현
         return Stream.of(input.split(format))
                 .map(Integer::parseInt)
                 .collect(toList());
     }
 
-
     private static int parseToInt(String input) {
         return Integer.parseInt(input);
     }
-
 
     public static int convertBossHp(String rawBossHp) {
         return parseToInt(rawBossHp);

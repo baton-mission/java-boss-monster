@@ -5,6 +5,7 @@ import static bossmonster.domain.ExceptionMessage.PLAYER_HP_EXCEPTION_MESSAGE;
 public final class InitialPlayerHp {
 
     private static final int MIN_HP = 0;
+
     private final int initialPlayerHp;
 
     private InitialPlayerHp(int initialPlayerHp) {

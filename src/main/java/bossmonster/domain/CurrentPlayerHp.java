@@ -5,6 +5,7 @@ import java.util.Objects;
 public final class CurrentPlayerHp {
 
     private static final int MIN_HP = 0;
+
     private final int currentPlayerHp;
 
     private CurrentPlayerHp(int currentPlayerHp) {
@@ -24,7 +25,6 @@ public final class CurrentPlayerHp {
         int currentPlayerHp = calculatePlayerHpNotToUnderMin(effectedPlayerHp);
         return new CurrentPlayerHp(currentPlayerHp);
     }
-
 
     private int calculatePlayerHpNotToUnderMin(int effectedPlayerHp) {
         return Math.max(MIN_HP, effectedPlayerHp);

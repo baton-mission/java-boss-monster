@@ -1,6 +1,7 @@
 package bossmonster.domain;
 
 public class PlayerHp {
+
     private CurrentPlayerHp currentPlayerHp;
     private final InitialPlayerHp initialPlayerHp;
 
@@ -13,11 +14,9 @@ public class PlayerHp {
         this(CurrentPlayerHp.from(playerHp), InitialPlayerHp.from(playerHp));
     }
 
-
     public static PlayerHp from(int playerHp) {
         return new PlayerHp(playerHp);
     }
-
 
     public int plus(PlayerMp playerMp) {
         return playerMp.plusWithHp(currentPlayerHp.getCurrentPlayerHp());
@@ -38,6 +37,4 @@ public class PlayerHp {
     public boolean isUnderMinHp() {
         return currentPlayerHp.isUnderMinHp();
     }
-
-
 }

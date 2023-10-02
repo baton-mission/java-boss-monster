@@ -41,6 +41,36 @@ public class BossGameController {
         playingGame(bossGame);
     }
 
+    private Boss initBoss() {
+        BossHpDto bossHpDto = retryOnFail(inputView::scanBossHp);
+        return Boss.from(bossHpDto.getHp(), damageStrategy);
+    }
+
+    private Player createPlayer() {
+        PlayerName playerName = retryOnFail(this::createPlayerName);
+        PlayerStatus playerStatus = retryOnFail(this::createPlayerStatus);
+        return Player.from(playerName, playerStatus);
+    }
+
+    private PlayerName createPlayerName() {
+        PlayerNameDto playerNameDto = retryOnFail(inputView::scanPlayerNames);
+        return PlayerName.from(playerNameDto.getPlayerName());
+    }
+
+    private PlayerStatus createPlayerStatus() {
+        PlayerStatusInfoDto statusInfoDto = retryOnFail(inputView::scanPlayerHpAndMp);
+        return PlayerStatus.from(statusInfoDto.getPlayerHp(), statusInfoDto.getPlayerMp());
+    }
+
+    private void printStartMessage() {
+        outputView.printStartMessage();
+    }
+
+    private void printBossAndPlayerStatus(Boss boss, Player player) {
+        BossAndPlayerStatusDto bossAndPlayerStatusDto = new BossAndPlayerStatusDto(boss, player);
+        outputView.printBossAndPlayerStatus(bossAndPlayerStatusDto);
+    }
+
 
     private void playingGame(BossGame bossGame) {
         while (true) {
@@ -60,27 +90,11 @@ public class BossGameController {
         }
     }
 
-    private void printPlayerDeadMessage(BossGame bossGame, AttackType attackType, int bossDamage) {
-        PlayerBossInfoDto playerBossInfoResponseDto = new PlayerBossInfoDto(attackType, bossDamage, bossGame);
-        outputView.printPlayerDeadMessage(playerBossInfoResponseDto);
-    }
-
-    private void printBossDeadMessage(BossGame bossGame, AttackType attackType) {
-        BossAttackDto bossDeadResponseDto = new BossAttackDto(attackType, bossGame);
-        outputView.printBossDeadMessage(bossDeadResponseDto);
-    }
-
-    private void printGameCurrentStatus(BossGame bossGame, AttackType attackType, int bossDamage) {
-        PlayerBossInfoDto playerBossInfoResponseDto = new PlayerBossInfoDto(attackType, bossDamage, bossGame);
-        outputView.printGameCurrentStatus(playerBossInfoResponseDto);
-    }
-
     private AttackType getAttackType(BossGame bossGame) {
         AttackType attackType = readAttackType();
         bossGame.effectPlayerMpWith(attackType);
         return attackType;
     }
-
 
     private AttackType readAttackType() {
         return retryOnFail(this::scanAttackType);
@@ -92,33 +106,19 @@ public class BossGameController {
         return AttackType.fromCode(attackTypeCodeDto.getAttackTypeCode());
     }
 
-    private void printStartMessage() {
-        outputView.printStartMessage();
+    private void printBossDeadMessage(BossGame bossGame, AttackType attackType) {
+        BossAttackDto bossDeadResponseDto = new BossAttackDto(attackType, bossGame);
+        outputView.printBossDeadMessage(bossDeadResponseDto);
     }
 
-    private void printBossAndPlayerStatus(Boss boss, Player player) {
-        BossAndPlayerStatusDto bossAndPlayerStatusDto = new BossAndPlayerStatusDto(boss, player);
-        outputView.printBossAndPlayerStatus(bossAndPlayerStatusDto);
+    private void printPlayerDeadMessage(BossGame bossGame, AttackType attackType, int bossDamage) {
+        PlayerBossInfoDto playerBossInfoResponseDto = new PlayerBossInfoDto(attackType, bossDamage, bossGame);
+        outputView.printPlayerDeadMessage(playerBossInfoResponseDto);
     }
 
-    private Player createPlayer() {
-        PlayerName playerName = retryOnFail(this::createPlayerName);
-        PlayerStatus playerStatus = retryOnFail(this::createPlayerStatus);
-        return Player.from(playerName, playerStatus);
-    }
 
-    private PlayerStatus createPlayerStatus() {
-        PlayerStatusInfoDto statusInfoDto = retryOnFail(inputView::scanPlayerHpAndMp);
-        return PlayerStatus.from(statusInfoDto.getPlayerHp(), statusInfoDto.getPlayerMp());
-    }
-
-    private PlayerName createPlayerName() {
-        PlayerNameDto playerNameDto = retryOnFail(inputView::scanPlayerNames);
-        return PlayerName.from(playerNameDto.getPlayerName());
-    }
-
-    private Boss initBoss() {
-        BossHpDto bossHpDto = retryOnFail(inputView::scanBossHp);
-        return Boss.from(bossHpDto.getHp(), damageStrategy);
+    private void printGameCurrentStatus(BossGame bossGame, AttackType attackType, int bossDamage) {
+        PlayerBossInfoDto playerBossInfoResponseDto = new PlayerBossInfoDto(attackType, bossDamage, bossGame);
+        outputView.printGameCurrentStatus(playerBossInfoResponseDto);
     }
 }

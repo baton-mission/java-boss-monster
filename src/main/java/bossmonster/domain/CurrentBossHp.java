@@ -5,6 +5,7 @@ import java.util.Objects;
 public final class CurrentBossHp {
 
     private static final int BOSS_ZERO_HP = 0;
+
     private final int currentBossHp;
 
     private CurrentBossHp(int currentBossHp) {
