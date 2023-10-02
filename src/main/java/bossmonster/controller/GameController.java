@@ -1,6 +1,7 @@
 package bossmonster.controller;
 
 import bossmonster.domain.Boss;
+import bossmonster.domain.Player;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
 
@@ -16,9 +17,16 @@ public class GameController {
 
     public void run() {
         Boss boss = getBossHP();
+        Player player = getPlayerInfo();
     }
 
     private Boss getBossHP() {
         return inputView.getBossHP();
+    }
+
+    private Player getPlayerInfo() {
+        String name = inputView.getPlayerName();
+        int[] playerStatus = inputView.getPlayerStatus();
+        return new Player(name, playerStatus[0], playerStatus[1]);
     }
 }
