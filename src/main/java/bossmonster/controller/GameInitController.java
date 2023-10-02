@@ -8,18 +8,31 @@ import bossmonster.domain.player.PlayerHpAndMp;
 import bossmonster.domain.player.PlayerImpl;
 import bossmonster.domain.player.PlayerName;
 import bossmonster.domain.scanner.GameInputScanner;
-import bossmonster.domain.scanner.GameInputScannerImpl;
 import bossmonster.view.ErrorView;
 import bossmonster.view.InputView;
+import bossmonster.view.ResultView;
 
 import static bossmonster.domain.player.constant.PlayerOption.INPUT_PLAYER_HP_AND_MP_DELIMITER;
-import static bossmonster.view.constant.ErrorMessage.*;
-import static bossmonster.view.constant.InputMessage.*;
+import static bossmonster.view.message.ErrorMessage.*;
+import static bossmonster.view.message.InputMessage.*;
 
 public class GameInitController {
-    private final GameInputScanner scanner = new GameInputScannerImpl();
-    private final InputView inputView = new InputView();
-    private final ErrorView errorView = new ErrorView();
+    private final GameInputScanner scanner;
+    private final InputView inputView;
+    private final ResultView resultView;
+    private final ErrorView errorView;
+
+    public GameInitController(
+            GameInputScanner scanner,
+            InputView inputView,
+            ResultView resultView,
+            ErrorView errorView
+    ) {
+        this.scanner = scanner;
+        this.inputView = inputView;
+        this.resultView = resultView;
+        this.errorView = errorView;
+    }
 
     public BossMonster initBossMonster() {
         BossMonsterHp bossMonsterHp = initBossMonsterHP();
