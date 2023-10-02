@@ -4,12 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import bossmonster.Attack;
-import bossmonster.Hp;
-import bossmonster.Mp;
-import bossmonster.Name;
 import bossmonster.RandomBossMonsterDamageGenerator;
 import bossmonster.Service;
-import bossmonster.Stat;
 import bossmonster.dto.BossMonsterInfo;
 import bossmonster.dto.PlayerInfo;
 import bossmonster.monster.BossMonster;
@@ -51,23 +47,16 @@ public class Controller {
     private void battle(BossMonster bossMonster, Player player, int numberOfTurns) {
         numberOfTurns++;
 
-        // 보스 몬스터와 플레이어의 정보
         printInfo(bossMonster, player);
 
-        // 플레이어 공격
-        Attack playerAttack = Attack.of(InputView.readPlayerAttackNumber(scanner));
-        player.attack(playerAttack, bossMonster);
-        OutputView.printPlayerAttackResult(playerAttack.getName(), playerAttack.getDamage());
+        playerAttack(bossMonster, player);
 
         if (bossMonster.isDead()) {
             OutputView.printWinningMessage(PlayerInfo.from(player), numberOfTurns);
             return;
         }
 
-        // 보스 몬스터 공격
-        int bossMonsterAttackDamage = bossMonsterDamageGenerator.generateDamage();
-        bossMonster.attack(bossMonsterAttackDamage, player);
-        OutputView.printBossMonsterAttackResult(bossMonsterAttackDamage);
+        bossMonsterAttack(bossMonster, player);
 
         if (player.isDead()) {
             bossMonster.changeAppearance(BossMonsterAppearance.HAPPY);
@@ -84,5 +73,17 @@ public class Controller {
         OutputView.printBossMonsterInfo(BossMonsterInfo.from(bossMonster));
         OutputView.printPlayerInfo(PlayerInfo.from(player));
         OutputView.printBoldBoundary();
+    }
+
+    private void playerAttack(BossMonster bossMonster, Player player) {
+        int playerAttackNumber = InputView.readPlayerAttackNumber(scanner);
+        Attack playerAttack = service.playerAttack(playerAttackNumber, player, bossMonster);
+        OutputView.printPlayerAttackResult(playerAttack.getName(), playerAttack.getDamage());
+    }
+
+    private void bossMonsterAttack(BossMonster bossMonster, Player player) {
+        int bossMonsterAttackDamage = bossMonsterDamageGenerator.generateDamage();
+        service.bossMonsterAttack(bossMonsterAttackDamage, bossMonster, player);
+        OutputView.printBossMonsterAttackResult(bossMonsterAttackDamage);
     }
 }
