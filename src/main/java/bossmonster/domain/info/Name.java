@@ -1,4 +1,4 @@
-package bossmonster;
+package bossmonster.domain.info;
 
 public class Name {
 

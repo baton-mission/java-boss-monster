@@ -1,4 +1,4 @@
-package bossmonster.monster;
+package bossmonster.domain.monster;
 
 public enum BossMonsterAppearance {
 
@@ -18,7 +18,7 @@ public enum BossMonsterAppearance {
          " \\  ^  /\n" +
          "  - ^ -\n");
 
-    private String appearance;
+    private final String appearance;
 
     BossMonsterAppearance(String appearance) {
         this.appearance = appearance;

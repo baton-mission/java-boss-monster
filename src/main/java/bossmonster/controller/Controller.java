@@ -3,24 +3,24 @@ package bossmonster.controller;
 import java.util.List;
 import java.util.Scanner;
 
-import bossmonster.Attack;
-import bossmonster.RandomBossMonsterDamageGenerator;
+import bossmonster.domain.player.Attack;
+import bossmonster.domain.monster.BossMonsterDamageGenerator;
 import bossmonster.Service;
 import bossmonster.dto.BossMonsterInfo;
 import bossmonster.dto.PlayerInfo;
-import bossmonster.monster.BossMonster;
-import bossmonster.monster.BossMonsterAppearance;
-import bossmonster.player.Player;
+import bossmonster.domain.monster.BossMonster;
+import bossmonster.domain.monster.BossMonsterAppearance;
+import bossmonster.domain.player.Player;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
 
 public class Controller {
 
     private final Scanner scanner;
-    private final RandomBossMonsterDamageGenerator bossMonsterDamageGenerator;
+    private final BossMonsterDamageGenerator bossMonsterDamageGenerator;
     private final Service service;
 
-    public Controller(Scanner scanner, RandomBossMonsterDamageGenerator bossMonsterDamageGenerator, Service service) {
+    public Controller(Scanner scanner, BossMonsterDamageGenerator bossMonsterDamageGenerator, Service service) {
         this.scanner = scanner;
         this.bossMonsterDamageGenerator = bossMonsterDamageGenerator;
         this.service = service;

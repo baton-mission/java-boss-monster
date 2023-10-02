@@ -1,12 +1,12 @@
-package bossmonster.monster;
+package bossmonster.domain.monster;
 
-import static bossmonster.monster.BossMonsterAppearance.*;
+import static bossmonster.domain.monster.BossMonsterAppearance.*;
 import static bossmonster.utils.ErrorMessage.*;
 
 import java.util.List;
 
-import bossmonster.Hp;
-import bossmonster.player.Player;
+import bossmonster.domain.info.Hp;
+import bossmonster.domain.player.Player;
 
 public class BossMonster {
 

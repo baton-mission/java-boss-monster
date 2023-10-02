@@ -1,6 +1,9 @@
-package bossmonster;
+package bossmonster.domain.info;
 
 import java.util.List;
+
+import bossmonster.domain.info.Hp;
+import bossmonster.domain.info.Mp;
 
 public class Stat {
 

@@ -2,7 +2,7 @@ package bossmonster.dto;
 
 import java.util.List;
 
-import bossmonster.monster.BossMonster;
+import bossmonster.domain.monster.BossMonster;
 
 public class BossMonsterInfo {
 

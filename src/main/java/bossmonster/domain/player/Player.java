@@ -1,13 +1,12 @@
-package bossmonster.player;
+package bossmonster.domain.player;
 
 import static bossmonster.utils.ErrorMessage.*;
 
 import java.util.List;
 
-import bossmonster.Attack;
-import bossmonster.Name;
-import bossmonster.Stat;
-import bossmonster.monster.BossMonster;
+import bossmonster.domain.info.Name;
+import bossmonster.domain.info.Stat;
+import bossmonster.domain.monster.BossMonster;
 
 public class Player {
 

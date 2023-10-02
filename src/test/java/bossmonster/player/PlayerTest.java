@@ -1,17 +1,18 @@
 package bossmonster.player;
 
-import static bossmonster.Attack.*;
+import static bossmonster.domain.player.Attack.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import bossmonster.Hp;
-import bossmonster.Mp;
-import bossmonster.Name;
-import bossmonster.Stat;
-import bossmonster.monster.BossMonster;
+import bossmonster.domain.info.Hp;
+import bossmonster.domain.info.Mp;
+import bossmonster.domain.info.Name;
+import bossmonster.domain.info.Stat;
+import bossmonster.domain.monster.BossMonster;
+import bossmonster.domain.player.Player;
 
 class PlayerTest {
 

@@ -1,8 +1,8 @@
-package bossmonster;
+package bossmonster.domain.monster;
 
 import java.util.Random;
 
-public class RandomBossMonsterDamageGenerator {
+public class BossMonsterDamageGenerator {
 
     private static final int MAX_DAMAGE = 20;
 

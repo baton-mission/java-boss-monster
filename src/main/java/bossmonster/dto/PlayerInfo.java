@@ -2,7 +2,7 @@ package bossmonster.dto;
 
 import java.util.List;
 
-import bossmonster.player.Player;
+import bossmonster.domain.player.Player;
 
 public class PlayerInfo {
 

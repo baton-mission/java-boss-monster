@@ -1,4 +1,4 @@
-package bossmonster;
+package bossmonster.domain.player;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
