@@ -8,7 +8,9 @@ public class Main {
     public static void main(String[] args) {
         Controller controller = new Controller(
                 new Scanner(System.in),
-                new RandomBossMonsterDamageGenerator());
+                new RandomBossMonsterDamageGenerator(),
+                new Service()
+        );
         controller.start();
     }
 }

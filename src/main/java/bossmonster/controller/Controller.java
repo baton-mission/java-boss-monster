@@ -8,6 +8,7 @@ import bossmonster.Hp;
 import bossmonster.Mp;
 import bossmonster.Name;
 import bossmonster.RandomBossMonsterDamageGenerator;
+import bossmonster.Service;
 import bossmonster.Stat;
 import bossmonster.dto.BossMonsterInfo;
 import bossmonster.dto.PlayerInfo;
@@ -21,20 +22,30 @@ public class Controller {
 
     private final Scanner scanner;
     private final RandomBossMonsterDamageGenerator bossMonsterDamageGenerator;
+    private final Service service;
 
-    public Controller(Scanner scanner, RandomBossMonsterDamageGenerator bossMonsterDamageGenerator) {
+    public Controller(Scanner scanner, RandomBossMonsterDamageGenerator bossMonsterDamageGenerator, Service service) {
         this.scanner = scanner;
         this.bossMonsterDamageGenerator = bossMonsterDamageGenerator;
+        this.service = service;
     }
 
     public void start() {
-        BossMonster bossMonster = generateBossMonster();
-        Player player = generatePlayer();
-
+        BossMonster bossMonster = getBossMonster();
+        Player player = getPlayer();
         OutputView.printStartMessage();
-
         int numberOfTurns = 0;
         battle(bossMonster, player, numberOfTurns);
+    }
+
+    private BossMonster getBossMonster() {
+        return service.generateBossMonster(InputView.readBossMonsterHp(scanner));
+    }
+
+    private Player getPlayer() {
+        String playerName = InputView.readPlayerName(scanner);
+        List<Integer> playerInitialHpAndMp = InputView.readPlayerInitialHpAndMp(scanner);
+        return service.generatePlayer(playerName, playerInitialHpAndMp);
     }
 
     private void battle(BossMonster bossMonster, Player player, int numberOfTurns) {
@@ -73,18 +84,5 @@ public class Controller {
         OutputView.printBossMonsterInfo(BossMonsterInfo.from(bossMonster));
         OutputView.printPlayerInfo(PlayerInfo.from(player));
         OutputView.printBoldBoundary();
-    }
-
-    private BossMonster generateBossMonster() {
-        Hp bossMonsterHp = new Hp(InputView.readBossMonsterHp(scanner));
-        return new BossMonster(bossMonsterHp);
-    }
-
-    private Player generatePlayer() {
-        String playerName = InputView.readPlayerName(scanner);
-        List<Integer> playerInitialHpAndMp = InputView.readPlayerInitialHpAndMp(scanner);
-        Hp playerHp = new Hp(playerInitialHpAndMp.get(0));
-        Mp playerMp = new Mp(playerInitialHpAndMp.get(1));
-        return new Player(new Name(playerName), new Stat(playerHp, playerMp));
     }
 }
