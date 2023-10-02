@@ -9,6 +9,13 @@ import bossmonster.view.OutputView;
 public class GameController {
     InputView inputView = new InputView();
 
+    public void game() {
+        BossMonster bossMonster = generateBossMonster();
+        Player player = generatePlayer();
+        OutputView.bossDefault(bossMonster, player);
+        playerBossTransaction(player, bossMonster, 1);
+    }
+
     private Player generatePlayer() {
         String name = inputView.inputPlayerName();
         int[] hpMp = inputView.inputHpMp();
