@@ -30,9 +30,6 @@ public class BossGame {
     }
 
     public int attackPlayerFromBoss() {
-        if (isBossDead()) {
-            return boss.zeroDamage();
-        }
         return boss.attackTo(player);
     }
 
@@ -75,4 +72,5 @@ public class BossGame {
     public int getPlayerInitialMp() {
         return player.getInitialPlayerMp();
     }
+
 }
