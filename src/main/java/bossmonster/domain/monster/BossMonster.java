@@ -5,7 +5,7 @@ import static bossmonster.utils.ErrorMessage.*;
 
 import java.util.List;
 
-import bossmonster.domain.info.Hp;
+import bossmonster.domain.characterattributes.Hp;
 import bossmonster.domain.player.Player;
 
 public class BossMonster {

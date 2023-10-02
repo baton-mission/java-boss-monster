@@ -4,8 +4,8 @@ import static bossmonster.utils.ErrorMessage.*;
 
 import java.util.List;
 
-import bossmonster.domain.info.Name;
-import bossmonster.domain.info.Stat;
+import bossmonster.domain.characterattributes.Name;
+import bossmonster.domain.characterattributes.Stat;
 import bossmonster.domain.monster.BossMonster;
 
 public class Player {

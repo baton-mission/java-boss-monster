@@ -5,10 +5,10 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import bossmonster.domain.info.Hp;
-import bossmonster.domain.info.Mp;
-import bossmonster.domain.info.Name;
-import bossmonster.domain.info.Stat;
+import bossmonster.domain.characterattributes.Hp;
+import bossmonster.domain.characterattributes.Mp;
+import bossmonster.domain.characterattributes.Name;
+import bossmonster.domain.characterattributes.Stat;
 import bossmonster.domain.monster.BossMonster;
 import bossmonster.domain.player.Player;
 

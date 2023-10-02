@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import bossmonster.domain.player.Attack;
 import bossmonster.domain.monster.BossMonsterDamageGenerator;
-import bossmonster.Service;
+import bossmonster.service.Service;
 import bossmonster.dto.BossMonsterInfo;
 import bossmonster.dto.PlayerInfo;
 import bossmonster.domain.monster.BossMonster;

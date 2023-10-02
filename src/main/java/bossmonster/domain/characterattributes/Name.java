@@ -1,4 +1,4 @@
-package bossmonster.domain.info;
+package bossmonster.domain.characterattributes;
 
 public class Name {
 
