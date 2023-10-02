@@ -13,34 +13,28 @@ public class GameController {
 
     private final InputView inputView;
     private final OutputView outputView;
+    private final GameStatus status;
     private final GameService gameService;
 
     public GameController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.gameService = new GameService();
+        this.status = new GameStatus();
+        this.gameService = new GameService(status);
     }
 
     public void run() {
         Boss boss = getBossInfo();
         Player player = getPlayerInfo();
         outputView.printSetting(boss, player);
-        GameStatus status = new GameStatus();
         while (boss.isAlive() && player.isAlive()) {
-            AttackType type = playTurnOfPlayer(boss, player);
-            if (boss.isDie()) {
-                outputView.printBossDie(player, status);
-                break;
-            }
-            int bossDamage = playTurnOfBoss(player);
-            if (player.isDie()) {
-                outputView.printPlayerDie(player);
-                break;
-            }
-            status.updateInfo(type, bossDamage);
+            playTurnOfPlayer(boss, player);
+            if (boss.isDie()) break;
+            playTurnOfBoss(player);
+            if (player.isDie()) break;
             outputView.printResult(boss, player, status);
-            status.nextRound();
         }
+        checkWhoIsWin(boss, player);
     }
 
     private Boss getBossInfo() {
@@ -53,16 +47,22 @@ public class GameController {
         return new Player(name, playerStatus[0], playerStatus[1]);
     }
 
-    private AttackType playTurnOfPlayer(Boss boss, Player player) {
-        AttackType type = inputView.getAttackType();
-        gameService.attackToBoss(boss, type);
-        player.updateMana(type);
-        return type;
+    private void playTurnOfPlayer(Boss boss, Player player) {
+        AttackType type = inputView.getAttackType(player);
+        gameService.attackToBoss(boss, player, type);
     }
 
-    private int playTurnOfBoss(Player player) {
+    private void playTurnOfBoss(Player player) {
         int bossDamage = BossWeapon.attack();
-        gameService.attackToPlayer(player, bossDamage);
-        return bossDamage;
+        gameService.attackToPlayer(bossDamage, player);
+    }
+
+    private void checkWhoIsWin(Boss boss, Player player) {
+        if (boss.isDie()) {
+            outputView.printBossDie(player, status);
+        }
+        if (player.isDie()) {
+            outputView.printPlayerDie(player);
+        }
     }
 }

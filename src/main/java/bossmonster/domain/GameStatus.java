@@ -10,15 +10,6 @@ public class GameStatus {
         this.tryCount = 1;
     }
 
-    public void updateInfo(AttackType type, int bossDamage) {
-        this.type = type;
-        this.bossDamage = bossDamage;
-    }
-
-    public void nextRound() {
-        this.tryCount++;
-    }
-
     public int getTryCount() {
         return tryCount;
     }
@@ -33,5 +24,18 @@ public class GameStatus {
 
     public int getBossDamage() {
         return bossDamage;
+    }
+
+    public void updateAttackType(AttackType type) {
+        this.type = type;
+    }
+
+    public void updateBossDamage(int bossDamage) {
+        this.bossDamage = bossDamage;
+        nextRound();
+    }
+
+    private void nextRound() {
+        this.tryCount++;
     }
 }

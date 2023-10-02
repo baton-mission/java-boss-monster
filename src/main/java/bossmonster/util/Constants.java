@@ -20,7 +20,7 @@ public final class Constants {
     public static final String ATTACK_MESSAGE = "%s를 했습니다. (입힌 데미지: %s)\n";
     public static final String BOSS_ATTACK_MESSAGE = "보스가 공격 했습니다. (입힌 데미지: %s)\n";
     public static final String BOSS_DIE_MESSAGE = "%s 님이 %s번의 전투 끝에 보스 몬스터를 잡았습니다.";
-    public static final String ZERO_HP_MESSAGE = " %s의 HP가 0이 되었습니다.\n";
+    public static final String ZERO_HP_MESSAGE = "%s의 HP가 0이 되었습니다.\n";
     public static final String FAIL_MESSAGE = "보스 레이드에 실패했습니다.";
 
     public static final String SETTING_FORMAT =

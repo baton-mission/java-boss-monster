@@ -2,6 +2,7 @@ package bossmonster.view;
 
 import bossmonster.domain.AttackType;
 import bossmonster.domain.Boss;
+import bossmonster.domain.Player;
 import bossmonster.util.ErrorChecker;
 import bossmonster.util.TypeConvertor;
 
@@ -51,14 +52,16 @@ public class InputView {
         }
     }
 
-    public AttackType getAttackType() {
+    public AttackType getAttackType(Player player) {
         System.out.println(ATTACK_INPUT);
         try {
             String command = in.next();
-            return AttackType.findByCommand(command);
+            AttackType attackType = AttackType.findByCommand(command);
+            ErrorChecker.checkMana(player, attackType.getManaCost());
+            return attackType;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return getAttackType();
+            return getAttackType(player);
         }
     }
 }
