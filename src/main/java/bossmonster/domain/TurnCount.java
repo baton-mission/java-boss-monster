@@ -8,8 +8,12 @@ public final class TurnCount {
 
     private static final int MIN_TURN_COUNT = 0;
     private static final int INCREASE_COUNT = 1;
-
+    
     private final int turnCount;
+
+    private TurnCount() {
+        this(MIN_TURN_COUNT);
+    }
 
     private TurnCount(int turnCount) {
         validate(turnCount);
@@ -30,10 +34,6 @@ public final class TurnCount {
         return turnCount < MIN_TURN_COUNT;
     }
 
-    private TurnCount() {
-        this(MIN_TURN_COUNT);
-    }
-
     public static TurnCount init() {
         return new TurnCount();
     }
@@ -44,10 +44,6 @@ public final class TurnCount {
 
     public TurnCount increase() {
         return new TurnCount(turnCount + INCREASE_COUNT);
-    }
-
-    public int getTurnCount() {
-        return turnCount;
     }
 
     @Override
@@ -62,4 +58,9 @@ public final class TurnCount {
     public int hashCode() {
         return Objects.hash(turnCount);
     }
+
+    public int getTurnCount() {
+        return turnCount;
+    }
+
 }

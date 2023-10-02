@@ -1,11 +1,9 @@
 package bossmonster.util;
 
-
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 import bossmonster.view.OutputView;
-
 
 /**
  * 재시도를 위한 유틸리티 클래스
@@ -45,4 +43,5 @@ public final class RetryUtil {
             return retryOnFail(function, input);
         }
     }
+
 }

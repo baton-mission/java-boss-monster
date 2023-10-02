@@ -11,4 +11,5 @@ public class AttackTypeCodeDto {
     public int getAttackTypeCode() {
         return attackTypeCode;
     }
+
 }

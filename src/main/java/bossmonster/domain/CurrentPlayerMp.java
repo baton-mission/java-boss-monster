@@ -33,10 +33,6 @@ public final class CurrentPlayerMp {
         return new CurrentPlayerMp(currentPlayerMp);
     }
 
-    public int getCurrentPlayerMp() {
-        return currentPlayerMp;
-    }
-
     public CurrentPlayerMp effectMpByAttackType(AttackType attackType, InitialPlayerMp initialPlayerMp) {
         int effectedCurrentPlayerMp = attackType.effectMp(currentPlayerMp);
         int normalizedPlayerMp = initialPlayerMp.getNormalizedPlayerMp(effectedCurrentPlayerMp);
@@ -55,4 +51,9 @@ public final class CurrentPlayerMp {
     public int hashCode() {
         return Objects.hash(currentPlayerMp);
     }
+
+    public int getCurrentPlayerMp() {
+        return currentPlayerMp;
+    }
+
 }

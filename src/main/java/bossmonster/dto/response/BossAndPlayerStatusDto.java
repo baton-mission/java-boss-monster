@@ -50,4 +50,5 @@ public class BossAndPlayerStatusDto {
     public int getCurrentPlayerMp() {
         return currentPlayerMp;
     }
+
 }

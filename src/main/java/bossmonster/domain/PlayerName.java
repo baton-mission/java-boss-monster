@@ -5,6 +5,7 @@ import static bossmonster.domain.ExceptionMessage.PLAYER_NAME_LENGTH_EXCEPTION_M
 public class PlayerName {
 
     private static final int MAX_NAME_LENGTH = 5;
+    
     private final String playerName;
 
     private PlayerName(String playerName) {
@@ -33,4 +34,5 @@ public class PlayerName {
     public String getPlayerName() {
         return playerName;
     }
+
 }

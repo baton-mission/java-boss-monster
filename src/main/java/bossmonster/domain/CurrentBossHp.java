@@ -16,10 +16,6 @@ public final class CurrentBossHp {
         return new CurrentBossHp(currentBossHp);
     }
 
-    public int getCurrentBossHp() {
-        return currentBossHp;
-    }
-
     public CurrentBossHp attackedBy(AttackType attackType) {
         int bossHpFromAttack = attackType.attack(currentBossHp);
         int currentBossHp = calculateBossHpNotToUnderMin(bossHpFromAttack);
@@ -28,10 +24,6 @@ public final class CurrentBossHp {
 
     private int calculateBossHpNotToUnderMin(int bossHpFromAttack) {
         return Math.max(BOSS_ZERO_HP, bossHpFromAttack);
-    }
-
-    public boolean isUnderZero() {
-        return currentBossHp <= BOSS_ZERO_HP;
     }
 
     @Override
@@ -46,4 +38,13 @@ public final class CurrentBossHp {
     public int hashCode() {
         return Objects.hash(currentBossHp);
     }
+
+    public int getCurrentBossHp() {
+        return currentBossHp;
+    }
+
+    public boolean isUnderZero() {
+        return currentBossHp <= BOSS_ZERO_HP;
+    }
+
 }

@@ -21,4 +21,5 @@ public class AttackTypeDto {
                         AttackType::getAttackTypeName));
 
     }
+
 }

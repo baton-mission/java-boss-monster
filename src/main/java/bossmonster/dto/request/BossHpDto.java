@@ -11,4 +11,5 @@ public class BossHpDto {
     public int getHp() {
         return bossHp;
     }
+
 }

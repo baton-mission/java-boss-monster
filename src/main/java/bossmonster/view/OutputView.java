@@ -39,10 +39,6 @@ public class OutputView {
     private static final String PLAYER_DEAD_MESSAGE_FORMAT = "%s의 HP가 0이 되었습니다.\n";
     private static final String BOSS_GAME_FAIL_MESSAGE = "보스 레이드에 실패했습니다.\n";
 
-    private static class LazyHolder {
-        private static final OutputView INSTANCE = new OutputView();
-    }
-
     private OutputView() {
     }
 
@@ -87,14 +83,14 @@ public class OutputView {
         printEmptyLine();
     }
 
+    private static String getBossHpMessage(int currentBossHp, int initialBossHp) {
+        return String.format(BOSS_HP_STATUS_FORMAT, currentBossHp, initialBossHp);
+    }
+
     private static String getPlayerStatusMessage(String playerName, int currentPlayerHp, int initialPlayerHp,
                                                  int currentPlayerMp, int initialPlayerMp) {
         return String.format(PLAYER_STATUS_FORMAT, playerName, currentPlayerHp, initialPlayerHp,
                 currentPlayerMp, initialPlayerMp);
-    }
-
-    private static String getBossHpMessage(int currentBossHp, int initialBossHp) {
-        return String.format(BOSS_HP_STATUS_FORMAT, currentBossHp, initialBossHp);
     }
 
     public void printBossDeadMessage(BossAttackDto bossDeadResponseDto) {
@@ -141,4 +137,11 @@ public class OutputView {
                 playerBossInfoResponseDto.getPlayerInitialMp(),
                 BOSS_BAD_FACE);
     }
+
+    private static class LazyHolder {
+
+        private static final OutputView INSTANCE = new OutputView();
+
+    }
+
 }

@@ -20,10 +20,6 @@ public class InputView {
     private static final String ATTACK_TYPE_MESSAGE = "어떤 공격을 하시겠습니까?";
     private static final String ATTACK_TYPE_FORMAT = "%d. %s\n";
 
-    private static class LazyHolder {
-        private static final InputView INSTANCE = new InputView();
-    }
-
     private InputView() {
     }
 
@@ -70,4 +66,11 @@ public class InputView {
         int attackTypeCode = InputConverter.convertAttackTypeCode(rawAttackType);
         return new AttackTypeCodeDto(attackTypeCode);
     }
+
+    private static class LazyHolder {
+
+        private static final InputView INSTANCE = new InputView();
+
+    }
+
 }

@@ -16,10 +16,6 @@ public final class InitialBossHp {
         this.initialBossHp = initialBossHp;
     }
 
-    public static InitialBossHp from(int initialBossHp) {
-        return new InitialBossHp(initialBossHp);
-    }
-
     private void validate(int bossHp) {
         validateRange(bossHp);
     }
@@ -30,12 +26,12 @@ public final class InitialBossHp {
         }
     }
 
-    private static boolean isRightHpRange(int bossHp) {
+    private boolean isRightHpRange(int bossHp) {
         return bossHp >= MIN_HP && bossHp <= MAX_HP;
     }
 
-    public int getInitialBossHp() {
-        return initialBossHp;
+    public static InitialBossHp from(int initialBossHp) {
+        return new InitialBossHp(initialBossHp);
     }
 
     @Override
@@ -50,4 +46,9 @@ public final class InitialBossHp {
     public int hashCode() {
         return Objects.hash(initialBossHp);
     }
+
+    public int getInitialBossHp() {
+        return initialBossHp;
+    }
+
 }

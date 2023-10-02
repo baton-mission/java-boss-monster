@@ -14,6 +14,14 @@ public class Player {
         return new Player(playerName, playerStatus);
     }
 
+    public void effectedMpBy(AttackType attackType) {
+        playerStatus.effectedMpByAttackType(attackType);
+    }
+
+    public void attackedBy(int damageFromBoss) {
+        playerStatus.effectedHpByBossDamage(damageFromBoss);
+    }
+
     public int getPlayerHp() {
         return playerStatus.getPlayerHp();
     }
@@ -34,15 +42,8 @@ public class Player {
         return playerStatus.getInitialPlayerMp();
     }
 
-    public void effectedMpBy(AttackType attackType) {
-        playerStatus.effectedMpByAttackType(attackType);
-    }
-
-    public void attackedBy(int damageFromBoss) {
-        playerStatus.effectedHpByBossDamage(damageFromBoss);
-    }
-
     public boolean isDead() {
         return playerStatus.isHpUnderMin();
     }
+
 }

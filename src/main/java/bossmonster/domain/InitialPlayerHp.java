@@ -34,4 +34,5 @@ public final class InitialPlayerHp {
     public int getInitialPlayerHp() {
         return initialPlayerHp;
     }
+
 }

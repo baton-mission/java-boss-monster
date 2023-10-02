@@ -10,13 +10,13 @@ public class PlayerStatusInfoDto {
     private final int playerHp;
     private final int playerMp;
 
+    public PlayerStatusInfoDto(List<Integer> playerHpAndMp) {
+        this(playerHpAndMp.get(PLAYER_HP_INDEX), playerHpAndMp.get(PLAYER_MP_INDEX));
+    }
+
     private PlayerStatusInfoDto(int playerHp, int playerMp) {
         this.playerHp = playerHp;
         this.playerMp = playerMp;
-    }
-
-    public PlayerStatusInfoDto(List<Integer> playerHpAndMp) {
-        this(playerHpAndMp.get(PLAYER_HP_INDEX), playerHpAndMp.get(PLAYER_MP_INDEX));
     }
 
     public int getPlayerHp() {
@@ -26,4 +26,5 @@ public class PlayerStatusInfoDto {
     public int getPlayerMp() {
         return playerMp;
     }
+
 }

@@ -5,29 +5,21 @@ public class Boss {
     private static final int MIN_DAMAGE = 0;
     private static final int MAX_DAMAGE = 20;
     private static final int NO_DAMAGE = 0;
-
+    
     private final BossHp bossHp;
     private final DamageStrategy damageStrategy;
+
+    private Boss(int bossHp, DamageStrategy damageStrategy) {
+        this(BossHp.from(bossHp), damageStrategy);
+    }
 
     private Boss(BossHp bossHp, DamageStrategy damageStrategy) {
         this.bossHp = bossHp;
         this.damageStrategy = damageStrategy;
     }
 
-    private Boss(int bossHp, DamageStrategy damageStrategy) {
-        this(BossHp.from(bossHp), damageStrategy);
-    }
-
     public static Boss from(int bossHp, DamageStrategy damageStrategy) {
         return new Boss(bossHp, damageStrategy);
-    }
-
-    public int getBossHp() {
-        return bossHp.getCurrentBossHp();
-    }
-
-    public int getInitialBossHp() {
-        return bossHp.getInitialBossHp();
     }
 
     public void attackedByPlayer(AttackType attackType) {
@@ -40,11 +32,20 @@ public class Boss {
         return bossDamage;
     }
 
+    public int zeroDamage() {
+        return NO_DAMAGE;
+    }
+
+    public int getInitialBossHp() {
+        return bossHp.getInitialBossHp();
+    }
+
     public boolean isDead() {
         return bossHp.isUnderZero();
     }
 
-    public int zeroDamage() {
-        return NO_DAMAGE;
+    public int getBossHp() {
+        return bossHp.getCurrentBossHp();
     }
+
 }

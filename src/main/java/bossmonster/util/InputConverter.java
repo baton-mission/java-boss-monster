@@ -9,25 +9,26 @@ public final class InputConverter {
 
     private static final String COMMA_DELIMITER = ",";
 
-    private static List<Integer> splitToInt(String format, String input) {
-        return Stream.of(input.split(format))
-                .map(Integer::parseInt)
-                .collect(toList());
+    public static int convertBossHp(String rawBossHp) {
+        return parseToInt(rawBossHp);
     }
 
     private static int parseToInt(String input) {
         return Integer.parseInt(input);
     }
 
-    public static int convertBossHp(String rawBossHp) {
-        return parseToInt(rawBossHp);
-    }
-
     public static List<Integer> convertPlayerHpAndMp(String rawPlayerHpAndMp) {
         return splitToInt(COMMA_DELIMITER, rawPlayerHpAndMp);
+    }
+
+    private static List<Integer> splitToInt(String format, String input) {
+        return Stream.of(input.split(format))
+                .map(Integer::parseInt)
+                .collect(toList());
     }
 
     public static int convertAttackTypeCode(String rawAttackTypeCode) {
         return parseToInt(rawAttackTypeCode);
     }
+
 }

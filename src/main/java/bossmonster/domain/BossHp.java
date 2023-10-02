@@ -2,20 +2,24 @@ package bossmonster.domain;
 
 public class BossHp {
 
-    private CurrentBossHp currentBossHp;
     private final InitialBossHp initialBossHp;
+    private CurrentBossHp currentBossHp;
+
+    private BossHp(int bossHp) {
+        this(CurrentBossHp.from(bossHp), InitialBossHp.from(bossHp));
+    }
 
     private BossHp(CurrentBossHp currentBossHp, InitialBossHp initialBossHp) {
         this.currentBossHp = currentBossHp;
         this.initialBossHp = initialBossHp;
     }
 
-    private BossHp(int bossHp) {
-        this(CurrentBossHp.from(bossHp), InitialBossHp.from(bossHp));
-    }
-
     public static BossHp from(int bossHp) {
         return new BossHp(bossHp);
+    }
+
+    public void attackedBy(AttackType attackType) {
+        this.currentBossHp = currentBossHp.attackedBy(attackType);
     }
 
     public int getCurrentBossHp() {
@@ -26,13 +30,8 @@ public class BossHp {
         return initialBossHp.getInitialBossHp();
     }
 
-    public void attackedBy(AttackType attackType) {
-        this.currentBossHp = currentBossHp.attackedBy(attackType);
-    }
-
     public boolean isUnderZero() {
         return currentBossHp.isUnderZero();
     }
-
 
 }

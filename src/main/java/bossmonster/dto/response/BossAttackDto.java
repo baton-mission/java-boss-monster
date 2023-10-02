@@ -32,4 +32,5 @@ public class BossAttackDto {
     public int getTotalTryCount() {
         return totalTryCount;
     }
+
 }

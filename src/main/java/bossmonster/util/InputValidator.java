@@ -1,6 +1,5 @@
 package bossmonster.util;
 
-
 import java.util.regex.Pattern;
 
 /**
@@ -30,6 +29,21 @@ public final class InputValidator {
         }
     }
 
+    /**
+     * 공백 및 빈 문자열 체크
+     * 주로 사용자 입력으로 부터의 검증이기에 빈문자열 혹은 공백 위주로 검증
+     */
+    private static boolean isBlank(String input) {
+        return input.isBlank();
+    }
+
+    /**
+     * 이상적인 형식인지 체크
+     */
+    private static boolean isRightFormat(Pattern pattern, String input) {
+        return pattern.matcher(input).matches();
+    }
+
     public static void validatePlayerName(String rawPlayerName) {
         if (isBlank(rawPlayerName)) {
             throw new IllegalArgumentException(BLANK_EXCEPTION_MESSAGE);
@@ -56,21 +70,5 @@ public final class InputValidator {
             throw new IllegalArgumentException(FORMAT_EXCEPTION_MESSAGE);
         }
     }
-
-    /**
-     * 공백 및 빈 문자열 체크
-     * 주로 사용자 입력으로 부터의 검증이기에 빈문자열 혹은 공백 위주로 검증
-     */
-    private static boolean isBlank(String input) {
-        return input.isBlank();
-    }
-
-    /**
-     * 이상적인 형식인지 체크
-     */
-    private static boolean isRightFormat(Pattern pattern, String input) {
-        return pattern.matcher(input).matches();
-    }
-
 
 }

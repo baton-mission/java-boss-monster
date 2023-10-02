@@ -68,4 +68,5 @@ public class PlayerBossInfoDto {
     public int getPlayerInitialMp() {
         return playerInitialMp;
     }
+
 }

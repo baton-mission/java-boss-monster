@@ -9,18 +9,14 @@ public class PlayerStatus {
     private final PlayerHp playerHp;
     private final PlayerMp playerMp;
 
-    private PlayerStatus(PlayerHp playerHp, PlayerMp playerMp) {
-        validate(playerHp, playerMp);
-        this.playerHp = playerHp;
-        this.playerMp = playerMp;
-    }
-
     private PlayerStatus(int playerHp, int playerMp) {
         this(PlayerHp.from(playerHp), PlayerMp.from(playerMp));
     }
 
-    public static PlayerStatus fromTest(PlayerHp playerHp, PlayerMp playerMp) {
-        return new PlayerStatus(playerHp, playerMp);
+    private PlayerStatus(PlayerHp playerHp, PlayerMp playerMp) {
+        validate(playerHp, playerMp);
+        this.playerHp = playerHp;
+        this.playerMp = playerMp;
     }
 
     private void validate(PlayerHp playerHp, PlayerMp playerMp) {
@@ -31,15 +27,26 @@ public class PlayerStatus {
         if (!isRightTotalSum(playerHp, playerMp)) {
             throw new IllegalArgumentException(INITIAL_HP_MP_SUM_EXCEPTION_MESSAGE);
         }
-
     }
 
     private boolean isRightTotalSum(PlayerHp playerHp, PlayerMp playerMp) {
         return playerHp.plus(playerMp) == TOTAL_SUM;
     }
 
+    public static PlayerStatus fromTest(PlayerHp playerHp, PlayerMp playerMp) {
+        return new PlayerStatus(playerHp, playerMp);
+    }
+
     public static PlayerStatus from(int playerHp, int playerMp) {
         return new PlayerStatus(playerHp, playerMp);
+    }
+
+    public void effectedMpByAttackType(AttackType attackType) {
+        playerMp.effectedMpByAttackType(attackType);
+    }
+
+    public void effectedHpByBossDamage(int damageFromBoss) {
+        playerHp.effectedByBossDamage(damageFromBoss);
     }
 
     public int getPlayerHp() {
@@ -58,15 +65,8 @@ public class PlayerStatus {
         return playerMp.getInitialPlayerMp();
     }
 
-    public void effectedMpByAttackType(AttackType attackType) {
-        playerMp.effectedMpByAttackType(attackType);
-    }
-
-    public void effectedHpByBossDamage(int damageFromBoss) {
-        playerHp.effectedByBossDamage(damageFromBoss);
-    }
-
     public boolean isHpUnderMin() {
         return playerHp.isUnderMinHp();
     }
+
 }

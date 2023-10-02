@@ -5,7 +5,6 @@ import static bossmonster.domain.ExceptionMessage.PLAYER_MP_EXCEPTION_MESSAGE;
 public final class InitialPlayerMp {
 
     private static final int MIN_MP = 0;
-
     private final int initialPlayerMp;
 
     private InitialPlayerMp(int initialPlayerMp) {
@@ -35,10 +34,6 @@ public final class InitialPlayerMp {
         return initialPlayerMp + playerHp;
     }
 
-    public int getInitialPlayerMp() {
-        return initialPlayerMp;
-    }
-
     public int getNormalizedPlayerMp(int effectedCurrentPlayerMp) {
         if (isBiggerThanInitialMp(effectedCurrentPlayerMp)) {
             return initialPlayerMp;
@@ -49,4 +44,9 @@ public final class InitialPlayerMp {
     private boolean isBiggerThanInitialMp(int effectedCurrentPlayerMp) {
         return effectedCurrentPlayerMp > initialPlayerMp;
     }
+
+    public int getInitialPlayerMp() {
+        return initialPlayerMp;
+    }
+
 }

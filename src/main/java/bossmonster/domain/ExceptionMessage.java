@@ -12,5 +12,7 @@ public final class ExceptionMessage {
     public static final String TURN_COUNT_EXCEPTION_MESSAGE = "시도 횟수는 0밑으로 내려갈 수 없습니다.";
 
     private ExceptionMessage() {
+
     }
+
 }

@@ -6,14 +6,14 @@ public class BossGame {
     private final Player player;
     private TurnCount turnCount;
 
+    private BossGame(Boss boss, Player player) {
+        this(boss, player, TurnCount.init());
+    }
+
     private BossGame(Boss boss, Player player, TurnCount turnCount) {
         this.boss = boss;
         this.player = player;
         this.turnCount = turnCount;
-    }
-
-    private BossGame(Boss boss, Player player) {
-        this(boss, player, TurnCount.init());
     }
 
     public static BossGame init(Boss boss, Player player) {
@@ -23,7 +23,6 @@ public class BossGame {
     public void effectPlayerMpWith(AttackType attackType) {
         player.effectedMpBy(attackType);
     }
-
 
     public void attackToBossFromPlayer(AttackType attackType) {
         turnCount = turnCount.increase();
