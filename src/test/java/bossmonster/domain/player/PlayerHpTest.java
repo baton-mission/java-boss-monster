@@ -44,20 +44,25 @@ class PlayerHpTest {
                 .hasMessage("유효하지 않은 플레이어 HP입니다.");
     }
 
-    @DisplayName("[성공 테스트] 주어진 감소량 만큼 현재 HP를 감소시킨다.")
+    @DisplayName("[성공 테스트] 주어진 감소량 만큼 현재 HP를 감소시킨다. 이때 0 미만으로는 감소할 수 없다.")
     @Test
     void decrease_current_hp_test() throws Exception {
         // Given
         int firstHp = 100;
-        int decreaseHp = 50;
+        int decreaseHp1 = 50;
+        int decreaseHp2 = 150;
 
-        PlayerHp playerHp = createPlayerHp(firstHp);
+        PlayerHp playerHp1 = createPlayerHp(firstHp);
+        PlayerHp playerHp2 = createPlayerHp(firstHp);
 
         // When
-        playerHp.decreaseCurrentHp(decreaseHp);
+        playerHp1.decreaseCurrentHp(decreaseHp1);
+        playerHp2.decreaseCurrentHp(decreaseHp2);
 
         // Then
-        assertThat(playerHp.getCurrentHp()).isEqualTo(firstHp - decreaseHp);
+        assertThat(playerHp1.getCurrentHp()).isEqualTo(firstHp - decreaseHp1);
+        assertThat(playerHp2.getCurrentHp()).isNotEqualTo(firstHp - decreaseHp1);
+        assertThat(playerHp2.getCurrentHp()).isEqualTo(0);
     }
 
     @DisplayName("[성공 테스트] 현재 HP가 0 이하이면 true를 반환하고, 1 이상이면 false를 반환한다.")

@@ -23,6 +23,7 @@ public class PlayerHp {
 
     public void decreaseCurrentHp(int decreaseHp) {
         currentHp -= decreaseHp;
+        if (currentHp < 0) currentHp = 0;
     }
 
     public boolean isCurrentHpZeroOrBelow() {
