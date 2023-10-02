@@ -2,6 +2,7 @@ package bossmonster.controller;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Supplier;
 
 import bossmonster.domain.player.Attack;
 import bossmonster.domain.monster.BossMonsterDamageGenerator;
@@ -27,15 +28,16 @@ public class Controller {
     }
 
     public void start() {
-        BossMonster bossMonster = getBossMonster();
-        Player player = getPlayer();
+        BossMonster bossMonster = repeatReadForInvalid(this::getBossMonster);
+        Player player = repeatReadForInvalid(this::getPlayer);
         OutputView.printStartMessage();
         int numberOfTurns = 0;
         battle(bossMonster, player, numberOfTurns);
     }
 
     private BossMonster getBossMonster() {
-        return service.generateBossMonster(InputView.readBossMonsterHp(scanner));
+        int bossMonsterHp = InputView.readBossMonsterHp(scanner);
+        return service.generateBossMonster(bossMonsterHp);
     }
 
     private Player getPlayer() {
@@ -76,8 +78,13 @@ public class Controller {
     }
 
     private void playerAttack(BossMonster bossMonster, Player player) {
-        int playerAttackNumber = InputView.readPlayerAttackNumber(scanner);
-        Attack playerAttack = service.playerAttack(playerAttackNumber, player, bossMonster);
+        Attack playerAttack = repeatReadForInvalid(() -> Attack.of(InputView.readPlayerAttackNumber(scanner)));
+        try {
+            service.playerAttack(playerAttack, player, bossMonster);
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e);
+            playerAttack(bossMonster, player);
+        }
         OutputView.printPlayerAttackResult(playerAttack.getName(), playerAttack.getDamage());
     }
 
@@ -85,5 +92,14 @@ public class Controller {
         int bossMonsterAttackDamage = bossMonsterDamageGenerator.generateDamage();
         service.bossMonsterAttack(bossMonsterAttackDamage, bossMonster, player);
         OutputView.printBossMonsterAttackResult(bossMonsterAttackDamage);
+    }
+
+    private <T> T repeatReadForInvalid(Supplier<T> reader) {
+        try {
+            return reader.get();
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e);
+            return repeatReadForInvalid(reader);
+        }
     }
 }

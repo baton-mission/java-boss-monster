@@ -24,7 +24,7 @@ public enum Attack {
         return Arrays.stream(Attack.values())
                 .filter(attack -> attack.getNumber() == number)
                 .findFirst()
-                .orElseThrow(() -> new NoSuchElementException("[ERROR] 존재하지 않는 번호입니다."));
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 번호입니다."));
     }
 
     private int getNumber() {

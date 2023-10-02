@@ -22,10 +22,8 @@ public class Service {
         return new Player(new Name(playerName), new Stat(playerHp, playerMp));
     }
 
-    public Attack playerAttack(int attackNumber, Player player, BossMonster bossMonster) {
-        Attack playerAttack = Attack.of(attackNumber);
+    public void playerAttack(Attack playerAttack, Player player, BossMonster bossMonster) {
         player.attack(playerAttack, bossMonster);
-        return playerAttack;
     }
 
     public void bossMonsterAttack(int bossMonsterAttackDamage, BossMonster bossMonster, Player player) {

@@ -24,7 +24,7 @@ public class BossMonster {
 
     private void validate(Hp hp) {
         if (hp.isOutOfRange(MIN_HP, MAX_HP)) {
-            throw new IllegalArgumentException(BOSS_MONSTER_HP_OUT_OF_RANGE.formatted(MIN_HP, MAX_HP));
+            throw new IllegalArgumentException(ERROR_BOSS_MONSTER_HP_OUT_OF_RANGE.formatted(MIN_HP, MAX_HP));
         }
     }
 

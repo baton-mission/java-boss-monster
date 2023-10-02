@@ -49,4 +49,8 @@ public class OutputView {
         System.out.printf("%s의 HP가 %d이 되었습니다.\n", info.getName(), info.getHp());
         System.out.println("보스 레이드에 실패했습니다.");
     }
+
+    public static void printErrorMessage(IllegalArgumentException e) {
+        System.out.println(e.getMessage());
+    }
 }
