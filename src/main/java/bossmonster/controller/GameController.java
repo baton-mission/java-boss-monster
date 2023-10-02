@@ -19,4 +19,8 @@ public class GameController {
     private BossMonster generateBossMonster() {
         return new BossMonster(inputView.inputBossHp());
     }
+
+    private AttackType userInputAttackType() {
+        return inputView.inputAttackType();
+    }
 }
