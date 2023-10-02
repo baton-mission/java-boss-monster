@@ -27,4 +27,12 @@ public class Boss {
             throw new IllegalArgumentException(ERROR + "보스의 체력은 100이상 300이하 입니다.");
         }
     }
+
+    public boolean isAlive() {
+        return this.hp > 0;
+    }
+
+    public int getHp() {
+        return hp;
+    }
 }

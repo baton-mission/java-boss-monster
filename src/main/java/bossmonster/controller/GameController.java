@@ -18,6 +18,11 @@ public class GameController {
     public void run() {
         Boss boss = getBossHP();
         Player player = getPlayerInfo();
+        outputView.printSetting(boss, player);
+
+        while (boss.isAlive() && player.isAlive()) {
+            playTurnOfPlayer();
+        }
     }
 
     private Boss getBossHP() {
@@ -28,5 +33,9 @@ public class GameController {
         String name = inputView.getPlayerName();
         int[] playerStatus = inputView.getPlayerStatus();
         return new Player(name, playerStatus[0], playerStatus[1]);
+    }
+
+    private void playTurnOfPlayer() {
+
     }
 }

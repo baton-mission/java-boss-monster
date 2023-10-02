@@ -70,7 +70,7 @@ public class InputView {
 
     private void checkSum(int[] temp) {
         int sum = temp[0] + temp[1];
-        if (sum != 300) {
+        if (sum != 200) {
             throw new IllegalArgumentException("[ERROR] ");
         }
     }
