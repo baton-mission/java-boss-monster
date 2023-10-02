@@ -1,5 +1,7 @@
 package bossmonster.domain;
 
+import static bossmonster.util.Constants.ZERO;
+
 public class Player {
 
     private final String name;
@@ -37,11 +39,11 @@ public class Player {
     }
 
     public boolean isAlive() {
-        return this.hp > 0;
+        return this.hp > ZERO;
     }
 
     public boolean isDie() {
-        return this.hp <= 0;
+        return this.hp <= ZERO;
     }
 
     public void updateMana(AttackType type) {

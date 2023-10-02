@@ -2,21 +2,25 @@ package bossmonster.view;
 
 import bossmonster.domain.AttackType;
 import bossmonster.domain.Boss;
+import bossmonster.util.ErrorChecker;
+import bossmonster.util.TypeConvertor;
 
 import java.util.Scanner;
+
+import static bossmonster.util.Constants.*;
 
 public class InputView {
 
     private final Scanner in;
 
-    public InputView(Scanner sc) {
-        this.in = sc;
+    public InputView(Scanner in) {
+        this.in = in;
     }
 
     public Boss getBossHP() {
-        System.out.println("보스 몬스터의 HP를 입력해주세요.");
-        String input = in.next();
+        System.out.println(BOSS_HP_INPUT);
         try {
+            String input = in.next();
             return new Boss(input);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -25,10 +29,10 @@ public class InputView {
     }
 
     public String getPlayerName() {
-        System.out.println("플레이어의 이름을 입력해주세요");
+        System.out.println(PLAYER_NAME_INPUT);
         try {
             String input = in.next();
-            checkName(input);
+            ErrorChecker.checkName(input);
             return input;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -36,50 +40,21 @@ public class InputView {
         }
     }
 
-    private void checkName(String input) {
-        if (input.length() > 5) {
-            throw new IllegalArgumentException("[ERROR] ");
-        }
-        if (input.isEmpty()) {
-            throw new IllegalArgumentException("[ERROR] ");
-        }
-    }
-
     public int[] getPlayerStatus() {
-        System.out.println("플레이어의 HP와 MP를 입력해주세요.(,로 구분)");
-        String[] input = in.next().split(",");
+        System.out.println(PLAYER_INFO_INPUT);
         try {
-            return convertStringToInt(input);
+            String input = in.next();
+            return TypeConvertor.convertStringToInt(input);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getPlayerStatus();
         }
     }
 
-    private int[] convertStringToInt(String[] input) {
-        int[] temp = new int[2];
-        try {
-            for (int i = 0; i < 2; i++) {
-                temp[i] = Integer.parseInt(input[i]);
-            }
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] ");
-        }
-        checkSum(temp);
-        return temp;
-    }
-
-    private void checkSum(int[] temp) {
-        int sum = temp[0] + temp[1];
-        if (sum != 200) {
-            throw new IllegalArgumentException("[ERROR] ");
-        }
-    }
-
     public AttackType getAttackType() {
-        System.out.println("어떤 공격을 하시겠습니까?\n1. 물리 공격\n2. 마법 공격");
-        String command = in.next();
+        System.out.println(ATTACK_INPUT);
         try {
+            String command = in.next();
             return AttackType.findByCommand(command);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());

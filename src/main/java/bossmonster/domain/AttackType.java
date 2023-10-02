@@ -2,6 +2,9 @@ package bossmonster.domain;
 
 import java.util.Arrays;
 
+import static bossmonster.util.ErrorMessage.ERROR;
+import static bossmonster.util.ErrorMessage.NOT_CORRECT;
+
 public enum AttackType {
     PHYSICAL("물리 공격", "1", 10, 10),
     MAGICAL("마법 공격", "2", 20, -30);
@@ -22,7 +25,7 @@ public enum AttackType {
         return Arrays.stream(values())
                 .filter(it -> it.command.equals(command))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException(""));
+                .orElseThrow(() -> new IllegalArgumentException(ERROR + NOT_CORRECT));
     }
 
     public int getManaCost() {
