@@ -1,5 +1,6 @@
 package bossmonster.view;
 
+import bossmonster.domain.AttackType;
 import bossmonster.domain.Boss;
 
 import java.util.Scanner;
@@ -8,8 +9,8 @@ public class InputView {
 
     private final Scanner in;
 
-    public InputView() {
-        this.in = new Scanner(System.in);
+    public InputView(Scanner sc) {
+        this.in = sc;
     }
 
     public Boss getBossHP() {
@@ -72,6 +73,17 @@ public class InputView {
         int sum = temp[0] + temp[1];
         if (sum != 200) {
             throw new IllegalArgumentException("[ERROR] ");
+        }
+    }
+
+    public AttackType getAttackType() {
+        System.out.println("어떤 공격을 하시겠습니까?\n1. 물리 공격\n2. 마법 공격");
+        String command = in.next();
+        try {
+            return AttackType.findByCommand(command);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getAttackType();
         }
     }
 }

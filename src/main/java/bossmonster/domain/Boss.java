@@ -7,11 +7,13 @@ public class Boss {
     private static final int MIN_HP = 100;
 
     private int hp;
+    private final int initialHp;
 
     public Boss(String input) {
         int hp = changeToInt(input);
         checkBossHp(hp);
         this.hp = hp;
+        this.initialHp = hp;
     }
 
     private int changeToInt(String input) {
@@ -32,7 +34,19 @@ public class Boss {
         return this.hp > 0;
     }
 
+    public boolean isDie() {
+        return this.hp <= 0;
+    }
+
     public int getHp() {
         return hp;
+    }
+
+    public int getInitialHp() {
+        return initialHp;
+    }
+
+    public void getDamage(int damage) {
+        this.hp -= damage;
     }
 }
