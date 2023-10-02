@@ -38,7 +38,7 @@ public class BossGameController {
         printStartMessage();
         printBossAndPlayerStatus(boss, player);
         BossGame bossGame = BossGame.init(boss, player);
-        playingGame(bossGame);
+        play(bossGame);
     }
 
     private Boss initBoss() {
@@ -61,7 +61,7 @@ public class BossGameController {
         outputView.printBossAndPlayerStatus(bossAndPlayerStatusDto);
     }
 
-    private void playingGame(BossGame bossGame) {
+    private void play(BossGame bossGame) {
         while (true) {
             AttackType attackType = retryOnFail(this::getAttackType, bossGame);
             bossGame.attackToBossFromPlayer(attackType);
@@ -71,10 +71,12 @@ public class BossGameController {
                 printBossDeadMessage(bossGame, attackType);
                 return;
             }
+
             if (bossGame.isPlayerDead()) {
                 printPlayerDeadMessage(bossGame, attackType, bossDamage);
                 return;
             }
+
             printGameCurrentStatus(bossGame, attackType, bossDamage);
         }
     }
