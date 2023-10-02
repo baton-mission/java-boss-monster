@@ -1,5 +1,6 @@
 package bossmonster.controller;
 
+import bossmonster.domain.Boss;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
 
@@ -14,6 +15,10 @@ public class GameController {
     }
 
     public void run() {
+        Boss boss = getBossHP();
+    }
 
+    private Boss getBossHP() {
+        return inputView.getBossHP();
     }
 }
