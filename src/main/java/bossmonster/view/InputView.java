@@ -6,8 +6,6 @@ import java.util.Scanner;
 
 public class InputView {
 
-    private static final String DELIMITER = ",";
-
     public static int readBossMonsterHp(Scanner scanner) {
         System.out.println("보스 몬스터의 HP를 입력해주세요.");
         return toInt(scanner.nextLine());
@@ -21,7 +19,7 @@ public class InputView {
     public static List<Integer> readPlayerInitialHpAndMp(Scanner scanner) {
         System.out.println("플레이어의 HP와 MP를 입력해주세요.(,로 구분)");
         return Arrays.stream(scanner.nextLine()
-                        .split(DELIMITER))
+                        .split(","))
                 .map(InputView::toInt)
                 .toList();
     }

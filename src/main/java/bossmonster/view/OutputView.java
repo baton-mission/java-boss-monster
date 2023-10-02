@@ -1,7 +1,5 @@
 package bossmonster.view;
 
-import java.util.Map;
-
 import bossmonster.dto.BossMonsterInfo;
 import bossmonster.dto.PlayerInfo;
 
