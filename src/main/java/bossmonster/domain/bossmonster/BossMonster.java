@@ -9,5 +9,5 @@ public interface BossMonster
 
     BossMonsterInfo getBossMonsterInfo();
 
-    void attackPlayer(Player player);
+    int attackPlayer(Player player);
 }

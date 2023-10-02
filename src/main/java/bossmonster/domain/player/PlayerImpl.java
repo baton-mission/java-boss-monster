@@ -46,7 +46,7 @@ public class PlayerImpl
     }
 
     @Override
-    public void attackBossMonster(
+    public int attackBossMonster(
             BossMonster bossMonster,
             PlayerAttackOption attackOption
     ) {
@@ -55,6 +55,8 @@ public class PlayerImpl
         playerMp.decreaseCurrentMp(attackOption.getNeedMp());
         bossMonster.takeDamage(attackOption.getDamage());
         playerMp.increaseCurrentMp(attackOption.getRecoveryMp());
+
+        return attackOption.getDamage();
     }
 
     private void checkEnoughMp(int needMp) {

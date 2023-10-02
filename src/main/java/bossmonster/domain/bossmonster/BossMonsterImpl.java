@@ -37,12 +37,13 @@ public class BossMonsterImpl
     }
 
     @Override
-    public void attackPlayer(Player player) {
+    public int attackPlayer(Player player) {
         int bossMonsterRandomDamage = getRandomNumber(
                 BOSS_MONSTER_MINIMUM_RANDOM_DAMAGE_LIMIT,
                 BOSS_MONSTER_MAXIMUM_RANDOM_DAMAGE_LIMIT
         );
 
         player.takeDamage(bossMonsterRandomDamage);
+        return bossMonsterRandomDamage;
     }
 }

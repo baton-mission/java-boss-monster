@@ -78,7 +78,7 @@ class BossMonsterTest {
         assertThat(bossMonsterInfo.getCurrentBossMonsterHp()).isEqualTo(firstHp - damage);
     }
 
-    @DisplayName("[성공 테스트] 보스 몬스터가 플레이어를 공격 시, 0 ~ 20 범위의 랜덤한 데미지 만큼 플레이어의 현재 HP를 감소시킨다.")
+    @DisplayName("[성공 테스트] 보스 몬스터가 플레이어를 공격 시, 0 ~ 20 범위의 랜덤한 데미지 만큼 플레이어의 현재 HP를 감소시키고 입힌 데미지를 반환한다.")
     @Test
     void attack_player_test() throws Exception {
         // Given
@@ -87,10 +87,15 @@ class BossMonsterTest {
         BossMonster bossMonster = createBossMonster();
 
         // When
-        bossMonster.attackPlayer(player);
+        int attackDamage = bossMonster.attackPlayer(player);
         PlayerInfo playerInfo = player.getPlayerInfo();
 
         // Then
+        assertThat(attackDamage)
+                .isBetween(
+                        BOSS_MONSTER_MINIMUM_RANDOM_DAMAGE_LIMIT,
+                        BOSS_MONSTER_MAXIMUM_RANDOM_DAMAGE_LIMIT
+                );
         assertThat(playerInfo.getPlayerCurrentHp())
                 .isBetween(
                         playerFirstHp - BOSS_MONSTER_MAXIMUM_RANDOM_DAMAGE_LIMIT,

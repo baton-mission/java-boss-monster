@@ -9,5 +9,5 @@ public interface Player
         extends Character {
     PlayerInfo getPlayerInfo();
 
-    void attackBossMonster(BossMonster bossMonster, PlayerAttackOption attackOption);
+    int attackBossMonster(BossMonster bossMonster, PlayerAttackOption attackOption);
 }

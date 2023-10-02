@@ -87,7 +87,7 @@ class PlayerTest {
         assertThat(playerInfo.getPlayerCurrentMp()).isEqualTo(playerMp);
     }
 
-    @DisplayName("[성공 테스트] 플레이어가 물리공격을 수행할 시, 보스 몬스터에게 10 데미지를 주고 자신의 현재 MP를 10 회복한다.")
+    @DisplayName("[성공 테스트] 플레이어가 물리공격을 수행할 시, 보스 몬스터에게 10 데미지를 주고 자신의 현재 MP를 10 회복한다. 그리고 공격 데미지를 반환한다.")
     @Test
     void attack_boss_monster_physical_test() throws Exception {
         // Given
@@ -104,7 +104,7 @@ class PlayerTest {
         Player player = createPlayer(playerMp);
 
         // When
-        player.attackBossMonster(
+        int attackDamage = player.attackBossMonster(
                 bossMonster,
                 physicalAttack
         );
@@ -113,6 +113,7 @@ class PlayerTest {
         PlayerInfo playerInfo = player.getPlayerInfo();
 
         // Then
+        assertThat(attackDamage).isEqualTo(physicalAttack.getDamage());
         assertThat(bossMonsterInfo.getCurrentBossMonsterHp()).isEqualTo(bossMonsterFirstHp - physicalAttack.getDamage());
         assertThat(playerInfo.getPlayerCurrentMp()).isEqualTo(playerFirstCurrentMp + physicalAttack.getRecoveryMp());
     }
@@ -148,7 +149,7 @@ class PlayerTest {
         assertThat(playerInfo.getPlayerCurrentMp()).isEqualTo(playerMaximumMp);
     }
 
-    @DisplayName("[성공 테스트] 플레이어가 마법공격을 수행할 시, 보스 몬스터에게 20 데미지를 주고 자신의 현재 MP를 30 감소시킨다.")
+    @DisplayName("[성공 테스트] 플레이어가 마법공격을 수행할 시, 보스 몬스터에게 20 데미지를 주고 자신의 현재 MP를 30 감소시킨다. 그리고 공격 데미지를 반환한다.")
     @Test
     void attack_boss_monster_magic_test() throws Exception {
         // Given
@@ -160,7 +161,7 @@ class PlayerTest {
         Player player = createPlayer(playerFirstCurrentMp);
 
         // When
-        player.attackBossMonster(
+        int attackDamage = player.attackBossMonster(
                 bossMonster,
                 magicAttack
         );
@@ -169,6 +170,7 @@ class PlayerTest {
         PlayerInfo playerInfo = player.getPlayerInfo();
 
         // Then
+        assertThat(attackDamage).isEqualTo(magicAttack.getDamage());
         assertThat(bossMonsterInfo.getCurrentBossMonsterHp()).isEqualTo(bossMonsterFirstHp - magicAttack.getDamage());
         assertThat(playerInfo.getPlayerCurrentMp()).isEqualTo(playerFirstCurrentMp - magicAttack.getNeedMp());
     }
