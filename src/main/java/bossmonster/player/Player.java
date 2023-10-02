@@ -42,7 +42,7 @@ public class Player {
     }
 
     public boolean isDead() {
-        return stat.isHpNegative();
+        return stat.isHPZeroOrLess();
     }
 
     public List<Integer> stat() {

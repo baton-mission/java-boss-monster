@@ -18,8 +18,8 @@ public class Hp {
         hp -= damage;
     }
 
-    public boolean isNegative() {
-        return hp < 0;
+    public boolean isZeroOrLess() {
+        return hp <= 0;
     }
 
     public int getHp() {

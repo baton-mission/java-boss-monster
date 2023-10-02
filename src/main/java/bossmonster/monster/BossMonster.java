@@ -38,7 +38,7 @@ public class BossMonster {
     }
 
     public boolean isDead() {
-        return hp.isNegative();
+        return hp.isZeroOrLess();
     }
 
     public void changeAppearance(BossMonsterAppearance appearance) {
