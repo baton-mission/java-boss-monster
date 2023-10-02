@@ -91,7 +91,13 @@ public class GamePlayController {
     }
 
     private PlayerAttackResult attemptPlayerAttack(PlayerAttackOption playerAttackOption) {
-        if (playerAttackOption == null) return null;
+        if (playerAttackOption == null) {
+            return PlayerAttackResult.of(
+                    false,
+                    "NO_ATTACK",
+                    0
+            );
+        }
 
         try {
             int attackDamage = player.attackBossMonster(
@@ -117,6 +123,8 @@ public class GamePlayController {
     private PlayerAttackOption convertInputToPlayerAttackOption(int input) {
         if (input == PHYSICAL_ATTACK_OPTION) return PHYSICAL;
         if (input == MAGIC_ATTACK_OPTION) return MAGIC;
+
+        errorView.printErrorMessage(INVALID_PLAYER_ATTACK_OPTION_INPUT_ERROR_MESSAGE);
         return null;
     }
 
