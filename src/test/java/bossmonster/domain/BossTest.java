@@ -12,7 +12,8 @@ class BossTest {
     void attackTo는_플레이어에게_데미지를_주고_데미지를_리턴한다() {
         Player mockPlayer = mock(Player.class);
         int bossHp = 100;
-        Boss boss = Boss.from(bossHp, (min, max) -> 20);
+        DamageStrategy fixedDamageStrategy = (min, max) -> 20;
+        Boss boss = Boss.from(bossHp, fixedDamageStrategy);
 
         int bossDamage = boss.attackTo(mockPlayer);
 
@@ -23,10 +24,12 @@ class BossTest {
     @Test
     void zeroDamage는_0을_리턴한다() {
         int bossHp = 100;
-        Boss boss = Boss.from(bossHp, (min, max) -> 20);
+        DamageStrategy fixedDamageStrategy = (min, max) -> 20;
+        Boss boss = Boss.from(bossHp, fixedDamageStrategy);
 
         int zeroDamage = boss.zeroDamage();
 
         assertThat(zeroDamage).isEqualTo(0);
     }
+
 }
