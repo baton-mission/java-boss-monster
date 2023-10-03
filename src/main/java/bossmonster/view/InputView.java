@@ -28,8 +28,8 @@ public class InputView {
         return InputValidation.validPlayerHPAndMP(scanner.nextLine());
     }
 
-    public String inputAttackMethod() {
+    public int inputAttackMethod() {
         System.out.println(INPUT_ATTACK_METHOD);
-        return scanner.nextLine();
+        return InputValidation.validAttackMethod(scanner.nextLine());
     }
 }

@@ -23,6 +23,18 @@ public class InputValidation {
         return playerHPMP;
     }
 
+    public static int validAttackMethod(String input) {
+        int inputNumber = isNumber(input);
+        isOneOrTwo(inputNumber);
+        return inputNumber;
+    }
+
+    public static void isOneOrTwo(int inputNumber) {
+        if(inputNumber != 1 && inputNumber != 2) {
+            throw new IllegalArgumentException(ERROR_MESSAGE + "1 혹은 2를 입력해주세요.");
+        }
+    }
+
     public static void isAdd300(List<Integer> playerHPMP) {
         if(playerHPMP.get(0) + playerHPMP.get(1) != 200) {
             throw new IllegalArgumentException(ERROR_MESSAGE + "HP와 MP의 합이 200이 되도록 입력해주세요.");
