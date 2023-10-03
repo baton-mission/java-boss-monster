@@ -10,29 +10,28 @@ import java.util.List;
 
 public class GameController {
 
-    private final int END = 0;
-
-    private int turnCount;
+    private static final int END = 0;
     private InputView inputView;
     private OutputView outputView;
+
+    public GameController(InputView inputView, OutputView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+    }
 
     public void play() {
         Player player = new Player();
         BossMonster bossMonster = new BossMonster();
-
-        inputView = new InputView();
-        outputView = new OutputView();
-        turnCount = 1;
+        int turnCount = 1;
 
         progressInitialSetting(player, bossMonster);
-        progressBattle(player, bossMonster);
+        progressBattle(player, bossMonster, turnCount);
     }
 
     private void progressInitialSetting(Player player, BossMonster bossMonster) {
         progressBossHpSetting(bossMonster);
         progressPlayerNameSetting(player);
         progressPlayerStatusSetting(player);
-
     }
 
     private int progressBossHpSetting(BossMonster bossMonster) {
@@ -74,7 +73,7 @@ public class GameController {
         return END;
     }
 
-    private void progressBattle(Player player, BossMonster bossMonster) {
+    private void progressBattle(Player player, BossMonster bossMonster, int turnCount) {
         outputView.printBattleStartView();
 
         while (true) {
