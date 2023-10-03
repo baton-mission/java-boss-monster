@@ -10,7 +10,9 @@ public class Player {
 
     public Player(int maxHP, int maxMP, String name) {
         this.maxHP = maxHP;
-        this.maxMP = maxHP;
+        this.maxMP = maxMP;
+        this.HP = maxHP;
+        this.MP = maxMP;
         this.name = name;
         attackNumber = 0;
     }
