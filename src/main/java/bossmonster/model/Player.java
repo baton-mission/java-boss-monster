@@ -36,6 +36,17 @@ public class Player {
         return name;
     }
 
+    public void subtractHP(int damage) {
+        HP -= damage;
+    }
+
+    public void subtractMP() {
+        MP -= 30;
+    }
+
+    public void addMP() {
+        MP += 10;
+    }
     public int getAttackNumber() {
         return attackNumber;
     }
