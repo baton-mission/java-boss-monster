@@ -16,7 +16,13 @@ public class BossmonsterController {
     }
 
     public Boss initBoss() {
-        int bossHP = inputView.inputBossHP();
+        int bossHP = 0;
+        try {
+            bossHP = inputView.inputBossHP();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            initBoss();
+        }
         return new Boss(bossHP);
     }
 
