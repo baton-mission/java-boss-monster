@@ -33,6 +33,7 @@ public class BossmonsterController {
             }
             bossAttack(boss, player);
             if (player.getHP() <= 0) {
+                player.modifyHP();
                 printBossWinImage(boss, player);
                 break;
             }

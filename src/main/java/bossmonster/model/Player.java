@@ -48,6 +48,10 @@ public class Player {
         MP += 10;
     }
 
+    public void modifyHP() {
+        HP = 0;
+    }
+
     public void modifyMP() {MP = maxMP;}
     public int getAttackNumber() {
         return attackNumber;
