@@ -1,7 +1,5 @@
 package bossmonster.view;
 
-import bossmonster.exception.Validator;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,15 +7,16 @@ import java.util.StringTokenizer;
 
 public class InputView {
 
+    private final String PREFIX = "[ERROR] ";
+
     private Scanner scanner = new Scanner(System.in);
-    private Validator validator = new Validator();
 
     public int readBossMonsterHp() {
         System.out.println("보스 몬스터의 HP를 입력해주세요.");
         String bossHp = scanner.nextLine();
 
         try {
-            validator.validateBossStatus(bossHp);
+            validateDigit(bossHp);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return readBossMonsterHp();
@@ -38,7 +37,7 @@ public class InputView {
         String inputString = scanner.nextLine();
 
         try {
-            validator.validatePlayerStatus(inputString);
+            validatePlayerStatus(inputString);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return readPlayerHpAndMp();
@@ -61,7 +60,7 @@ public class InputView {
 
     private int validateAttackType(String inputString) {
         try {
-            validator.validateAttackType(inputString);
+            validateDigit(inputString);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return readAttackType();
@@ -70,6 +69,27 @@ public class InputView {
         int attackType = Integer.parseInt(inputString);
 
         return attackType;
+    }
+
+    private void validatePlayerStatus(String status) {
+        StringTokenizer st = new StringTokenizer(status, ",");
+        String hp = st.nextToken();
+
+        if (!st.hasMoreTokens()) {
+            throw new IllegalArgumentException(PREFIX + "HP와 MP를 콤마(,)로 구분하여 입력해주세요. (예: 100,100)");
+        }
+
+        String mp = st.nextToken();
+        validateDigit(hp);
+        validateDigit(mp);
+    }
+
+    private void validateDigit(String input) {
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(PREFIX + "입력이 잘못되었습니다. 다시 입력해주세요.");
+        }
     }
 
     private List<Integer> parseToIntegerList(String inputString) {
