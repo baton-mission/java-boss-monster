@@ -4,7 +4,7 @@ public class Boss {
     private int HP;
     private final int maxHP;
 
-    Boss(int maxHP) {
+    public Boss(int maxHP) {
         this.maxHP = maxHP;
         this.HP = maxHP;
     }

@@ -8,7 +8,7 @@ public class Player {
     private final String name;
     private int attackNumber;
 
-    Player(int maxHP, int maxMP, String name) {
+    public Player(int maxHP, int maxMP, String name) {
         this.maxHP = maxHP;
         this.maxMP = maxHP;
         this.name = name;
