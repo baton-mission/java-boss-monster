@@ -1,6 +1,8 @@
 package  bossmonster.view;
 
+import java.util.List;
 import java.util.Scanner;
+import bossmonster.validation.InputValidation;
 
 class InputView {
     private static final String INPUT_BOSS_HP = "보스 몬스터의 HP를 입력해주세요.";
@@ -9,18 +11,18 @@ class InputView {
 
     static Scanner scanner = new Scanner(System.in);
 
-    public static String inputBossHP() {
+    public static int inputBossHP() {
         System.out.println(INPUT_BOSS_HP);
-        return scanner.nextLine();
+        return InputValidation.validBossHP(scanner.nextLine());
     }
 
     public static String inputPlayerName() {
         System.out.println(INPUT_PLAYER_NAME);
-        return scanner.nextLine();
+        return InputValidation.validPlayerName(scanner.nextLine());
     }
 
-    public static String getInputPlayerHpAndMp() {
+    public static List<Integer> getInputPlayerHpAndMp() {
         System.out.println(INPUT_PLAYER_HP_AND_MP);
-        return scanner.nextLine();
+        return InputValidation.validPlayerHPAndMP(scanner.nextLine());
     }
 }

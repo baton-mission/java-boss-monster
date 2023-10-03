@@ -1,7 +1,7 @@
 package bossmonster.validation;
 
 import java.util.*;
-class InputValidation {
+public class InputValidation {
     public static int validBossHP(String input) {
         int inputNumber = isNumber(input);
         isBetween100And300(inputNumber);
