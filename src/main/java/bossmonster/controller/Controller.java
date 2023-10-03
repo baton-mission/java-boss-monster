@@ -50,18 +50,15 @@ public class Controller {
         numberOfTurns++;
 
         printInfo(bossMonster, player);
-
         playerAttack(bossMonster, player);
-
         if (bossMonster.isDead()) {
             OutputView.printWinningMessage(PlayerInfo.from(player), numberOfTurns);
             return;
         }
 
         bossMonsterAttack(bossMonster, player);
-
         if (player.isDead()) {
-            bossMonster.changeAppearance(BossMonsterAppearance.HAPPY);
+            service.changeBossMonsterAppearanceToHappy(bossMonster);
             printInfo(bossMonster, player);
             OutputView.printDefeatMessage(PlayerInfo.from(player));
             return;
