@@ -1,7 +1,6 @@
 package bossmonster.domain.scanner;
 
 public interface GameInputScanner {
-
     int inputNumber();
 
     String inputString();

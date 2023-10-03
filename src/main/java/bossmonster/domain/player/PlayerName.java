@@ -15,7 +15,8 @@ public class PlayerName {
     }
 
     private void validatePlayerName(String playerName) {
-        if (playerName.isBlank() || playerName.length() > PLAYER_NAME_MAXIMUM_LENGTH_LIMIT) {
+        if (playerName.isBlank()
+                || playerName.length() > PLAYER_NAME_MAXIMUM_LENGTH_LIMIT) {
             throw new IllegalArgumentException("유효하지 않은 플레이어 이름입니다.");
         }
     }

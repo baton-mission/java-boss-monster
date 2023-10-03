@@ -31,7 +31,8 @@ public class PlayerHp {
     }
 
     private void validateHp(int hp) {
-        if (PLAYER_MINIMUM_HP_LIMIT > hp || PLAYER_MAXIMUM_HP_LIMIT < hp) {
+        if (PLAYER_MINIMUM_HP_LIMIT > hp
+                || PLAYER_MAXIMUM_HP_LIMIT < hp) {
             throw new IllegalArgumentException("유효하지 않은 플레이어 HP입니다.");
         }
     }

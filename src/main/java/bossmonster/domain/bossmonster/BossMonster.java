@@ -6,7 +6,6 @@ import bossmonster.domain.bossmonster.dto.BossMonsterInfo;
 
 public interface BossMonster
         extends Character {
-
     BossMonsterInfo getBossMonsterInfo();
 
     int attackPlayer(Player player);

@@ -26,7 +26,10 @@ public class GameInputScannerImpl
     }
 
     @Override
-    public int[] inputStringAndConvertToIntegerArrayBasedOnDelimiter(int countNumber, String delimiter) {
+    public int[] inputStringAndConvertToIntegerArrayBasedOnDelimiter(
+            int countNumber,
+            String delimiter
+    ) {
         String input = sc.nextLine();
         String[] inputArray = input.split(delimiter);
 

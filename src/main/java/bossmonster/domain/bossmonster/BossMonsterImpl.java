@@ -21,11 +21,7 @@ public class BossMonsterImpl
 
     @Override
     public boolean isAlive() {
-        if (bossMonsterHp.isCurrentHpZeroOrBelow()) {
-            return false;
-        }
-
-        return true;
+        return !bossMonsterHp.isCurrentHpZeroOrBelow();
     }
 
     @Override
