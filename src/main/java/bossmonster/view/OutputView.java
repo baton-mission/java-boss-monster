@@ -3,6 +3,8 @@ package bossmonster.view;
 public class OutputView {
     private static final String PRINT_START_RAID = "보스 레이드를 시작합니다!";
     private static final String PRINT_TWO_LINE = "============================";
+    private static final String PRINT_MAGICAL_ATTACK = "마법 공격을 했습니다. (입힌 데미지: 20)";
+    private static final String PRINT_PHYSICAL_ATTACK = "물리 공격을 했습니다. (입힌 데미지: 10)";
     private static final String PRINT_BOSS_START_IMAGE =
                     "____________________________\n" +
                     "   ^-^\n" +
@@ -40,5 +42,13 @@ public class OutputView {
 
     public void printBossAttackedImage() {
         System.out.println(PRINT_BOSS_ATTACKED_IMAGE);
+    }
+
+    public void printMagicalAttack() {
+        System.out.println(PRINT_MAGICAL_ATTACK);
+    }
+
+    public void printPhysicalAttack() {
+        System.out.println(PRINT_PHYSICAL_ATTACK);
     }
 }
