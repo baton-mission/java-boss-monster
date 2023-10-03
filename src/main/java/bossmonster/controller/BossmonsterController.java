@@ -23,6 +23,30 @@ public class BossmonsterController {
         outputView.printBossStartImage();
         outputView.printPlayerHPAndMP(player.getName(), player.getHP(), player.getMaxHP(),
                 player.getMP(), player.getMaxMP());
+
+        repeatRaid(boss, player);
+    }
+
+    public void repeatRaid(Boss boss, Player player) {
+        playerAttack(boss, player);
+        if(boss.getHP() <= 0) {
+            outputView.printEndRaid(player.getName(), player.getAttackNumber());
+            return;
+        }
+    }
+
+    public void playerAttack(Boss boss, Player player) {
+        int attackMethod = inputView.inputAttackMethod();
+        if(attackMethod == 1) {
+            outputView.printPhysicalAttack();
+            boss.subtractHP(10);
+        }
+        if(attackMethod == 2) {
+            outputView.printMagicalAttack();
+            boss.subtractHP(20);
+            player.subtractMP();
+        }
+        player.addAttackNumber();
     }
 
     public Boss initBoss() {
