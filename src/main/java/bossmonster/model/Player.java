@@ -47,6 +47,8 @@ public class Player {
     public void addMP() {
         MP += 10;
     }
+
+    public void modifyMP() {MP = maxMP;}
     public int getAttackNumber() {
         return attackNumber;
     }
