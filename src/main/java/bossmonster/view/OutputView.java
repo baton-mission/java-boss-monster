@@ -24,6 +24,14 @@ public class OutputView {
                     " \\  -  /\n" +
                     "  - ^ -\n"+
                     "____________________________\n";
+    private static final String PRINT_BOSS_WIN_IMAGE =
+                    "____________________________\n" +
+                    "   ^-^\n" +
+                    " / ^ ^ \\\n" +
+                    "(   \"   )\n" +
+                    " \\  3  /\n" +
+                    "  - ^ -\n" +
+                    "____________________________";
 
     public void printStartRaid() {
         System.out.println(PRINT_START_RAID);
@@ -45,6 +53,10 @@ public class OutputView {
 
     public void printBossAttackedImage() {
         System.out.println(PRINT_BOSS_ATTACKED_IMAGE);
+    }
+
+    public void printBossWinImage() {
+        System.out.println(PRINT_BOSS_WIN_IMAGE);
     }
 
     public void printBossAttack(int number) {
