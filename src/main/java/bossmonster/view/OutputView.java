@@ -9,7 +9,7 @@ public class OutputView {
                     " / 0 0 \\\n" +
                     "(   \"   )\n" +
                     " \\  -  /\n" +
-                    "  - ^ -" +
+                    "  - ^ -\n" +
                     "____________________________\n";
     private static final String PRINT_BOSS_ATTACKED_IMAGE =
                     "____________________________\n" +
@@ -17,7 +17,7 @@ public class OutputView {
                     " / x x \\\n" +
                     "(   \"   )\n" +
                     " \\  -  /\n" +
-                    "  - ^ -" +
+                    "  - ^ -\n"+
                     "____________________________\n";
 
     public void printStartRaid() {
