@@ -12,19 +12,15 @@ public class Mp {
         this.initialMp = mp;
     }
 
-    public int getMp() {
-        return mp;
-    }
-
     public void consume(int mpConsumption) {
         if (notEnoughMp(mpConsumption)) {
             throw new IllegalArgumentException(ErrorMessage.ERROR_NOT_ENOUGH_MP);
         }
-        int consumed = mp - mpConsumption;
+        int consumed = subtractFromMp(mpConsumption);
         if (exceedConsumedMp(consumed)) {
-            mp -= (consumed - initialMp);
+            mp = subtractFromMp(consumed - initialMp);
         }
-        mp -= mpConsumption;
+        mp = subtractFromMp(mpConsumption);
     }
 
     private boolean notEnoughMp(int mpConsumption) {
@@ -33,6 +29,14 @@ public class Mp {
 
     private boolean exceedConsumedMp(int consumed) {
         return consumed > initialMp;
+    }
+
+    private int subtractFromMp(int number) {
+        return mp - number;
+    }
+
+    public int getMp() {
+        return mp;
     }
 
     public int getInitialMp() {

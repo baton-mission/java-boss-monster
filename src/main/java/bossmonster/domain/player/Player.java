@@ -32,7 +32,7 @@ public class Player {
     }
 
     public void attack(Attack attack, BossMonster bossMonster) {
-        this.stat.consumeMp(attack.getMpConsumption());
+        stat.consumeMp(attack.getMpConsumption());
         bossMonster.takeDamaged(attack.getDamage());
     }
 
@@ -44,11 +44,11 @@ public class Player {
         return stat.isHPZeroOrLess();
     }
 
-    public List<Integer> stat() {
-        return stat.hpAndInitialHpAndMpAndInitialMp();
-    }
-
     public String name() {
         return name.getName();
+    }
+
+    public List<Integer> stat() {
+        return stat.hpAndInitialHpAndMpAndInitialMp();
     }
 }

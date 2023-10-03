@@ -41,12 +41,12 @@ public class BossMonster {
         return hp.isZeroOrLess();
     }
 
-    public void changeAppearance(BossMonsterAppearance appearance) {
-        this.appearance = appearance;
-    }
-
     public List<Integer> hpAndInitialHp() {
         return List.of(hp.getHp(), hp.getInitialHp());
+    }
+
+    public void changeAppearance(BossMonsterAppearance appearance) {
+        this.appearance = appearance;
     }
 
     public String appearance() {

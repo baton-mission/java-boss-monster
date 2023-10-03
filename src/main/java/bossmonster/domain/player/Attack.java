@@ -1,7 +1,8 @@
 package bossmonster.domain.player;
 
 import java.util.Arrays;
-import java.util.NoSuchElementException;
+
+import bossmonster.utils.ErrorMessage;
 
 public enum Attack {
 
@@ -24,7 +25,7 @@ public enum Attack {
         return Arrays.stream(Attack.values())
                 .filter(attack -> attack.getNumber() == number)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 번호입니다."));
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.ERROR_NOT_FOUND_ATTACK_FOR_NUMBER));
     }
 
     private int getNumber() {

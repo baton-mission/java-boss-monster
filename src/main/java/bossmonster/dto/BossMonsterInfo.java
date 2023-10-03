@@ -20,12 +20,12 @@ public class BossMonsterInfo {
         return new BossMonsterInfo(bossMonster.hpAndInitialHp(), bossMonster.appearance());
     }
 
-    public int getInitialHp() {
-        return initialHp;
-    }
-
     public int getHp() {
         return hp;
+    }
+
+    public int getInitialHp() {
+        return initialHp;
     }
 
     public String getAppearance() {
