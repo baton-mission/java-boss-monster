@@ -2,6 +2,7 @@ package bossmonster.controller;
 
 import bossmonster.model.Boss;
 import bossmonster.model.Player;
+import bossmonster.service.BossmonsterService;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
 
@@ -28,11 +29,28 @@ public class BossmonsterController {
     }
 
     public void repeatRaid(Boss boss, Player player) {
-        playerAttack(boss, player);
-        if(boss.getHP() <= 0) {
-            outputView.printEndRaid(player.getName(), player.getAttackNumber());
-            return;
+        while(true) {
+            playerAttack(boss, player);
+            if (boss.getHP() <= 0) {
+                outputView.printEndRaid(player.getName(), player.getAttackNumber());
+                break;
+            }
+            bossAttack(boss, player);
+            if (player.getHP() <= 0) {
+                outputView.printFailedRaid(player.getName());
+                break;
+            }
+            outputView.printBossHP(boss.getHP(), boss.getMaxHP());
+            outputView.printBossAttackedImage();
+            outputView.printPlayerHPAndMP(player.getName(), player.getHP(), player.getMaxHP(),
+                    player.getMP(), player.getMaxMP());
         }
+    }
+
+    public void bossAttack(Boss boss, Player player) {
+        int damage = BossmonsterService.bossDamage();
+        outputView.printBossAttack(damage);
+        player.subtractHP(damage);
     }
 
     public void playerAttack(Boss boss, Player player) {
