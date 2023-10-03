@@ -20,11 +20,7 @@ public class BossmonsterController {
     }
 
     public void startRaid(Boss boss, Player player) {
-        outputView.printBossHP(boss.getHP(), boss.getMaxHP());
-        outputView.printBossStartImage();
-        outputView.printPlayerHPAndMP(player.getName(), player.getHP(), player.getMaxHP(),
-                player.getMP(), player.getMaxMP());
-
+        printStartImage(boss, player);
         repeatRaid(boss, player);
     }
 
@@ -37,19 +33,35 @@ public class BossmonsterController {
             }
             bossAttack(boss, player);
             if (player.getHP() <= 0) {
-                outputView.printBossHP(boss.getHP(), boss.getMaxHP());
-                outputView.printBossWinImage();
-                outputView.printPlayerHPAndMP(player.getName(), player.getHP(), player.getMaxHP(),
-                        player.getMP(), player.getMaxMP());
-                outputView.printFailedRaid(player.getName());
+                printBossWinImage(boss, player);
                 break;
             }
-            outputView.printBossHP(boss.getHP(), boss.getMaxHP());
-            outputView.printBossAttackedImage();
-            outputView.printPlayerHPAndMP(player.getName(), player.getHP(), player.getMaxHP(),
-                    player.getMP(), player.getMaxMP());
+            printFightImage(boss, player);
         }
     }
+
+    public void printStartImage(Boss boss, Player player) {
+        outputView.printBossHP(boss.getHP(), boss.getMaxHP());
+        outputView.printBossStartImage();
+        outputView.printPlayerHPAndMP(player.getName(), player.getHP(), player.getMaxHP(),
+                player.getMP(), player.getMaxMP());
+    }
+
+    public void printFightImage(Boss boss, Player player) {
+        outputView.printBossHP(boss.getHP(), boss.getMaxHP());
+        outputView.printBossAttackedImage();
+        outputView.printPlayerHPAndMP(player.getName(), player.getHP(), player.getMaxHP(),
+                player.getMP(), player.getMaxMP());
+    }
+
+    public void printBossWinImage(Boss boss, Player player) {
+        outputView.printBossHP(boss.getHP(), boss.getMaxHP());
+        outputView.printBossWinImage();
+        outputView.printPlayerHPAndMP(player.getName(), player.getHP(), player.getMaxHP(),
+                player.getMP(), player.getMaxMP());
+        outputView.printFailedRaid(player.getName());
+    }
+
 
     public void bossAttack(Boss boss, Player player) {
         int damage = BossmonsterService.bossDamage();
