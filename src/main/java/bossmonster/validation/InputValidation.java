@@ -1,26 +1,29 @@
 package bossmonster.validation;
 
+import java.util.*;
 class InputValidation {
-    public static void validBossHP(String input) {
-        isNumber(input);
-        isBetween100And300(input);
+    public static int validBossHP(String input) {
+        int inputNumber = isNumber(input);
+        isBetween100And300(inputNumber);
+        return inputNumber;
     }
 
-    public static void validPlayerName(String input) {
+    public static String validPlayerName(String input) {
         if(input.length() > 5) {
             throw new IllegalArgumentException("5자 이하의 이름을 입력해주세요.");
         }
+        return input;
     }
 
-    public static void validPlayerHPAndMP(String input) {
+    public static List<Integer> validPlayerHPAndMP(String input) {
         String[] stringArr = divideString(input);
-        isNumber(stringArr[0]);
-        isNumber(stringArr[1]);
-        isAdd300(stringArr);
+        List<Integer> playerHPMP = List.of(isNumber(stringArr[0]), isNumber(stringArr[1]));
+        isAdd300(playerHPMP);
+        return playerHPMP;
     }
 
-    public static void isAdd300(String[] stringArr) {
-        if(Integer.parseInt(stringArr[0]) + Integer.parseInt(stringArr[1]) != 200) {
+    public static void isAdd300(List<Integer> playerHPMP) {
+        if(playerHPMP.get(0) + playerHPMP.get(1) != 200) {
             throw new IllegalArgumentException("HP와 MP의 합이 200이 되도록 입력해주세요.");
         }
     }
@@ -36,19 +39,20 @@ class InputValidation {
         return stringArr;
     }
 
-    public static void isBetween100And300(String input) {
-        int inputInteger = Integer.parseInt(input);
-        if(inputInteger < 100 || 300 < inputInteger) {
+    public static void isBetween100And300(int input) {
+        if(input < 100 || 300 < input) {
             throw new IllegalArgumentException("100 ~ 300 사이의 숫자를 입력해주세요.");
         }
     }
 
-    public static void isNumber(String input) {
+    public static int isNumber(String input) {
+        int inputNumber;
         try {
-            Integer.parseInt(input);
+            inputNumber = Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자를 입력해주세요.");
         }
+        return inputNumber;
     }
 
 }
