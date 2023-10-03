@@ -3,11 +3,11 @@ package bossmonster;
 import bossmonster.domain.Boss;
 import org.junit.jupiter.api.Test;
 
+import static bossmonster.util.ErrorMessage.HP_RANGE;
+import static bossmonster.util.ErrorMessage.NUMERIC;
 import static org.assertj.core.api.Assertions.*;
 
 public class BossTest {
-
-    private static final String ERROR = "[ERROR] ";
 
     @Test
     void 정상_테스트() {
@@ -32,7 +32,7 @@ public class BossTest {
         //when & then
         assertThatThrownBy(() -> new Boss(stringBossHp))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ERROR);
+                .hasMessageContaining(NUMERIC);
     }
 
     @Test
@@ -43,7 +43,7 @@ public class BossTest {
         //when & then
         assertThatThrownBy(() -> new Boss(lowBossHp))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ERROR);
+                .hasMessageContaining(HP_RANGE);
     }
 
     @Test
@@ -54,6 +54,6 @@ public class BossTest {
         //when & then
         assertThatThrownBy(() -> new Boss(highBossHp))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(ERROR);
+                .hasMessageContaining(HP_RANGE);
     }
 }

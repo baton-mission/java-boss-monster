@@ -1,5 +1,7 @@
 package bossmonster.domain;
 
+import bossmonster.util.ErrorChecker;
+
 import static bossmonster.util.Constants.ZERO;
 
 public class Player {
@@ -11,6 +13,8 @@ public class Player {
     private final int initialMp;
 
     public Player(String name, int hp, int mp) {
+        ErrorChecker.checkName(name);
+        ErrorChecker.checkSum(new int[]{hp, mp});
         this.name = name;
         this.hp = hp;
         this.mp = mp;
