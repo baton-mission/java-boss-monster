@@ -11,17 +11,17 @@ public class InputView {
 
     static Scanner scanner = new Scanner(System.in);
 
-    public static int inputBossHP() {
+    public int inputBossHP() {
         System.out.println(INPUT_BOSS_HP);
         return InputValidation.validBossHP(scanner.nextLine());
     }
 
-    public static String inputPlayerName() {
+    public String inputPlayerName() {
         System.out.println(INPUT_PLAYER_NAME);
         return InputValidation.validPlayerName(scanner.nextLine());
     }
 
-    public static List<Integer> inputPlayerHpAndMp() {
+    public List<Integer> inputPlayerHpAndMp() {
         System.out.println(INPUT_PLAYER_HP_AND_MP);
         return InputValidation.validPlayerHPAndMP(scanner.nextLine());
     }
