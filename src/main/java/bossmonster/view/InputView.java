@@ -21,7 +21,7 @@ public class InputView {
         return InputValidation.validPlayerName(scanner.nextLine());
     }
 
-    public static List<Integer> getInputPlayerHpAndMp() {
+    public static List<Integer> inputPlayerHpAndMp() {
         System.out.println(INPUT_PLAYER_HP_AND_MP);
         return InputValidation.validPlayerHPAndMP(scanner.nextLine());
     }
