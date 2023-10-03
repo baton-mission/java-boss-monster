@@ -24,7 +24,7 @@ class BossMonsterTest {
     Service service;
 
     @BeforeEach
-    void setUp() {
+    void injectService() {
         service = new Service();
     }
 
@@ -58,9 +58,9 @@ class BossMonsterTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("보스 몬스터 생성 시 HP가 지정된 최소 값보다 작은 경우 실패한다.")
+    @DisplayName("보스 몬스터 생성 시 HP가 지정된 최대 값보다 큰 경우 실패한다.")
     @Test
-    void generateBossMonster_Fail_ByHpGreaterThanMaximum() {
+    void generateBossMonster_Fail_ByHpMoreThanMaximum() {
         // when, then
         assertThatThrownBy(() -> service.generateBossMonster(400))
                 .isInstanceOf(IllegalArgumentException.class);
