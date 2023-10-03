@@ -5,18 +5,16 @@ public class BossMonster {
     private int hp;
     private int maxHp;
 
-    public int getHp() {
-        return hp;
-    }
-
-    public int getMaxHp() {
-        return maxHp;
-    }
-
-    public void setHp(int hp) {
+    public BossMonster(int hp) {
         validateBossStatus(hp);
         this.hp = hp;
         this.maxHp = hp;
+    }
+
+    private void validateBossStatus(int hp) {
+        if (hp < 100 || hp > 300) {
+            throw new IllegalArgumentException("보스 체력은 100이상, 300이하여야합니다.");
+        }
     }
 
     public int attackPlayer(Player player) {
@@ -40,9 +38,11 @@ public class BossMonster {
         return false;
     }
 
-    private void validateBossStatus(int hp) {
-        if (hp < 100 || hp > 300) {
-            throw new IllegalArgumentException();
-        }
+    public int getHp() {
+        return hp;
+    }
+
+    public int getMaxHp() {
+        return maxHp;
     }
 }

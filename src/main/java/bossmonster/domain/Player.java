@@ -8,37 +8,27 @@ public class Player {
     private int maxHp;
     private int maxMp;
 
-    public String getName() {
-        return name;
-    }
-
-    public int getHp() {
-        return hp;
-    }
-
-    public int getMp() {
-        return mp;
-    }
-
-    public int getMaxHp() {
-        return maxHp;
-    }
-
-    public int getMaxMp() {
-        return maxMp;
-    }
-
-    public void setName(String name) {
+    public Player(String name, int hp, int mp) {
         validatePlayerName(name);
-        this.name = name;
-    }
-
-    public void setStatus(int hp, int mp) {
         validatePlayerStatus(hp, mp);
+
+        this.name = name;
         this.hp = hp;
         this.maxHp = hp;
         this.mp = mp;
         this.maxMp = mp;
+    }
+
+    public static void validatePlayerName(String name) {
+        if (name.length() > 5) {
+            throw new IllegalArgumentException("플레이어의 이름은 5자 이하만 가능합니다.");
+        }
+    }
+
+    public static void validatePlayerStatus(int hp, int mp) {
+        if (hp < 1 || hp + mp != 200) {
+            throw new IllegalArgumentException("HP는 1이상, HP와 MP의 합이 200이 되도록 입력해주세요.");
+        }
     }
 
     public void attackBossMonster(BossMonster bossMonster, AttackType attackType) {
@@ -61,22 +51,7 @@ public class Player {
     }
 
     public boolean isVictory(BossMonster bossMonster) {
-        if (bossMonster.getHp() == 0) {
-            return true;
-        }
-        return false;
-    }
-
-    private void validatePlayerName(String name) {
-        if (name.length() > 5) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private void validatePlayerStatus(int hp, int mp) {
-        if (hp < 1 || hp + mp != 200) {
-            throw new IllegalArgumentException();
-        }
+        return bossMonster.getHp() == 0;
     }
 
     private boolean canAttack(AttackType attackType) {
@@ -87,5 +62,25 @@ public class Player {
         }
 
         return true;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public int getMp() {
+        return mp;
+    }
+
+    public int getMaxHp() {
+        return maxHp;
+    }
+
+    public int getMaxMp() {
+        return maxMp;
     }
 }

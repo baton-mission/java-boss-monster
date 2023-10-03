@@ -64,16 +64,8 @@ public class OutputView {
         System.out.println("============================\n");
     }
 
-    public void printBossHpException() {
-        System.out.println(PREFIX + "보스 체력은 100이상, 300이하여야합니다.");
-    }
-
-    public void printPlayerNameException() {
-        System.out.println(PREFIX + "플레이어의 이름은 5자 이하만 가능합니다.");
-    }
-
-    public void printPlayerStatusException() {
-        System.out.println(PREFIX + "HP는 1이상, HP와 MP의 합이 200이 되도록 입력해주세요.");
+    public void printException(String errorMessage) {
+        System.out.println(PREFIX + errorMessage);
     }
 
     public void printAttackTypeException() {

@@ -20,59 +20,59 @@ public class GameController {
     }
 
     public void play() {
-        Player player = new Player();
-        BossMonster bossMonster = new BossMonster();
+        BossMonster bossMonster = progressBossHpSetting();
+        Player player = progressPlayerInitialSetting();
         int turnCount = 1;
 
-        progressInitialSetting(player, bossMonster);
         progressBattle(player, bossMonster, turnCount);
     }
 
-    private void progressInitialSetting(Player player, BossMonster bossMonster) {
-        progressBossHpSetting(bossMonster);
-        progressPlayerNameSetting(player);
-        progressPlayerStatusSetting(player);
-    }
-
-    private int progressBossHpSetting(BossMonster bossMonster) {
+    private BossMonster progressBossHpSetting() {
         int bossMonsterHp = inputView.readBossMonsterHp();
 
         try {
-            bossMonster.setHp(bossMonsterHp);
+            BossMonster bossMonster = new BossMonster(bossMonsterHp);
+            return bossMonster;
         } catch (IllegalArgumentException e) {
-            outputView.printBossHpException();
-            return progressBossHpSetting(bossMonster);
+            outputView.printException(e.getMessage());
+            return progressBossHpSetting();
         }
-
-        return END;
     }
 
-    private int progressPlayerNameSetting(Player player) {
-        String playerName = inputView.readPlayerName();
+    private Player progressPlayerInitialSetting() {
+        String playerName = progressPlayerNameSetting();
+        List<Integer> playerStatus = progressPlayerStatusSetting();
 
         try {
-            player.setName(playerName);
+            Player player = new Player(playerName, playerStatus.get(0), playerStatus.get(1));
+            return player;
         } catch (IllegalArgumentException e) {
-            outputView.printPlayerNameException();
-            return progressPlayerNameSetting(player);
+            outputView.printException(e.getMessage());
+            return progressPlayerInitialSetting();
         }
-
-        return END;
     }
 
-    private int progressPlayerStatusSetting(Player player) {
-        List<Integer> playerStatus = inputView.readPlayerHpAndMp();
-
+    private String progressPlayerNameSetting() {
         try {
-            player.setStatus(playerStatus.get(0), playerStatus.get(1));
+            String playerName = inputView.readPlayerName();
+            Player.validatePlayerName(playerName);
+            return playerName;
         } catch (IllegalArgumentException e) {
-            outputView.printPlayerStatusException();
-            return progressPlayerStatusSetting(player);
+            outputView.printException(e.getMessage());
+            return progressPlayerNameSetting();
         }
-
-        return END;
     }
 
+    private List<Integer> progressPlayerStatusSetting() {
+        try {
+            List<Integer> playerStatus = inputView.readPlayerHpAndMp();
+            Player.validatePlayerStatus(playerStatus.get(0), playerStatus.get(1));
+            return playerStatus;
+        } catch (IllegalArgumentException e) {
+            outputView.printException(e.getMessage());
+            return progressPlayerStatusSetting();
+        }
+    }
     private void progressBattle(Player player, BossMonster bossMonster, int turnCount) {
         outputView.printBattleStartView();
 
@@ -116,6 +116,8 @@ public class GameController {
 
         return END;
     }
+
+
 
     private void endGameByPlayerVictory(Player player, int turnCount) {
         outputView.printEndGameByVictoryView(player, turnCount);
