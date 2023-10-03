@@ -4,21 +4,21 @@ public class OutputView {
     private static final String PRINT_START_RAID = "보스 레이드를 시작합니다!";
     private static final String PRINT_TWO_LINE = "============================";
     private static final String PRINT_BOSS_START_IMAGE =
-                    "____________________________" +
+                    "____________________________\n" +
                     "   ^-^\n" +
                     " / 0 0 \\\n" +
                     "(   \"   )\n" +
                     " \\  -  /\n" +
                     "  - ^ -" +
-                    "____________________________";
+                    "____________________________\n";
     private static final String PRINT_BOSS_ATTACKED_IMAGE =
-                    "____________________________" +
+                    "____________________________\n" +
                     "   ^-^\n" +
                     " / x x \\\n" +
                     "(   \"   )\n" +
                     " \\  -  /\n" +
                     "  - ^ -" +
-                    "____________________________";
+                    "____________________________\n";
 
     public void printStartRaid() {
         System.out.println(PRINT_START_RAID);
