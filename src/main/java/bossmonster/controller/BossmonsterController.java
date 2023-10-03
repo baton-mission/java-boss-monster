@@ -37,6 +37,10 @@ public class BossmonsterController {
             }
             bossAttack(boss, player);
             if (player.getHP() <= 0) {
+                outputView.printBossHP(boss.getHP(), boss.getMaxHP());
+                outputView.printBossWinImage();
+                outputView.printPlayerHPAndMP(player.getName(), player.getHP(), player.getMaxHP(),
+                        player.getMP(), player.getMaxMP());
                 outputView.printFailedRaid(player.getName());
                 break;
             }
