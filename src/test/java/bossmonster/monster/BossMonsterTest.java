@@ -66,7 +66,7 @@ class BossMonsterTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("플레이어 공격 시 플레이어의 HP가 공격 데미지만큼 감소한다.")
+    @DisplayName("보스 몬스터가 플레이어 공격 시 플레이어의 HP가 공격 데미지만큼 감소한다.")
     @Test
     void reducePlayerHp_Success_ByAttack() {
         // given
