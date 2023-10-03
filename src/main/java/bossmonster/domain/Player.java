@@ -51,6 +51,7 @@ public class Player {
     }
 
     public void updateMana(AttackType type) {
+        ErrorChecker.checkMana(this, type.getManaCost());
         this.mp += type.getManaCost();
         if (this.mp > initialMp) {
             this.mp = initialMp;
