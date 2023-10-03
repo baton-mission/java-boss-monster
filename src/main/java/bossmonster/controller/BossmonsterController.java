@@ -27,8 +27,28 @@ public class BossmonsterController {
     }
 
     public Player initPlayer() {
-        String name = inputView.inputPlayerName();
-        List<Integer> playerHPAndMP = inputView.inputPlayerHpAndMp();
+        String name = getPlayerName();
+        List<Integer> playerHPAndMP = getPlayerHPAndMP();
+
         return new Player(playerHPAndMP.get(0), playerHPAndMP.get(1), name);
+    }
+
+    public List<Integer> getPlayerHPAndMP() {
+        try {
+            return inputView.inputPlayerHpAndMp();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getPlayerHPAndMP();
+        }
+
+    }
+
+    public String getPlayerName() {
+        try {
+            return inputView.inputPlayerName();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getPlayerName();
+        }
     }
 }
