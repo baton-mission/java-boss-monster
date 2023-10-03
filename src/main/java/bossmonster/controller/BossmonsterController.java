@@ -16,14 +16,16 @@ public class BossmonsterController {
     }
 
     public Boss initBoss() {
-        int bossHP = 0;
+        return new Boss(getBossHP());
+    }
+
+    public int getBossHP() {
         try {
-            bossHP = inputView.inputBossHP();
+            return inputView.inputBossHP();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            initBoss();
+            return getBossHP();
         }
-        return new Boss(bossHP);
     }
 
     public Player initPlayer() {
