@@ -5,6 +5,8 @@ public class OutputView {
     private static final String PRINT_TWO_LINE = "============================";
     private static final String PRINT_MAGICAL_ATTACK = "마법 공격을 했습니다. (입힌 데미지: 20)";
     private static final String PRINT_PHYSICAL_ATTACK = "물리 공격을 했습니다. (입힌 데미지: 10)";
+    private static final String PRINT_END_RAID = "번의 전투 끝에 보스 몬스터를 잡았습니다.";
+    private static final String PRINT_FAILED_RAID = "보스 레이드에 실패했습니다.";
     private static final String PRINT_BOSS_START_IMAGE =
                     "____________________________\n" +
                     "   ^-^\n" +
@@ -50,5 +52,13 @@ public class OutputView {
 
     public void printPhysicalAttack() {
         System.out.println(PRINT_PHYSICAL_ATTACK);
+    }
+
+    public void printEndRaid(String name, int number) {
+        System.out.println(name + "님이 " +number + PRINT_END_RAID);
+    }
+
+    public void printFailedRaid() {
+        System.out.println(PRINT_FAILED_RAID);
     }
 }
