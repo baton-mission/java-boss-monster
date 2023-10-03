@@ -71,9 +71,14 @@ public class BossmonsterController {
 
     public void playerAttack(Boss boss, Player player) {
         int attackMethod = inputView.inputAttackMethod();
+        if(attackMethod == 2 && !isRemainPlayerMP(player)) {
+            outputView.printCantUseMagicalAttack();
+            attackMethod = 1;
+        }
         if(attackMethod == 1) {
             outputView.printPhysicalAttack();
             boss.subtractHP(10);
+            addPlayerMP(player);
         }
         if(attackMethod == 2) {
             outputView.printMagicalAttack();
@@ -81,6 +86,17 @@ public class BossmonsterController {
             player.subtractMP();
         }
         player.addAttackNumber();
+    }
+
+    public boolean isRemainPlayerMP(Player player) {
+        return player.getMP() >= 30;
+    }
+
+    public void addPlayerMP(Player player) {
+        player.addMP();
+        if(player.getMP() >= player.getMaxMP()) {
+            player.modifyMP();
+        }
     }
 
     public Boss initBoss() {
