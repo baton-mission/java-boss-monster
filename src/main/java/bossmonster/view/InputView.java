@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 import bossmonster.validation.InputValidation;
 
-class InputView {
+public class InputView {
     private static final String INPUT_BOSS_HP = "보스 몬스터의 HP를 입력해주세요.";
     private static final String INPUT_PLAYER_NAME = "플레이어의 이름을 입력해주세요.";
     private static final String INPUT_PLAYER_HP_AND_MP = "플레이어의 HP와 MP를 입력해주세요.(,로 구분)";
