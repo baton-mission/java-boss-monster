@@ -3,16 +3,26 @@ package bossmonster.controller;
 import bossmonster.model.Boss;
 import bossmonster.model.Player;
 import bossmonster.view.InputView;
+import bossmonster.view.OutputView;
 
 import java.util.List;
 
 public class BossmonsterController {
     InputView inputView = new InputView();
+    OutputView outputView= new OutputView();
 
     public void startProgram() {
         Boss boss = initBoss();
         Player player = initPlayer();
+        outputView.printStartRaid();
+        startRaid(boss, player);
+    }
 
+    public void startRaid(Boss boss, Player player) {
+        outputView.printBossHP(boss.getHP(), boss.getMaxHP());
+        outputView.printBossStartImage();
+        outputView.printPlayerHPAndMP(player.getName(), player.getHP(), player.getMaxHP(),
+                player.getMP(), player.getMaxMP());
     }
 
     public Boss initBoss() {
