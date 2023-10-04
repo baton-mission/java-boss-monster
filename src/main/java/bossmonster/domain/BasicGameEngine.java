@@ -90,22 +90,33 @@ public class BasicGameEngine implements GameEngine {
         int selected = inputProcessor.getInt();
         if (selected == 1){
            player.attack(boss, 10);
+           outputProcessor.printResult(String.format("물리공격을 했습니다. (입힌 데미지: %d)",10));
         }
         if (selected == 2){
             try {
-                player.magicAttack(boss, 30);
+                player.magicAttack(boss, 20);
+                outputProcessor.printResult(String.format("마법공격을 했습니다. (입힌 데미지: %d)",20));
             } catch (GamePolicyException e) {
                 outputProcessor.printError(e);
                 player.attack(boss, 10);
+                outputProcessor.printResult(String.format("물리공격을 했습니다. (입힌 데미지: %d)",10));
             }
+        }
+        try {
+            bossTurn();
+        }catch (GameEndException e){
+            outputProcessor.printResult(String.format("%s의 HP가 0이 되었습니다.\n보스 레이드에 실패했습니다.",player.getName()));
         }
     }
 
     private void bossTurn() {
-
-    }
-
-    private void endGame(OutputProcessor outputProcessor) {
-
+        int attackValue = inputProcessor.getRandomInt(21);
+        boss.attack(player,attackValue);
+        outputProcessor.printResult(String.format("보스가 공격을 했습니다. (입힌 데미지: %d)",attackValue));
+        try {
+            playerTurn();
+        }catch (GameEndException e){
+            outputProcessor.printResult(String.format("%s 님이 %d번의 전투 끝에 보스 몬스터를 잡았습니다!", player.getName(), turnCount));
+        }
     }
 }
