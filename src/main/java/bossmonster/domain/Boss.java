@@ -2,18 +2,18 @@ package bossmonster.domain;
 
 import bossmonster.exception.GameEndException;
 
-public abstract class Boss {
-    protected int hp;
-    protected final int maxHp;
+abstract class Boss {
+    private int hp;
+    private final int maxHp;
 
-    public Boss(int hp) {
+    Boss(int hp) {
         maxHp = hp;
         this.hp = hp;
     }
 
-    public abstract void attack(Player player, int value);
+    abstract void attack(Player player, int value);
 
-    public void hit(int value) {
+    void hit(int value) {
         if (hp - value <= 0 || hp == 0){
             hp = 0;
             throw new GameEndException("보스가 죽었습니다!", true);
@@ -26,7 +26,7 @@ public abstract class Boss {
         return String.format("BOSS HP [%d/%d]",hp,maxHp);
     }
 
-    public String bossIcon(){
+    String bossIcon(){
         return "   ^-^\n" +
                 " / 0 0 \\\n" +
                 "(   \"   )\n" +
@@ -34,7 +34,7 @@ public abstract class Boss {
                 "  - ^ -";
     }
 
-    public String bossHitIcon(){
+    String bossHitIcon(){
         return "   ^-^\n" +
                 " / x x \\\n" +
                 "(   \"\\  )\n" +
@@ -42,7 +42,7 @@ public abstract class Boss {
                 "  - ^ -";
     }
 
-    public final boolean isNew(){
+    final boolean isNew(){
         return hp == maxHp;
     }
 }

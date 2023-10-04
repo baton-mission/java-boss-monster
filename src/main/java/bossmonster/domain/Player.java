@@ -3,7 +3,7 @@ package bossmonster.domain;
 import bossmonster.exception.GameEndException;
 import bossmonster.exception.GamePolicyException;
 
-public abstract class Player {
+abstract class Player {
     protected final String name;
     private int hp;
     private int mp;
@@ -11,7 +11,7 @@ public abstract class Player {
     private final int maxMp;
 
 
-    public Player(String name, int hp, int mp) {
+    Player(String name, int hp, int mp) {
         this.name = name;
         this.hp = hp;
         this.mp = mp;
@@ -20,11 +20,11 @@ public abstract class Player {
     }
 
 
-    public abstract void attack(Boss boss, int value);
+    abstract void attack(Boss boss, int value);
 
-    public abstract void magicAttack(Boss boss, int value);
+    abstract void magicAttack(Boss boss, int value);
 
-    protected void recoveryMp(int value){
+    void recoveryMp(int value){
         mp = mp + value;
         if(mp > maxMp){
             mp = maxMp;
@@ -35,11 +35,11 @@ public abstract class Player {
         mp = mp - value;
     }
 
-    public final boolean canUseMp(int value){
+    final boolean canUseMp(int value){
         return mp >= value;
     }
 
-    public void hit(int value) {
+    void hit(int value) {
         if (hp - value <= 0 || hp == 0){
             hp = 0;
             throw new GameEndException("플레이어가 죽었습니다!", false);
@@ -47,13 +47,12 @@ public abstract class Player {
         hp = hp - value;
     }
 
-
     @Override
     public final String toString() {
         return String.format("%s HP [%d/%d]",name, hp, maxHp);
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 }

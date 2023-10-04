@@ -1,16 +1,13 @@
 package bossmonster.domain;
 
-import bossmonster.exception.GameEndException;
+class BossImpl extends Boss {
 
-
-public class BossImpl extends Boss {
-
-    public BossImpl(int hp) {
+    BossImpl(int hp) {
         super(hp);
     }
 
     @Override
-    public void attack(Player player, int value) {
+    void attack(Player player, int value) {
         player.hit(value);
     }
 }
