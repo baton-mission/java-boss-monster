@@ -1,7 +1,6 @@
 package bossmonster.controller;
 
 import java.util.List;
-import java.util.Scanner;
 import java.util.function.Supplier;
 
 import bossmonster.domain.player.Attack;
@@ -10,19 +9,16 @@ import bossmonster.service.Service;
 import bossmonster.dto.BossMonsterInfo;
 import bossmonster.dto.PlayerInfo;
 import bossmonster.domain.monster.BossMonster;
-import bossmonster.domain.monster.BossMonsterAppearance;
 import bossmonster.domain.player.Player;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
 
 public class Controller {
 
-    private final Scanner scanner;
     private final BossMonsterDamageGenerator bossMonsterDamageGenerator;
     private final Service service;
 
-    public Controller(Scanner scanner, BossMonsterDamageGenerator bossMonsterDamageGenerator, Service service) {
-        this.scanner = scanner;
+    public Controller(BossMonsterDamageGenerator bossMonsterDamageGenerator, Service service) {
         this.bossMonsterDamageGenerator = bossMonsterDamageGenerator;
         this.service = service;
     }
@@ -36,13 +32,13 @@ public class Controller {
     }
 
     private BossMonster getBossMonster() {
-        int bossMonsterHp = InputView.readBossMonsterHp(scanner);
+        int bossMonsterHp = InputView.readBossMonsterHp();
         return service.generateBossMonster(bossMonsterHp);
     }
 
     private Player getPlayer() {
-        String playerName = InputView.readPlayerName(scanner);
-        List<Integer> playerInitialHpAndMp = InputView.readPlayerInitialHpAndMp(scanner);
+        String playerName = InputView.readPlayerName();
+        List<Integer> playerInitialHpAndMp = InputView.readPlayerInitialHpAndMp();
         return service.generatePlayer(playerName, playerInitialHpAndMp);
     }
 
@@ -75,7 +71,7 @@ public class Controller {
     }
 
     private void playerAttack(BossMonster bossMonster, Player player) {
-        Attack playerAttack = repeatReadForInvalid(() -> Attack.of(InputView.readPlayerAttackNumber(scanner)));
+        Attack playerAttack = repeatReadForInvalid(() -> Attack.of(InputView.readPlayerAttackNumber()));
         try {
             service.playerAttack(playerAttack, player, bossMonster);
         } catch (IllegalArgumentException e) {
