@@ -22,11 +22,11 @@ public class BasicGameEngine implements GameEngine {
 
     @Override
     public void initGame() {
-        while (boss != null){
+        while (boss == null){
             boss = initBoss();
         }
 
-        while (player != null){
+        while (player == null){
             player = initPlayer();
         }
         startGame();
