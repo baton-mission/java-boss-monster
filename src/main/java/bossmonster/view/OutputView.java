@@ -45,15 +45,15 @@ public class OutputView {
         System.out.println("BOSS HP [" + bossMonster.getHp() + "/" + bossMonster.getMaxHp() + "]");
         System.out.println("____________________________");
 
-        if (turnCount == 1) {
+        if (bossMonster.getCondition() == BOSS_NORMAL) {
             printBossMonsterView(BOSS_NORMAL);
         }
 
-        if (turnCount > 1 && player.getHp() > 0) {
+        if (bossMonster.getCondition() == BOSS_DAMAGED) {
             printBossMonsterView(BOSS_DAMAGED);
         }
 
-        if (turnCount > 1 && player.getHp() == 0) {
+        if (bossMonster.getCondition() == BOSS_WIN) {
             printBossMonsterView(BOSS_WIN);
         }
 
@@ -66,10 +66,6 @@ public class OutputView {
 
     public void printException(String errorMessage) {
         System.out.println(PREFIX + errorMessage);
-    }
-
-    public void printAttackTypeException() {
-        System.out.println(PREFIX + "1 또는 2를 입력해주세요.");
     }
 
     public void printLackOfMPException() {

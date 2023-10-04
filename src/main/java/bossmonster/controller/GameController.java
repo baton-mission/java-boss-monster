@@ -82,14 +82,14 @@ public class GameController {
         while (true) {
             outputView.printBattleInfoView(player, bossMonster, turnCount);
             progressPlayerPhase(player, bossMonster);
-            if (player.isVictory(bossMonster)) {
+            if (bossMonster.isDead()) {
                 endGameByPlayerVictory(player, turnCount);
                 break;
             }
 
             int bossDamage = bossMonster.attackPlayer(player);
             outputView.printBossPhaseView(bossDamage);
-            if (bossMonster.isVictory(player)) {
+            if (player.isDead()) {
                 endGameByPlayerDefeat(player, bossMonster, turnCount);
                 break;
             }

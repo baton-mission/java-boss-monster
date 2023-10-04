@@ -52,18 +52,13 @@ public class Player {
         }
     }
 
-    public boolean isVictory(BossMonster bossMonster) {
-        return bossMonster.getHp() == 0;
+    public boolean isDead() {
+        return hp == 0;
     }
 
     private boolean canAttack(AttackType attackType) {
         int mpChange = attackType.getMpChange();
-
-        if (mp + mpChange < 0) {
-            return false;
-        }
-
-        return true;
+        return mp + mpChange >= 0;
     }
 
     public String getName() {
