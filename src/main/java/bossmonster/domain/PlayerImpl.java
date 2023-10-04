@@ -1,6 +1,7 @@
 package bossmonster.domain;
 
 import bossmonster.exception.GameEndException;
+import bossmonster.exception.GamePolicyException;
 
 public class PlayerImpl extends Player {
     public PlayerImpl(String name, int hp, int mp) {
@@ -18,6 +19,12 @@ public class PlayerImpl extends Player {
     }
 
     @Override
-    public void magicAttack(Boss boss, int value) {
+    public void magicAttack(Boss boss, int value) throws GamePolicyException {
+        useMp(30);
+        try {
+            boss.hit(value);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
