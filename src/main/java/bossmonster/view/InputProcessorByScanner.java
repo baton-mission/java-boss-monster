@@ -1,15 +1,23 @@
 package bossmonster.view;
 
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
 public class InputProcessorByScanner implements InputProcessor {
-    private final Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
     private final Random random = new Random();
 
     @Override
     public int getInt() {
-        return sc.nextInt();
+        while (true) {
+            sc = new Scanner(System.in);
+            try {
+                return sc.nextInt();
+            } catch (InputMismatchException ignored) {
+
+            }
+        }
     }
 
     @Override
