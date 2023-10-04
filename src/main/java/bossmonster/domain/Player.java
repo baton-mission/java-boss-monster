@@ -35,7 +35,7 @@ public class Player {
 
     public void attackBossMonster(BossMonster bossMonster, AttackType attackType) {
         if (!canAttack(attackType)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("마법 공격에 필요한 MP가 부족합니다.");
         }
 
         bossMonster.attacked(attackType);

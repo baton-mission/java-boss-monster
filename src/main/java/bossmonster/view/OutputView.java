@@ -68,11 +68,6 @@ public class OutputView {
         System.out.println(PREFIX + errorMessage);
     }
 
-    public void printLackOfMPException() {
-        System.out.println(PREFIX + "마법 공격에 필요한 MP가 부족합니다.");
-    }
-
-
     private void printBossMonsterView(int bossCondition) {
         if (bossCondition == BOSS_NORMAL) {
             System.out.println("   ^-^\n / 0 0 \\\n(   \"   )\n \\  -  /\n  - ^ -");
