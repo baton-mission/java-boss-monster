@@ -1,8 +1,9 @@
 package bossmonster.controller;
 
-import bossmonster.domain.AttackType;
+import bossmonster.domain.attacktype.AttackType;
 import bossmonster.domain.BossMonster;
 import bossmonster.domain.Player;
+import bossmonster.repository.AttackTypeRepository;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
 
@@ -11,10 +12,12 @@ import java.util.List;
 public class GameController {
 
     private static final int END = 0;
+    private AttackTypeRepository attackTypeRepository;
     private InputView inputView;
     private OutputView outputView;
 
-    public GameController(InputView inputView, OutputView outputView) {
+    public GameController(AttackTypeRepository attackTypeRepository, InputView inputView, OutputView outputView) {
+        this.attackTypeRepository = attackTypeRepository;
         this.inputView = inputView;
         this.outputView = outputView;
     }
@@ -96,15 +99,7 @@ public class GameController {
     }
 
     private int progressPlayerPhase(Player player, BossMonster bossMonster) {
-        int attackTypeNum = inputView.readAttackType();
-        AttackType attackType = new AttackType();
-
-        try {
-            attackType.setType(attackTypeNum);
-        } catch (IllegalArgumentException e) {
-            outputView.printAttackTypeException();
-            return progressPlayerPhase(player, bossMonster);
-        }
+        AttackType attackType = progressReadAttackType();
 
         try {
             player.attackBossMonster(bossMonster, attackType);
@@ -117,7 +112,17 @@ public class GameController {
         return END;
     }
 
+    private AttackType progressReadAttackType() {
+        int attackTypeNum = inputView.readAttackType();
 
+        try {
+            AttackType attackType = attackTypeRepository.getAttackType(attackTypeNum);
+            return attackType;
+        } catch (IllegalArgumentException e) {
+            outputView.printException(e.getMessage());
+            return progressReadAttackType();
+        }
+    }
 
     private void endGameByPlayerVictory(Player player, int turnCount) {
         outputView.printEndGameByVictoryView(player, turnCount);

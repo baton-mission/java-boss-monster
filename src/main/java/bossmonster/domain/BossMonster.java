@@ -1,5 +1,7 @@
 package bossmonster.domain;
 
+import bossmonster.domain.attacktype.AttackType;
+
 public class BossMonster {
 
     private int hp;

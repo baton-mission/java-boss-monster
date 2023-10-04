@@ -1,6 +1,6 @@
 package bossmonster.view;
 
-import bossmonster.domain.AttackType;
+import bossmonster.domain.attacktype.AttackType;
 import bossmonster.domain.BossMonster;
 import bossmonster.domain.Player;
 
