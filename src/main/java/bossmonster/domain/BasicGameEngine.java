@@ -1,5 +1,7 @@
 package bossmonster.domain;
 
+import bossmonster.exception.GameEndException;
+import bossmonster.exception.GamePolicyException;
 import bossmonster.view.InputProcessor;
 import bossmonster.view.OutputProcessor;
 
@@ -7,6 +9,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BasicGameEngine implements GameEngine {
+    private int turnCount = 0;
     private Player player;
     private Boss boss;
     private final InputProcessor inputProcessor;
@@ -64,18 +67,38 @@ public class BasicGameEngine implements GameEngine {
         if (!canStart()){
             return;
         }
+        outputProcessor.printResult("보스 레이드를 시작합니다!");
         outputProcessor.printResult(boss);
         outputProcessor.printSectionBar();
         outputProcessor.printResult(boss.bossIcon());
         outputProcessor.printSectionBar();
-        playerTurn();
+        try {
+            playerTurn();
+        }catch (GameEndException e){
+            outputProcessor.printResult(String.format("%s 님이 %d번의 전투 끝에 보스 몬스터를 잡았습니다!", player.getName(), turnCount));
+        }
     }
 
     private boolean canStart(){
         return player != null && boss != null;
     }
     private void playerTurn() {
-
+        turnCount = turnCount + 1;
+        outputProcessor.printResult(player);
+        outputProcessor.printDecorateInSection();
+        outputProcessor.printResult("어떤 공격을 하시겠습니까?\n1. 물리 공격\n2. 마법 공격");
+        int selected = inputProcessor.getInt();
+        if (selected == 1){
+           player.attack(boss, 10);
+        }
+        if (selected == 2){
+            try {
+                player.magicAttack(boss, 30);
+            } catch (GamePolicyException e) {
+                outputProcessor.printError(e);
+                player.attack(boss, 10);
+            }
+        }
     }
 
     private void bossTurn() {

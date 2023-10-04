@@ -61,4 +61,8 @@ public abstract class Player {
     public final String toString() {
         return String.format("BOSS HP [%d/%d]",hp,maxHp);
     }
+
+    public String getName() {
+        return name;
+    }
 }

@@ -6,4 +6,7 @@ public interface OutputProcessor {
     default void printSectionBar(){
         System.out.println("____________________________");
     }
+    default void printDecorateInSection(){
+        System.out.println("============================");
+    }
 }
