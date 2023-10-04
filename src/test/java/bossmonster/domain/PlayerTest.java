@@ -1,10 +1,14 @@
 package bossmonster.domain;
 
+import bossmonster.domain.attacktype.AttackType;
+import bossmonster.domain.attacktype.MagicalAttack;
+import bossmonster.domain.attacktype.PhysicalAttack;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -13,60 +17,32 @@ class PlayerTest {
     private final int PHYSICAL_ATTACK = 1;
     private final int MAGIC_ATTACK = 2;
 
-    @DisplayName("플레이어 이름 세팅 - 입력값 정상")
-    @Test
-    void setName_with_correct_input() {
-        // given
-        final String name = "test";
+    @DisplayName("플레이어 초기값 세팅 - 입력값 정상")
+    @ParameterizedTest
+    @CsvSource(value = {"a, 1, 199", "abc, 100, 100", "abcde, 200, 0"})
+    void setName_with_correct_input(String name, int hp, int mp) {
+        Player player = new Player(name, hp, mp);
 
-        // when
-        Player player = new Player();
-        player.setName(name);
-
-        // then
-        assertThat(player.getName()).isEqualTo("test");
+        assertThat(player.getName()).isEqualTo(name);
+        assertThat(player.getHp()).isEqualTo(hp);
+        assertThat(player.getMaxHp()).isEqualTo(hp);
+        assertThat(player.getMp()).isEqualTo(mp);
+        assertThat(player.getMaxMp()).isEqualTo(mp);
     }
 
     @DisplayName("플레이어 이름 세팅 - 입력값 오류")
-    @Test
-    void setName_with_wrong_input() {
-        // given
-        final String name = "testName";
-
-        // when, then
-        Player player = new Player();
-        assertThatThrownBy(() -> player.setName(name))
+    @ParameterizedTest
+    @ValueSource(strings = {"", " ", "abcdef"})
+    void setName_with_wrong_input(String name) {
+        assertThatThrownBy(() -> new Player(name, 100, 100))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("플레이어 HP, MP 세팅 - 입력값 정상")
-    @Test
-    void setStatus_with_correct_input() {
-        // given
-        final int hp = 150;
-        final int mp = 50;
-
-        // when
-        Player player = new Player();
-        player.setStatus(hp, mp);
-
-        // then
-        assertThat(player.getHp()).isEqualTo(150);
-        assertThat(player.getMaxHp()).isEqualTo(150);
-        assertThat(player.getMp()).isEqualTo(50);
-        assertThat(player.getMaxMp()).isEqualTo(50);
-    }
-
-    @DisplayName("플레이어 HP, MP 세팅 - 입력값 오류")
-    @Test
-    void setStatus_with_wrong_input() {
-        // given
-        final int hp = 1000;
-        final int mp = 500;
-
-        // when, then
-        Player player = new Player();
-        assertThatThrownBy(() -> player.setStatus(hp, mp))
+    @DisplayName("플레이어 HP,  MP 세팅 - 입력값 오류")
+    @ParameterizedTest
+    @CsvSource(value = {"0, 200", "50,50", "100, 101"})
+    void setHpAndMp_with_wrong_input(int hp, int mp) {
+        assertThatThrownBy(() -> new Player("test", hp, mp))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -74,12 +50,9 @@ class PlayerTest {
     @Test
     void attackBossMonsterByPhysicalAttack_with_correct_input() {
         // given
-        Player player = new Player();
-        BossMonster boss = new BossMonster();
-        AttackType attackType = new AttackType();
-        player.setStatus(100, 100);
-        boss.setHp(100);
-        attackType.setType(PHYSICAL_ATTACK);
+        Player player = new Player("test", 100, 100);
+        BossMonster boss = new BossMonster(100);
+        AttackType attackType = new PhysicalAttack();
 
         // when
         player.attackBossMonster(boss, attackType);
@@ -92,12 +65,9 @@ class PlayerTest {
     @Test
     void attackBossMonsterByMagicAttack_with_correct_input() {
         // given
-        Player player = new Player();
-        BossMonster boss = new BossMonster();
-        AttackType attackType = new AttackType();
-        player.setStatus(100, 100);
-        boss.setHp(100);
-        attackType.setType(MAGIC_ATTACK);
+        Player player = new Player("test", 100, 100);
+        BossMonster boss = new BossMonster(100);
+        AttackType attackType = new MagicalAttack();
 
         // when
         player.attackBossMonster(boss, attackType);
@@ -111,12 +81,9 @@ class PlayerTest {
     @Test
     void attackBossMonsterByPhysicalAttack_with_wrong_input() {
         // given
-        Player player = new Player();
-        BossMonster boss = new BossMonster();
-        AttackType attackType = new AttackType();
-        player.setStatus(190, 10);
-        boss.setHp(100);
-        attackType.setType(MAGIC_ATTACK);
+        Player player = new Player("test", 190, 10);
+        BossMonster boss = new BossMonster(100);
+        AttackType attackType = new MagicalAttack();
 
         // when, then
         assertThatThrownBy(() -> player.attackBossMonster(boss, attackType))
@@ -127,8 +94,7 @@ class PlayerTest {
     @Test
     void attacked() {
         // given
-        Player player = new Player();
-        player.setStatus(100, 100);
+        Player player = new Player("test", 100, 100);
 
         // when
         player.attacked(10);
@@ -137,26 +103,19 @@ class PlayerTest {
         assertThat(player.getHp()).isEqualTo(90);
     }
 
-    @DisplayName("플레이어가 승리했는지 확인")
+    @DisplayName("플레이어가 죽었는지 확인")
     @Test
-    void isVictory() {
+    void isDead() {
         // given
-        Player player = new Player();
-        BossMonster boss1 = new BossMonster();
-        BossMonster boss2 = new BossMonster();
-        AttackType attackType = new AttackType();
-        boss1.setHp(100);
-        boss2.setHp(100);
-        attackType.setType(MAGIC_ATTACK);
+        Player player1 = new Player("test", 1, 199);
+        Player player2 = new Player("test", 100, 100);
 
         // when
-        for (int i = 0; i < 5; i++) {
-            boss1.attacked(attackType);
-        }
-        boss2.attacked(attackType);
+        player1.attacked(10);
+        player2.attacked(10);
 
         // then
-        assertThat(player.isVictory(boss1)).isTrue();
-        assertThat(player.isVictory(boss2)).isFalse();
+        assertThat(player1.isDead()).isTrue();
+        assertThat(player2.isDead()).isFalse();
     }
 }
