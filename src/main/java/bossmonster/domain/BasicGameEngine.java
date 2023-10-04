@@ -33,6 +33,7 @@ public class BasicGameEngine implements GameEngine {
     }
 
     private Boss initBoss(){
+        outputProcessor.printResult("보스 몬스터의 체력을 입력해주세요.");
         Boss tmp = null;
         try {
             int bossHp = inputProcessor.getInt();
@@ -48,7 +49,9 @@ public class BasicGameEngine implements GameEngine {
     private Player initPlayer(){
         Player tmp = null;
         try {
+            outputProcessor.printResult("플레이어의 이름을 입력해주세요");
             String name = inputProcessor.getString();
+            outputProcessor.printResult("플레이어의 HP와 MP를 입력해주세요.(,로 구분)");
             String hpAndMp = inputProcessor.getString();
             String[] split = hpAndMp.split(",");
             int hp = Integer.parseInt(split[0]);
@@ -84,6 +87,10 @@ public class BasicGameEngine implements GameEngine {
     }
     private void playerTurn() {
         turnCount = turnCount + 1;
+        outputProcessor.printResult(boss);
+        outputProcessor.printSectionBar();
+        outputProcessor.printResult(boss.bossHitIcon());
+        outputProcessor.printSectionBar();
         outputProcessor.printResult(player);
         outputProcessor.printDecorateInSection();
         outputProcessor.printResult("어떤 공격을 하시겠습니까?\n1. 물리 공격\n2. 마법 공격");
@@ -113,6 +120,7 @@ public class BasicGameEngine implements GameEngine {
         int attackValue = inputProcessor.getRandomInt(21);
         boss.attack(player,attackValue);
         outputProcessor.printResult(String.format("보스가 공격을 했습니다. (입힌 데미지: %d)",attackValue));
+        outputProcessor.printDecorateInSection();
         try {
             playerTurn();
         }catch (GameEndException e){
