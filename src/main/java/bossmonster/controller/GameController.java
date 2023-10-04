@@ -104,7 +104,7 @@ public class GameController {
         try {
             player.attackBossMonster(bossMonster, attackType);
         } catch (IllegalArgumentException e) {
-            outputView.printLackOfMPException();
+            outputView.printException(e.getMessage());
             return progressPlayerPhase(player, bossMonster);
         }
         outputView.printPlayerPhaseView(attackType);
