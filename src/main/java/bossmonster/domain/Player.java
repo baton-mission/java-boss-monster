@@ -22,8 +22,8 @@ public class Player {
     }
 
     public static void validatePlayerName(String name) {
-        if (name.length() > 5) {
-            throw new IllegalArgumentException("플레이어의 이름은 5자 이하만 가능합니다.");
+        if (name.isBlank() || name.length() < 1 || name.length() > 5) {
+            throw new IllegalArgumentException("플레이어의 이름은 1자 이상, 5자 이하만 가능합니다.");
         }
     }
 
