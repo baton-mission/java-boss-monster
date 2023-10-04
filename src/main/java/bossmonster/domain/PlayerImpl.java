@@ -14,7 +14,7 @@ public class PlayerImpl extends Player {
     }
 
     @Override
-    public void magicAttack(Boss boss, int value) throws GamePolicyException {
+    public void magicAttack(Boss boss, int value){
         useMp(30);
         boss.hit(value);
     }

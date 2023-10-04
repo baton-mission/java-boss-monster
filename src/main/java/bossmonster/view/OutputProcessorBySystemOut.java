@@ -2,7 +2,7 @@ package bossmonster.view;
 
 public class OutputProcessorBySystemOut implements OutputProcessor {
     @Override
-    public void printResult(Object result) {
+    public void print(Object result) {
         System.out.println(result);
     }
 

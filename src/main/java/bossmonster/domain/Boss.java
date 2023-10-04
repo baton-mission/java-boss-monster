@@ -7,9 +7,6 @@ public abstract class Boss {
     protected final int maxHp;
 
     public Boss(int hp) {
-        if (hp < 100 || 300 < hp){
-            throw new IllegalArgumentException("보스의 초기 HP 는 100 이상 300 이하여야 합니다.");
-        }
         maxHp = hp;
         this.hp = hp;
     }
@@ -43,5 +40,9 @@ public abstract class Boss {
                 "(   \"\\  )\n" +
                 " \\  ^  /\n" +
                 "  - ^ -";
+    }
+
+    public final boolean isNew(){
+        return hp == maxHp;
     }
 }
