@@ -5,10 +5,10 @@ import bossmonster.exception.GamePolicyException;
 
 public abstract class Player {
     protected final String name;
-    protected int hp;
-    protected int mp;
-    protected final int maxHp;
-    protected final int maxMp;
+    private int hp;
+    private int mp;
+    private final int maxHp;
+    private final int maxMp;
 
 
     public Player(String name, int hp, int mp) {
@@ -26,6 +26,9 @@ public abstract class Player {
 
     protected void recoveryMp(int value){
         mp = mp + value;
+        if(mp > maxMp){
+            mp = maxMp;
+        }
     }
 
     protected void useMp(int value){
