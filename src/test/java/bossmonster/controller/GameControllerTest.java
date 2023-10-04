@@ -1,14 +1,11 @@
 package bossmonster.controller;
 
-import bossmonster.IOTest;
-import bossmonster.domain.AttackType;
+import bossmonster.repository.AttackTypeRepository;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
@@ -17,7 +14,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -28,6 +24,9 @@ class GameControllerTest{
 
     @Spy
     OutputView outputView;
+
+    @Spy
+    AttackTypeRepository attackTypeRepository;
 
     @InjectMocks
     GameController gameController;
@@ -54,5 +53,6 @@ class GameControllerTest{
         then(inputView).should().readPlayerHpAndMp();
         then(inputView).should(times(10)).readAttackType();
         then(outputView).should().printBattleStartView();
+        then(attackTypeRepository).should(times(10)).getAttackType(1);
     }
 }
