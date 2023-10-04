@@ -26,9 +26,13 @@ public abstract class Player {
     }
 
 
-    public abstract void attack(Boss boss);
+    public abstract void attack(Boss boss, int value);
 
-    public abstract void magicAttack(Boss boss);
+    public abstract void magicAttack(Boss boss, int value);
+
+    protected void recoveryMp(int value){
+        mp = mp + value;
+    }
 
     public void hit(int value) throws InterruptedException {
         if (hp - value < 0){
