@@ -102,8 +102,15 @@ public class BasicGameEngine implements GameEngine {
         }
         outputProcessor.printDecoration();
         outputProcessor.print("어떤 공격을 하시겠습니까?\n1. 물리 공격\n2. 마법 공격");
-        int attackType = inputProcessor.getInt();
-        playerAttack(attackType);
+        while (true) {
+            try {
+                int attackType = inputProcessor.getInt();
+                playerAttack(attackType);
+                break;
+            } catch (IllegalArgumentException e) {
+                outputProcessor.printError(e);
+            }
+        }
         try {
             bossTurn();
         }catch (GameEndException e){
