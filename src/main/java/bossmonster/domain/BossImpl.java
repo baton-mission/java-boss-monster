@@ -11,10 +11,6 @@ public class BossImpl extends Boss {
 
     @Override
     public void attack(Player player, int value) {
-        try {
-            player.hit(value);
-        } catch (InterruptedException e) {
-            throw new GameEndException(e, false);
-        }
+        player.hit(value);
     }
 }

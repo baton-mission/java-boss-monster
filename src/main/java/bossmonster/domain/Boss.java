@@ -1,5 +1,7 @@
 package bossmonster.domain;
 
+import bossmonster.exception.GameEndException;
+
 public abstract class Boss {
     protected int hp;
     protected final int maxHp;
@@ -14,10 +16,10 @@ public abstract class Boss {
 
     public abstract void attack(Player player, int value);
 
-    public void hit(int value) throws InterruptedException {
-        if (hp - value < 0){
+    public void hit(int value) {
+        if (hp - value <= 0 || hp == 0){
             hp = 0;
-            throw new InterruptedException("보스가 죽었습니다!");
+            throw new GameEndException("보스가 죽었습니다!", true);
         }
         hp = hp - value;
     }

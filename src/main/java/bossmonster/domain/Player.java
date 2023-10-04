@@ -1,5 +1,6 @@
 package bossmonster.domain;
 
+import bossmonster.exception.GameEndException;
 import bossmonster.exception.GamePolicyException;
 
 public abstract class Player {
@@ -48,10 +49,10 @@ public abstract class Player {
         return mp >= value;
     }
 
-    public void hit(int value) throws InterruptedException {
-        if (hp - value < 0){
+    public void hit(int value) {
+        if (hp - value <= 0 || hp == 0){
             hp = 0;
-            throw new InterruptedException("보스가 죽었습니다!");
+            throw new GameEndException("플레이어가 죽었습니다!", false);
         }
         hp = hp - value;
     }
@@ -59,7 +60,7 @@ public abstract class Player {
 
     @Override
     public final String toString() {
-        return String.format("BOSS HP [%d/%d]",hp,maxHp);
+        return String.format("%s HP [%d/%d]",name, hp, maxHp);
     }
 
     public String getName() {
