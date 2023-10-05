@@ -1,9 +1,7 @@
 package bossmonster.view;
 
 import java.util.Scanner;
-
 import bossmonster.AttackType;
-import bossmonster.domain.Player;
 import bossmonster.dto.PlayerHpMpParam;
 
 public class InputView {
