@@ -3,9 +3,9 @@ package bossmonster.domain;
 import bossmonster.AttackType;
 
 public class Player{
-    private String name;
-    private int maxHp;
-    private int maxMp;
+    private final String name;
+    private final int maxHp;
+    private final int maxMp;
     private int currentHp, currentMp;
 
     public Player(String name, int hp, int mp){
@@ -36,14 +36,6 @@ public class Player{
         return this.name;
     }
     
-    public static int[] validatesumOfHpMp(int hp, int mp) {
-        if(hp + mp != SUM_OF_HP_MP){
-            throw new IllegalArgumentException("[Error] Sum of Hp and Mp should be 200");
-        }
-        int[] hpMp = {hp, mp};
-        return hpMp;
-    }
-
     public int attack(AttackType attacktype) {
         if(this.currentMp - attacktype.getmpNeeded() < 0) {
             throw new IllegalArgumentException("Not enough Mana");
@@ -59,7 +51,6 @@ public class Player{
     }
 
     public boolean isDead(){
-        if(this.currentHp <= 0) return true;
-        return false;
+        return this.currentHp <= 0;
     }
 }

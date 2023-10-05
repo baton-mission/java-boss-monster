@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import bossmonster.AttackType;
 import bossmonster.domain.Player;
+import bossmonster.dto.PlayerHpMpParam;
 
 public class InputView {
     private static final Scanner scan = new Scanner(System.in);
@@ -34,14 +35,17 @@ public class InputView {
         return inputPlayerName();
     }
 
-    public int[] inputHpMp() { //////// [hp mp] uh ke um gi noh...
+    public PlayerHpMpParam inputHpMp() { //////// [hp mp] uh ke um gi noh...
         System.out.println("Enter Players HP and MP : ");
         try {
-            return Player.validatesumOfHpMp(scan.nextInt(), scan.nextInt());
+            PlayerHpMpParam playerHpMpParam = new PlayerHpMpParam(scan.nextInt(), scan.nextInt());
+            if(validatePlayerHpMp(playerHpMpParam)) {
+                return playerHpMpParam;
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return inputHpMp();
         }
+        return inputHpMp();
     }
 
     public AttackType inputAttackType() {
@@ -56,7 +60,7 @@ public class InputView {
 
     private boolean validateBossHp(int hp) throws IllegalArgumentException{
         if(hp > InputValidationConstant.BOSS_MAX_HP || hp < InputValidationConstant.BOSS_MIN_HP) {
-            throw new IllegalArgumentException("[Error] : 보스 몬스터의 체력은 100에서 300사이 여야합니다.");
+            throw new IllegalArgumentException("[Error] 보스 몬스터의 체력은 100에서 300사이여야합니다.");
         }
         return true;
     }
@@ -64,7 +68,14 @@ public class InputView {
     private boolean validatePlayerName(String name) throws IllegalArgumentException{
         if (name.length() > InputValidationConstant.MAX_PLAYER_NAME_SIZE) {
             throw new IllegalArgumentException(
-                    "[Error] : 이름의 최대 길이는 5글자 입니다.");
+                    "[Error] 이름의 최대 길이는 5글자 입니다.");
+        }
+        return true;
+    }
+
+    private boolean validatePlayerHpMp(PlayerHpMpParam playerHpMpParam) throws IllegalArgumentException{
+        if(playerHpMpParam.getHp() + playerHpMpParam.getMp() > InputValidationConstant.SUM_OF_PLAYER_HP_MP) {
+            throw new IllegalArgumentException("[Error] Hp와 Mp의 합은 200이여야합니다.");
         }
         return true;
     }
