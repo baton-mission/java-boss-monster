@@ -3,6 +3,7 @@ package bossmonster.controller;
 import bossmonster.AttackType;
 import bossmonster.domain.BossMonster;
 import bossmonster.domain.Player;
+import bossmonster.dto.PlayerHpMpParam;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
 
@@ -18,9 +19,9 @@ public class GameController {
 
     private Player generatePlayer() {
         String name = inputView.inputPlayerName();
-        int[] hpMp = inputView.inputHpMp();
+        PlayerHpMpParam playerHpMpParam = inputView.inputHpMp();
 
-        return new Player(name, hpMp[0], hpMp[1]);
+        return new Player(name, playerHpMpParam.getHp(), playerHpMpParam.getMp());
     }
 
     private BossMonster generateBossMonster() {
