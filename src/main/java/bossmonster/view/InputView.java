@@ -24,11 +24,14 @@ public class InputView {
     public String inputPlayerName() {
         System.out.println("Enter Player's name : ");
         try {
-            return Player.validateName(scan.next().trim());
-        } catch (Exception e) {
+            String userInput = scan.next().trim();
+            if(validatePlayerName(userInput)) {
+                return userInput;
+            }
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return inputPlayerName();
         }
+        return inputPlayerName();
     }
 
     public int[] inputHpMp() { //////// [hp mp] uh ke um gi noh...
@@ -54,6 +57,14 @@ public class InputView {
     private boolean validateBossHp(int hp) throws IllegalArgumentException{
         if(hp > InputValidationConstant.BOSS_MAX_HP || hp < InputValidationConstant.BOSS_MIN_HP) {
             throw new IllegalArgumentException("[Error] : 보스 몬스터의 체력은 100에서 300사이 여야합니다.");
+        }
+        return true;
+    }
+
+    private boolean validatePlayerName(String name) throws IllegalArgumentException{
+        if (name.length() > InputValidationConstant.MAX_PLAYER_NAME_SIZE) {
+            throw new IllegalArgumentException(
+                    "[Error] : 이름의 최대 길이는 5글자 입니다.");
         }
         return true;
     }

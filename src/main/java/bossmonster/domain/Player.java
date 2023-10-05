@@ -44,14 +44,6 @@ public class Player{
         return hpMp;
     }
 
-    public static String validateName(String inputName) {
-        if(inputName.length() > MAX_NAME_SIZE){
-            throw new IllegalArgumentException(
-                "[Error] size of name should be less than 6");
-        }
-        return inputName;
-    }
-
     public int attack(AttackType attacktype) {
         if(this.currentMp - attacktype.getmpNeeded() < 0) {
             throw new IllegalArgumentException("Not enough Mana");
