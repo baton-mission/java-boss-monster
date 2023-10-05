@@ -3,20 +3,22 @@ package bossmonster.view;
 import java.util.Scanner;
 
 import bossmonster.AttackType;
-import bossmonster.domain.BossMonster;
 import bossmonster.domain.Player;
 
 public class InputView {
-    private static Scanner scan = new Scanner(System.in);
+    private static final Scanner scan = new Scanner(System.in);
 
     public int inputBossHp() {
         System.out.println("Enter boss monster's health : ");
         try {
-            return BossMonster.validateBossHp(Integer.parseInt(scan.nextLine()));
-        } catch (Exception e) {
+            int userInput = Integer.parseInt(scan.nextLine());
+            if (validateBossHp(userInput)) {
+                return userInput;
+            }
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return inputBossHp();
         }
+        return inputBossHp();
     }
 
     public String inputPlayerName() {
@@ -47,5 +49,12 @@ public class InputView {
             System.out.println(e.getMessage());
             return inputAttackType();
         }
+    }
+
+    private boolean validateBossHp(int hp) throws IllegalArgumentException{
+        if(hp > InputValidationConstant.BOSS_MAX_HP || hp < InputValidationConstant.BOSS_MIN_HP) {
+            throw new IllegalArgumentException("[Error] : 보스 몬스터의 체력은 100에서 300사이 여야합니다.");
+        }
+        return true;
     }
 }
