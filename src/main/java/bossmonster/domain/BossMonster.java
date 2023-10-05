@@ -7,8 +7,6 @@ public class BossMonster {
 
     private int maxHp;
     private int currentHp;
-    private static final int MAX_HP_SIZE = 300;
-    private static final int MIN_HP_SIZE = 100;
 
     public BossMonster(int hp) {
         this.currentHp = hp;

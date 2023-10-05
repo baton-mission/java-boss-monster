@@ -7,8 +7,6 @@ public class Player{
     private int maxHp;
     private int maxMp;
     private int currentHp, currentMp;
-    private static final int SUM_OF_HP_MP = 200;
-    private static final int MAX_NAME_SIZE = 5;
 
     public Player(String name, int hp, int mp){
         this.name = name;
