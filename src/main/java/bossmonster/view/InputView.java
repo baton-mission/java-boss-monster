@@ -2,7 +2,7 @@ package bossmonster.view;
 
 import java.util.Scanner;
 import bossmonster.AttackType;
-import bossmonster.dto.PlayerHpMpParam;
+import bossmonster.dto.PlayerDto;
 
 public class InputView {
     private static final Scanner scan = new Scanner(System.in);
@@ -33,12 +33,12 @@ public class InputView {
         return inputPlayerName();
     }
 
-    public PlayerHpMpParam inputHpMp() { //////// [hp mp] uh ke um gi noh...
+    public PlayerDto inputHpMp() { //////// [hp mp] uh ke um gi noh...
         System.out.println("Enter Players HP and MP : ");
         try {
-            PlayerHpMpParam playerHpMpParam = new PlayerHpMpParam(scan.nextInt(), scan.nextInt());
-            if(validatePlayerHpMp(playerHpMpParam)) {
-                return playerHpMpParam;
+            PlayerDto playerDto = new PlayerDto(scan.nextInt(), scan.nextInt());
+            if(validatePlayerHpMp(playerDto)) {
+                return playerDto;
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -71,8 +71,8 @@ public class InputView {
         return true;
     }
 
-    private boolean validatePlayerHpMp(PlayerHpMpParam playerHpMpParam) throws IllegalArgumentException{
-        if(playerHpMpParam.getHp() + playerHpMpParam.getMp() > InputValidationConstant.SUM_OF_PLAYER_HP_MP) {
+    private boolean validatePlayerHpMp(PlayerDto playerDto) throws IllegalArgumentException{
+        if(playerDto.getHp() + playerDto.getMp() > InputValidationConstant.SUM_OF_PLAYER_HP_MP) {
             throw new IllegalArgumentException("[Error] Hp와 Mp의 합은 200이여야합니다.");
         }
         return true;
