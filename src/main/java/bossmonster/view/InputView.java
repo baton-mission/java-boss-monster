@@ -33,7 +33,7 @@ public class InputView {
         return inputPlayerName();
     }
 
-    public PlayerDto inputHpMp() { //////// [hp mp] uh ke um gi noh...
+    public PlayerDto inputHpMp() {
         System.out.println("Enter Players HP and MP : ");
         try {
             PlayerDto playerDto = new PlayerDto(scan.nextInt(), scan.nextInt());
