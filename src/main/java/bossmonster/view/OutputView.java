@@ -1,14 +1,14 @@
 package bossmonster.view;
 
 import bossmonster.AttackType;
-import bossmonster.domain.BossMonster;
+import bossmonster.dto.BossMonsterDto;
 import bossmonster.dto.PlayerDto;
 
 public class OutputView {
 
-    public static void printDefaultBoss(BossMonster bossMonster, PlayerDto.Status player) {
+    public static void printDefaultBoss(BossMonsterDto bossMonster, PlayerDto.Status player) {
         System.out.println("============================");
-        System.out.println("BOSS HP [" + bossMonster.getCurrentHp() + "/" +
+        System.out.println("BOSS HP [" + bossMonster.getHp() + "/" +
                 bossMonster.getMaxHp() + "]");
         System.out.println("""
                         ____________________________\s
@@ -24,9 +24,9 @@ public class OutputView {
                 + player.getMaxMp() + "]");
     }
 
-    public static void printSadBoss(BossMonster bossMonster, PlayerDto.Status player) {
+    public static void printSadBoss(BossMonsterDto bossMonster, PlayerDto.Status player) {
         System.out.println("============================");
-        System.out.println("BOSS HP [" + bossMonster.getCurrentHp() + "/" +
+        System.out.println("BOSS HP [" + bossMonster.getHp() + "/" +
                 bossMonster.getMaxHp() + "]");
         System.out.println("""
                         ____________________________\s
@@ -42,9 +42,9 @@ public class OutputView {
                 + player.getMaxMp() + "]");
     }
 
-    public static void printHappyBoss(BossMonster bossMonster, PlayerDto.Status player) {
+    public static void printHappyBoss(BossMonsterDto bossMonster, PlayerDto.Status player) {
         System.out.println("============================");
-        System.out.println("BOSS HP [" + bossMonster.getCurrentHp() + "/" +
+        System.out.println("BOSS HP [" + bossMonster.getHp() + "/" +
                 bossMonster.getMaxHp() + "]");
         System.out.println("""
                         ____________________________\s

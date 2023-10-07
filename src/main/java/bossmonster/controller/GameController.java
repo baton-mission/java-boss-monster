@@ -3,6 +3,7 @@ package bossmonster.controller;
 import bossmonster.AttackType;
 import bossmonster.domain.BossMonster;
 import bossmonster.domain.Player;
+import bossmonster.dto.BossMonsterDto;
 import bossmonster.dto.PlayerDto;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
@@ -13,7 +14,7 @@ public class GameController {
     public void game() {
         BossMonster bossMonster = generateBossMonster();
         Player player = generatePlayer();
-        OutputView.printDefaultBoss(bossMonster, PlayerDto.Status.from(player));
+        OutputView.printDefaultBoss(BossMonsterDto.from(bossMonster), PlayerDto.Status.from(player));
         playerBossTransaction(player, bossMonster, 1);
     }
 
@@ -42,7 +43,7 @@ public class GameController {
         }
 
         if (bossMonster.isDead()) {
-            OutputView.printSadBoss(bossMonster, PlayerDto.Status.from(player));
+            OutputView.printSadBoss(BossMonsterDto.from(bossMonster), PlayerDto.Status.from(player));
             OutputView.printPlayerWin(PlayerDto.Status.from(player), count);
             return false;
         }
@@ -50,12 +51,12 @@ public class GameController {
         int bossAttackDamage = bossMonster.attack();
         player.attacked(bossAttackDamage);
         if (player.isDead()) {
-            OutputView.printHappyBoss(bossMonster, PlayerDto.Status.from(player));
+            OutputView.printHappyBoss(BossMonsterDto.from(bossMonster), PlayerDto.Status.from(player));
             OutputView.printBossMonsterWin(PlayerDto.Status.from(player), count);
             return false;
         }
 
-        OutputView.printSadBoss(bossMonster, PlayerDto.Status.from(player));
+        OutputView.printSadBoss(BossMonsterDto.from(bossMonster), PlayerDto.Status.from(player));
         OutputView.printDamageByPlayer(playerAttackType);
         OutputView.printDamageByBossMonster(bossAttackDamage);
 
