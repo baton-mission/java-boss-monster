@@ -19,9 +19,9 @@ public class GameController {
 
     private Player generatePlayer() {
         String name = inputView.inputPlayerName();
-        PlayerDto playerDto = inputView.inputHpMp();
+        PlayerDto.HpMp hpMp = inputView.inputHpMp();
 
-        return new Player(name, playerDto.getHp(), playerDto.getMp());
+        return new Player(name, hpMp.getHp(), hpMp.getMp());
     }
 
     private BossMonster generateBossMonster() {

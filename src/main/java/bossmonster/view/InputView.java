@@ -33,12 +33,12 @@ public class InputView {
         return inputPlayerName();
     }
 
-    public PlayerDto inputHpMp() {
+    public PlayerDto.HpMp inputHpMp() {
         System.out.println("Enter Players HP and MP : ");
         try {
-            PlayerDto playerDto = new PlayerDto(scan.nextInt(), scan.nextInt());
-            if(validatePlayerHpMp(playerDto)) {
-                return playerDto;
+            PlayerDto.HpMp hpMp = new PlayerDto.HpMp(scan.nextInt(), scan.nextInt());
+            if(validatePlayerHpMp(hpMp)) {
+                return hpMp;
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -71,8 +71,8 @@ public class InputView {
         return true;
     }
 
-    private boolean validatePlayerHpMp(PlayerDto playerDto) throws IllegalArgumentException{
-        if(playerDto.getHp() + playerDto.getMp() > InputValidationConstant.SUM_OF_PLAYER_HP_MP) {
+    private boolean validatePlayerHpMp(PlayerDto.HpMp hpMp) throws IllegalArgumentException{
+        if(hpMp.getHp() + hpMp.getMp() > InputValidationConstant.SUM_OF_PLAYER_HP_MP) {
             throw new IllegalArgumentException("[Error] Hp와 Mp의 합은 200이여야합니다.");
         }
         return true;
