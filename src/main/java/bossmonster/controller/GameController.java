@@ -13,7 +13,7 @@ public class GameController {
     public void game() {
         BossMonster bossMonster = generateBossMonster();
         Player player = generatePlayer();
-        OutputView.printDefaultBoss(bossMonster, player);
+        OutputView.printDefaultBoss(bossMonster, PlayerDto.Status.from(player));
         playerBossTransaction(player, bossMonster, 1);
     }
 
@@ -42,20 +42,20 @@ public class GameController {
         }
 
         if (bossMonster.isDead()) {
-            OutputView.printSadBoss(bossMonster, player);
-            OutputView.printPlayerWin(player, count);
+            OutputView.printSadBoss(bossMonster, PlayerDto.Status.from(player));
+            OutputView.printPlayerWin(PlayerDto.Status.from(player), count);
             return false;
         }
         
         int bossAttackDamage = bossMonster.attack();
         player.attacked(bossAttackDamage);
         if (player.isDead()) {
-            OutputView.printHappyBoss(bossMonster, player);
-            OutputView.printBossMonsterWin(player, count);
+            OutputView.printHappyBoss(bossMonster, PlayerDto.Status.from(player));
+            OutputView.printBossMonsterWin(PlayerDto.Status.from(player), count);
             return false;
         }
 
-        OutputView.printSadBoss(bossMonster, player);
+        OutputView.printSadBoss(bossMonster, PlayerDto.Status.from(player));
         OutputView.printDamageByPlayer(playerAttackType);
         OutputView.printDamageByBossMonster(bossAttackDamage);
 

@@ -2,11 +2,11 @@ package bossmonster.view;
 
 import bossmonster.AttackType;
 import bossmonster.domain.BossMonster;
-import bossmonster.domain.Player;
+import bossmonster.dto.PlayerDto;
 
 public class OutputView {
 
-    public static void printDefaultBoss(BossMonster bossMonster, Player player) {
+    public static void printDefaultBoss(BossMonster bossMonster, PlayerDto.Status player) {
         System.out.println("============================");
         System.out.println("BOSS HP [" + bossMonster.getCurrentHp() + "/" +
                 bossMonster.getMaxHp() + "]");
@@ -19,12 +19,12 @@ public class OutputView {
                           - ^ -\s
                         ____________________________"""
                 );
-        System.out.println(player.getName() + " HP [" + player.getCurrentHp()
-                + "/" + player.getMaxHp() + "] MP [" + player.getCurrentMp() + "/"
+        System.out.println(player.getName() + " HP [" + player.getHp()
+                + "/" + player.getMaxHp() + "] MP [" + player.getMp() + "/"
                 + player.getMaxMp() + "]");
     }
 
-    public static void printSadBoss(BossMonster bossMonster, Player player) {
+    public static void printSadBoss(BossMonster bossMonster, PlayerDto.Status player) {
         System.out.println("============================");
         System.out.println("BOSS HP [" + bossMonster.getCurrentHp() + "/" +
                 bossMonster.getMaxHp() + "]");
@@ -37,12 +37,12 @@ public class OutputView {
                           - ^ -\s
                         ____________________________"""
                 );
-        System.out.println(player.getName() + " HP [" + player.getCurrentHp()
-                + "/" + player.getMaxHp() + "] MP [" + player.getCurrentMp() + "/"
+        System.out.println(player.getName() + " HP [" + player.getHp()
+                + "/" + player.getMaxHp() + "] MP [" + player.getMp() + "/"
                 + player.getMaxMp() + "]");
     }
 
-    public static void printHappyBoss(BossMonster bossMonster, Player player) {
+    public static void printHappyBoss(BossMonster bossMonster, PlayerDto.Status player) {
         System.out.println("============================");
         System.out.println("BOSS HP [" + bossMonster.getCurrentHp() + "/" +
                 bossMonster.getMaxHp() + "]");
@@ -55,16 +55,16 @@ public class OutputView {
                           - ^ -\s
                         ____________________________"""
         );
-        System.out.println(player.getName() + " HP [" + player.getCurrentHp()
-                + "/" + player.getMaxHp() + "] MP [" + player.getCurrentMp() + "/"
+        System.out.println(player.getName() + " HP [" + player.getHp()
+                + "/" + player.getMaxHp() + "] MP [" + player.getMp() + "/"
                 + player.getMaxMp() + "]");
     }
 
-    public static void printPlayerWin(Player player, int count) { // shoild i get name by string?
+    public static void printPlayerWin(PlayerDto.Status player, int count) { // shoild i get name by string?
         System.out.println(player.getName() + "won after " + count + " turn");
     }
 
-    public static void printBossMonsterWin(Player player, int count) {
+    public static void printBossMonsterWin(PlayerDto.Status player, int count) {
         System.out.println(player.getName() + " lost after " + count + " turn");
     }
 
