@@ -1,64 +1,52 @@
 package bossmonster.domain;
 
-import bossmonster.util.ErrorChecker;
-
-import static bossmonster.util.Constants.ZERO;
-
 public class Player {
 
-    private final String name;
-    private int hp;
-    private int mp;
-    private final int initialHp;
-    private final int initialMp;
+    private final Name name;
+    private final Status status;
 
-    public Player(String name, int hp, int mp) {
-        ErrorChecker.checkName(name);
-        ErrorChecker.checkSum(new int[]{hp, mp});
+    public Player(Name name, Status status) {
         this.name = name;
-        this.hp = hp;
-        this.mp = mp;
-        this.initialHp = hp;
-        this.initialMp = mp;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getHp() {
-        return hp;
-    }
-
-    public int getMp() {
-        return mp;
-    }
-
-    public int getInitialHp() {
-        return initialHp;
-    }
-
-    public int getInitialMp() {
-        return initialMp;
+        this.status = status;
     }
 
     public boolean isAlive() {
-        return this.hp > ZERO;
+        return status.upperZero();
     }
 
     public boolean isDie() {
-        return this.hp <= ZERO;
+        return status.underZero();
     }
 
     public void updateMana(AttackType type) {
-        ErrorChecker.checkMana(this, type.getManaCost());
-        this.mp += type.getManaCost();
-        if (this.mp > initialMp) {
-            this.mp = initialMp;
-        }
+        status.updateMana(type);
     }
 
-    public void getDamage(int bossDamage) {
-        this.hp -= bossDamage;
+    public void hit(int bossDamage) {
+        status.updateHp(bossDamage);
+    }
+
+    public String getName() {
+        return name.name();
+    }
+
+    public int getHp() {
+        return status.getHp();
+    }
+
+    public int getMp() {
+        return status.getMp();
+    }
+
+    public int getInitialHp() {
+        return status.getInitialHp();
+    }
+
+    public int getInitialMp() {
+        return status.getInitialMp();
+    }
+
+    public Status getStatus() {
+        return status;
     }
 }

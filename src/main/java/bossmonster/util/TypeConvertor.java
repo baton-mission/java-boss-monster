@@ -15,7 +15,6 @@ public class TypeConvertor {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR + NUMERIC);
         }
-        ErrorChecker.checkSum(temp);
         return temp;
     }
 }

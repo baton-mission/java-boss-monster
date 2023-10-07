@@ -1,6 +1,9 @@
 package bossmonster;
 
+import bossmonster.domain.Name;
 import bossmonster.domain.Player;
+import bossmonster.domain.Status;
+import bossmonster.util.ErrorMessage;
 import org.junit.jupiter.api.Test;
 
 import static bossmonster.util.ErrorMessage.*;
@@ -8,17 +11,14 @@ import static org.assertj.core.api.Assertions.*;
 
 public class PlayerTest {
 
-    private static final int HP_MP_SUM = 200;
-
     @Test
     void 정상_테스트() {
         //given
-        String name = "name";
-        int hp = 100;
-        int mp = HP_MP_SUM - hp;
+        Name name = new Name("name");
+        Status status = new Status(new int[]{100, 100});
 
         //when
-        Player player = new Player(name, hp, mp);
+        Player player = new Player(name, status);
 
         //then
         assertThat(player.getName()).isEqualTo("name");
@@ -29,26 +29,17 @@ public class PlayerTest {
 
     @Test
     void 공백_이름_예외() {
-        //given
-        String blank = "";
-        int hp = 100;
-        int mp = 100;
 
         //when & then
-        assertThatThrownBy(() -> new Player(blank, hp, mp))
+        assertThatThrownBy(() -> new Name(""))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(EMPTY);
     }
 
     @Test
     void 이름_길이_예외() {
-        //given
-        String longName = "bfghjkakhbafjk";
-        int hp = 100;
-        int mp = 100;
-
         //when & then
-        assertThatThrownBy(() -> new Player(longName, hp, mp))
+        assertThatThrownBy(() -> new Name("gahgabgbalk"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(MAX_LENGTH);
     }
@@ -56,13 +47,11 @@ public class PlayerTest {
     @Test
     void hp_mp_합_예외() {
         //given
-        String name = "name";
-        int hp = 101;
-        int mp = 100;
+        Name name = new Name("name");
 
         //when & then
-        assertThatThrownBy(() -> new Player(name, hp, mp))
+        assertThatThrownBy(() -> new Status(new int[]{101, 100}))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(SUM);
+                .hasMessageContaining(ErrorMessage.SUM_EXCEPTION);
     }
 }

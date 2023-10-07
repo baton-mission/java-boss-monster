@@ -3,7 +3,7 @@ package bossmonster.domain;
 import java.util.Arrays;
 
 import static bossmonster.util.ErrorMessage.ERROR;
-import static bossmonster.util.ErrorMessage.NOT_CORRECT;
+import static bossmonster.util.ErrorMessage.ATTACK_COMMAND;
 
 public enum AttackType {
     PHYSICAL("물리 공격", "1", 10, 10),
@@ -25,7 +25,7 @@ public enum AttackType {
         return Arrays.stream(values())
                 .filter(it -> it.command.equals(command))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException(ERROR + NOT_CORRECT));
+                .orElseThrow(() -> new IllegalArgumentException(ERROR + ATTACK_COMMAND));
     }
 
     public int getManaCost() {

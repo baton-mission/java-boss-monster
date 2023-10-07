@@ -1,9 +1,6 @@
 package bossmonster.controller;
 
-import bossmonster.domain.AttackType;
-import bossmonster.domain.Boss;
-import bossmonster.domain.GameStatus;
-import bossmonster.domain.Player;
+import bossmonster.domain.*;
 import bossmonster.service.BossWeapon;
 import bossmonster.service.GameService;
 import bossmonster.view.InputView;
@@ -42,9 +39,9 @@ public class GameController {
     }
 
     private Player getPlayerInfo() {
-        String name = inputView.getPlayerName();
-        int[] playerStatus = inputView.getPlayerStatus();
-        return new Player(name, playerStatus[0], playerStatus[1]);
+        Name name = inputView.getPlayerName();
+        Status status = inputView.getPlayerStatus();
+        return new Player(name, status);
     }
 
     private void playTurnOfPlayer(Boss boss, Player player) {

@@ -14,13 +14,13 @@ public class GameService {
     }
 
     public void attackToBoss(Boss boss, Player player, AttackType type) {
-        boss.getDamage(type.getDamage());
+        boss.hit(type);
         gameStatus.updateAttackType(type);
         player.updateMana(type);
     }
 
     public void attackToPlayer(int bossDamage, Player player) {
-        player.getDamage(bossDamage);
+        player.hit(bossDamage);
         gameStatus.updateBossDamage(bossDamage);
     }
 }

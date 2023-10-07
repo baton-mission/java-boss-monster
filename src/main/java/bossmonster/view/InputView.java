@@ -1,8 +1,6 @@
 package bossmonster.view;
 
-import bossmonster.domain.AttackType;
-import bossmonster.domain.Boss;
-import bossmonster.domain.Player;
+import bossmonster.domain.*;
 import bossmonster.util.ErrorChecker;
 import bossmonster.util.TypeConvertor;
 
@@ -29,23 +27,23 @@ public class InputView {
         }
     }
 
-    public String getPlayerName() {
+    public Name getPlayerName() {
         System.out.println(PLAYER_NAME_INPUT);
         try {
             String input = in.next();
-            ErrorChecker.checkName(input);
-            return input;
+            return new Name(input);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getPlayerName();
         }
     }
 
-    public int[] getPlayerStatus() {
+    public Status getPlayerStatus() {
         System.out.println(PLAYER_INFO_INPUT);
         try {
             String input = in.next();
-            return TypeConvertor.convertStringToInt(input);
+            int[] amount = TypeConvertor.convertStringToInt(input);
+            return new Status(amount);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getPlayerStatus();
@@ -57,7 +55,7 @@ public class InputView {
         try {
             String command = in.next();
             AttackType attackType = AttackType.findByCommand(command);
-            ErrorChecker.checkMana(player, attackType.getManaCost());
+            ErrorChecker.checkMana(player.getStatus(), attackType.getManaCost());
             return attackType;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());

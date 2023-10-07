@@ -1,17 +1,16 @@
 package bossmonster.util;
 
-import bossmonster.domain.Player;
+import bossmonster.domain.Status;
 
 import static bossmonster.util.Constants.*;
 import static bossmonster.util.ErrorMessage.*;
-import static bossmonster.util.ErrorMessage.EMPTY;
 
 public class ErrorChecker {
 
     public static void checkSum(int[] temp) {
         int sum = temp[0] + temp[1];
         if (sum != HP_MP_SUM) {
-            throw new IllegalArgumentException(ERROR + SUM);
+            throw new IllegalArgumentException(ERROR + SUM_EXCEPTION);
         }
     }
 
@@ -38,9 +37,9 @@ public class ErrorChecker {
         }
     }
 
-    public static void checkMana(Player player, int manaCost) {
-        if (player.getMp() + manaCost < 0) {
-            throw new IllegalArgumentException(ERROR + MANA);
+    public static void checkMana(Status status, int manaCost) {
+        if (status.getMp() + manaCost < 0) {
+            throw new IllegalArgumentException(ERROR + MANA_LACK);
         }
     }
 }

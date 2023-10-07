@@ -16,6 +16,10 @@ public class Boss {
         this.initialHp = hp;
     }
 
+    public void hit(AttackType type) {
+        this.hp -= type.getDamage();
+    }
+
     public boolean isAlive() {
         return this.hp > ZERO;
     }
@@ -30,9 +34,5 @@ public class Boss {
 
     public int getInitialHp() {
         return initialHp;
-    }
-
-    public void getDamage(int damage) {
-        this.hp -= damage;
     }
 }
