@@ -12,6 +12,31 @@ public class GuideText {
     public static final String NORMAL_ATTACK = "\n물리공격을 했습니다. (입힌 데미지: %d)";
     public static final String BOSS_ATTACK = "보스가 공격을 했습니다. (입힌 데미지: %d)";
     public static final String NEW_LINE_DOUBLE_LINE = "\n============================";
+    public static final String DOUBLE_LINE_NEW_LINE = "============================\n";
     public static final String SINGLE_LINE = "____________________________";
     public static final String SINGLE_LINE_NEW_LINE = String.format("%s\n", SINGLE_LINE);
+
+    public static final String BOSS_INIT_ICON = "____________________________\n" +
+            "       ^-^\n" +
+            "     / 0 0 \\\n" +
+            "    (   \"   )\n" +
+            "     \\  -  /\n" +
+            "      - ^ -\n" +
+            "____________________________\n";
+    public static final String BOSS_WIN_ICON = "____________________________\n" +
+            "       ^-^\n" +
+            "     / ^ ^ \\\n" +
+            "    (   \"   )\n" +
+            "     \\  3  /\n" +
+            "      - ^ -\n" +
+            "____________________________\n" +
+            "\n";
+    public static final String BOSS_HIT_ICON = "____________________________\n" +
+            "       ^-^\n" +
+            "     / x x \\\n" +
+            "    (   \"\\  )\n" +
+            "     \\  ^  /\n" +
+            "      - ^ -\n" +
+            "____________________________\n";
+    public static final String FORCE_NORMAL_ATTACK = "마나가 부족해 일반 공격을 합니다.";
 }

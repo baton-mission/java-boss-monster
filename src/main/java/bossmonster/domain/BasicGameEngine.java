@@ -4,10 +4,15 @@ import bossmonster.exception.GameEndException;
 import bossmonster.view.InputProcessor;
 import bossmonster.view.OutputProcessor;
 
+import java.util.Random;
+
 import static bossmonster.view.GuideText.*;
 
 public class BasicGameEngine implements GameEngine {
     private int turnCount = 0;
+    private static final int NORMAL_ATTACK_DAMAGE = 10;
+    private static final int MAGICK_ATTACK_DAMAGE = 20;
+    private static final int MP_USE_VALUE = 30;
     private Player player;
     private Boss boss;
     private final InputProcessor inputProcessor;
@@ -84,8 +89,7 @@ public class BasicGameEngine implements GameEngine {
         if (!canStart()){
             return;
         }
-        outputProcessor.print(GAME_START);
-        printStatus();
+        printInitStatus();
         try {
             playerTurn();
         }catch (GameEndException e){
@@ -97,78 +101,78 @@ public class BasicGameEngine implements GameEngine {
         return player != null && boss != null;
     }
 
-    private void playerTurn() {
-        updateTurnCount();
+    private void printInitStatus(){
+        outputProcessor.print(GAME_START);
+        outputProcessor.print(NEW_LINE_DOUBLE_LINE);
+        outputProcessor.print(boss);
+        outputProcessor.print(BOSS_INIT_ICON);
+        outputProcessor.print(player);
+        outputProcessor.print(DOUBLE_LINE_NEW_LINE);
+    }
+
+    private void printStatus(){
+        outputProcessor.print(NEW_LINE_DOUBLE_LINE);
+        outputProcessor.print(boss);
+        outputProcessor.print(BOSS_HIT_ICON);
+        outputProcessor.print(player);
+        outputProcessor.print(DOUBLE_LINE_NEW_LINE);
+    }
+
+    private void printBossWinStatus(){
+        outputProcessor.print(NEW_LINE_DOUBLE_LINE);
+        outputProcessor.print(boss);
+        outputProcessor.print(BOSS_WIN_ICON);
+        outputProcessor.print(player);
+        outputProcessor.print(DOUBLE_LINE_NEW_LINE);
+        outputProcessor.print(String.format(KILL_PLAYER, player.getName()));
+    }
+
+    private void playerTurn(){
+        turnCount++;
         if(!boss.isNew()){
             printStatus();
         }
-        outputProcessor.printDecoration();
         outputProcessor.print(ATTACK_STRATEGY);
-        while (true) {
-            try {
-                int attackType = inputProcessor.getInt();
-                playerAttack(attackType);
-                break;
-            } catch (IllegalArgumentException e) {
-                outputProcessor.printError(e.getMessage());
-            }
-        }
-        bossTurn();
-    }
-
-    private void updateTurnCount() {
-        turnCount = turnCount + 1;
-    }
-
-    private boolean playerAttack(int attackType){
+        int attackType = inputProcessor.getInt();
         if(attackType == 1){
-            playerNormalAttack();
-            return true;
+            playerAttack();
         }
         if(attackType == 2){
-            return playerMagicAttack();
+            tryPlayerMagicAttack();
         }
-        throw new IllegalArgumentException("없는 공격 타입");
-    }
-
-    private boolean playerMagicAttack(){
-        if(!ruleChecker.checkPlayerCanMagicAttack(player, 30)) {
-            outputProcessor.printError("MP가 부족해 마법공격을 할 수 없습니다.");
-            playerNormalAttack();
-            return false;
+        try {
+            bossTurn();
+        }catch (GameEndException e){
+            printBossWinStatus();
         }
-        player.magicAttack(boss, 20);
-        outputProcessor.print(String.format(MAGIK_ATTACK, 20));
-        return true;
     }
 
-    private void playerNormalAttack(){
-        player.attack(boss, 10);
-        outputProcessor.print(String.format(NORMAL_ATTACK, 10));
-    }
-
-    private void printStatus() {
-        outputProcessor.print(NEW_LINE_DOUBLE_LINE);
-        outputProcessor.print(boss);
-        printBossImage();
-        outputProcessor.print(player);
-    }
-
-    private void printBossImage(){
-        outputProcessor.print(SINGLE_LINE);
-        if(boss.isNew()){
-            outputProcessor.print(boss.bossIcon());
+    private void tryPlayerMagicAttack(){
+        boolean attackAble = true;
+        if(ruleChecker.checkPlayerCanMagicAttack(player, MP_USE_VALUE)) {
+            playerMagicAttack();
+            attackAble = false;
         }
-        if(!boss.isNew()) {
-            outputProcessor.print(boss.bossHitIcon());
+        if(attackAble){
+            outputProcessor.print(FORCE_NORMAL_ATTACK);
+            playerAttack();
         }
-        outputProcessor.print(SINGLE_LINE_NEW_LINE);
     }
 
-    private void bossTurn() {
-        int attackValue = inputProcessor.getRandomInt(21);
-        boss.attack(player,attackValue);
-        outputProcessor.print(String.format(BOSS_ATTACK, attackValue));
+    private void playerAttack(){
+        outputProcessor.print(String.format(NORMAL_ATTACK, NORMAL_ATTACK_DAMAGE));
+        player.attack(boss, NORMAL_ATTACK_DAMAGE);
+    }
+
+    private void playerMagicAttack(){
+        outputProcessor.print(String.format(MAGIK_ATTACK, MAGICK_ATTACK_DAMAGE));
+        player.magicAttack(boss, MAGICK_ATTACK_DAMAGE);
+    }
+
+    private void bossTurn(){
+        int damage = new Random().nextInt(21);
+        outputProcessor.print(String.format(BOSS_ATTACK, damage));
+        boss.attack(player, damage);
         try {
             playerTurn();
         }catch (GameEndException e){
