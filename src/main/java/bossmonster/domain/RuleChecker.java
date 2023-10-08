@@ -1,8 +1,8 @@
 package bossmonster.domain;
 
 public interface RuleChecker {
-    boolean checkBossInitHp(int hp);
-    boolean checkPlayerName(String name);
-    boolean checkPlayerHpAndMP(String hpAndMp);
-    boolean checkPlayerCanMagicAttack(Player player, int requireMp);
+    boolean isAllowedBossInitHp(int hp);
+    boolean isAllowedPlayerName(String name);
+    boolean isAllowedPlayerHpAndMP(String hpAndMp);
+    boolean canPlayerMagicAttack(Player player, int requireMp);
 }

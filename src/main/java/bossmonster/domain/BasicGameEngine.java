@@ -36,7 +36,7 @@ public class BasicGameEngine implements GameEngine {
         outputProcessor.print(BOSS_HP_INPUT);
         int bossHp = 0;
         boolean firstTimeInput = true;
-        while (!ruleChecker.checkBossInitHp(bossHp)){
+        while (!ruleChecker.isAllowedBossInitHp(bossHp)){
             if(!firstTimeInput){
                 outputProcessor.printError("보스의 HP는 100 이상 300 이하여야 합니다.");
                 outputProcessor.print(String.format("\n%s", BOSS_HP_INPUT));
@@ -59,7 +59,7 @@ public class BasicGameEngine implements GameEngine {
         outputProcessor.print(PLAYER_NAME_INPUT);
         String name = "";
         boolean firstTimeInput = true;
-        while (!ruleChecker.checkPlayerName(name)){
+        while (!ruleChecker.isAllowedPlayerName(name)){
             if(!firstTimeInput){
                 outputProcessor.printError("플레이어의 이름은 5글자 이하여야 합니다.");
                 outputProcessor.print(PLAYER_NAME_INPUT);
@@ -74,7 +74,7 @@ public class BasicGameEngine implements GameEngine {
         outputProcessor.print(PLAYER_HP_MP_INPUT);
         String hpAndMP = "";
         boolean firstTimeInput = true;
-        while (!ruleChecker.checkPlayerHpAndMP(hpAndMP)){
+        while (!ruleChecker.isAllowedPlayerHpAndMP(hpAndMP)){
             if(!firstTimeInput){
                 outputProcessor.printError("플레이어의 HP와 MP의 합은 200이어야합니다.");
                 outputProcessor.print(PLAYER_HP_MP_INPUT);
@@ -149,7 +149,7 @@ public class BasicGameEngine implements GameEngine {
 
     private void tryPlayerMagicAttack(){
         boolean attackAble = true;
-        if(ruleChecker.checkPlayerCanMagicAttack(player, MP_USE_VALUE)) {
+        if(ruleChecker.canPlayerMagicAttack(player, MP_USE_VALUE)) {
             playerMagicAttack();
             attackAble = false;
         }

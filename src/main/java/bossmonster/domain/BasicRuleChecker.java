@@ -2,17 +2,17 @@ package bossmonster.domain;
 
 public class BasicRuleChecker implements RuleChecker {
     @Override
-    public boolean checkBossInitHp(int hp) {
+    public boolean isAllowedBossInitHp(int hp) {
         return hp >= 100 && hp <= 300;
     }
 
     @Override
-    public boolean checkPlayerName(String name) {
+    public boolean isAllowedPlayerName(String name) {
         return name.length() <= 5 && !name.isEmpty() && !name.isBlank();
     }
 
     @Override
-    public boolean checkPlayerHpAndMP(String hpAndMp) {
+    public boolean isAllowedPlayerHpAndMP(String hpAndMp) {
         try {
             String[] split = hpAndMp.split(",");
             int hp = Integer.parseInt(split[0]);
@@ -24,7 +24,7 @@ public class BasicRuleChecker implements RuleChecker {
     }
 
     @Override
-    public boolean checkPlayerCanMagicAttack(Player player, int requireMp) {
+    public boolean canPlayerMagicAttack(Player player, int requireMp) {
         return player.canUseMp(requireMp);
     }
 }
