@@ -20,36 +20,36 @@ abstract class Player {
     }
 
 
-    abstract void attack(Boss boss, int value);
+    abstract void attack(Boss boss, int damageValue);
 
-    abstract void magicAttack(Boss boss, int value);
+    abstract void magicAttack(Boss boss, int damageValue);
 
-    void recoveryMp(int value){
-        mp = mp + value;
+    void recoveryMp(int recoveryValue){
+        mp = mp + recoveryValue;
         if(mp > maxMp){
             mp = maxMp;
         }
     }
 
-    protected void useMp(int value){
-        mp = mp - value;
+    protected void useMp(int useValue){
+        mp = mp - useValue;
     }
 
-    final boolean canUseMp(int value){
-        return mp >= value;
+    final boolean canUseMp(int useRequestValue){
+        return mp >= useRequestValue;
     }
 
-    void hit(int value) {
-        if (hp - value <= 0 || hp == 0){
+    void hit(int damageValue) {
+        if (hp - damageValue <= 0 || hp == 0){
             hp = 0;
             throw new GameEndException("플레이어가 죽었습니다!", false);
         }
-        hp = hp - value;
+        hp = hp - damageValue;
     }
 
     @Override
     public final String toString() {
-        return String.format("%s HP [%d/%d]",name, hp, maxHp);
+        return String.format("%s HP [%d/%d] MP [%d/%d]",name, hp, maxHp, mp, maxMp);
     }
 
     String getName() {

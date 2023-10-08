@@ -7,14 +7,14 @@ class PlayerImpl extends Player {
     }
 
     @Override
-    void attack(Boss boss, int value) {
+    void attack(Boss boss, int damageValue) {
         recoveryMp(10);
-        boss.hit(value);
+        boss.hit(damageValue);
     }
 
     @Override
-    void magicAttack(Boss boss, int value){
+    void magicAttack(Boss boss, int damageValue){
         useMp(30);
-        boss.hit(value);
+        boss.hit(damageValue);
     }
 }
