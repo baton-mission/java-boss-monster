@@ -4,6 +4,8 @@ import bossmonster.exception.GameEndException;
 import bossmonster.view.InputProcessor;
 import bossmonster.view.OutputProcessor;
 
+import static bossmonster.view.GuideText.*;
+
 public class BasicGameEngine implements GameEngine {
     private int turnCount = 0;
     private Player player;
@@ -26,13 +28,13 @@ public class BasicGameEngine implements GameEngine {
     }
 
     private Boss initBoss(){
-        outputProcessor.print("보스 몬스터의 체력을 입력해주세요.");
+        outputProcessor.print(BOSS_HP_INPUT);
         int bossHp = 0;
         boolean firstTimeInput = true;
         while (!ruleChecker.checkBossInitHp(bossHp)){
             if(!firstTimeInput){
                 outputProcessor.printError("보스의 HP는 100 이상 300 이하여야 합니다.");
-                outputProcessor.print("\n보스 몬스터의 체력을 입력해주세요.");
+                outputProcessor.print(String.format("\n%s", BOSS_HP_INPUT));
             }
             bossHp = inputProcessor.getInt();
             firstTimeInput = false;
@@ -49,13 +51,13 @@ public class BasicGameEngine implements GameEngine {
     }
 
     private String initPlayerName(){
-        outputProcessor.print("\n플레이어의 이름을 입력해주세요");
+        outputProcessor.print(PLAYER_NAME_INPUT);
         String name = "";
         boolean firstTimeInput = true;
         while (!ruleChecker.checkPlayerName(name)){
             if(!firstTimeInput){
                 outputProcessor.printError("플레이어의 이름은 5글자 이하여야 합니다.");
-                outputProcessor.print("\n플레이어의 이름을 입력해주세요");
+                outputProcessor.print(PLAYER_NAME_INPUT);
             }
             name = inputProcessor.getString();
             firstTimeInput = false;
@@ -64,13 +66,13 @@ public class BasicGameEngine implements GameEngine {
     }
 
     private String initPlayerHPAndMP(){
-        outputProcessor.print("\n플레이어의 HP와 MP를 입력해주세요.(,로 구분)");
+        outputProcessor.print(PLAYER_HP_MP_INPUT);
         String hpAndMP = "";
         boolean firstTimeInput = true;
         while (!ruleChecker.checkPlayerHpAndMP(hpAndMP)){
             if(!firstTimeInput){
                 outputProcessor.printError("플레이어의 HP와 MP의 합은 200이어야합니다.");
-                outputProcessor.print("\n플레이어의 HP와 MP를 입력해주세요.(,로 구분)");
+                outputProcessor.print(PLAYER_HP_MP_INPUT);
             }
             hpAndMP = inputProcessor.getString();
             firstTimeInput = false;
@@ -82,12 +84,12 @@ public class BasicGameEngine implements GameEngine {
         if (!canStart()){
             return;
         }
-        outputProcessor.print("\n보스 레이드를 시작합니다!");
+        outputProcessor.print(GAME_START);
         printStatus();
         try {
             playerTurn();
         }catch (GameEndException e){
-            outputProcessor.print(String.format("%s 님이 %d번의 전투 끝에 보스 몬스터를 잡았습니다!", player.getName(), turnCount));
+            outputProcessor.print(String.format(KILL_BOSS, player.getName(), turnCount));
         }
     }
 
@@ -101,7 +103,7 @@ public class BasicGameEngine implements GameEngine {
             printStatus();
         }
         outputProcessor.printDecoration();
-        outputProcessor.print("어떤 공격을 하시겠습니까?\n1. 물리 공격\n2. 마법 공격");
+        outputProcessor.print(ATTACK_STRATEGY);
         while (true) {
             try {
                 int attackType = inputProcessor.getInt();
@@ -111,11 +113,7 @@ public class BasicGameEngine implements GameEngine {
                 outputProcessor.printError(e.getMessage());
             }
         }
-        try {
-            bossTurn();
-        }catch (GameEndException e){
-            outputProcessor.print(String.format("%s의 HP가 0이 되었습니다.\n보스 레이드에 실패했습니다.",player.getName()));
-        }
+        bossTurn();
     }
 
     private void updateTurnCount() {
@@ -140,41 +138,41 @@ public class BasicGameEngine implements GameEngine {
             return false;
         }
         player.magicAttack(boss, 20);
-        outputProcessor.print(String.format("\n마법공격을 했습니다. (입힌 데미지: %d)", 20));
+        outputProcessor.print(String.format(MAGIK_ATTACK, 20));
         return true;
     }
 
     private void playerNormalAttack(){
         player.attack(boss, 10);
-        outputProcessor.print(String.format("\n물리공격을 했습니다. (입힌 데미지: %d)",10));
+        outputProcessor.print(String.format(NORMAL_ATTACK, 10));
     }
 
     private void printStatus() {
-        outputProcessor.print("\n============================");
+        outputProcessor.print(NEW_LINE_DOUBLE_LINE);
         outputProcessor.print(boss);
         printBossImage();
         outputProcessor.print(player);
     }
 
     private void printBossImage(){
-        outputProcessor.print("____________________________");
+        outputProcessor.print(SINGLE_LINE);
         if(boss.isNew()){
             outputProcessor.print(boss.bossIcon());
         }
         if(!boss.isNew()) {
             outputProcessor.print(boss.bossHitIcon());
         }
-        outputProcessor.print("____________________________\n");
+        outputProcessor.print(SINGLE_LINE_NEW_LINE);
     }
 
     private void bossTurn() {
         int attackValue = inputProcessor.getRandomInt(21);
         boss.attack(player,attackValue);
-        outputProcessor.print(String.format("보스가 공격을 했습니다. (입힌 데미지: %d)",attackValue));
+        outputProcessor.print(String.format(BOSS_ATTACK, attackValue));
         try {
             playerTurn();
         }catch (GameEndException e){
-            outputProcessor.print(String.format("\n%s 님이 %d번의 전투 끝에 보스 몬스터를 잡았습니다!", player.getName(), turnCount));
+            outputProcessor.print(String.format(KILL_BOSS, player.getName(), turnCount));
         }
     }
 }
