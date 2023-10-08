@@ -52,7 +52,7 @@ public class BasicGameEngine implements GameEngine {
         String[] split = initPlayerHPAndMP().split(",");
         int hp = Integer.parseInt(split[0]);
         int mp = Integer.parseInt(split[1]);
-        return new PlayerImpl(playerName, hp, mp);
+        return new Player(playerName, hp, mp);
     }
 
     private String initPlayerName(){

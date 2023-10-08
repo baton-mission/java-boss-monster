@@ -1,9 +1,8 @@
 package bossmonster.domain;
 
 import bossmonster.exception.GameEndException;
-import bossmonster.exception.GamePolicyException;
 
-abstract class Player {
+class Player {
     protected final String name;
     private int hp;
     private int mp;
@@ -20,9 +19,15 @@ abstract class Player {
     }
 
 
-    abstract void attack(Boss boss, int damageValue);
+    void attack(Boss boss, int damageValue) {
+        recoveryMp(10);
+        boss.hit(damageValue);
+    }
 
-    abstract void magicAttack(Boss boss, int damageValue);
+    void magicAttack(Boss boss, int damageValue){
+        useMp(30);
+        boss.hit(damageValue);
+    }
 
     void recoveryMp(int recoveryValue){
         mp = mp + recoveryValue;
