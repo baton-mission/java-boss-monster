@@ -14,8 +14,8 @@ public class InputProcessorByScanner implements InputProcessor {
             sc = new Scanner(System.in);
             try {
                 return sc.nextInt();
-            } catch (InputMismatchException ignored) {
-
+            } catch (InputMismatchException e) {
+                System.out.println("[ERROR] 숫자를 입력하세요.");
             }
         }
     }
