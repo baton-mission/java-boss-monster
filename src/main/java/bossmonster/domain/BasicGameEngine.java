@@ -1,18 +1,18 @@
 package bossmonster.domain;
 
 import bossmonster.exception.GameEndException;
+import bossmonster.view.GuideText;
 import bossmonster.view.InputProcessor;
 import bossmonster.view.OutputProcessor;
 
 import java.util.Random;
 
+import static bossmonster.domain.AttackType.MAGICK;
+import static bossmonster.domain.AttackType.NORMAL;
 import static bossmonster.view.GuideText.*;
 
 public class BasicGameEngine implements GameEngine {
     private int turnCount = 0;
-    private static final int NORMAL_ATTACK_DAMAGE = 10;
-    private static final int MAGICK_ATTACK_DAMAGE = 20;
-    private static final int MP_USE_VALUE = 30;
     private Player player;
     private Boss boss;
     private final InputProcessor inputProcessor;
@@ -133,11 +133,11 @@ public class BasicGameEngine implements GameEngine {
             printStatus();
         }
         outputProcessor.print(ATTACK_STRATEGY);
-        int attackType = inputProcessor.getInt();
-        if(attackType == 1){
+        AttackType attackType = AttackType.fromInt(inputProcessor.getInt());
+        if(attackType == NORMAL){
             playerAttack();
         }
-        if(attackType == 2){
+        if(attackType == MAGICK){
             tryPlayerMagicAttack();
         }
         try {
@@ -149,7 +149,7 @@ public class BasicGameEngine implements GameEngine {
 
     private void tryPlayerMagicAttack(){
         boolean attackAble = true;
-        if(ruleChecker.canPlayerMagicAttack(player, MP_USE_VALUE)) {
+        if(ruleChecker.canPlayerMagicAttack(player, MAGICK.getUseMpValue())) {
             playerMagicAttack();
             attackAble = false;
         }
@@ -160,13 +160,13 @@ public class BasicGameEngine implements GameEngine {
     }
 
     private void playerAttack(){
-        outputProcessor.print(String.format(NORMAL_ATTACK, NORMAL_ATTACK_DAMAGE));
-        player.attack(boss, NORMAL_ATTACK_DAMAGE);
+        outputProcessor.print(String.format(GuideText.NORMAL_ATTACK, NORMAL.getDamageValue()));
+        player.attack(boss, NORMAL.getDamageValue());
     }
 
     private void playerMagicAttack(){
-        outputProcessor.print(String.format(MAGIK_ATTACK, MAGICK_ATTACK_DAMAGE));
-        player.magicAttack(boss, MAGICK_ATTACK_DAMAGE);
+        outputProcessor.print(String.format(GuideText.MAGIK_ATTACK, MAGICK.getDamageValue()));
+        player.magicAttack(boss, MAGICK.getDamageValue());
     }
 
     private void bossTurn(){
