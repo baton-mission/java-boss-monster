@@ -11,14 +11,14 @@ abstract class Boss {
         this.hp = hp;
     }
 
-    abstract void attack(Player player, int value);
+    abstract void attack(Player player, int damageValue);
 
-    void hit(int value) {
-        if (hp - value <= 0 || hp == 0){
+    void hit(int damageValue) {
+        if (hp - damageValue <= 0 || hp == 0){
             hp = 0;
             throw new GameEndException("보스가 죽었습니다!", true);
         }
-        hp = hp - value;
+        hp = hp - damageValue;
     }
 
     @Override

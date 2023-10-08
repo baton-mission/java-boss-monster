@@ -7,7 +7,7 @@ class BossImpl extends Boss {
     }
 
     @Override
-    void attack(Player player, int value) {
-        player.hit(value);
+    void attack(Player player, int damageValue) {
+        player.hit(damageValue);
     }
 }
