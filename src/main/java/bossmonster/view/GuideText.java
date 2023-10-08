@@ -13,5 +13,5 @@ public class GuideText {
     public static final String BOSS_ATTACK = "보스가 공격을 했습니다. (입힌 데미지: %d)";
     public static final String NEW_LINE_DOUBLE_LINE = "\n============================";
     public static final String SINGLE_LINE = "____________________________";
-    public static final String SINGLE_LINE_NEW_LINE = String.format("$s\n", SINGLE_LINE);
+    public static final String SINGLE_LINE_NEW_LINE = String.format("%s\n", SINGLE_LINE);
 }
