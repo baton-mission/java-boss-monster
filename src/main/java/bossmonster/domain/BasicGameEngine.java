@@ -10,7 +10,6 @@ public class BasicGameEngine implements GameEngine {
     private Boss boss;
     private final InputProcessor inputProcessor;
     private final OutputProcessor outputProcessor;
-
     private final RuleChecker ruleChecker;
 
     public BasicGameEngine(InputProcessor inputProcessor, OutputProcessor outputProcessor, RuleChecker ruleChecker) {
@@ -32,7 +31,7 @@ public class BasicGameEngine implements GameEngine {
         boolean firstTimeInput = true;
         while (!ruleChecker.checkBossInitHp(bossHp)){
             if(!firstTimeInput){
-                outputProcessor.printError(new IllegalStateException("보스의 HP는 100 이상 300 이하여야 합니다."));
+                outputProcessor.printError("보스의 HP는 100 이상 300 이하여야 합니다.");
                 outputProcessor.print("\n보스 몬스터의 체력을 입력해주세요.");
             }
             bossHp = inputProcessor.getInt();
@@ -55,7 +54,7 @@ public class BasicGameEngine implements GameEngine {
         boolean firstTimeInput = true;
         while (!ruleChecker.checkPlayerName(name)){
             if(!firstTimeInput){
-                outputProcessor.printError(new IllegalStateException("플레이어의 이름은 5글자 이하여야 합니다."));
+                outputProcessor.printError("플레이어의 이름은 5글자 이하여야 합니다.");
                 outputProcessor.print("\n플레이어의 이름을 입력해주세요");
             }
             name = inputProcessor.getString();
@@ -70,7 +69,7 @@ public class BasicGameEngine implements GameEngine {
         boolean firstTimeInput = true;
         while (!ruleChecker.checkPlayerHpAndMP(hpAndMP)){
             if(!firstTimeInput){
-                outputProcessor.printError(new IllegalStateException("플레이어의 HP와 MP의 합은 200이어야합니다."));
+                outputProcessor.printError("플레이어의 HP와 MP의 합은 200이어야합니다.");
                 outputProcessor.print("\n플레이어의 HP와 MP를 입력해주세요.(,로 구분)");
             }
             hpAndMP = inputProcessor.getString();
@@ -78,6 +77,7 @@ public class BasicGameEngine implements GameEngine {
         }
         return hpAndMP;
     }
+
     private void startGame() {
         if (!canStart()){
             return;
@@ -108,7 +108,7 @@ public class BasicGameEngine implements GameEngine {
                 playerAttack(attackType);
                 break;
             } catch (IllegalArgumentException e) {
-                outputProcessor.printError(e);
+                outputProcessor.printError(e.getMessage());
             }
         }
         try {
@@ -132,9 +132,10 @@ public class BasicGameEngine implements GameEngine {
         }
         throw new IllegalArgumentException("없는 공격 타입");
     }
+
     private boolean playerMagicAttack(){
         if(!ruleChecker.checkPlayerCanMagicAttack(player, 30)) {
-            outputProcessor.printError(new IllegalStateException("MP가 부족해 마법공격을 할 수 없습니다."));
+            outputProcessor.printError("MP가 부족해 마법공격을 할 수 없습니다.");
             playerNormalAttack();
             return false;
         }
@@ -142,6 +143,7 @@ public class BasicGameEngine implements GameEngine {
         outputProcessor.print(String.format("\n마법공격을 했습니다. (입힌 데미지: %d)", 20));
         return true;
     }
+
     private void playerNormalAttack(){
         player.attack(boss, 10);
         outputProcessor.print(String.format("\n물리공격을 했습니다. (입힌 데미지: %d)",10));

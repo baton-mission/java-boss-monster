@@ -7,7 +7,7 @@ public class OutputProcessorBySystemOut implements OutputProcessor {
     }
 
     @Override
-    public void printError(Exception e) {
-        System.out.println(String.format("[ERROR] %s",e.getMessage()));
+    public void printError(String errMsg) {
+        System.out.println(String.format("[ERROR] %s", errMsg));
     }
 }
