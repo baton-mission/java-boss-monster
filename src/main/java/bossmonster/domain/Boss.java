@@ -2,7 +2,7 @@ package bossmonster.domain;
 
 import bossmonster.exception.GameEndException;
 
-abstract class Boss {
+class Boss {
     private int hp;
     private final int maxHp;
 
@@ -11,7 +11,9 @@ abstract class Boss {
         this.hp = hp;
     }
 
-    abstract void attack(Player player, int damageValue);
+    void attack(Player player, int damageValue) {
+        player.hit(damageValue);
+    }
 
     void hit(int damageValue) {
         if (hp - damageValue <= 0 || hp == 0){

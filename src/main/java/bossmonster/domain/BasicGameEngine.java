@@ -44,7 +44,7 @@ public class BasicGameEngine implements GameEngine {
             bossHp = inputProcessor.getInt();
             firstTimeInput = false;
         }
-        return new BossImpl(bossHp);
+        return new Boss(bossHp);
     }
 
     private Player initPlayer(){
