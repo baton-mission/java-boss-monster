@@ -11,10 +11,10 @@ public class InputProcessorByScanner implements InputProcessor {
     @Override
     public int getInt() {
         while (true) {
-            sc = new Scanner(System.in);
             try {
                 return sc.nextInt();
             } catch (InputMismatchException e) {
+                sc.nextLine();
                 System.out.println("[ERROR] 숫자를 입력하세요.");
             }
         }
