@@ -37,15 +37,19 @@ public class Player{
     }
     
     public int attack(AttackType attacktype) {
-        if(this.currentMp - attacktype.getmpNeeded() < 0) {
-            throw new IllegalArgumentException("Not enough Mana");
-        }
         this.currentMp -= attacktype.getmpNeeded();
         this.currentMp = Math.min(currentMp + attacktype.getReGenMp(), maxMp);
 
         return attacktype.getDamage();
     }
 
+    public boolean hasMp(AttackType attackType) {
+        if(this.currentMp - attackType.getmpNeeded() < 0) {
+            System.out.println("Not enough Mana");
+            return false;
+        }
+        return true;
+    }
     public void attacked(int bossDamage) {
         this.currentHp -= bossDamage;
     }

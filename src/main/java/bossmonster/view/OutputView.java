@@ -75,4 +75,10 @@ public class OutputView {
     public static void printDamageByPlayer(AttackType attackType) {
         System.out.println("Magical Attack! (damage : " + attackType.getDamage() + ")");
     }
+
+    public static void printNextTurn(PlayerDto.Status player, BossMonsterDto bossMonster, AttackType attackType, int bossDamage) {
+        printSadBoss(bossMonster, player);
+        printDamageByPlayer(attackType);
+        printDamageByBossMonster(bossDamage);
+    }
 }

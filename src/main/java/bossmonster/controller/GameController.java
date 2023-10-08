@@ -15,7 +15,7 @@ public class GameController {
         BossMonster bossMonster = generateBossMonster();
         Player player = generatePlayer();
         OutputView.printDefaultBoss(BossMonsterDto.from(bossMonster), PlayerDto.Status.from(player));
-        playerBossTransaction(player, bossMonster, 1);
+        playerBossTransaction(player, bossMonster);
     }
 
     private Player generatePlayer() {
@@ -29,37 +29,40 @@ public class GameController {
         return new BossMonster(inputView.inputBossHp());
     }
 
-    private AttackType userInputAttackType() {
-        return inputView.inputAttackType();
+
+    private void playerBossTransaction(Player player, BossMonster bossMonster) {
+        int count = 1;
+        while (true) {
+            AttackType playerAttackType = inputView.inputAttackType();
+            if (!player.hasMp(playerAttackType)) { continue; }
+            if (playerKilledBoss(player, bossMonster, playerAttackType, count)) { break; }
+
+            int bossAttackDamage = bossMonster.attack();
+            if (bossKilledPlayer(player, bossMonster, bossAttackDamage, count)) { break; }
+            OutputView.printNextTurn(PlayerDto.Status.from(player),
+                    BossMonsterDto.from(bossMonster), playerAttackType, count);
+            count++;
+        }
     }
 
-    private Boolean playerBossTransaction(Player player, BossMonster bossMonster, int count) {
-        AttackType playerAttackType = userInputAttackType();
-        try {
-            bossMonster.attacked(player.attack(playerAttackType));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return playerBossTransaction(player, bossMonster, count);
-        }
+    private Boolean playerKilledBoss(Player player, BossMonster bossMonster, AttackType attackType, int count) {
+        bossMonster.attacked(player.attack(attackType));
 
         if (bossMonster.isDead()) {
             OutputView.printSadBoss(BossMonsterDto.from(bossMonster), PlayerDto.Status.from(player));
             OutputView.printPlayerWin(PlayerDto.Status.from(player), count);
-            return false;
+            return true;
         }
-        
-        int bossAttackDamage = bossMonster.attack();
-        player.attacked(bossAttackDamage);
-        if (player.isDead()) {
+        return false;
+    }
+
+    private Boolean bossKilledPlayer(Player player, BossMonster bossMonster, int bossDamage, int count) {
+        player.attacked(bossDamage);
+        if(player.isDead()) {
             OutputView.printHappyBoss(BossMonsterDto.from(bossMonster), PlayerDto.Status.from(player));
             OutputView.printBossMonsterWin(PlayerDto.Status.from(player), count);
-            return false;
+            return true;
         }
-
-        OutputView.printSadBoss(BossMonsterDto.from(bossMonster), PlayerDto.Status.from(player));
-        OutputView.printDamageByPlayer(playerAttackType);
-        OutputView.printDamageByBossMonster(bossAttackDamage);
-
-        return playerBossTransaction(player, bossMonster, count + 1);
+        return false;
     }
 }
