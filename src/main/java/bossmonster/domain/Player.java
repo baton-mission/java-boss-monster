@@ -47,7 +47,7 @@ class Player {
     void hit(int damageValue) {
         if (hp - damageValue <= 0 || hp == 0){
             hp = 0;
-            throw new GameEndException("플레이어가 죽었습니다!", false);
+            throw new GameEndException("플레이어가 죽었습니다!");
         }
         hp = hp - damageValue;
     }

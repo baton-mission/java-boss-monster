@@ -18,7 +18,7 @@ class Boss {
     void hit(int damageValue) {
         if (hp - damageValue <= 0 || hp == 0){
             hp = 0;
-            throw new GameEndException("보스가 죽었습니다!", true);
+            throw new GameEndException("보스가 죽었습니다!");
         }
         hp = hp - damageValue;
     }
