@@ -110,23 +110,6 @@ public class BasicGameEngine implements GameEngine {
         outputProcessor.print(DOUBLE_LINE_NEW_LINE);
     }
 
-    private void printStatus(){
-        outputProcessor.print(NEW_LINE_DOUBLE_LINE);
-        outputProcessor.print(boss);
-        outputProcessor.print(BOSS_HIT_ICON);
-        outputProcessor.print(player);
-        outputProcessor.print(DOUBLE_LINE_NEW_LINE);
-    }
-
-    private void printBossWinStatus(){
-        outputProcessor.print(NEW_LINE_DOUBLE_LINE);
-        outputProcessor.print(boss);
-        outputProcessor.print(BOSS_WIN_ICON);
-        outputProcessor.print(player);
-        outputProcessor.print(DOUBLE_LINE_NEW_LINE);
-        outputProcessor.print(String.format(KILL_PLAYER, player.getName()));
-    }
-
     private void playerTurn(){
         turnCount++;
         if(!boss.isNew()){
@@ -147,6 +130,19 @@ public class BasicGameEngine implements GameEngine {
         }
     }
 
+    private void printStatus(){
+        outputProcessor.print(NEW_LINE_DOUBLE_LINE);
+        outputProcessor.print(boss);
+        outputProcessor.print(BOSS_HIT_ICON);
+        outputProcessor.print(player);
+        outputProcessor.print(DOUBLE_LINE_NEW_LINE);
+    }
+
+    private void playerAttack(){
+        outputProcessor.print(String.format(GuideText.NORMAL_ATTACK, NORMAL.getDamageValue()));
+        player.attack(boss, NORMAL.getDamageValue());
+    }
+
     private void tryPlayerMagicAttack(){
         boolean attackAble = true;
         if(ruleChecker.canPlayerMagicAttack(player, MAGICK.getUseMpValue())) {
@@ -157,11 +153,6 @@ public class BasicGameEngine implements GameEngine {
             outputProcessor.print(FORCE_NORMAL_ATTACK);
             playerAttack();
         }
-    }
-
-    private void playerAttack(){
-        outputProcessor.print(String.format(GuideText.NORMAL_ATTACK, NORMAL.getDamageValue()));
-        player.attack(boss, NORMAL.getDamageValue());
     }
 
     private void playerMagicAttack(){
@@ -178,5 +169,14 @@ public class BasicGameEngine implements GameEngine {
         }catch (GameEndException e){
             outputProcessor.print(String.format(KILL_BOSS, player.getName(), turnCount));
         }
+    }
+
+    private void printBossWinStatus(){
+        outputProcessor.print(NEW_LINE_DOUBLE_LINE);
+        outputProcessor.print(boss);
+        outputProcessor.print(BOSS_WIN_ICON);
+        outputProcessor.print(player);
+        outputProcessor.print(DOUBLE_LINE_NEW_LINE);
+        outputProcessor.print(String.format(KILL_PLAYER, player.getName()));
     }
 }
