@@ -1,7 +1,9 @@
 package bossmonster.controller;
 
 import bossmonster.domain.BossMonster;
+import bossmonster.domain.Player;
 import bossmonster.view.InputView;
+import bossmonster.view.PlayerStatDto;
 
 public class BossMonsterController {
     private final InputView inputView;
@@ -13,5 +15,10 @@ public class BossMonsterController {
     public void run() {
         int bossMonsterHp = inputView.readBossMonsterHp();
         BossMonster bossMonster = new BossMonster(bossMonsterHp);
+        String playerName = inputView.readPlayerName();
+        PlayerStatDto playerStatDto = inputView.readPlayerStat();
+        int playerHp = playerStatDto.getHp();
+        int playerMp = playerStatDto.getMp();
+        Player player = new Player(playerName, playerHp, playerMp);
     }
 }
