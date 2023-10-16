@@ -63,4 +63,30 @@ class PlayerTest {
                     .withMessage(Player.INVALID_STAT_MESSAGE);
         }
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "90, 100, PHYSICAL",
+            "80, 70, MAGICAL"
+    })
+    void 플레이어_공격_성공(int remainBossMonsterHp, int remainPlayerMp, AttackType attackType) {
+        BossMonster bossMonster = new BossMonster(100);
+        Player player = new Player("user1", 100, 100);
+
+        player.attack(bossMonster, attackType);
+
+        assertThat(bossMonster.getHp().getCurrentEnergy()).isEqualTo(remainBossMonsterHp);
+        assertThat(player.getMp().getCurrentEnergy()).isEqualTo(remainPlayerMp);
+    }
+
+    @Test
+    void 플레이어가_물리공격하면_마나가_회복된다() {
+        BossMonster bossMonster = new BossMonster(100);
+        Player player = new Player("user1", 100, 100);
+        player.attack(bossMonster, AttackType.MAGICAL);
+
+        player.attack(bossMonster, AttackType.PHYSICAL);
+
+        assertThat(player.getMp().getCurrentEnergy()).isEqualTo(80);
+    }
 }
