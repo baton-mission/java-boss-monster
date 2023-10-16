@@ -1,4 +1,4 @@
-package bossmonster.domain;
+package bossmonster.domain.number;
 
 public class RandomNumberGenerator {
     public static int getRandomNumber() {

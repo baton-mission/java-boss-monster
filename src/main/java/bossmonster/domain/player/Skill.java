@@ -1,4 +1,4 @@
-package bossmonster.domain;
+package bossmonster.domain.player;
 
 import java.util.Arrays;
 

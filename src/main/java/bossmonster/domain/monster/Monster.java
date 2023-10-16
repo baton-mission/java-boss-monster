@@ -1,4 +1,6 @@
-package bossmonster.domain;
+package bossmonster.domain.monster;
+
+import bossmonster.domain.player.Player;
 
 public class Monster {
 

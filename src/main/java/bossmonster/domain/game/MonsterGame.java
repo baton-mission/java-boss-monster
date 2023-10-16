@@ -1,15 +1,17 @@
-package bossmonster.domain;
+package bossmonster.domain.game;
+
+import bossmonster.domain.monster.Monster;
+import bossmonster.domain.player.Player;
+import bossmonster.domain.player.Skill;
 
 public class MonsterGame {
 
-    private GameStatus gameStatus;
     private int matchCount;
     private Monster monster;
 
     private Player player;
 
     public MonsterGame(Monster monster, Player player) {
-        this.gameStatus = GameStatus.RUN;
         this.matchCount = 0;
         this.monster = monster;
         this.player = player;
@@ -17,8 +19,12 @@ public class MonsterGame {
 
     public void proceedPlayerTurn(Skill skill) {
         if (player.isAlive()) {
-            player.takeDamage(skill, monster);
+            player.attack(skill, monster);
+            increaseMatchCount();
         }
+    }
+    private void increaseMatchCount() {
+        matchCount++;
     }
 
     public void proceedMonsterTurn(int damage) {
@@ -27,6 +33,12 @@ public class MonsterGame {
         }
     }
 
+
+    public boolean isGameInProgress() {
+        return player.isAlive() && monster.isAlive();
+    }
+
+
     public GameResult getGameResult() {
         if(player.isAlive()) {
             return GameResult.WIN;
@@ -34,29 +46,20 @@ public class MonsterGame {
         return GameResult.LOSE;
     }
 
-    private String findWinnerName() {
-        if(player.isAlive()) {
-            return player.getName();
-        }
-        return "monster";
+
+    public int getMatchCount() {
+        return matchCount;
     }
 
-    public boolean isGameInProgress() {
-        return gameStatus.isRunning();
+    public Monster getMonster() {
+        return monster;
     }
 
-    public void updateGame() {
-        updateMatchCount();
-        updateGameStatus();
+    public Player getPlayer() {
+        return player;
     }
 
-    private void updateMatchCount() {
-        matchCount++;
-    }
-
-    private void updateGameStatus() {
-        if (player.isDead() || monster.isDead()) {
-            gameStatus = GameStatus.STOP;
-        }
+    public boolean isMonsterPlayable() {
+        return monster.isAlive();
     }
 }

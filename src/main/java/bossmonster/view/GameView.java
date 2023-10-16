@@ -1,11 +1,13 @@
 package bossmonster.view;
 
 
-import bossmonster.domain.GameResult;
-import bossmonster.domain.Monster;
-import bossmonster.domain.MonsterGame;
-import bossmonster.domain.Player;
-import bossmonster.domain.Skill;
+import bossmonster.domain.monster.Monster;
+import bossmonster.domain.player.Player;
+import bossmonster.domain.player.PlayerHp;
+import bossmonster.domain.player.PlayerMp;
+import bossmonster.domain.player.PlayerName;
+import bossmonster.domain.player.PlayerStats;
+import bossmonster.domain.player.Skill;
 
 // todo print가 많긴함 나누면 좋을까?
 public class GameView {
@@ -48,7 +50,7 @@ public class GameView {
         enter();
     }
 
-    public void printGameProgress(Player player, Monster monster) {
+    public void printPlayerAndMonsterInformation(Player player, Monster monster) {
         printEqualsLine();
         printMonsterHP(monster);
         printUnderScoreLine();
@@ -83,9 +85,13 @@ public class GameView {
     }
 
     private void printPlayerHPAndMP(Player player) {
+        PlayerName name = player.getName();
+        PlayerStats playerStats = player.getPlayerStats();
+        PlayerHp playerHp = playerStats.getPlayerHp();
+        PlayerMp playerMp = playerStats.getPlayerMp();
         output.printLine(
-                player.getName() + " HP [" + player.getCurrentHp() + "/" + player.getMaxHp()
-                        + "] MP [" + player.getCurrentMp() + "/" + player.getMaxMp() + "]");
+                name.getName() + " HP [" + playerHp.getCurrentHp() + "/" + playerHp.getMaxHp()
+                        + "] MP [" + playerMp.getCurrentMp() + "/" + playerMp.getMaxMp() + "]");
     }
 
     private void printStartCharacter() {
@@ -152,13 +158,14 @@ public class GameView {
         output.printLine("보스가 공격 했습니다. (입힌 데미지:" + damage + ")");
     }
 
-    public void printWin(Player player) {
-        output.printLine(player.getName()+" 님이 "+player.getTryCount()+"번의 전투 끝에 보스 몬스터를 잡았습니다.");
+    public void printWin(Player player, int matchCount) {
+        enter();
+        output.printLine(player.getName().getName() + " 님이 " + matchCount + "번의 전투 끝에 보스 몬스터를 잡았습니다.");
     }
 
     public void printLose(Player player) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(player.getName() + "의 HP가 0이 되었습니다.").append(LINE_BREAK)
+        stringBuilder.append(player.getName().getName() + "의 HP가 0이 되었습니다.").append(LINE_BREAK)
                 .append("보스 레이드에 실패했습니다.");
         output.printLine(stringBuilder.toString());
     }
