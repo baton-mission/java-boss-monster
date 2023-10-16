@@ -12,6 +12,10 @@ public class InputView {
     public static final String PLAYER_STAT_DELIMITER = ",";
     public static final int HP_INDEX = 0;
     public static final int MP_INDEX = 1;
+    public static final String READ_ATTACK_TYPE_MESSAGE =
+            "어떤 공격을 하시겠습니까?\n"
+            + "1. 물리 공격\n"
+            + "2. 마법 공격";
     private final Scanner scanner;
 
     public InputView(Scanner scanner) {
@@ -26,6 +30,11 @@ public class InputView {
     public String readPlayerName() {
         print(READ_PLAYER_NAME);
         return scanner.nextLine();
+    }
+
+    public int readAttackType() {
+        print(READ_ATTACK_TYPE_MESSAGE);
+        return parseInt(scanner.nextLine());
     }
 
     public PlayerStatDto readPlayerStat() {

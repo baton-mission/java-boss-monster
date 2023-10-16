@@ -10,8 +10,8 @@ public class Player {
     private static final int MIN_HP = 1;
     private static final int MIN_MP = 0;
     private final String name;
-    private final int hp;
-    private final int mp;
+    private final Energy hp;
+    private final Energy mp;
 
     public Player(String name, int hp, int mp) {
         validateName(name);
@@ -19,8 +19,13 @@ public class Player {
         validateMp(mp);
         validateTotalStat(hp, mp);
         this.name = name;
-        this.hp = hp;
-        this.mp = mp;
+        this.hp = new Energy(hp);
+        this.mp = new Energy(mp);
+    }
+
+    public void attack(BossMonster bossMonster, AttackType attackType) {
+        bossMonster.decreaseHp(attackType.getDamage());
+        mp.change(attackType.getMpChange());
     }
 
     private void validateName(String name) {
@@ -51,11 +56,11 @@ public class Player {
         return name;
     }
 
-    public int getHp() {
+    public Energy getHp() {
         return hp;
     }
 
-    public int getMp() {
+    public Energy getMp() {
         return mp;
     }
 }

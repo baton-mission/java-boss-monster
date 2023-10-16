@@ -13,8 +13,8 @@ class BossMonsterTest {
     void 보스_몬스터_생성_정상(int hp) {
         BossMonster createdBossMonster = new BossMonster(hp);
 
-        int actual = createdBossMonster.getHp();
-        assertThat(actual).isEqualTo(hp);
+        Energy actual = createdBossMonster.getHp();
+        assertThat(actual.getCurrentEnergy()).isEqualTo(hp);
     }
 
     @Nested

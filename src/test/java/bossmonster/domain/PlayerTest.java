@@ -19,8 +19,8 @@ class PlayerTest {
         Player player = new Player(name, hp, mp);
 
         assertThat(player.getName()).isEqualTo(name);
-        assertThat(player.getHp()).isEqualTo(hp);
-        assertThat(player.getMp()).isEqualTo(mp);
+        assertThat(player.getHp().getCurrentEnergy()).isEqualTo(hp);
+        assertThat(player.getMp().getCurrentEnergy()).isEqualTo(mp);
     }
 
     @Nested
