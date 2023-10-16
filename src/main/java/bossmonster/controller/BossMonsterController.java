@@ -27,7 +27,12 @@ public class BossMonsterController {
         while (bossMonster.getHp().getCurrentEnergy() > 0 && player.getHp().getCurrentEnergy() > 0) {
             int type = inputView.readAttackType();
             AttackType attackType = AttackType.fromType(type);
+
+            int beforeBossHp = bossMonster.getHp().getCurrentEnergy();
             player.attack(bossMonster, attackType);
+            int afterBossHp = bossMonster.getHp().getCurrentEnergy();
+            outputView.printPlayerAttack(beforeBossHp - afterBossHp, attackType);
+
             int beforePlayerHp = player.getHp().getCurrentEnergy();
             bossMonster.attack(player);
             int afterPlayerHp = player.getHp().getCurrentEnergy();
