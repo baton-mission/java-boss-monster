@@ -63,4 +63,8 @@ public class Player {
     public Energy getMp() {
         return mp;
     }
+
+    public void decreaseHp(int amount) {
+        hp.change(-amount);
+    }
 }
