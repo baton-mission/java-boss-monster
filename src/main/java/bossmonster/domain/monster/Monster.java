@@ -4,26 +4,14 @@ import bossmonster.domain.player.Player;
 
 public class Monster {
 
-    private int currentHp;
-    private int maxHp;
+    private MonsterHp monsterHp;
 
     public Monster(int hp) {
-        validateHp(hp);
-        this.currentHp = hp;
-        this.maxHp = hp;
-    }
-
-    private void validateHp(int hp) {
-        if (100 > hp || hp > 300) {
-            throw new IllegalArgumentException("몬스터의 HP는 100이상 300이하여야합니다.");
-        }
+        monsterHp = new MonsterHp(hp);
     }
 
     public void sufferDamage(int damage) {
-        this.currentHp = currentHp - damage;
-        if (currentHp < 0) {
-            currentHp = 0;
-        }
+        monsterHp.reduceHp(damage);
     }
 
     public void takeDamage(int damage, Player player) {
@@ -31,7 +19,7 @@ public class Monster {
     }
 
     public boolean isAlive() {
-        return currentHp > 0;
+        return monsterHp.hasHPGreaterThanZero();
     }
 
     public boolean isDead() {
@@ -39,10 +27,10 @@ public class Monster {
     }
 
     public int getCurrentHp() {
-        return currentHp;
+        return monsterHp.getCurrentHp();
     }
 
     public int getMaxHp() {
-        return maxHp;
+        return monsterHp.getMaxHp();
     }
 }
