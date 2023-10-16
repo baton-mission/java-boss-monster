@@ -6,6 +6,8 @@ import bossmonster.domain.player.Skill;
 
 public class MonsterGame {
 
+
+    private GameStatus gameStatus;
     private int matchCount;
     private Monster monster;
 
@@ -13,6 +15,7 @@ public class MonsterGame {
 
     public MonsterGame(Monster monster, Player player) {
         this.matchCount = 0;
+        this.gameStatus = GameStatus.INIT;
         this.monster = monster;
         this.player = player;
     }
@@ -22,7 +25,11 @@ public class MonsterGame {
             player.attack(skill, monster);
             increaseMatchCount();
         }
+        if(monster.isDead()) {
+            gameStatus = GameStatus.END;
+        }
     }
+
     private void increaseMatchCount() {
         matchCount++;
     }
@@ -31,21 +38,29 @@ public class MonsterGame {
         if (monster.isAlive()) {
             monster.takeDamage(damage, player);
         }
+        if(player.isDead()) {
+            gameStatus = GameStatus.END;
+        }
     }
 
-
-    public boolean isGameInProgress() {
+    public boolean isRun() {
         return player.isAlive() && monster.isAlive();
     }
 
-
-    public GameResult getGameResult() {
-        if(player.isAlive()) {
-            return GameResult.WIN;
-        }
-        return GameResult.LOSE;
+    public boolean isPlayerWin() {
+        return player.isAlive();
     }
 
+    public boolean isMonsterAlive() {
+        return monster.isAlive();
+    }
+
+    public boolean isPlayerAlive() {
+        return player.isAlive();
+    }
+    public void start() {
+        gameStatus = GameStatus.PLAY;
+    }
 
     public int getMatchCount() {
         return matchCount;
@@ -59,7 +74,9 @@ public class MonsterGame {
         return player;
     }
 
-    public boolean isMonsterPlayable() {
-        return monster.isAlive();
+    public GameStatus getGameStatus() {
+        return gameStatus;
     }
+
+
 }

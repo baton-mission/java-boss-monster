@@ -4,12 +4,12 @@ import bossmonster.domain.monster.Monster;
 
 public class Player {
 
-    private PlayerName name;
+    private PlayerName playerName;
 
     private PlayerStats playerStats;
 
-    public Player(PlayerName name, PlayerStats playerStats) {
-        this.name = name;
+    public Player(PlayerName playerName, PlayerStats playerStats) {
+        this.playerName = playerName;
         this.playerStats = playerStats;
     }
 
@@ -31,12 +31,17 @@ public class Player {
     public boolean isAlive() {
         return playerStats.hasHPGreaterThanZero();
     }
+    public boolean isDead() {
+        return !isAlive();
+    }
 
     public PlayerName getName() {
-        return name;
+        return playerName;
     }
 
     public PlayerStats getPlayerStats() {
         return playerStats;
     }
+
+
 }

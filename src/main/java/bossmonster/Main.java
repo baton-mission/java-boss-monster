@@ -1,21 +1,15 @@
 package bossmonster;
 
 import bossmonster.controller.GameController;
-import bossmonster.view.GameView;
-import bossmonster.view.Input;
-import bossmonster.view.Output;
+import bossmonster.view.InputView;
+import bossmonster.view.OutputView;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
-        Input input = new Input(new Scanner(System.in));
-        Output output = new Output();
-        GameView gameView = new GameView(input,output);
-        GameController game = new GameController(gameView);
+        GameController game = new GameController(new InputView(new Scanner(System.in)),
+                new OutputView());
         game.play();
-
-
-
-
     }
 }
