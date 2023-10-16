@@ -1,7 +1,11 @@
 package bossmonster;
 
+import bossmonster.controller.MainController;
+import bossmonster.repository.MemoryRepository;
+import bossmonster.service.RepositoryService;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        new MainController(new RepositoryService(MemoryRepository.getInstance())).run();
     }
 }
