@@ -9,7 +9,7 @@ public class BossMonster {
     private static final int MAX_HP = 300;
     public static final int MIN_DAMAGE = 0;
     public static final int MAX_DAMAGE = 20;
-    public static final int DIE = 0;
+    public static final int DEAD = 0;
     private final Energy hp;
 
     public BossMonster(int hp) {
@@ -32,13 +32,14 @@ public class BossMonster {
     }
 
     public void attack(Player player) {
-        if (hp.getCurrentEnergy() == DIE) {
-            return;
-        }
         player.decreaseHp(getDamage());
     }
 
     private int getDamage() {
         return random.nextInt(MIN_DAMAGE, MAX_DAMAGE + 1);
+    }
+
+    public boolean isDead() {
+        return hp.getCurrentEnergy() == DEAD;
     }
 }

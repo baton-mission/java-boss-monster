@@ -17,26 +17,43 @@ public class BossMonsterController {
     }
 
     public void run() {
+        BossMonster bossMonster = createBossMonster();
+        Player player = createPlayer();
+        while (!bossMonster.isDead() && !player.isDead()) {
+            BeginPlayerTurn(player, bossMonster);
+            BeginBossMonsterTurn(player, bossMonster);
+        }
+    }
+
+    private BossMonster createBossMonster() {
         int bossMonsterHp = inputView.readBossMonsterHp();
-        BossMonster bossMonster = new BossMonster(bossMonsterHp);
+        return new BossMonster(bossMonsterHp);
+    }
+
+    private Player createPlayer() {
         String playerName = inputView.readPlayerName();
         PlayerStatDto playerStatDto = inputView.readPlayerStat();
         int playerHp = playerStatDto.getHp();
         int playerMp = playerStatDto.getMp();
-        Player player = new Player(playerName, playerHp, playerMp);
-        while (bossMonster.getHp().getCurrentEnergy() > 0 && player.getHp().getCurrentEnergy() > 0) {
-            int type = inputView.readAttackType();
-            AttackType attackType = AttackType.fromType(type);
+        return new Player(playerName, playerHp, playerMp);
+    }
 
-            int beforeBossHp = bossMonster.getHp().getCurrentEnergy();
-            player.attack(bossMonster, attackType);
-            int afterBossHp = bossMonster.getHp().getCurrentEnergy();
-            outputView.printPlayerAttack(beforeBossHp - afterBossHp, attackType);
+    private void BeginPlayerTurn(Player player, BossMonster bossMonster) {
+        int type = inputView.readAttackType();
+        AttackType attackType = AttackType.fromType(type);
+        int beforeBossHp = bossMonster.getHp().getCurrentEnergy();
+        player.attack(bossMonster, attackType);
+        int afterBossHp = bossMonster.getHp().getCurrentEnergy();
+        outputView.printPlayerAttack(beforeBossHp - afterBossHp, attackType);
+    }
 
-            int beforePlayerHp = player.getHp().getCurrentEnergy();
-            bossMonster.attack(player);
-            int afterPlayerHp = player.getHp().getCurrentEnergy();
-            outputView.printBossAttack(beforePlayerHp - afterPlayerHp);
+    private void BeginBossMonsterTurn(Player player, BossMonster bossMonster) {
+        if (bossMonster.isDead()) {
+            return;
         }
+        int beforePlayerHp = player.getHp().getCurrentEnergy();
+        bossMonster.attack(player);
+        int afterPlayerHp = player.getHp().getCurrentEnergy();
+        outputView.printBossAttack(beforePlayerHp - afterPlayerHp);
     }
 }
