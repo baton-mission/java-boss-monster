@@ -1,7 +1,7 @@
 package bossmonster.domain;
 
 public class BossMonster {
-    private static final String INVALID_HP_MESSAGE = "보스 몬스터의 HP는 100이상 300이하여야 합니다.";
+    public static final String INVALID_HP_MESSAGE = "보스 몬스터의 HP는 100이상 300이하여야 합니다.";
     private static final int MIN_HP = 100;
     private static final int MAX_HP = 300;
     private final int hp;
