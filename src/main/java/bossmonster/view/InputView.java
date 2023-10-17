@@ -13,10 +13,10 @@ public class InputView {
     private static final String PLAYER_STAT_DELIMITER = ",";
     private static final int HP_INDEX = 0;
     private static final int MP_INDEX = 1;
-    private static final String READ_ATTACK_TYPE_MESSAGE =
-            "어떤 공격을 하시겠습니까?\n"
-            + "1. 물리 공격\n"
-            + "2. 마법 공격";
+    private static final String READ_ATTACK_TYPE_MESSAGE = """
+            어떤 공격을 하시겠습니까?
+            1. 물리 공격
+            2. 마법 공격""";
     private static final int MAX_NAME_LENGTH = 5;
     private final Scanner scanner;
 
