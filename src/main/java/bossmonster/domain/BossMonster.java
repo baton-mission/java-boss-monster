@@ -31,11 +31,11 @@ public class BossMonster {
 
     public void decreaseHp(int attackDamage) {
         hp.change(-attackDamage);
+        attackedCount++;
     }
 
     public void attack(Player player) {
         player.decreaseHp(getDamage());
-        attackedCount++;
     }
 
     private int getDamage() {
