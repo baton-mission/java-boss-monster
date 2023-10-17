@@ -91,6 +91,16 @@ class PlayerTest {
     }
 
     @Test
+    void 마법공격시_마나가_부족하면_에러가_발생한다() {
+        BossMonster bossMonster = new BossMonster(100);
+        Player player = new Player("user1", 171, 29);
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> player.attack(bossMonster, AttackType.MAGICAL))
+                .withMessage(Player.NOT_ENOUGH_MANA);
+    }
+
+    @Test
     void 플레이어가_공격하면_보스_몬스터의_피격_횟수가_증가한다() {
         BossMonster bossMonster = new BossMonster(100);
         Player player = new Player("user1", 100, 100);
