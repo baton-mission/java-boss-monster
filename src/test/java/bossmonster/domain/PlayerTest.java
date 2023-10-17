@@ -89,4 +89,15 @@ class PlayerTest {
 
         assertThat(player.getMp().getCurrentEnergy()).isEqualTo(80);
     }
+
+    @Test
+    void 플레이어가_공격하면_보스_몬스터의_피격_횟수가_증가한다() {
+        BossMonster bossMonster = new BossMonster(100);
+        Player player = new Player("user1", 100, 100);
+
+        player.attack(bossMonster, AttackType.PHYSICAL);
+
+        int attackedCount = bossMonster.getAttackedCount();
+        assertThat(attackedCount).isEqualTo(1);
+    }
 }
