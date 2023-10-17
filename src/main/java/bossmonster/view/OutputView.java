@@ -66,7 +66,7 @@ public class OutputView {
     private void printPlayerStatus(Player player) {
         int playerCurrentHp = player.getHp().getCurrentEnergy();
         int playerMaxHp = player.getHp().getMaxEnergy();
-        int playerCurrentMp = player.getMp().getMaxEnergy();
+        int playerCurrentMp = player.getMp().getCurrentEnergy();
         int playerMaxMp = player.getMp().getMaxEnergy();
         System.out.printf(PLAYER_STATUS_FORMAT, playerCurrentHp, playerMaxHp, playerCurrentMp, playerMaxMp);
     }
