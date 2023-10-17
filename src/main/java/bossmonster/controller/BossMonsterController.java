@@ -24,8 +24,8 @@ public class BossMonsterController {
         outputView.printGameStart();
         while (!bossMonster.isDead() && !player.isDead()) {
             printGameStatus(player, bossMonster);
-            repeat(this::BeginPlayerTurn, player, bossMonster);
-            BeginBossMonsterTurn(player, bossMonster);
+            repeat(this::beginPlayerTurn, player, bossMonster);
+            beginBossMonsterTurn(player, bossMonster);
         }
         outputView.printGameResult(player, bossMonster);
     }
@@ -47,7 +47,7 @@ public class BossMonsterController {
         return new Player(playerName, playerHp, playerMp);
     }
 
-    private void BeginPlayerTurn(Player player, BossMonster bossMonster) {
+    private void beginPlayerTurn(Player player, BossMonster bossMonster) {
         int type = inputView.readAttackType();
         AttackType attackType = AttackType.fromType(type);
         int beforeBossHp = bossMonster.getHp().getCurrentEnergy();
@@ -56,7 +56,7 @@ public class BossMonsterController {
         outputView.printPlayerAttack(beforeBossHp - afterBossHp, attackType);
     }
 
-    private void BeginBossMonsterTurn(Player player, BossMonster bossMonster) {
+    private void beginBossMonsterTurn(Player player, BossMonster bossMonster) {
         if (bossMonster.isDead()) {
             return;
         }
