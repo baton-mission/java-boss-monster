@@ -28,16 +28,19 @@ public class InputView {
     }
 
     public String readPlayerName() {
+        println();
         print(READ_PLAYER_NAME);
         return scanner.nextLine();
     }
 
     public int readAttackType() {
+        println();
         print(READ_ATTACK_TYPE_MESSAGE);
         return parseInt(scanner.nextLine());
     }
 
     public PlayerStatDto readPlayerStat() {
+        println();
         print(READ_PLAYER_HP_AND_MP);
         String[] playerStat = scanner.nextLine().split(PLAYER_STAT_DELIMITER);
         validatePlayerStat(playerStat);
@@ -52,8 +55,12 @@ public class InputView {
         }
     }
 
-    private static void print(String message) {
+    private void print(String message) {
         System.out.println(message);
+    }
+
+    private void println() {
+        System.out.println();
     }
 
     private int parseInt(String input) {

@@ -32,10 +32,12 @@ public class OutputView {
     }
 
     public void printPlayerAttack(int damage, AttackType attackType) {
+        println();
         System.out.printf(attackType.getMessage() + PLAYER_ATTACK_FORMAT, damage);
     }
 
     public void printGameStatus(Player player, BossMonster bossMonster) {
+        println();
         if (bossMonster.getAttackedCount() > ZERO) {
             printGameStatus(player, bossMonster, ATTACKED_EMOJIS);
             return;
@@ -80,17 +82,24 @@ public class OutputView {
     }
 
     public void printGameResult(Player player, BossMonster bossMonster) {
+        println();
         if (bossMonster.isDead()) {
             printBossClear(player, bossMonster);
             return;
         }
         if (player.isDead()) {
             printGameStatus(player, bossMonster, SMILE_EMOJIS);
+            println();
             printGameOver(player);
         }
     }
 
     public void printGameStart() {
+        println();
         System.out.println(GAME_START);
+    }
+
+    private void println() {
+        System.out.println();
     }
 }
