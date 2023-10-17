@@ -23,4 +23,8 @@ public class Energy {
     public int getCurrentEnergy() {
         return currentEnergy;
     }
+
+    public int getMaxEnergy() {
+        return maxEnergy;
+    }
 }

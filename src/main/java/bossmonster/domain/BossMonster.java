@@ -11,10 +11,12 @@ public class BossMonster {
     public static final int MAX_DAMAGE = 20;
     public static final int DEAD = 0;
     private final Energy hp;
+    private int attackedCount;
 
     public BossMonster(int hp) {
         validateHp(hp);
         this.hp = new Energy(hp);
+        attackedCount = 0;
     }
 
     private void validateHp(int hp) {
@@ -33,6 +35,7 @@ public class BossMonster {
 
     public void attack(Player player) {
         player.decreaseHp(getDamage());
+        attackedCount++;
     }
 
     private int getDamage() {
@@ -41,5 +44,9 @@ public class BossMonster {
 
     public boolean isDead() {
         return hp.getCurrentEnergy() == DEAD;
+    }
+
+    public int getAttackedCount() {
+        return attackedCount;
     }
 }
