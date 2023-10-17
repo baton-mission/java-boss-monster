@@ -19,6 +19,7 @@ public class BossMonsterController {
     public void run() {
         BossMonster bossMonster = createBossMonster();
         Player player = createPlayer();
+        outputView.printGameStart();
         while (!bossMonster.isDead() && !player.isDead()) {
             printGameStatus(player, bossMonster);
             BeginPlayerTurn(player, bossMonster);

@@ -25,6 +25,7 @@ public class OutputView {
     private static final Object[] ATTACKED_EMOJIS = {"x", "x", "\"\\", "^"};
     private static final Object[] SMILE_EMOJIS = {"^", "^", "\" ", "3"};
     private static final int ZERO = 0;
+    public static final String GAME_START = "보스 레이드를 시작합니다!";
 
     public void printBossAttack(int damage) {
         System.out.printf(BOSS_ATTACK_FORMAT, damage);
@@ -87,5 +88,9 @@ public class OutputView {
             printGameStatus(player, bossMonster, SMILE_EMOJIS);
             printGameOver(player);
         }
+    }
+
+    public void printGameStart() {
+        System.out.println(GAME_START);
     }
 }
