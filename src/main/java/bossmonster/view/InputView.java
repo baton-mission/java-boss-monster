@@ -3,19 +3,21 @@ package bossmonster.view;
 import java.util.Scanner;
 
 public class InputView {
-    public static final String READ_BOSS_MONSTER_HP_MESSAGE = "보스 몬스터의 HP를 입력해주세요.";
-    public static final String READ_PLAYER_NAME = "플레이어의 이름을 입력해주세요";
-    public static final String READ_PLAYER_HP_AND_MP = "플레이어의 HP와 MP를 입력해주세요.(,로 구분)";
-    public static final String NOT_NUMBER_MESSAGE = "숫자를 입력해주세요";
-    public static final int PLAYER_STAT_SIZE = 2;
-    public static final String INVALID_PLAYER_STAT_MESSAGE = "HP와 MP를 콤마(,)로 구분해 입력해주세요. (e.g. 10,190)";
-    public static final String PLAYER_STAT_DELIMITER = ",";
-    public static final int HP_INDEX = 0;
-    public static final int MP_INDEX = 1;
-    public static final String READ_ATTACK_TYPE_MESSAGE =
+    private static final String INVALID_NAME_MASSAGE = "플레이어의 이름은 1글자 이상 5글자 이하여야 합니다.";
+    private static final String READ_BOSS_MONSTER_HP_MESSAGE = "보스 몬스터의 HP를 입력해주세요.";
+    private static final String READ_PLAYER_NAME = "플레이어의 이름을 입력해주세요";
+    private static final String READ_PLAYER_HP_AND_MP = "플레이어의 HP와 MP를 입력해주세요.(,로 구분)";
+    private static final String NOT_NUMBER_MESSAGE = "숫자를 입력해주세요";
+    private static final int PLAYER_STAT_SIZE = 2;
+    private static final String INVALID_PLAYER_STAT_MESSAGE = "HP와 MP를 콤마(,)로 구분해 입력해주세요. (e.g. 10,190)";
+    private static final String PLAYER_STAT_DELIMITER = ",";
+    private static final int HP_INDEX = 0;
+    private static final int MP_INDEX = 1;
+    private static final String READ_ATTACK_TYPE_MESSAGE =
             "어떤 공격을 하시겠습니까?\n"
             + "1. 물리 공격\n"
             + "2. 마법 공격";
+    private static final int MAX_NAME_LENGTH = 5;
     private final Scanner scanner;
 
     public InputView(Scanner scanner) {
@@ -30,7 +32,15 @@ public class InputView {
     public String readPlayerName() {
         println();
         print(READ_PLAYER_NAME);
-        return scanner.nextLine();
+        String playerName = scanner.nextLine();
+        validatePlayerName(playerName);
+        return playerName;
+    }
+
+    private void validatePlayerName(String playerName) {
+        if (playerName.isBlank() || playerName.length() > MAX_NAME_LENGTH) {
+            throw new IllegalArgumentException(INVALID_NAME_MASSAGE);
+        }
     }
 
     public int readAttackType() {

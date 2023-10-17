@@ -1,5 +1,7 @@
 package bossmonster.controller;
 
+import static bossmonster.utils.ExceptionHandler.repeat;
+
 import bossmonster.domain.AttackType;
 import bossmonster.domain.BossMonster;
 import bossmonster.domain.Player;
@@ -17,12 +19,12 @@ public class BossMonsterController {
     }
 
     public void run() {
-        BossMonster bossMonster = createBossMonster();
-        Player player = createPlayer();
+        BossMonster bossMonster = repeat(this::createBossMonster);
+        Player player = repeat(this::createPlayer);
         outputView.printGameStart();
         while (!bossMonster.isDead() && !player.isDead()) {
             printGameStatus(player, bossMonster);
-            BeginPlayerTurn(player, bossMonster);
+            repeat(this::BeginPlayerTurn, player, bossMonster);
             BeginBossMonsterTurn(player, bossMonster);
         }
         outputView.printGameResult(player, bossMonster);
