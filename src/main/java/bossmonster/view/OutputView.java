@@ -19,8 +19,11 @@ public class OutputView {
             """;
     private static final String BOSS_ATTACK_FORMAT = "보스가 공격 했습니다. (입힌 데미지: %d)\n";
     private static final String PLAYER_ATTACK_FORMAT = " 공격을 했습니다." + "(입힌 데미지: %d)\n";
+    private static final String BOSS_CLEAR_FORMAT = "%s 님이 %d번의 전투 끝에 보스 몬스터를 잡았습니다.";
+    private static final String GAME_OVER_FORMAT = "%s의 HP가 0이 되었습니다.\n보스 레이드에 실패했습니다.";
     private static final Object[] NORMAL_EMOJIS = {"0", "0", "\" ", "-"};
     private static final Object[] ATTACKED_EMOJIS = {"x", "x", "\"\\", "^"};
+    private static final Object[] SMILE_EMOJIS = {"^", "^", "\" ", "3"};
     private static final int ZERO = 0;
 
     public void printBossAttack(int damage) {
@@ -63,5 +66,26 @@ public class OutputView {
         int playerCurrentMp = player.getMp().getMaxEnergy();
         int playerMaxMp = player.getMp().getMaxEnergy();
         System.out.printf(PLAYER_STATUS_FORMAT, playerCurrentHp, playerMaxHp, playerCurrentMp, playerMaxMp);
+    }
+
+    private void printGameOver(Player player) {
+        System.out.printf(GAME_OVER_FORMAT, player.getName());
+    }
+
+    private void printBossClear(Player player, BossMonster bossMonster) {
+        String name = player.getName();
+        int attackedCount = bossMonster.getAttackedCount();
+        System.out.printf(BOSS_CLEAR_FORMAT, name, attackedCount);
+    }
+
+    public void printGameResult(Player player, BossMonster bossMonster) {
+        if (bossMonster.isDead()) {
+            printBossClear(player, bossMonster);
+            return;
+        }
+        if (player.isDead()) {
+            printGameStatus(player, bossMonster, SMILE_EMOJIS);
+            printGameOver(player);
+        }
     }
 }

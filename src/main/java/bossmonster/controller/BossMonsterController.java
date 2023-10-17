@@ -24,6 +24,7 @@ public class BossMonsterController {
             BeginPlayerTurn(player, bossMonster);
             BeginBossMonsterTurn(player, bossMonster);
         }
+        outputView.printGameResult(player, bossMonster);
     }
 
     private void printGameStatus(Player player, BossMonster bossMonster) {
