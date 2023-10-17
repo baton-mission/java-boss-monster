@@ -20,6 +20,10 @@ public class Energy {
         }
     }
 
+    public boolean isNotEnoughEnergy(int amount) {
+        return currentEnergy + amount < MIN_ENERGY;
+    }
+
     public int getCurrentEnergy() {
         return currentEnergy;
     }

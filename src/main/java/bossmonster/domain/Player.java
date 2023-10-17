@@ -10,6 +10,7 @@ public class Player {
     private static final int MIN_HP = 1;
     private static final int MIN_MP = 0;
     public static final int DEAD = 0;
+    public static final String NOT_ENOUGH_MANA = "마나가 부족합니다.";
     private final String name;
     private final Energy hp;
     private final Energy mp;
@@ -25,8 +26,15 @@ public class Player {
     }
 
     public void attack(BossMonster bossMonster, AttackType attackType) {
+        checkEnoughMp(attackType);
         bossMonster.decreaseHp(attackType.getDamage());
         mp.change(attackType.getMpChange());
+    }
+
+    private void checkEnoughMp(AttackType attackType) {
+        if (mp.isNotEnoughEnergy(attackType.getMpChange())){
+            throw new IllegalArgumentException(NOT_ENOUGH_MANA);
+        }
     }
 
     private void validateName(String name) {
