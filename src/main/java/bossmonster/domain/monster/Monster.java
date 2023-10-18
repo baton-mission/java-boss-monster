@@ -10,12 +10,13 @@ public class Monster {
         monsterHp = new MonsterHp(hp);
     }
 
-    public void sufferDamage(int damage) {
+    public void receiveDamage(int damage) {
+        //int damage = RandomNumberGenerator.getRandomNumber();
         monsterHp.reduceHp(damage);
     }
 
-    public void takeDamage(int damage, Player player) {
-        player.sufferDamage(damage);
+    public void attack(Player player,int damage) {
+        player.receiveDamage(damage);
     }
 
     public boolean isAlive() {

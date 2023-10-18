@@ -1,8 +1,6 @@
 package bossmonster.message;
 
 public enum InputMessage {
-
-
     SKILL_LIST("어떤 공격을 하시겠습니까?\n"
             + "1. 물리 공격\n"
             + "2. 마법 공격"),

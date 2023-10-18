@@ -1,6 +1,7 @@
 package bossmonster.domain.game;
 
 import bossmonster.domain.monster.Monster;
+import bossmonster.domain.number.BossDamageGenerator;
 import bossmonster.domain.player.Player;
 import bossmonster.domain.player.Skill;
 
@@ -20,27 +21,31 @@ public class MonsterGame {
         this.player = player;
     }
 
-    public void proceedPlayerTurn(Skill skill) {
+    public Skill attackMonster(String skillNo) {
+        Skill skill = Skill.getSkillBySkillNo(skillNo);
         if (player.isAlive()) {
-            player.attack(skill, monster);
+            player.attack(monster, skill);
             increaseMatchCount();
         }
-        if(monster.isDead()) {
+        if (monster.isDead()) {
             gameStatus = GameStatus.END;
         }
+        return skill;
     }
 
     private void increaseMatchCount() {
         matchCount++;
     }
 
-    public void proceedMonsterTurn(int damage) {
+    public int attackPlayer() {
+        int damage = BossDamageGenerator.getDamage();
         if (monster.isAlive()) {
-            monster.takeDamage(damage, player);
+            monster.attack(player, damage);
         }
-        if(player.isDead()) {
+        if (player.isDead()) {
             gameStatus = GameStatus.END;
         }
+        return damage;
     }
 
     public boolean isRun() {
@@ -58,6 +63,7 @@ public class MonsterGame {
     public boolean isPlayerAlive() {
         return player.isAlive();
     }
+
     public void start() {
         gameStatus = GameStatus.PLAY;
     }

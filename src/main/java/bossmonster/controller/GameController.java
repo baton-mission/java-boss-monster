@@ -1,19 +1,15 @@
 package bossmonster.controller;
 
+import bossmonster.controller.dto.PlayerStatsDto;
 import bossmonster.domain.monster.Monster;
 import bossmonster.domain.game.MonsterGame;
 import bossmonster.domain.player.Player;
-import bossmonster.domain.number.RandomNumberGenerator;
 import bossmonster.domain.player.Skill;
 import bossmonster.domain.player.PlayerName;
 import bossmonster.domain.player.PlayerStats;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
 
-//값을 전달해줘야하는 객체는 값을 잘 전달해줘야하는 책임이 있음
-// 자기가 다루지 못하는 값이 들어오면 예외를 발생시켜야함
-//유틸클래스도 쓸수있는곳이 명확해야한다? 재사용성
-//dto ??
 
 public class GameController {
 
@@ -26,32 +22,52 @@ public class GameController {
         this.outputView = outputView;
     }
 
-    public void play() {
+    public void run() {
         init();
-        proceedGame();
+        start();
+        play();
         printResult();
     }
-
     private void init() {
         Monster monster = createBossMonster();
         Player player = createPlayer();
         monsterGame = new MonsterGame(monster, player);
     }
 
-    private void proceedGame() {
-        startGame();
+    private void start() {
+        printStart();
+        printPlayerAndMonsterInfo();
+        monsterGame.start();
+    }
+    private void printStart() {
+        outputView.printStart();
+    }
 
+    private void play() {
         while (monsterGame.isRun()) {
             proceedPlayerTurn();
             proceedBossMonsterTurn();
             printPlayerAndMonsterInfo();
         }
     }
+    private void proceedPlayerTurn() {
+        while (true) {
+            try {
+                String skillNo = inputView.askSkillNo();
+                Skill skill = monsterGame.attackMonster(skillNo);
+                outputView.printPlayerAttack(skill);
+                return;
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e);
+            }
+        }
+    }
 
-    private void startGame() {
-        outputView.printStart();
-        printPlayerAndMonsterInfo();
-        monsterGame.start();
+    private void proceedBossMonsterTurn() {
+        if (monsterGame.isMonsterAlive()) {
+            int bossDamage = monsterGame.attackPlayer();
+            outputView.printMonsterAttack(bossDamage);
+        }
     }
 
     private void printPlayerAndMonsterInfo() {
@@ -70,39 +86,6 @@ public class GameController {
             return;
         }
         outputView.printLose(player);
-    }
-
-    private void proceedPlayerTurn() {
-        while (true) {
-            try {
-                Skill skill = askSkill();
-                monsterGame.proceedPlayerTurn(skill);
-                outputView.printPlayerAttack(skill);
-                return;
-            } catch (IllegalArgumentException e) {
-                outputView.printErrorMessage(e);
-            }
-        }
-
-    }
-
-    private Skill askSkill() {
-        while (true) {
-            try {
-                String skillNo = inputView.askSkillNo();
-                return Skill.getSkillBySkillNo(skillNo);
-            } catch (IllegalArgumentException e) {
-                outputView.printErrorMessage(e);
-            }
-        }
-    }
-
-    private void proceedBossMonsterTurn() {
-        if (monsterGame.isMonsterAlive()) {
-            int damage = RandomNumberGenerator.getRandomNumber(); // 몬스터게임 안에 들어가면 테스트 하기힘들어짐
-            monsterGame.proceedMonsterTurn(damage);
-            outputView.printMonsterAttack(damage);
-        }
     }
 
     private Player createPlayer() {
@@ -124,10 +107,9 @@ public class GameController {
     private PlayerStats createPlayerStats() {
         while (true) {
             try {
-                String hpAndMp = inputView.askPlayerHPAndMP();
-                String[] hpAndMpSplit = hpAndMp.split(",");
-                int hp = Integer.parseInt(hpAndMpSplit[0]);
-                int mp = Integer.parseInt(hpAndMpSplit[1]); // dto로 변환하던가 gameview에서 해야되나?
+                PlayerStatsDto playerStatsDto = PlayerStatsDto.of(inputView.askPlayerHPAndMP());
+                int hp = playerStatsDto.getHp();
+                int mp = playerStatsDto.getMp();
                 return PlayerStats.createPlayerStats(hp, mp);
             } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e);

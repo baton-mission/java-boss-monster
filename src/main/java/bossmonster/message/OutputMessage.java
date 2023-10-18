@@ -14,8 +14,6 @@ public enum OutputMessage {
     MONSTER_ATTACK("보스가 공격 했습니다. (입힌 데미지: %d)"),
     PLAYER_ATTACK("%s을 했습니다. (입힌 데미지: %d)");
 
-
-    ;
     private String message;
 
     OutputMessage(String message) {

@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 
 public class InputView {
 
-    public static final String LINE_BREAK = "\n";
     private Scanner sc;
 
     public InputView(Scanner sc) {
@@ -26,17 +25,7 @@ public class InputView {
 
     public String askPlayerHPAndMP() {
         System.out.println(InputMessage.PLAYER_HP_AND_MP.getMessage());
-        return getPlayerHPandMP();
-    }
-
-    private String getPlayerHPandMP() {
-        String regex = "(\\d{1,}),(\\d{1,})";
-        String str = sc.nextLine();
-        if (!Pattern.matches(regex, str)) {
-            throw new IllegalArgumentException(
-                    ErrorMessage.getErrorMessage(ErrorMessage.WRONG_PLAYER_HP_MP_FORMAT));
-        }
-        return str;
+        return getString();
     }
 
     public String askSkillNo() {
@@ -54,11 +43,10 @@ public class InputView {
         return str;
     }
 
-
     private void validateBlank(String str) {
         if (str.isEmpty()) {
             throw new IllegalArgumentException(
-                    ErrorMessage.getErrorMessage(ErrorMessage.NOT_BLANCK));
+                    ErrorMessage.getErrorMessage(ErrorMessage.NOT_BLANK));
         }
     }
 
