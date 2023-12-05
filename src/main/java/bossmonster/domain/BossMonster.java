@@ -4,18 +4,29 @@ import bossmonster.exception.Validator;
 
 public class BossMonster {
 
-    private int totalHP;
-    private int currentHP;
+    private BossMonsterStatus status;
 
-    public BossMonster(int hp) {
-        totalHP = Validator.validateBossMonster(hp);
+    public BossMonster(int maxHP) {
+        this.status = new BossMonsterStatus(Validator.validateBossMonster(maxHP));
     }
 
-    public int getTotalHP() {
-        return totalHP;
+    public boolean isAlive() {
+        return status.isAlive();
+    }
+
+    public int getMaxHP() {
+        return status.getMaxHP();
     }
 
     public int getCurrentHP() {
-        return currentHP;
+        return status.getCurrentHP();
+    }
+
+    public int attack() {
+        return (int) (Math.random() * 20);
+    }
+
+    public void takeDamage(int damage) {
+        status.setCurrentHP(damage);
     }
 }
