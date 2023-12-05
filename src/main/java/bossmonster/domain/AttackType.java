@@ -23,6 +23,10 @@ public enum AttackType {
         return number;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public int getDamage() {
         return damage;
     }
