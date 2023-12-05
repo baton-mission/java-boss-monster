@@ -8,8 +8,9 @@ public class Validator {
         return inputValue;
     }
 
-    public static String validateInputOfString(String inputValue) {
+    public static String validatePlayerName(String inputValue) {
         validateEmpty(inputValue);
+        validateRangeOfPlayerName(inputValue);
         return inputValue;
     }
 
@@ -26,10 +27,6 @@ public class Validator {
 
     public static int validateBossMonster(int hp) {
         return validateRangeOfMonster(hp);
-    }
-
-    public static String validatePlayerName(String name) {
-        return validateRangeOfPlayerName(name);
     }
 
     public static void validatePlayerStatus(int hp, int mp) {
@@ -71,10 +68,9 @@ public class Validator {
         return hp;
     }
 
-    private static String validateRangeOfPlayerName(String name) {
-        if (name.length() > 5) {
+    private static void validateRangeOfPlayerName(String name) {
+        if (name.length() >= 5) {
             throw new IllegalArgumentException();
         }
-        return name;
     }
 }
