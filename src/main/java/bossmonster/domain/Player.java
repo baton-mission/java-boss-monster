@@ -2,20 +2,16 @@ package bossmonster.domain;
 
 import bossmonster.exception.ManaShortageException;
 import bossmonster.exception.Validator;
-import java.util.LinkedHashMap;
-import java.util.List;
 
 public class Player {
 
     private String name;
     private PlayerStatus status;
-    private List<AttackType> attackType;
 
-    public Player(String name, int maxHP, int maxMP, List<AttackType> attackType) {
+    public Player(String name, int maxHP, int maxMP) {
         this.name = Validator.validatePlayerName(name);
         Validator.validatePlayerStatus(maxHP, maxMP);
         this.status = new PlayerStatus(maxHP, maxMP);
-        this.attackType = attackType;
     }
 
     public String getName() {
