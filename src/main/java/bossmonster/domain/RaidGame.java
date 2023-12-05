@@ -1,9 +1,10 @@
 package bossmonster.domain;
 
-import java.util.Arrays;
-import java.util.List;
+import bossmonster.domain.dto.GameHistoryDto;
 
 public class RaidGame {
+
+    private static final int DEFAULT_TURN = 0;
 
     private BossMonster bossMonster;
     private Player player;
@@ -11,13 +12,13 @@ public class RaidGame {
     private boolean status;
     private int turns;
 
-    public RaidGame(int bossMonsterHP, String playerName, int playerHP, int playerMP) {
+    public RaidGame(BossMonster bossMonster, Player player) {
+        this.bossMonster = bossMonster;
+        this.player = player;
         this.gameHistory = new GameHistory();
         this.status = true;
-        this.turns = 0;
+        this.turns = DEFAULT_TURN;
 
-        createBossMonster(bossMonsterHP);
-        createPlayer(playerName, playerHP, playerMP);
         gameHistory.addHistory(turns, status, player, bossMonster);
     }
 
@@ -30,17 +31,8 @@ public class RaidGame {
         }
     }
 
-    public GameHistory getGameHistory() {
-        return gameHistory;
-    }
-
-    private void createBossMonster(int hp) {
-        bossMonster = new BossMonster(hp);
-    }
-
-    private void createPlayer(String name, int maxHP, int maxMP) {
-        List<AttackType> attackType = Arrays.asList(AttackType.ATTACK_TYPE_NORMAL, AttackType.ATTACK_TYPE_MAGIC);
-        player = new Player(name, maxHP, maxMP, attackType);
+    public GameHistoryDto getGameHistory() {
+        return gameHistory.requestRaidHistory();
     }
 
     private boolean isGameProgress() {
@@ -70,7 +62,8 @@ public class RaidGame {
     }
 
     private void createTurnHistory(AttackType playerAttackType, int playerAttackDamage, int monsterAttackDamage) {
-        gameHistory.addHistory(turns, playerAttackType, playerAttackDamage, monsterAttackDamage, status, player,
+        gameHistory.addHistory(turns, playerAttackType.getName(), playerAttackDamage, monsterAttackDamage, status,
+                player,
                 bossMonster);
     }
 }
