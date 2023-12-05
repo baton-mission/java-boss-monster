@@ -11,19 +11,14 @@ public class RaidGame {
     private boolean status;
     private int turns;
 
-    public RaidGame() {
+    public RaidGame(int bossMonsterHP, String playerName, int playerHP, int playerMP) {
         this.gameHistory = new GameHistory();
         this.status = true;
         this.turns = 0;
-    }
 
-    public void createBossMonster(int hp) {
-        bossMonster = new BossMonster(hp);
-    }
-
-    public void createPlayer(String name, int maxHP, int maxMP) {
-        List<AttackType> attackType = Arrays.asList(AttackType.ATTACK_TYPE_NORMAL, AttackType.ATTACK_TYPE_MAGIC);
-        player = new Player(name, maxHP, maxMP, attackType);
+        createBossMonster(bossMonsterHP);
+        createPlayer(playerName, playerHP, playerMP);
+        gameHistory.addHistory(turns, status, player, bossMonster);
     }
 
     public void executeTurn(AttackType attackType) {
@@ -33,6 +28,19 @@ public class RaidGame {
             int monsterAttackDamage = executeBossMonsterTurn();
             createTurnHistory(attackType, playerAttackDamage, monsterAttackDamage);
         }
+    }
+
+    public GameHistory getGameHistory() {
+        return gameHistory;
+    }
+
+    private void createBossMonster(int hp) {
+        bossMonster = new BossMonster(hp);
+    }
+
+    private void createPlayer(String name, int maxHP, int maxMP) {
+        List<AttackType> attackType = Arrays.asList(AttackType.ATTACK_TYPE_NORMAL, AttackType.ATTACK_TYPE_MAGIC);
+        player = new Player(name, maxHP, maxMP, attackType);
     }
 
     private boolean isGameProgress() {
