@@ -1,6 +1,5 @@
 package bossmonster.domain;
 
-import bossmonster.exception.ManaShortageException;
 import bossmonster.exception.Validator;
 
 public class Player {
@@ -39,18 +38,24 @@ public class Player {
     }
 
     public int attack(AttackType attackType) {
-        if (status.getCurrentMP() < attackType.getMpUsage()) {
-            throw new ManaShortageException();
+        if (attackType.getName().equals(AttackType.ATTACK_TYPE_NORMAL.getName())) {
+            recoverMP(attackType.getMpRecover());
         }
-        recoverMP(attackType.getMpRecover());
+        if (attackType.getName().equals(AttackType.ATTACK_TYPE_MAGIC.getName())) {
+            consumeMP(attackType.getMpUsage());
+        }
         return attackType.getDamage();
     }
 
     public void takeDamage(int damage) {
-        status.setCurrentHP(damage);
+        status.setCurrentHP(status.getCurrentHP() - damage);
     }
 
     private void recoverMP(int mp) {
-        status.setCurrentMP(mp);
+        status.setCurrentMP(status.getCurrentMP() + mp);
+    }
+
+    private void consumeMP(int mp) {
+        status.setCurrentMP(status.getCurrentMP() - mp);
     }
 }
