@@ -9,21 +9,9 @@ public class ExceptionHandler {
         while (true) {
             try {
                 return supplier.get();
-            } catch (IllegalArgumentException exception) {
+            } catch (Exception exception) {
+                OutputView.printError(exception);
             }
         }
     }
-
-
-    /*
-    public static void retryInput(Runnable runnable) {
-        while (true) {
-            try {
-                runnable.run();
-                break;
-            } catch (IllegalArgumentException exception) {
-            }
-        }
-    }
-     */
 }
