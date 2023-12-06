@@ -4,7 +4,7 @@ import bossmonster.domain.dto.GameHistoryDto;
 
 public class RaidGame {
 
-    private static final int DEFAULT_TURN = 0;
+    private static final int DEFAULT_VALUE = 0;
 
     private BossMonster bossMonster;
     private Player player;
@@ -17,7 +17,7 @@ public class RaidGame {
         this.player = player;
         this.gameHistory = new GameHistory();
         this.status = true;
-        this.turns = DEFAULT_TURN;
+        this.turns = DEFAULT_VALUE;
 
         gameHistory.addHistory(turns, status, player, bossMonster);
     }
@@ -25,8 +25,13 @@ public class RaidGame {
     public void executeTurn(AttackType attackType) {
         if (isGameProgress()) {
             increaseTurn();
-            int playerAttackDamage = executePlayerTurn(attackType);
-            int monsterAttackDamage = executeBossMonsterTurn();
+            int playerAttackDamage = DEFAULT_VALUE;
+            int monsterAttackDamage = DEFAULT_VALUE;
+                playerAttackDamage = executePlayerTurn(attackType);
+            if (bossMonster.isAlive()) {
+                monsterAttackDamage = executeBossMonsterTurn();
+            }
+            setStatus();
             createTurnHistory(attackType, playerAttackDamage, monsterAttackDamage);
         }
     }
@@ -36,11 +41,12 @@ public class RaidGame {
     }
 
     private boolean isGameProgress() {
+        setStatus();
         return status;
     }
 
-    private void setStatus(boolean status) {
-        this.status = status;
+    private void setStatus() {
+        status = player.isAlive() && bossMonster.isAlive();
     }
 
     private void increaseTurn() {
@@ -50,14 +56,12 @@ public class RaidGame {
     private int executePlayerTurn(AttackType attackType) {
         int playerAttackDamage = player.attack(attackType);
         bossMonster.takeDamage(playerAttackDamage);
-        setStatus(bossMonster.isAlive());
         return playerAttackDamage;
     }
 
     private int executeBossMonsterTurn() {
         int monsterAttackDamage = bossMonster.attack();
         player.takeDamage(monsterAttackDamage);
-        setStatus(player.isAlive());
         return monsterAttackDamage;
     }
 
