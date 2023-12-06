@@ -10,6 +10,10 @@ public class OutputView {
         System.out.println(message.getMessage());
     }
 
+    public static void printError(Exception e) {
+        System.out.println(e.getMessage());
+    }
+
     public static void printGameStatus(GameHistoryDto gameHistoryDto) {
         printNewLine();
         printBossMonsterStatus(gameHistoryDto);
@@ -24,10 +28,13 @@ public class OutputView {
         }
     }
 
-    public static void printTurnResult(GameHistoryDto gameHistoryDto) {
+    public static void printPlayerTurnResult(GameHistoryDto gameHistoryDto) {
         System.out.println(
                 String.format(Message.OUTPUT_TURN_RESULT_PLAYER.getMessage(), gameHistoryDto.getPlayerAttackType(),
                         gameHistoryDto.getPlayerAttackDamage()));
+    }
+
+    public static void printBossMonsterTurnResult(GameHistoryDto gameHistoryDto) {
         System.out.println(
                 String.format(Message.OUTPUT_TURN_RESULT_BOSS.getMessage(), gameHistoryDto.getMonsterAttackDamage()));
     }
