@@ -27,6 +27,6 @@ public class BossMonster {
     }
 
     public void takeDamage(int damage) {
-        status.setCurrentHP(damage);
+        status.setCurrentHP(status.getCurrentHP() - damage);
     }
 }
