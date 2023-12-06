@@ -2,6 +2,8 @@ package bossmonster.domain;
 
 public class PlayerStatus {
 
+    private static final int ZERO = 0;
+
     private boolean alive;
     private int maxHP;
     private int currentHP;
@@ -42,16 +44,16 @@ public class PlayerStatus {
 
     public void setCurrentHP(int currentHP) {
         this.currentHP = Math.min(maxHP, currentHP);
-        if (currentHP < 0) {
-            this.currentHP = 0;
+        if (currentHP < ZERO) {
+            this.currentHP = ZERO;
         }
-        setAlive(currentHP > 0);
+        setAlive(currentHP > ZERO);
     }
 
     public void setCurrentMP(int currentMP) {
         this.currentMP = Math.min(maxMP, currentMP);
-        if (currentMP < 0) {
-            this.currentMP = 0;
+        if (currentMP < ZERO) {
+            this.currentMP = ZERO;
         }
     }
 }
