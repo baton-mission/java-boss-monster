@@ -1,7 +1,6 @@
 package bossmonster.domain;
 
 public enum AttackType {
-    ATTACK_TYPE_NONE(0, "없음", 0, 0, 0),
     ATTACK_TYPE_NORMAL(1, "물리 공격", 10, 0, 10),
     ATTACK_TYPE_MAGIC(2, "마법 공격", 20, 30, 0);
 
