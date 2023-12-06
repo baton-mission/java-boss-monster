@@ -1,5 +1,7 @@
 package bossmonster.exception;
 
+import bossmonster.view.constants.Message;
+
 public class Validator {
 
     public static String validateInputOfNumber(String inputValue) {
@@ -31,13 +33,13 @@ public class Validator {
 
     public static void validatePlayerStatus(int hp, int mp) {
         if (hp + mp != 200) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(Message.ERROR_PLAYER_STATUS.getErrorMessage());
         }
     }
 
     private static void validateEmpty(String inputValue) {
         if (inputValue.isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(Message.ERROR_EMPTY.getErrorMessage());
         }
     }
 
@@ -45,32 +47,32 @@ public class Validator {
         try {
             Integer.parseInt(inputValue);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(Message.ERROR_NOT_INTEGER.getErrorMessage());
         }
     }
 
     private static void validateSeparated(String inputValue) {
         if (!inputValue.contains(",")) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(Message.ERROR_NOT_COMMA.getErrorMessage());
         }
     }
 
     private static void validateArray(String[] inputValue) {
         if (inputValue.length != 2) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(Message.ERROR_ARRAY_SIZE.getErrorMessage());
         }
     }
 
     private static int validateRangeOfMonster(int hp) {
         if (hp < 100 || hp > 300) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(Message.ERROR_BOSS_MONSTER_HP.getErrorMessage());
         }
         return hp;
     }
 
     private static void validateRangeOfPlayerName(String name) {
-        if (name.length() >= 5) {
-            throw new IllegalArgumentException();
+        if (name.length() > 5) {
+            throw new IllegalArgumentException(Message.ERROR_PLAYER_NAME.getErrorMessage());
         }
     }
 }
