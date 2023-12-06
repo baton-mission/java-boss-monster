@@ -6,6 +6,7 @@ import bossmonster.domain.Player;
 import bossmonster.domain.RaidGame;
 import bossmonster.domain.dto.GameHistoryDto;
 import bossmonster.exception.ExceptionHandler;
+import bossmonster.exception.ManaShortageException;
 import bossmonster.exception.Validator;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
@@ -22,7 +23,7 @@ public class Controller {
 
         while (isGamePossible(raidGame)) {
             showGameStatus(raidGame);
-            raidGame.executeTurn(selectAttackType());
+            raidGame.executeTurn(selectAttackType(raidGame));
             showTurnResult(raidGame);
         }
         showGameOver(raidGame);
@@ -65,9 +66,9 @@ public class Controller {
         OutputView.printGameStatus(raidGame.getGameHistory());
     }
 
-    private AttackType selectAttackType() {
+    private AttackType selectAttackType(RaidGame raidGame) {
         OutputView.printAttackType(provideAttackType());
-        return ExceptionHandler.retryInput(this::requestAttackType);
+        return ExceptionHandler.retryInput(() -> requestAttackType(raidGame));
     }
 
     private LinkedHashMap<Integer, String> provideAttackType() {
@@ -80,16 +81,29 @@ public class Controller {
         return attackType;
     }
 
-    private AttackType requestAttackType() {
+    private AttackType requestAttackType(RaidGame raidGame) {
         int valueInput = Integer.parseInt(Validator.validateInputOfNumber(InputView.readLine()));
-        return Arrays.stream(AttackType.values())
+        AttackType attackType = Arrays.stream(AttackType.values())
                 .filter(type -> type.getNumber() == valueInput && type.getNumber() != 0)
                 .findFirst()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow(() -> new NoSuchElementException(Message.ERROR_PLAYER_ATTACK_TYPE.getErrorMessage()));
+        checkPlayerMP(raidGame, attackType);
+        return attackType;
+    }
+
+    private void checkPlayerMP(RaidGame raidGame, AttackType attackType) {
+        GameHistoryDto gameHistoryDto = raidGame.getGameHistory();
+        if (gameHistoryDto.getPlayerCurrentMP() < attackType.getMpUsage()) {
+            throw new ManaShortageException(Message.ERROR_PLAYER_MANA_SHORTAGE.getErrorMessage());
+        }
     }
 
     private void showTurnResult(RaidGame raidGame) {
-        OutputView.printTurnResult(raidGame.getGameHistory());
+        GameHistoryDto gameHistoryDto = raidGame.getGameHistory();
+        OutputView.printPlayerTurnResult(gameHistoryDto);
+        if (gameHistoryDto.getMonsterCurrentHP() != 0) {
+            OutputView.printBossMonsterTurnResult(gameHistoryDto);
+        }
     }
 
     private void showGameOver(RaidGame raidGame) {
