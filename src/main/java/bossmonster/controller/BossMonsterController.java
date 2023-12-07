@@ -25,6 +25,8 @@ public class BossMonsterController {
         Player player = Player.of(playerName, playerVital);
         GameCharacters gameCharacters = GameCharacters.of(monster, player);
         outputView.printCharactersInitVital(gameCharacters);
+
+        PlayerAttack playerAttack = inputView.inputPlayerAttack();
     }
 
     private <T> T readWithRetry(Supplier<T> supplier) {

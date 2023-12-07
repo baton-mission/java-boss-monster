@@ -42,4 +42,10 @@ public class InputValidator {
         playerVital.forEach(eachVital -> StringValidator.validateNumeric(eachVital, target));
         playerVital.forEach(eachVital -> StringValidator.validateIntegerRange(eachVital, target));
     }
+
+    public void validatePlayerAttack(String playerAttack, String target) {
+        StringValidator.validateBlank(playerAttack, target);
+        StringValidator.validateNumeric(playerAttack, target);
+        StringValidator.validateIntegerRange(playerAttack, target);
+    }
 }

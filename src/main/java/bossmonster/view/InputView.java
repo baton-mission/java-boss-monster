@@ -2,6 +2,7 @@ package bossmonster.view;
 
 
 import bossmonster.domain.Monster;
+import bossmonster.domain.PlayerAttack;
 import bossmonster.domain.PlayerName;
 import bossmonster.domain.PlayerVital;
 import bossmonster.util.converter.Converter;
@@ -44,5 +45,15 @@ public class InputView {
         validator.validatePlayerVital(playerVital, "플레이어의 HP와 MP");
         validator.validateEachVital(Converter.splitToList(",", playerVital), "플레이어의 각 HP와 MP");
         return PlayerVital.of(Converter.splitToIntegerList(",", playerVital));
+    }
+
+    public PlayerAttack inputPlayerAttack() {
+        printer.printLine("어떤 공격을 하시겠습니까?");
+        printer.printLine("1. 물리 공격");
+        printer.printLine("2. 마법 공격");
+        String playerAttack = reader.readLine();
+        printer.printEmptyLine();
+        validator.validatePlayerAttack(playerAttack, "공격 종류");
+        return PlayerAttack.from(Converter.convertToInt(playerAttack));
     }
 }
