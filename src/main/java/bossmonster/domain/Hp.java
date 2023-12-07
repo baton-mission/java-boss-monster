@@ -6,4 +6,8 @@ public class Hp {
     public Hp(int hp) {
         this.hp = hp;
     }
+
+    public int getHp() {
+        return hp;
+    }
 }

@@ -1,7 +1,10 @@
 package bossmonster.controller;
 
+import bossmonster.domain.GameCharacters;
 import bossmonster.domain.Monster;
+import bossmonster.domain.Player;
 import bossmonster.domain.PlayerName;
+import bossmonster.domain.PlayerVital;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
 import java.util.function.Supplier;
@@ -19,6 +22,9 @@ public class BossMonsterController {
         Monster monster = inputView.inputMonsterHP();
         PlayerName playerName = inputView.inputPlayerName();
         PlayerVital playerVital = inputView.inputPlayerVital();
+        Player player = Player.of(playerName, playerVital);
+        GameCharacters gameCharacters = GameCharacters.of(monster, player);
+        outputView.printCharactersInitVital(gameCharacters);
     }
 
     private <T> T readWithRetry(Supplier<T> supplier) {

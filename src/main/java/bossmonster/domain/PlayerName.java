@@ -17,4 +17,8 @@ public class PlayerName {
     private boolean isValidLength(String playerName) {
         return playerName.length() <= 5;
     }
+
+    public String getPlayerName() {
+        return playerName;
+    }
 }

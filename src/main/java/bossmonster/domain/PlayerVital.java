@@ -4,12 +4,16 @@ import java.util.List;
 
 public class PlayerVital {
 
-    private final Hp hp;
-    private final Mp mp;
+    private final Hp totalHp;
+    private final Hp currentHp;
+    private final Mp totalMp;
+    private final Mp currentMp;
 
     public PlayerVital(Hp hp, Mp mp) {
-        this.hp = hp;
-        this.mp = mp;
+        this.totalHp = hp;
+        this.currentHp = hp;
+        this.totalMp = mp;
+        this.currentMp = mp;
     }
 
     public static PlayerVital of(List<Integer> playerVital) {
@@ -25,5 +29,21 @@ public class PlayerVital {
 
     private static boolean isValidValue(List<Integer> playerVital) {
         return playerVital.get(0) + playerVital.get(1) == 200;
+    }
+
+    public Hp getTotalHp() {
+        return totalHp;
+    }
+
+    public Hp getCurrentHp() {
+        return currentHp;
+    }
+
+    public Mp getTotalMp() {
+        return totalMp;
+    }
+
+    public Mp getCurrentMp() {
+        return currentMp;
     }
 }

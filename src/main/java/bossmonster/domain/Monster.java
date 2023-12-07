@@ -1,10 +1,12 @@
 package bossmonster.domain;
 
 public class Monster {
-    private final Hp hp;
+    private final Hp totalHp;
+    private final Hp currentHp;
 
     public Monster(Hp hp) {
-        this.hp = hp;
+        this.totalHp = hp;
+        this.currentHp = hp;
     }
 
     public static Monster fromHp(int hp) {
@@ -20,5 +22,13 @@ public class Monster {
 
     private static boolean isValidRange(int hp) {
         return hp >= 100 && hp <= 300;
+    }
+
+    public Hp getTotalHp() {
+        return totalHp;
+    }
+
+    public Hp getCurrentHp() {
+        return currentHp;
     }
 }
