@@ -22,4 +22,8 @@ public class InputValidator {
         StringValidator.validateNumeric(monsterHP, target);
         StringValidator.validateIntegerRange(monsterHP, target);
     }
+
+    public void validatePlayerName(String playerName, String target) {
+        StringValidator.validateBlank(playerName, target);
+    }
 }

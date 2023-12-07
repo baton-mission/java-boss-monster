@@ -2,6 +2,7 @@ package bossmonster.view;
 
 
 import bossmonster.domain.Monster;
+import bossmonster.domain.PlayerName;
 import bossmonster.util.converter.Converter;
 import bossmonster.view.printer.Printer;
 import bossmonster.view.reader.Reader;
@@ -29,10 +30,10 @@ public class InputView {
         return Monster.fromHp(Converter.convertToInt(monsterHP));
     }
 
-//    public PlayerName inputPlayerName() {
-//        printer.printLine("");
-//        String playerName = reader.readLine();
-//        validator.validatePlayerName(playerName, "플레이어의 이름을 입력해주세요");
-//        return new PlayerName();
-//    }
+    public PlayerName inputPlayerName() {
+        printer.printLine("플레이어의 이름을 입력해주세요");
+        String playerName = reader.readLine();
+        validator.validatePlayerName(playerName, "플레이어의 이름");
+        return new PlayerName(playerName);
+    }
 }
