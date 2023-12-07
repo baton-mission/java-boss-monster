@@ -1,6 +1,8 @@
 package bossmonster.view;
 
+import static bossmonster.common.MonsterImage.MONSTER_IMAGE_DAMAGED;
 import static bossmonster.common.MonsterImage.MONSTER_IMAGE_START;
+import static bossmonster.common.MonsterImage.MONSTER_IMAGE_WINNING;
 
 import bossmonster.domain.GameCharacters;
 import bossmonster.view.formatter.OutputFomatter;
@@ -51,6 +53,13 @@ public class OutputView {
         printer.printEmptyLine();
     }
 
-//    public void printCharactersCurrnetVital(GameCharacters gameCharacters) {
-//    }
+    public void printCharactersCurrnetVital(GameCharacters gameCharacters) {
+        printCharactersVital(gameCharacters, MONSTER_IMAGE_DAMAGED);
+        printer.printEmptyLine();
+    }
+
+    public void printCharactersMonsterWinningVital(GameCharacters gameCharacters) {
+        printCharactersVital(gameCharacters, MONSTER_IMAGE_WINNING);
+        printer.printEmptyLine();
+    }
 }

@@ -32,12 +32,25 @@ public class BossMonsterController {
         GameCharacters gameCharacters = GameCharacters.of(monster, player);
         outputView.printCharactersInitVital(gameCharacters);
 
-        PlayerAttack playerAttack = inputView.inputPlayerAttack();
-        Hp monsterAttack = attackGenerator.generate();
-
         MonsterGame monsterGame = MonsterGame.from(gameCharacters);
-        monsterGame.applyAttack(playerAttack, monsterAttack);
-//        outputView.printCharactersCurrnetVital(gameCharacters);
+        while (!monsterGame.isAnyCharacterOver()) {
+            PlayerAttack playerAttack = inputView.inputPlayerAttack();
+            Hp monsterAttack = attackGenerator.generate();
+
+            monsterGame.applyPlayerAttack(playerAttack);
+
+            if (!monsterGame.isMonsterOver()) {
+                monsterGame.applyMonsterAttack(monsterAttack);
+            }
+
+            if (monsterGame.isPlayerOver()) {
+                outputView.printCharactersMonsterWinningVital(gameCharacters);
+            }
+            if (!monsterGame.isPlayerOver()) {
+                outputView.printCharactersCurrnetVital(gameCharacters);
+            }
+        }
+
     }
 
     private <T> T readWithRetry(Supplier<T> supplier) {

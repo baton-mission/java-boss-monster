@@ -15,8 +15,29 @@ public class MonsterGame {
         return new MonsterGame(gameCharacters, GameCount.init(), false);
     }
 
-    public void applyAttack(PlayerAttack playerAttack, Hp monsterAttack) {
-        gameCharacters.applyAttack(playerAttack, monsterAttack);
+    public boolean isPlayerOver() {
+        return gameCharacters.isPlayerOver();
+    }
+
+//    public void applyAttack(PlayerAttack playerAttack, Hp monsterAttack) {
+//        gameCharacters.applyAttack(playerAttack, monsterAttack);
+//        gameCount.increase();
+//    }
+
+    public void applyPlayerAttack(PlayerAttack playerAttack) {
+        gameCharacters.applyPlayerAttack(playerAttack);
         gameCount.increase();
+    }
+
+    public void applyMonsterAttack(Hp monsterAttack) {
+        gameCharacters.applyMonsterAttack(monsterAttack);
+    }
+
+    public boolean isMonsterOver() {
+        return gameCharacters.isMonsterOver();
+    }
+
+    public boolean isAnyCharacterOver() {
+        return gameCharacters.isMonsterOver() || gameCharacters.isPlayerOver();
     }
 }

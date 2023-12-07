@@ -18,4 +18,8 @@ public class Hp {
     public void decreaseBy(PlayerAttack playerAttack) {
         hp = playerAttack.applyHp(hp);
     }
+
+    public boolean isEmpty() {
+        return hp == 0;
+    }
 }

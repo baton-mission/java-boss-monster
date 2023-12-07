@@ -3,8 +3,8 @@ package bossmonster.domain;
 import java.util.Arrays;
 
 public enum PlayerAttack {
-    PHYSICAL_ATTACK(1, "물리 공격", -10, -30),
-    MAGICAL_ATTACK(2, "마법 공격", -20, 10);
+    PHYSICAL_ATTACK(1, "물리 공격", -10, 10),
+    MAGICAL_ATTACK(2, "마법 공격", -20, -30);
 
     private final int userCommand;
     private final String message;

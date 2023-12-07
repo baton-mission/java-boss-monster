@@ -35,4 +35,8 @@ public class Monster {
     public void damagedBy(PlayerAttack playerAttack) {
         currentHp.decreaseBy(playerAttack);
     }
+
+    public boolean isOver() {
+        return currentHp.isEmpty();
+    }
 }

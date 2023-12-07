@@ -54,4 +54,8 @@ public class PlayerVital {
     public void affectMpBy(PlayerAttack playerAttack) {
         currentMp.affectMpBy(playerAttack);
     }
+
+    public boolean isOver() {
+        return currentHp.isEmpty();
+    }
 }

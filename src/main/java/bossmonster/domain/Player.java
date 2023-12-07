@@ -28,4 +28,8 @@ public class Player {
     public void affectMpBy(PlayerAttack playerAttack) {
         playerVital.affectMpBy(playerAttack);
     }
+
+    public boolean isOver() {
+        return playerVital.isOver();
+    }
 }

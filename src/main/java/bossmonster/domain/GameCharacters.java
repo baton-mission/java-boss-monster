@@ -21,9 +21,26 @@ public class GameCharacters {
         return player;
     }
 
-    public void applyAttack(PlayerAttack playerAttack, Hp monsterAttack) {
-        player.damagedBy(monsterAttack);
+//    public void applyAttack(PlayerAttack playerAttack, Hp monsterAttack) {
+//        player.damagedBy(monsterAttack);
+//        player.affectMpBy(playerAttack);
+//        monster.damagedBy(playerAttack);
+//    }
+
+    public boolean isPlayerOver() {
+        return player.isOver();
+    }
+
+    public boolean isMonsterOver() {
+        return monster.isOver();
+    }
+
+    public void applyPlayerAttack(PlayerAttack playerAttack) {
         player.affectMpBy(playerAttack);
         monster.damagedBy(playerAttack);
+    }
+
+    public void applyMonsterAttack(Hp monsterAttack) {
+        player.damagedBy(monsterAttack);
     }
 }
