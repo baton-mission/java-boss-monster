@@ -31,4 +31,8 @@ public class Monster {
     public Hp getCurrentHp() {
         return currentHp;
     }
+
+    public void damagedBy(PlayerAttack playerAttack) {
+        currentHp.decreaseBy(playerAttack);
+    }
 }

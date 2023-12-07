@@ -46,4 +46,12 @@ public class PlayerVital {
     public Mp getCurrentMp() {
         return currentMp;
     }
+
+    public void damagedBy(Hp monsterAttack) {
+        currentHp.decreaseBy(monsterAttack);
+    }
+
+    public void affectMpBy(PlayerAttack playerAttack) {
+        currentMp.affectMpBy(playerAttack);
+    }
 }

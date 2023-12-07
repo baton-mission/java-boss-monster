@@ -1,8 +1,12 @@
 package bossmonster.controller;
 
+import bossmonster.domain.AttackGenerator;
 import bossmonster.domain.GameCharacters;
+import bossmonster.domain.Hp;
 import bossmonster.domain.Monster;
+import bossmonster.domain.MonsterGame;
 import bossmonster.domain.Player;
+import bossmonster.domain.PlayerAttack;
 import bossmonster.domain.PlayerName;
 import bossmonster.domain.PlayerVital;
 import bossmonster.view.InputView;
@@ -12,10 +16,12 @@ import java.util.function.Supplier;
 public class BossMonsterController {
     private final InputView inputView;
     private final OutputView outputView;
+    private final AttackGenerator attackGenerator;
 
-    public BossMonsterController(InputView inputView, OutputView outputView) {
+    public BossMonsterController(InputView inputView, OutputView outputView, AttackGenerator attackGenerator) {
         this.inputView = inputView;
         this.outputView = outputView;
+        this.attackGenerator = attackGenerator;
     }
 
     public void run() {
@@ -27,6 +33,11 @@ public class BossMonsterController {
         outputView.printCharactersInitVital(gameCharacters);
 
         PlayerAttack playerAttack = inputView.inputPlayerAttack();
+        Hp monsterAttack = attackGenerator.generate();
+
+        MonsterGame monsterGame = MonsterGame.from(gameCharacters);
+        monsterGame.applyAttack(playerAttack, monsterAttack);
+//        outputView.printCharactersCurrnetVital(gameCharacters);
     }
 
     private <T> T readWithRetry(Supplier<T> supplier) {

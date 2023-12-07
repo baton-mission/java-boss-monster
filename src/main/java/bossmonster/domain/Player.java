@@ -20,4 +20,12 @@ public class Player {
     public PlayerVital getPlayerVital() {
         return playerVital;
     }
+
+    public void damagedBy(Hp monsterAttack) {
+        playerVital.damagedBy(monsterAttack);
+    }
+
+    public void affectMpBy(PlayerAttack playerAttack) {
+        playerVital.affectMpBy(playerAttack);
+    }
 }

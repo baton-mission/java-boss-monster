@@ -25,4 +25,12 @@ public enum PlayerAttack {
                 .orElseThrow(() -> new IllegalArgumentException(
                         String.format("입력은 %s, %s로 해야합니다.", PHYSICAL_ATTACK.userCommand, MAGICAL_ATTACK.userCommand)));
     }
+
+    public int applyMp(int mp) {
+        return mp + mpSelfEffect;
+    }
+
+    public int applyHp(int hp) {
+        return hp + hpDamage;
+    }
 }

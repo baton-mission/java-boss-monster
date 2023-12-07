@@ -20,4 +20,10 @@ public class GameCharacters {
     public Player getPlayer() {
         return player;
     }
+
+    public void applyAttack(PlayerAttack playerAttack, Hp monsterAttack) {
+        player.damagedBy(monsterAttack);
+        player.affectMpBy(playerAttack);
+        monster.damagedBy(playerAttack);
+    }
 }

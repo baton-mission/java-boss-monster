@@ -50,4 +50,7 @@ public class OutputView {
         printer.printLine(DOUBLE_LINE);
         printer.printEmptyLine();
     }
+
+//    public void printCharactersCurrnetVital(GameCharacters gameCharacters) {
+//    }
 }

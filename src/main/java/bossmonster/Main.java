@@ -1,6 +1,8 @@
 package bossmonster;
 
 import bossmonster.controller.BossMonsterController;
+import bossmonster.domain.AttackGenerator;
+import bossmonster.domain.RandomAttackGenerator;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
 import bossmonster.view.printer.ConsolePrinter;
@@ -16,7 +18,8 @@ public class Main {
         InputView inputView = InputView.of(reader, printer);
         OutputView outputView = new OutputView(printer);
 
-        BossMonsterController bossMonsterController = new BossMonsterController(inputView, outputView);
+        AttackGenerator attackGenerator = new RandomAttackGenerator();
+        BossMonsterController bossMonsterController = new BossMonsterController(inputView, outputView, attackGenerator);
         bossMonsterController.run();
     }
 }

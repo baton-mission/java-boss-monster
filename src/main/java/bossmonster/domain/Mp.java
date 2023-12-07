@@ -1,7 +1,7 @@
 package bossmonster.domain;
 
 public class Mp {
-    private final int mp;
+    private int mp;
 
     public Mp(int mp) {
         this.mp = mp;
@@ -9,5 +9,9 @@ public class Mp {
 
     public int getMp() {
         return mp;
+    }
+
+    public void affectMpBy(PlayerAttack playerAttack) {
+        mp = playerAttack.applyMp(mp);
     }
 }
