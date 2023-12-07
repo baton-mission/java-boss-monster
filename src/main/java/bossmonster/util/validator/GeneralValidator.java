@@ -25,10 +25,10 @@ public class GeneralValidator {
         }
     }
 
-    public static void validateMinSplittedCount(String seperator, String value, int minSplittedCount, String target) {
+    public static void validateSplittedCount(String seperator, String value, int requiredCount, String target) {
         List<String> values = Converter.splitToList(seperator, value);
-        if (!hasOverMinCount(values, minSplittedCount)) {
-            throw new IllegalArgumentException(String.format("%s은(는) 최소 %d개 이상이여야 합니다..", target, minSplittedCount));
+        if (!hasValidCount(values, requiredCount)) {
+            throw new IllegalArgumentException(String.format("%s은(는) 올바르게 하나씩 입력해주세요", target));
         }
     }
 
@@ -36,7 +36,7 @@ public class GeneralValidator {
         String doubleSubstring = substring.repeat(2);
         return value.contains(doubleSubstring);
     }
-    private static boolean hasOverMinCount(List<String> values, int minSplittedCount) {
-        return values.size() >= minSplittedCount;
+    private static boolean hasValidCount(List<String> values, int requiredCount) {
+        return values.size() == requiredCount;
     }
 }

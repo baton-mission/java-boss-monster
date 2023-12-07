@@ -1,7 +1,9 @@
 package bossmonster.view.validator;
 
 import bossmonster.common.Symbol;
+import bossmonster.util.validator.GeneralValidator;
 import bossmonster.util.validator.StringValidator;
+import java.util.List;
 
 public class InputValidator {
     private static InputValidator inputValidator;
@@ -25,5 +27,19 @@ public class InputValidator {
 
     public void validatePlayerName(String playerName, String target) {
         StringValidator.validateBlank(playerName, target);
+    }
+
+    public void validatePlayerVital(String playerVital, String target) {
+        StringValidator.validateBlank(playerVital, target);
+        GeneralValidator.validateDuplicateSubstring(Symbol.COMMA, playerVital, target);
+        GeneralValidator.validateStartSubstring(Symbol.COMMA, playerVital, target);
+        GeneralValidator.validateEndSubstring(Symbol.COMMA, playerVital, target);
+        GeneralValidator.validateSplittedCount(Symbol.COMMA, playerVital, 2, target);
+    }
+
+    public void validateEachVital(List<String> playerVital, String target) {
+        playerVital.forEach(eachVital -> StringValidator.validateBlank(eachVital, target));
+        playerVital.forEach(eachVital -> StringValidator.validateNumeric(eachVital, target));
+        playerVital.forEach(eachVital -> StringValidator.validateIntegerRange(eachVital, target));
     }
 }

@@ -18,6 +18,7 @@ public class BossMonsterController {
     public void run() {
         Monster monster = inputView.inputMonsterHP();
         PlayerName playerName = inputView.inputPlayerName();
+        PlayerVital playerVital = inputView.inputPlayerVital();
     }
 
     private <T> T readWithRetry(Supplier<T> supplier) {

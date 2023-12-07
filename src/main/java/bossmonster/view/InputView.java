@@ -3,6 +3,7 @@ package bossmonster.view;
 
 import bossmonster.domain.Monster;
 import bossmonster.domain.PlayerName;
+import bossmonster.domain.PlayerVital;
 import bossmonster.util.converter.Converter;
 import bossmonster.view.printer.Printer;
 import bossmonster.view.reader.Reader;
@@ -35,5 +36,13 @@ public class InputView {
         String playerName = reader.readLine();
         validator.validatePlayerName(playerName, "플레이어의 이름");
         return new PlayerName(playerName);
+    }
+
+    public PlayerVital inputPlayerVital() {
+        printer.printLine("플레이어의 HP와 MP를 입력해주세요.(,로 구분)");
+        String playerVital = reader.readLine();
+        validator.validatePlayerVital(playerVital, "플레이어의 HP와 MP");
+        validator.validateEachVital(Converter.splitToList(",", playerVital), "플레이어의 각 HP와 MP");
+        return PlayerVital.of(Converter.splitToIntegerList(",", playerVital));
     }
 }
