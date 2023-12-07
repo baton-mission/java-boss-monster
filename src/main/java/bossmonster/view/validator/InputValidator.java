@@ -17,9 +17,9 @@ public class InputValidator {
         return inputValidator;
     }
 
-    public static void validateTemplate(String template, String target) {
-        StringValidator.validateBlank(template, target);
-        StringValidator.validateNumeric(template, target);
-        StringValidator.validateIntegerRange(template, target);
+    public void validateMonsterHP(String monsterHP, String target) {
+        StringValidator.validateBlank(monsterHP, target);
+        StringValidator.validateNumeric(monsterHP, target);
+        StringValidator.validateIntegerRange(monsterHP, target);
     }
 }

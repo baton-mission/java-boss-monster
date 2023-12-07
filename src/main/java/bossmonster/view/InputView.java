@@ -1,6 +1,8 @@
 package bossmonster.view;
 
 
+import bossmonster.domain.Monster;
+import bossmonster.util.converter.Converter;
 import bossmonster.view.printer.Printer;
 import bossmonster.view.reader.Reader;
 import bossmonster.view.validator.InputValidator;
@@ -20,10 +22,17 @@ public class InputView {
         return new InputView(reader, printer, InputValidator.getInstance());
     }
 
-//    public Template inputTemplate() {
+    public Monster inputMonsterHP() {
+        printer.printLine("보스 몬스터의 HP를 입력해주세요.");
+        String monsterHP = reader.readLine();
+        validator.validateMonsterHP(monsterHP, "보스 몬스터의 HP");
+        return Monster.fromHp(Converter.convertToInt(monsterHP));
+    }
+
+//    public PlayerName inputPlayerName() {
 //        printer.printLine("");
-//        String template = reader.readLine();
-//        validator.validate(template, "템플릿");
-//        return new Template();
+//        String playerName = reader.readLine();
+//        validator.validatePlayerName(playerName, "플레이어의 이름을 입력해주세요");
+//        return new PlayerName();
 //    }
 }

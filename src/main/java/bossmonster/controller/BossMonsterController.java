@@ -1,5 +1,6 @@
 package bossmonster.controller;
 
+import bossmonster.domain.Monster;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
 import java.util.function.Supplier;
@@ -14,6 +15,8 @@ public class BossMonsterController {
     }
 
     public void run() {
+        Monster monster = inputView.inputMonsterHP();
+//        PlayerName playerName = inputView.inputPlayerName();
     }
 
     private <T> T readWithRetry(Supplier<T> supplier) {
