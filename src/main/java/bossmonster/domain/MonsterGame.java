@@ -19,11 +19,6 @@ public class MonsterGame {
         return gameCharacters.isPlayerOver();
     }
 
-//    public void applyAttack(PlayerAttack playerAttack, Hp monsterAttack) {
-//        gameCharacters.applyAttack(playerAttack, monsterAttack);
-//        gameCount.increase();
-//    }
-
     public void applyPlayerAttack(PlayerAttack playerAttack) {
         gameCharacters.applyPlayerAttack(playerAttack);
         gameCount.increase();
@@ -39,5 +34,13 @@ public class MonsterGame {
 
     public boolean isAnyCharacterOver() {
         return gameCharacters.isMonsterOver() || gameCharacters.isPlayerOver();
+    }
+
+    public GameCount getGameCount() {
+        return gameCount;
+    }
+
+    public GameCharacters getGameCharacters() {
+        return gameCharacters;
     }
 }

@@ -14,4 +14,8 @@ public class GameCount {
     public void increase() {
         gameCount++;
     }
+
+    public int getGameCount() {
+        return gameCount;
+    }
 }

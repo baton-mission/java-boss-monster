@@ -4,14 +4,14 @@ public class Monster {
     private final Hp totalHp;
     private final Hp currentHp;
 
-    public Monster(Hp hp) {
-        this.totalHp = hp;
-        this.currentHp = hp;
+    public Monster(Hp totalHp, Hp currentHp) {
+        this.totalHp = totalHp;
+        this.currentHp = currentHp;
     }
 
     public static Monster fromHp(int hp) {
         validateHpRange(hp);
-        return new Monster(new Hp(hp));
+        return new Monster(new Hp(hp), new Hp(hp));
     }
 
     private static void validateHpRange(int hp) {

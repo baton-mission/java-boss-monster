@@ -9,16 +9,18 @@ public class PlayerVital {
     private final Mp totalMp;
     private final Mp currentMp;
 
-    public PlayerVital(Hp hp, Mp mp) {
-        this.totalHp = hp;
-        this.currentHp = hp;
-        this.totalMp = mp;
-        this.currentMp = mp;
+    public PlayerVital(Hp totalHp, Hp currentHp, Mp totalMp, Mp currentMp) {
+        this.totalHp = totalHp;
+        this.currentHp = currentHp;
+        this.totalMp = totalMp;
+        this.currentMp = currentMp;
     }
 
     public static PlayerVital of(List<Integer> playerVital) {
         validateTotalVitalValue(playerVital);
-        return new PlayerVital(new Hp(playerVital.get(0)), new Mp(playerVital.get(1)));
+        int hp = playerVital.get(0);
+        int mp = playerVital.get(1);
+        return new PlayerVital(new Hp(hp), new Hp(hp), new Mp(mp), new Mp(mp));
     }
 
     private static void validateTotalVitalValue(List<Integer> playerVital) {

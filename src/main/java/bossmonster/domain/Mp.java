@@ -12,6 +12,16 @@ public class Mp {
     }
 
     public void affectMpBy(PlayerAttack playerAttack) {
-        mp = playerAttack.applyMp(mp);
+        int newMp = playerAttack.applyMp(mp);
+        if (isOverMax(newMp)) {
+            mp = 200;
+        }
+        if (!isOverMax(newMp)) {
+            mp = newMp;
+        }
+    }
+
+    private static boolean isOverMax(int newMp) {
+        return newMp > 200;
     }
 }

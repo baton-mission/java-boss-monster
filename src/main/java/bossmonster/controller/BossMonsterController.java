@@ -25,22 +25,28 @@ public class BossMonsterController {
     }
 
     public void run() {
-        Monster monster = inputView.inputMonsterHP();
-        PlayerName playerName = inputView.inputPlayerName();
-        PlayerVital playerVital = inputView.inputPlayerVital();
+        Monster monster = readWithRetry(inputView::inputMonsterHP);
+        PlayerName playerName = readWithRetry(inputView::inputPlayerName);
+        PlayerVital playerVital = readWithRetry(inputView::inputPlayerVital);
         Player player = Player.of(playerName, playerVital);
         GameCharacters gameCharacters = GameCharacters.of(monster, player);
         outputView.printCharactersInitVital(gameCharacters);
 
         MonsterGame monsterGame = MonsterGame.from(gameCharacters);
         while (!monsterGame.isAnyCharacterOver()) {
-            PlayerAttack playerAttack = inputView.inputPlayerAttack();
+            PlayerAttack playerAttack = readWithRetry(inputView::inputPlayerAttack);
             Hp monsterAttack = attackGenerator.generate();
 
             monsterGame.applyPlayerAttack(playerAttack);
 
             if (!monsterGame.isMonsterOver()) {
                 monsterGame.applyMonsterAttack(monsterAttack);
+                outputView.printAttack(playerAttack, monsterAttack);
+
+            }
+
+            if (monsterGame.isMonsterOver()) {
+                outputView.printAttack(playerAttack);
             }
 
             if (monsterGame.isPlayerOver()) {
@@ -49,6 +55,13 @@ public class BossMonsterController {
             if (!monsterGame.isPlayerOver()) {
                 outputView.printCharactersCurrnetVital(gameCharacters);
             }
+        }
+
+        if (monsterGame.isMonsterOver()) {
+            outputView.printPlayerWin(monsterGame);
+        }
+        if (monsterGame.isPlayerOver()) {
+            outputView.printPlayerOver(playerName);
         }
 
     }
