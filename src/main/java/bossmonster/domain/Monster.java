@@ -1,10 +1,12 @@
 package bossmonster.domain;
 
 public class Monster {
+    public static final int MIN_MONSTER_HP = 100;
+    public static final int MAX_MONSTER_HP = 300;
     private final Hp totalHp;
     private final Hp currentHp;
 
-    public Monster(Hp totalHp, Hp currentHp) {
+    private Monster(Hp totalHp, Hp currentHp) {
         this.totalHp = totalHp;
         this.currentHp = currentHp;
     }
@@ -16,12 +18,13 @@ public class Monster {
 
     private static void validateHpRange(int hp) {
         if (!isValidRange(hp)) {
-            throw new IllegalArgumentException("보스 몬스터의 hp는 100이상 300이하여야 합니다.");
+            throw new IllegalArgumentException(
+                    String.format("보스 몬스터의 hp는 %d이상 %d이하여야 합니다.", MIN_MONSTER_HP, MAX_MONSTER_HP));
         }
     }
 
     private static boolean isValidRange(int hp) {
-        return hp >= 100 && hp <= 300;
+        return hp >= MIN_MONSTER_HP && hp <= MAX_MONSTER_HP;
     }
 
     public Hp getTotalHp() {

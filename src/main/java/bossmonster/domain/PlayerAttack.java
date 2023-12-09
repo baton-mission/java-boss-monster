@@ -18,9 +18,9 @@ public enum PlayerAttack {
         this.mpSelfEffect = mpSelfEffect;
     }
 
-    public static PlayerAttack from(int playerAttack) {
+    public static PlayerAttack from(int input) {
         return Arrays.stream(values())
-                .filter(option -> option.userCommand == playerAttack)
+                .filter(attack -> attack.userCommand == input)
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(
                         String.format("입력은 %s, %s로 해야합니다.", PHYSICAL_ATTACK.userCommand, MAGICAL_ATTACK.userCommand)));
@@ -40,5 +40,9 @@ public enum PlayerAttack {
 
     public int getHpDamage() {
         return hpDamage;
+    }
+
+    public int getUserCommand() {
+        return userCommand;
     }
 }

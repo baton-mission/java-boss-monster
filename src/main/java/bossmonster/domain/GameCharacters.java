@@ -4,7 +4,7 @@ public class GameCharacters {
     private final Monster monster;
     private final Player player;
 
-    public GameCharacters(Monster monster, Player player) {
+    private GameCharacters(Monster monster, Player player) {
         this.monster = monster;
         this.player = player;
     }
@@ -21,12 +21,6 @@ public class GameCharacters {
         return player;
     }
 
-//    public void applyAttack(PlayerAttack playerAttack, Hp monsterAttack) {
-//        player.damagedBy(monsterAttack);
-//        player.affectMpBy(playerAttack);
-//        monster.damagedBy(playerAttack);
-//    }
-
     public boolean isPlayerOver() {
         return player.isOver();
     }
@@ -42,5 +36,9 @@ public class GameCharacters {
 
     public void applyMonsterAttack(Hp monsterAttack) {
         player.damagedBy(monsterAttack);
+    }
+
+    public void validateAttackMp(PlayerAttack playerAttack) {
+        player.validateAttackMp(playerAttack);
     }
 }

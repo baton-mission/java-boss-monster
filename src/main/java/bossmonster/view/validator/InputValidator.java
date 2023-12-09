@@ -1,13 +1,13 @@
 package bossmonster.view.validator;
 
-import bossmonster.common.Symbol;
 import bossmonster.util.validator.GeneralValidator;
 import bossmonster.util.validator.StringValidator;
+import bossmonster.view.InputView;
 import java.util.List;
 
 public class InputValidator {
+    private static final String PLAYER_VITAL_SEPARATOR = InputView.PLAYER_VITAL_SEPARATOR;
     private static InputValidator inputValidator;
-    public static final String TEMPLATE_SEPARATOR = Symbol.COMMA;
 
     private InputValidator() {
     }
@@ -31,10 +31,10 @@ public class InputValidator {
 
     public void validatePlayerVital(String playerVital, String target) {
         StringValidator.validateBlank(playerVital, target);
-        GeneralValidator.validateDuplicateSubstring(Symbol.COMMA, playerVital, target);
-        GeneralValidator.validateStartSubstring(Symbol.COMMA, playerVital, target);
-        GeneralValidator.validateEndSubstring(Symbol.COMMA, playerVital, target);
-        GeneralValidator.validateSplittedCount(Symbol.COMMA, playerVital, 2, target);
+        GeneralValidator.validateDuplicateSubstring(PLAYER_VITAL_SEPARATOR, playerVital, target);
+        GeneralValidator.validateStartSubstring(PLAYER_VITAL_SEPARATOR, playerVital, target);
+        GeneralValidator.validateEndSubstring(PLAYER_VITAL_SEPARATOR, playerVital, target);
+        GeneralValidator.validateSplittedCount(PLAYER_VITAL_SEPARATOR, playerVital, 2, target);
     }
 
     public void validateEachVital(List<String> playerVital, String target) {

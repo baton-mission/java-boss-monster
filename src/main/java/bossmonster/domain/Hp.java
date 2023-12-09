@@ -1,20 +1,17 @@
 package bossmonster.domain;
 
 public class Hp {
+    public static final int EMPTY_HP = 0;
     private int hp;
 
     public Hp(int hp) {
         this.hp = hp;
     }
 
-    public int getHp() {
-        return hp;
-    }
-
     public void decreaseBy(Hp monsterAttack) {
         int newHp = hp - monsterAttack.hp;
         if (isUnderMinScore(newHp)) {
-            hp = 0;
+            hp = EMPTY_HP;
         }
         if (!isUnderMinScore(newHp)) {
             hp = newHp;
@@ -22,13 +19,13 @@ public class Hp {
     }
 
     private boolean isUnderMinScore(int newHp) {
-        return newHp <= 0;
+        return newHp <= EMPTY_HP;
     }
 
     public void decreaseBy(PlayerAttack playerAttack) {
         int newHp = playerAttack.applyHp(hp);
         if (isUnderMinScore(newHp)) {
-            hp = 0;
+            hp = EMPTY_HP;
         }
         if (!isUnderMinScore(newHp)) {
             hp = newHp;
@@ -36,6 +33,10 @@ public class Hp {
     }
 
     public boolean isEmpty() {
-        return hp <= 0;
+        return hp <= EMPTY_HP;
+    }
+
+    public int getHp() {
+        return hp;
     }
 }

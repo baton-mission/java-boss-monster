@@ -3,6 +3,7 @@ package bossmonster.domain;
 import java.util.Random;
 
 public class RandomAttackGenerator implements AttackGenerator{
+    public static final int MAX_MONSTER_ATTACK = 20;
     private final Random random;
 
     public RandomAttackGenerator() {
@@ -11,6 +12,6 @@ public class RandomAttackGenerator implements AttackGenerator{
 
     @Override
     public Hp generate() {
-        return new Hp(random.nextInt(20));
+        return new Hp(random.nextInt(MAX_MONSTER_ATTACK));
     }
 }

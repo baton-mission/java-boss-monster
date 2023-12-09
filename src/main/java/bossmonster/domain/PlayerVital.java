@@ -4,12 +4,13 @@ import java.util.List;
 
 public class PlayerVital {
 
+    public static final int MAX_PLAYER_VITAL_SUM = 200;
     private final Hp totalHp;
     private final Hp currentHp;
     private final Mp totalMp;
     private final Mp currentMp;
 
-    public PlayerVital(Hp totalHp, Hp currentHp, Mp totalMp, Mp currentMp) {
+    private PlayerVital(Hp totalHp, Hp currentHp, Mp totalMp, Mp currentMp) {
         this.totalHp = totalHp;
         this.currentHp = currentHp;
         this.totalMp = totalMp;
@@ -17,20 +18,34 @@ public class PlayerVital {
     }
 
     public static PlayerVital of(List<Integer> playerVital) {
-        validateTotalVitalValue(playerVital);
-        int hp = playerVital.get(0);
-        int mp = playerVital.get(1);
+        int hpIndex = 0;
+        int mpIndex = 1;
+        int hp = playerVital.get(hpIndex);
+        int mp = playerVital.get(mpIndex);
+        validateTotalVitalValue(hp, mp);
         return new PlayerVital(new Hp(hp), new Hp(hp), new Mp(mp), new Mp(mp));
     }
 
-    private static void validateTotalVitalValue(List<Integer> playerVital) {
-        if (!isValidValue(playerVital)) {
-            throw new IllegalArgumentException("플레이어의 HP와 MP의 합은 200이어야 합니다.");
+    private static void validateTotalVitalValue(int hp, int mp) {
+        if (!isValidValue(hp, mp)) {
+            throw new IllegalArgumentException(String.format("플레이어의 HP와 MP의 합은 %d이어야 합니다.", MAX_PLAYER_VITAL_SUM));
         }
     }
 
-    private static boolean isValidValue(List<Integer> playerVital) {
-        return playerVital.get(0) + playerVital.get(1) == 200;
+    private static boolean isValidValue(int hp, int mp) {
+        return hp + mp == MAX_PLAYER_VITAL_SUM;
+    }
+
+    public void damagedBy(Hp monsterAttack) {
+        currentHp.decreaseBy(monsterAttack);
+    }
+
+    public void affectMpBy(PlayerAttack playerAttack) {
+        currentMp.affectMpBy(playerAttack);
+    }
+
+    public boolean isOver() {
+        return currentHp.isEmpty();
     }
 
     public Hp getTotalHp() {
@@ -49,15 +64,11 @@ public class PlayerVital {
         return currentMp;
     }
 
-    public void damagedBy(Hp monsterAttack) {
-        currentHp.decreaseBy(monsterAttack);
-    }
-
-    public void affectMpBy(PlayerAttack playerAttack) {
-        currentMp.affectMpBy(playerAttack);
-    }
-
-    public boolean isOver() {
-        return currentHp.isEmpty();
+    public void validateAttackMp(PlayerAttack playerAttack) {
+        Mp newMp = currentMp;
+        newMp.affectMpBy(playerAttack);
+        if (newMp.isUderEmpty()) {
+            throw new IllegalArgumentException("현재 보유 Mp를 넘어서는 공격을 할 수는 없습니다.");
+        }
     }
 }

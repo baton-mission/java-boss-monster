@@ -7,14 +7,10 @@ public class Mp {
         this.mp = mp;
     }
 
-    public int getMp() {
-        return mp;
-    }
-
     public void affectMpBy(PlayerAttack playerAttack) {
         int newMp = playerAttack.applyMp(mp);
         if (isOverMax(newMp)) {
-            mp = 200;
+            mp = PlayerVital.MAX_PLAYER_VITAL_SUM;
         }
         if (!isOverMax(newMp)) {
             mp = newMp;
@@ -22,6 +18,14 @@ public class Mp {
     }
 
     private static boolean isOverMax(int newMp) {
-        return newMp > 200;
+        return newMp > PlayerVital.MAX_PLAYER_VITAL_SUM;
+    }
+
+    public boolean isUderEmpty() {
+        return mp < 0;
+    }
+
+    public int getMp() {
+        return mp;
     }
 }

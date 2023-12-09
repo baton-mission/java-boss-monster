@@ -11,7 +11,7 @@ public class MonsterGame {
         this.gameOver = gameOver;
     }
 
-    public static MonsterGame from(GameCharacters gameCharacters) {
+    public static MonsterGame init(GameCharacters gameCharacters) {
         return new MonsterGame(gameCharacters, GameCount.init(), false);
     }
 
@@ -25,7 +25,9 @@ public class MonsterGame {
     }
 
     public void applyMonsterAttack(Hp monsterAttack) {
-        gameCharacters.applyMonsterAttack(monsterAttack);
+        if (!gameCharacters.isMonsterOver()) {
+            gameCharacters.applyMonsterAttack(monsterAttack);
+        }
     }
 
     public boolean isMonsterOver() {

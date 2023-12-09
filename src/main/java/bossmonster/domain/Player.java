@@ -4,21 +4,13 @@ public class Player {
     private final PlayerName playerName;
     private final PlayerVital playerVital;
 
-    public Player(PlayerName playerName, PlayerVital playerVital) {
+    private Player(PlayerName playerName, PlayerVital playerVital) {
         this.playerName = playerName;
         this.playerVital = playerVital;
     }
 
     public static Player of(PlayerName playerName, PlayerVital playerVital) {
         return new Player(playerName, playerVital);
-    }
-
-    public PlayerName getPlayerName() {
-        return playerName;
-    }
-
-    public PlayerVital getPlayerVital() {
-        return playerVital;
     }
 
     public void damagedBy(Hp monsterAttack) {
@@ -31,5 +23,17 @@ public class Player {
 
     public boolean isOver() {
         return playerVital.isOver();
+    }
+
+    public PlayerName getPlayerName() {
+        return playerName;
+    }
+
+    public PlayerVital getPlayerVital() {
+        return playerVital;
+    }
+
+    public void validateAttackMp(PlayerAttack playerAttack) {
+        playerVital.validateAttackMp(playerAttack);
     }
 }
