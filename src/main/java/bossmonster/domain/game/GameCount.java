@@ -1,4 +1,4 @@
-package bossmonster.domain;
+package bossmonster.domain.game;
 
 public class GameCount {
     public static final int INIT_GAME_COUNT = 0;

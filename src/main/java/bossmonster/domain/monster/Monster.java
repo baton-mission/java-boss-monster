@@ -1,4 +1,7 @@
-package bossmonster.domain;
+package bossmonster.domain.monster;
+
+import bossmonster.domain.Hp;
+import bossmonster.domain.PlayerAttack;
 
 public class Monster {
     public static final int MIN_MONSTER_HP = 100;
@@ -27,19 +30,19 @@ public class Monster {
         return hp >= MIN_MONSTER_HP && hp <= MAX_MONSTER_HP;
     }
 
-    public Hp getTotalHp() {
-        return totalHp;
-    }
-
-    public Hp getCurrentHp() {
-        return currentHp;
-    }
-
     public void damagedBy(PlayerAttack playerAttack) {
         currentHp.decreaseBy(playerAttack);
     }
 
     public boolean isOver() {
         return currentHp.isEmpty();
+    }
+
+    public Hp getTotalHp() {
+        return totalHp;
+    }
+
+    public Hp getCurrentHp() {
+        return currentHp;
     }
 }

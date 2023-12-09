@@ -1,4 +1,4 @@
-package bossmonster.domain;
+package bossmonster.domain.player;
 
 public class PlayerName {
     public static final int MAX_PLAYER_NAME_LENGTH = 5;

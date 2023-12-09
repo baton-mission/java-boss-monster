@@ -1,4 +1,9 @@
-package bossmonster.domain;
+package bossmonster.domain.game;
+
+import bossmonster.domain.Hp;
+import bossmonster.domain.PlayerAttack;
+import bossmonster.domain.monster.Monster;
+import bossmonster.domain.player.Player;
 
 public class GameCharacters {
     private final Monster monster;
@@ -11,14 +16,6 @@ public class GameCharacters {
 
     public static GameCharacters of(Monster monster, Player player) {
         return new GameCharacters(monster, player);
-    }
-
-    public Monster getMonster() {
-        return monster;
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 
     public boolean isPlayerOver() {
@@ -40,5 +37,13 @@ public class GameCharacters {
 
     public void validateAttackMp(PlayerAttack playerAttack) {
         player.validateAttackMp(playerAttack);
+    }
+
+    public Monster getMonster() {
+        return monster;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

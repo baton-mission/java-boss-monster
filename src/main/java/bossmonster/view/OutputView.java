@@ -1,9 +1,9 @@
 package bossmonster.view;
 
 import bossmonster.common.MonsterImage;
-import bossmonster.domain.GameCharacters;
+import bossmonster.domain.game.GameCharacters;
 import bossmonster.domain.Hp;
-import bossmonster.domain.MonsterGame;
+import bossmonster.domain.game.MonsterGame;
 import bossmonster.domain.PlayerAttack;
 import bossmonster.view.formatter.OutputFomatter;
 import bossmonster.view.printer.Printer;

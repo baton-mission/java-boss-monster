@@ -1,13 +1,16 @@
-package bossmonster.domain;
+package bossmonster.domain.player;
 
+import bossmonster.domain.Hp;
+import bossmonster.domain.Mp;
+import bossmonster.domain.PlayerAttack;
 import java.util.List;
 
 public class PlayerVital {
 
     public static final int MAX_PLAYER_VITAL_SUM = 200;
+    private final Mp totalMp;
     private final Hp totalHp;
     private final Hp currentHp;
-    private final Mp totalMp;
     private final Mp currentMp;
 
     private PlayerVital(Hp totalHp, Hp currentHp, Mp totalMp, Mp currentMp) {
@@ -41,11 +44,19 @@ public class PlayerVital {
     }
 
     public void affectMpBy(PlayerAttack playerAttack) {
-        currentMp.affectMpBy(playerAttack);
+        currentMp.applyPlayerAttack(playerAttack);
     }
 
     public boolean isOver() {
         return currentHp.isEmpty();
+    }
+
+    public void validateAttackMp(PlayerAttack playerAttack) {
+        Mp newMp = currentMp;
+        newMp.applyPlayerAttack(playerAttack);
+        if (newMp.isUnderEmpty()) {
+            throw new IllegalArgumentException("현재 보유 Mp를 넘어서는 공격을 할 수는 없습니다.");
+        }
     }
 
     public Hp getTotalHp() {
@@ -62,13 +73,5 @@ public class PlayerVital {
 
     public Mp getCurrentMp() {
         return currentMp;
-    }
-
-    public void validateAttackMp(PlayerAttack playerAttack) {
-        Mp newMp = currentMp;
-        newMp.affectMpBy(playerAttack);
-        if (newMp.isUderEmpty()) {
-            throw new IllegalArgumentException("현재 보유 Mp를 넘어서는 공격을 할 수는 없습니다.");
-        }
     }
 }

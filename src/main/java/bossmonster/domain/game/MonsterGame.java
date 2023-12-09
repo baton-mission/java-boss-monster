@@ -1,18 +1,19 @@
-package bossmonster.domain;
+package bossmonster.domain.game;
+
+import bossmonster.domain.Hp;
+import bossmonster.domain.PlayerAttack;
 
 public class MonsterGame {
     private final GameCharacters gameCharacters;
     private final GameCount gameCount;
-    private final boolean gameOver;
 
-    public MonsterGame(GameCharacters gameCharacters, GameCount gameCount, boolean gameOver) {
+    public MonsterGame(GameCharacters gameCharacters, GameCount gameCount) {
         this.gameCharacters = gameCharacters;
         this.gameCount = gameCount;
-        this.gameOver = gameOver;
     }
 
     public static MonsterGame init(GameCharacters gameCharacters) {
-        return new MonsterGame(gameCharacters, GameCount.init(), false);
+        return new MonsterGame(gameCharacters, GameCount.init());
     }
 
     public boolean isPlayerOver() {

@@ -1,14 +1,14 @@
 package bossmonster.controller;
 
 import bossmonster.domain.AttackGenerator;
-import bossmonster.domain.GameCharacters;
+import bossmonster.domain.game.GameCharacters;
 import bossmonster.domain.Hp;
-import bossmonster.domain.Monster;
-import bossmonster.domain.MonsterGame;
-import bossmonster.domain.Player;
+import bossmonster.domain.monster.Monster;
+import bossmonster.domain.game.MonsterGame;
+import bossmonster.domain.player.Player;
 import bossmonster.domain.PlayerAttack;
-import bossmonster.domain.PlayerName;
-import bossmonster.domain.PlayerVital;
+import bossmonster.domain.player.PlayerName;
+import bossmonster.domain.player.PlayerVital;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
 import java.util.function.Function;

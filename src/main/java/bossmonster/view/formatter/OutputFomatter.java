@@ -1,8 +1,8 @@
 package bossmonster.view.formatter;
 
-import bossmonster.domain.GameCharacters;
+import bossmonster.domain.game.GameCharacters;
 import bossmonster.domain.Hp;
-import bossmonster.domain.MonsterGame;
+import bossmonster.domain.game.MonsterGame;
 import bossmonster.domain.PlayerAttack;
 
 public class OutputFomatter {

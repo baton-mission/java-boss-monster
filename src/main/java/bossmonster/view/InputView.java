@@ -2,10 +2,10 @@ package bossmonster.view;
 
 
 import bossmonster.common.Symbol;
-import bossmonster.domain.Monster;
+import bossmonster.domain.monster.Monster;
 import bossmonster.domain.PlayerAttack;
-import bossmonster.domain.PlayerName;
-import bossmonster.domain.PlayerVital;
+import bossmonster.domain.player.PlayerName;
+import bossmonster.domain.player.PlayerVital;
 import bossmonster.util.converter.Converter;
 import bossmonster.view.printer.Printer;
 import bossmonster.view.reader.Reader;

@@ -1,5 +1,7 @@
 package bossmonster.domain;
 
+import bossmonster.domain.player.PlayerVital;
+
 public class Mp {
     private int mp;
 
@@ -7,7 +9,7 @@ public class Mp {
         this.mp = mp;
     }
 
-    public void affectMpBy(PlayerAttack playerAttack) {
+    public void applyPlayerAttack(PlayerAttack playerAttack) {
         int newMp = playerAttack.applyMp(mp);
         if (isOverMax(newMp)) {
             mp = PlayerVital.MAX_PLAYER_VITAL_SUM;
@@ -21,7 +23,7 @@ public class Mp {
         return newMp > PlayerVital.MAX_PLAYER_VITAL_SUM;
     }
 
-    public boolean isUderEmpty() {
+    public boolean isUnderEmpty() {
         return mp < 0;
     }
 

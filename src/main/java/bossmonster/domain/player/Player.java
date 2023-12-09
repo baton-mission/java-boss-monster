@@ -1,4 +1,7 @@
-package bossmonster.domain;
+package bossmonster.domain.player;
+
+import bossmonster.domain.Hp;
+import bossmonster.domain.PlayerAttack;
 
 public class Player {
     private final PlayerName playerName;
@@ -25,15 +28,15 @@ public class Player {
         return playerVital.isOver();
     }
 
+    public void validateAttackMp(PlayerAttack playerAttack) {
+        playerVital.validateAttackMp(playerAttack);
+    }
+
     public PlayerName getPlayerName() {
         return playerName;
     }
 
     public PlayerVital getPlayerVital() {
         return playerVital;
-    }
-
-    public void validateAttackMp(PlayerAttack playerAttack) {
-        playerVital.validateAttackMp(playerAttack);
     }
 }
