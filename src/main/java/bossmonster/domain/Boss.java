@@ -6,16 +6,10 @@ public class Boss {
     private Integer maxHp;
     private Integer currentHp;
 
-    public Boss() {
-        selectRandomHp();
+    public Boss(Integer hp) {
+        this.maxHp = hp;
+        this.currentHp = hp;
         printFigure(true);
-    }
-
-    private void selectRandomHp() {
-        Random random = new Random();
-        random.setSeed(System.currentTimeMillis());
-        this.maxHp = random.nextInt(200) + 100;   //100~200 사이 난수값
-        this.currentHp = this.maxHp;
     }
 
     public void printFigure(final Boolean isInitial) {
