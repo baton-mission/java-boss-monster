@@ -59,12 +59,12 @@ public class OutputText {
     }
 
     public final String printPhysicalAttack(int random){
-        return "물리 공격을 했습니다. (입힌 데미지: 10)\n"
+        return "\n물리 공격을 했습니다. (입힌 데미지: 10)\n"
                 +"보스가 공격 했습니다. (입힌 데미지: "+random+")";
     }
 
     public final String printMagicAttack(int random){
-        return "마법 공격을 했습니다. (입힌 데미지: 20)\n"
+        return "\n마법 공격을 했습니다. (입힌 데미지: 20)\n"
                 +"보스가 공격 했습니다. (입힌 데미지: "+random+")";
     }
 }
