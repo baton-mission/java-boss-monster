@@ -5,11 +5,13 @@ import bossmonster.domain.Game;
 import bossmonster.domain.Player;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
-import java.util.List;
 
 public class GameController {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
+    private final BossMonsterController bossMonsterController = new BossMonsterController();
+    private final PlayerController playerController = new PlayerController();
+
     public void run() {
         final Game game = initGame();
         outputView.printStartSentence();
@@ -56,5 +58,38 @@ public class GameController {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    private int inputAttackType(){
+        while(true){
+            try{
+                return inputView.inputAttack();
+            }catch(IllegalArgumentException e){
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private void controlAttack(Game game){
+        int type = inputAttackType();
+        if(type == 1){
+            startPhysicalAttack(game);
+        }else{
+            startMagicAttack(game);
+        }
+        if(bossMonsterController.die(game.getBossMonster())){
+            //BossMonster is dead
+            return;
+        }
+    }
+
+    private Game startPhysicalAttack(Game game){
+        BossMonster newBossMonster = bossMonsterController.hit(game.getBossMonster(), 10);
+        Player newPlayer = playerController.recover(game.getPlayer());
+        return new Game(newBossMonster, newPlayer);
+    }
+
+    private void startMagicAttack(Game game) {
+
     }
 }

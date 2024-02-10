@@ -16,12 +16,12 @@ public class Player {
         this.initMp = mp;
     }
 
-    public Player(String name, int hp, int mp, int initHp, int initMp){
-        this.name = name;
+    public Player(int hp, int mp, Player player){
+        this.name = player.getName();
         this.hp = hp;
         this.mp = mp;
-        this.initHp = initHp;
-        this.initMp = initMp;
+        this.initHp = player.getInitHp();
+        this.initMp = player.getInitMp();
     }
 
     public String getName(){
