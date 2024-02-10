@@ -89,7 +89,9 @@ public class GameController {
         return new Game(newBossMonster, newPlayer);
     }
 
-    private void startMagicAttack(Game game) {
-
+    private Game startMagicAttack(Game game) {
+        BossMonster newBossMonster = bossMonsterController.hit(game.getBossMonster(), 20);
+        Player newPlayer = playerController.hit(game.getPlayer(), 30);
+        return new Game(newBossMonster, newPlayer);
     }
 }
