@@ -1,6 +1,7 @@
 package bossmonster.domain;
 
 public class Player {
+
     private final String name;
     private final int hp;
     private final int mp;

@@ -1,2 +1,4 @@
-package bossmonster.view;public class OutputView {
+package bossmonster.view;
+
+public class OutputView {
 }
