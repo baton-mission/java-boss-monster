@@ -18,13 +18,28 @@ public class OutputView {
         System.out.println(outputText.printPhysicalAttack(random));
     }
 
-    public void printResult(Game game){
+    public void printResult(Game game, boolean bossDie, boolean playerDie){
         System.out.println(outputText.printBossHp(game.getBossMonster()));
+        if(!bossDie){
+            printIcon(playerDie);
+            System.out.println(outputText.printPlayerInfo(game.getPlayer()));
+        }
+
+    }
+
+    public void printIcon(boolean playerDie){
+        if(playerDie){
+            System.out.println(outputText.BOSS_WINNING());
+            return;
+        }
         System.out.println(outputText.BOSS_LOSING());
-        System.out.println(outputText.printPlayerInfo(game.getPlayer()));
     }
 
     public void printMagicAttack(int random) {
         System.out.println(outputText.printMagicAttack(random));
+    }
+
+    public void printFailMessage(){
+        System.out.println(outputText.printFailMessage());
     }
 }

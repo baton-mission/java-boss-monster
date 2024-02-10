@@ -15,7 +15,7 @@ public class GameController {
     public void run() {
         final Game game = initGame();
         outputView.printInit(game);
-        controlAttack(game);
+        operate(game);
     }
 
     private Game initGame() {
@@ -71,26 +71,34 @@ public class GameController {
         }
     }
 
-    private void controlAttack(Game game){
+    private void operate(Game game){
         while(true){
             int type = inputAttackType();
-            if(type == 1){
-                game = startPhysicalAttack(game);
-                outputView.printResult(game);
-            }else{
-                game = startMagicAttack(game);
-                outputView.printResult(game);
-            }
+            game = controlAttack(game, type);
+
+            game.addNumverOfTimes();
+
+            boolean bossDie= bossMonsterController.die(game.getBossMonster());
+            boolean playerDie = playerController.die(game.getPlayer());
+
+            outputView.printResult(game, bossDie, playerDie);
+
             if(bossMonsterController.die(game.getBossMonster())){
                 //BossMonster is dead
                 break;
             }
             if(playerController.die(game.getPlayer())){
-                //Player id dead
+                outputView.printFailMessage();
                 break;
             }
         }
 
+    }
+    private Game controlAttack(Game game, int type){
+        if(type==1){
+            return startPhysicalAttack(game);
+        }
+        return startMagicAttack(game);
     }
 
     private Game startPhysicalAttack(Game game){

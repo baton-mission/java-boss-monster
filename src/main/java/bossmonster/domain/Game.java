@@ -4,6 +4,7 @@ public class Game {
 
     private final BossMonster bossMonster;
     private final Player player;
+    private static int numberOfTimes = 0;
 
     public Game(final BossMonster bossMonster, final Player player){
         this.bossMonster = bossMonster;
@@ -16,5 +17,13 @@ public class Game {
 
     public Player getPlayer(){
         return player;
+    }
+
+    public void addNumverOfTimes(){
+        numberOfTimes++;
+    }
+
+    public int getNumberOfTimes(){
+        return numberOfTimes;
     }
 }

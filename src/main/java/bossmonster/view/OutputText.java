@@ -67,4 +67,9 @@ public class OutputText {
         return "\n마법 공격을 했습니다. (입힌 데미지: 20)\n"
                 +"보스가 공격 했습니다. (입힌 데미지: "+random+")";
     }
+
+    public final String printFailMessage(){
+        return "\ndori의 HP가 0이 되었습니다.\n"
+                + "보스 레이드에 실패했습니다.";
+    }
 }
