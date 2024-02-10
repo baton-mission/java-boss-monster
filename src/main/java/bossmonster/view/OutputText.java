@@ -58,18 +58,28 @@ public class OutputText {
                 + "============================";
     }
 
-    public final String printPhysicalAttack(int random){
-        return "\n물리 공격을 했습니다. (입힌 데미지: 10)\n"
-                +"보스가 공격 했습니다. (입힌 데미지: "+random+")";
+    public final String printPhysicalAttack(int random, boolean bossDie){
+        String sentence ="\n물리 공격을 했습니다. (입힌 데미지: 10)\n";
+        if(!bossDie){
+            return sentence+"보스가 공격 했습니다. (입힌 데미지: "+random+")";
+        }
+        return sentence;
     }
 
-    public final String printMagicAttack(int random){
-        return "\n마법 공격을 했습니다. (입힌 데미지: 20)\n"
-                +"보스가 공격 했습니다. (입힌 데미지: "+random+")";
+    public final String printMagicAttack(int random, boolean bossDie){
+        String sentence = "\n마법 공격을 했습니다. (입힌 데미지: 20)\n";
+        if(!bossDie) {
+            return sentence + "보스가 공격 했습니다. (입힌 데미지: " + random + ")";
+        }
+        return sentence;
     }
 
     public final String printFailMessage(){
         return "\ndori의 HP가 0이 되었습니다.\n"
                 + "보스 레이드에 실패했습니다.";
+    }
+
+    public final String printWinMessage(Player player, int num){
+        return player.getName() + " 님이 "+num+"번의 전투 끝에 보스 몬스터를 잡았습니다.";
     }
 }

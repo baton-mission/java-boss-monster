@@ -14,17 +14,14 @@ public class OutputView {
         System.out.println(outputText.printPlayerInfo(game.getPlayer()));
     }
 
-    public void printPhysicalAttack(int random) {
-        System.out.println(outputText.printPhysicalAttack(random));
+    public void printPhysicalAttack(int random, boolean bossDie) {
+        System.out.println(outputText.printPhysicalAttack(random, bossDie));
     }
 
-    public void printResult(Game game, boolean bossDie, boolean playerDie){
+    public void printResult(Game game, boolean playerDie){
         System.out.println(outputText.printBossHp(game.getBossMonster()));
-        if(!bossDie){
-            printIcon(playerDie);
-            System.out.println(outputText.printPlayerInfo(game.getPlayer()));
-        }
-
+        printIcon(playerDie);
+        System.out.println(outputText.printPlayerInfo(game.getPlayer()));
     }
 
     public void printIcon(boolean playerDie){
@@ -35,11 +32,15 @@ public class OutputView {
         System.out.println(outputText.BOSS_LOSING());
     }
 
-    public void printMagicAttack(int random) {
-        System.out.println(outputText.printMagicAttack(random));
+    public void printMagicAttack(int random, boolean bossDie) {
+        System.out.println(outputText.printMagicAttack(random, bossDie));
     }
 
     public void printFailMessage(){
         System.out.println(outputText.printFailMessage());
+    }
+
+    public void printWinMessage(Game game){
+        System.out.println(outputText.printWinMessage(game.getPlayer(), game.getNumberOfTimes()));
     }
 }

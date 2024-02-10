@@ -81,13 +81,17 @@ public class GameController {
             boolean bossDie= bossMonsterController.die(game.getBossMonster());
             boolean playerDie = playerController.die(game.getPlayer());
 
-            outputView.printResult(game, bossDie, playerDie);
+            if(!bossDie){
+                outputView.printResult(game, playerDie);
+            }
 
-            if(bossMonsterController.die(game.getBossMonster())){
-                //BossMonster is dead
+
+            if(bossDie){
+                outputView.printWinMessage(game);
                 break;
             }
-            if(playerController.die(game.getPlayer())){
+
+            if(playerDie){
                 outputView.printFailMessage();
                 break;
             }
@@ -107,7 +111,7 @@ public class GameController {
         int random = getRandomNumber();
         Player newPlayer = playerController.hit(player, random);
         game = new Game(newBossMonster, newPlayer);
-        outputView.printPhysicalAttack(random);
+        outputView.printPhysicalAttack(random, bossMonsterController.die(game.getBossMonster()));
         return game;
     }
 
@@ -115,8 +119,9 @@ public class GameController {
         BossMonster newBossMonster = bossMonsterController.hit(game.getBossMonster(), 20);
         int random = getRandomNumber();
         Player newPlayer = playerController.hit(game.getPlayer(), 30 + random);
-        outputView.printMagicAttack(random);
-        return new Game(newBossMonster, newPlayer);
+        game = new Game(newBossMonster, newPlayer);
+        outputView.printMagicAttack(random, bossMonsterController.die(game.getBossMonster()));
+        return game;
     }
 
     private int getRandomNumber(){
