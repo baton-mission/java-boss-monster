@@ -15,13 +15,18 @@ public class Player {
         this.currentHp = hp;
         this.maxMp = mp;
         this.currentMp = mp;
+        printStat();
     }
 
     public String getName() { return name; }
 
     public Integer getHp() { return currentHp; }
 
-    public Integer getMp() { return currentMp; }
+    public void printStat() {
+        System.out.println(this.name + " HP [" + this.currentHp + "/" + this.maxHp + "]"
+                + " MP [" + this.currentMp + "/" + this.maxMp + "]");
+        System.out.println("======================================\n");
+    }
 
     public void decreaseHp(final Integer hp) {
         if(this.currentHp - hp < 0) {
@@ -30,15 +35,6 @@ public class Player {
         }
 
         this.currentHp -= hp;
-    }
-
-    public void decreaseMp(final Integer mp) {
-        if(this.currentMp - mp < 0) {
-            this.currentMp = 0;
-            return;
-        }
-
-        this.currentMp -= mp;
     }
 
     public Integer physicalAttack() {
