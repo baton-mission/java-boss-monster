@@ -14,7 +14,8 @@ public class GameController {
 
     public void run() {
         final Game game = initGame();
-        outputView.printStartSentence();
+        outputView.printInit(game);
+        controlAttack(game);
     }
 
     private Game initGame() {
@@ -75,8 +76,10 @@ public class GameController {
             int type = inputAttackType();
             if(type == 1){
                 game = startPhysicalAttack(game);
+                outputView.printResult(game);
             }else{
                 game = startMagicAttack(game);
+                outputView.printResult(game);
             }
             if(bossMonsterController.die(game.getBossMonster())){
                 //BossMonster is dead
@@ -93,13 +96,18 @@ public class GameController {
     private Game startPhysicalAttack(Game game){
         BossMonster newBossMonster = bossMonsterController.hit(game.getBossMonster(), 10);
         Player player = playerController.recover(game.getPlayer());
-        Player newPlayer = playerController.hit(player, getRandomNumber());
-        return new Game(newBossMonster, newPlayer);
+        int random = getRandomNumber();
+        Player newPlayer = playerController.hit(player, random);
+        game = new Game(newBossMonster, newPlayer);
+        outputView.printPhysicalAttack(random);
+        return game;
     }
 
     private Game startMagicAttack(Game game) {
         BossMonster newBossMonster = bossMonsterController.hit(game.getBossMonster(), 20);
-        Player newPlayer = playerController.hit(game.getPlayer(), 30 + getRandomNumber());
+        int random = getRandomNumber();
+        Player newPlayer = playerController.hit(game.getPlayer(), 30 + random);
+        outputView.printMagicAttack(random);
         return new Game(newBossMonster, newPlayer);
     }
 

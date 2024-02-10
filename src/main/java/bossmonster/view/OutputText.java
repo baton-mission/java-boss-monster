@@ -14,30 +14,36 @@ public class OutputText {
         return "보스가 공격 했습니다. (입힌 데미지: 15)";
     }
 
-    public static final String BOSS_INIT =
-            "____________________________\n"
-            + "   ^-^\n"
-            + " / 0 0 \\\n"
-            + "(   \"   )\n"
-            + " \\  -  /\n"
-            + "  - ^ -\n"
-            + "____________________________";
-    public static final String BOSS_WINNING =
-            "____________________________\n"
-            + "   ^-^\n"
-            + " / ^ ^ \\\n"
-            + "(   \"   )\n"
-            + " \\  3  /\n"
-            + "  - ^ -\n"
-            + "____________________________";
-    public static final String BOSS_LOSING  =
-            "____________________________\n"
-            + "   ^-^\n"
-            + " / x x \\\n"
-            + "(   \"\\  )\n"
-            + " \\  ^  /\n"
-            + "  - ^ -\n"
-            + "____________________________";
+    public final String BOSS_INIT () {
+        return  "____________________________\n"
+                + "   ^-^\n"
+                + " / 0 0 \\\n"
+                + "(   \"   )\n"
+                + " \\  -  /\n"
+                + "  - ^ -\n"
+                + "____________________________";
+    }
+
+    public final String BOSS_WINNING () {
+        return  "____________________________\n"
+                + "   ^-^\n"
+                + " / ^ ^ \\\n"
+                + "(   \"   )\n"
+                + " \\  3  /\n"
+                + "  - ^ -\n"
+                + "____________________________";
+    }
+
+    public final String BOSS_LOSING () {
+        return  "____________________________\n"
+                + "   ^-^\n"
+                + " / x x \\\n"
+                + "(   \"\\  )\n"
+                + " \\  ^  /\n"
+                + "  - ^ -\n"
+                + "____________________________";
+    }
+
 
     public final String printBossHp(BossMonster bossMonster){
         return "\n"
@@ -46,9 +52,19 @@ public class OutputText {
     }
 
     public final String printPlayerInfo(Player player){
-        return "dori "
+        return  "\n"+player.getName()+" "
                 + "HP ["+player.getHp()+"/"+player.getInitHp()+"] "
                 + "MP ["+player.getMp()+"/"+player.getInitMp()+"]\n"
                 + "============================";
+    }
+
+    public final String printPhysicalAttack(int random){
+        return "물리 공격을 했습니다. (입힌 데미지: 10)\n"
+                +"보스가 공격 했습니다. (입힌 데미지: "+random+")";
+    }
+
+    public final String printMagicAttack(int random){
+        return "마법 공격을 했습니다. (입힌 데미지: 20)\n"
+                +"보스가 공격 했습니다. (입힌 데미지: "+random+")";
     }
 }
