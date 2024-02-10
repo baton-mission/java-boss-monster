@@ -11,14 +11,13 @@ public class GameController {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
     public void run() {
-//        final Game game = initGame();
-        initGame();
+        final Game game = initGame();
     }
 
-//    private Game initGame() {
-    private void initGame() {
+    private Game initGame() {
         final BossMonster bossMonster = initBossMonsterHp();
         final Player player = initPlayer();
+        return new Game(bossMonster, player);
     }
 
     private BossMonster initBossMonsterHp() {

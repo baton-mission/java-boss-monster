@@ -12,7 +12,7 @@ public class PlayerTest {
     private static final int PLAYER_MP1 = 50;
 
     @Test
-    @DisplayName("보스 몬스터 hp 저장 테스트")
+    @DisplayName("플레이어 정보 저장 테스트")
     void storePlayerInfoTest(){
         Player player = new Player(PLAYER_NAME1, PLAYER_HP1, PLAYER_MP1);
 
