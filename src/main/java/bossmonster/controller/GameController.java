@@ -12,6 +12,7 @@ public class GameController {
     private final OutputView outputView = new OutputView();
     public void run() {
         final Game game = initGame();
+        outputView.printStartSentence();
     }
 
     private Game initGame() {

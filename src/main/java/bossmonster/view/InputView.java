@@ -13,6 +13,9 @@ public class InputView {
     private static final String READ_PLAYER_NAME_EXCEPTION_MESSAGE = "[ERROR] Player의 이름 길이가 잘못되었습니다.";
     private static final String PLAYER_INFO_REQUEST_MESSAGE = "플레이어의 HP와 MP를 입력해주세요.(,로 구분)";
     private static final String READ_PLAYER_INFO_EXCEPTION_MESSAGE = "플레이어의 HP와 MP의 정보 입력이 올바르지 않습니다.";
+    private static final String ATTACK_REQUEST_MESSAGE = "어떤 공격을 하시겠습니까?\n"
+            + "1. 물리 공격\n"
+            + "2. 마법 공격";
 
     public int readBossMonsterHp() {
         System.out.println(BOSS_HP_REQUEST_MESSAGE);
