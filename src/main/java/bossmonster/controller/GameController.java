@@ -71,27 +71,39 @@ public class GameController {
     }
 
     private void controlAttack(Game game){
-        int type = inputAttackType();
-        if(type == 1){
-            startPhysicalAttack(game);
-        }else{
-            startMagicAttack(game);
+        while(true){
+            int type = inputAttackType();
+            if(type == 1){
+                game = startPhysicalAttack(game);
+            }else{
+                game = startMagicAttack(game);
+            }
+            if(bossMonsterController.die(game.getBossMonster())){
+                //BossMonster is dead
+                break;
+            }
+            if(playerController.die(game.getPlayer())){
+                //Player id dead
+                break;
+            }
         }
-        if(bossMonsterController.die(game.getBossMonster())){
-            //BossMonster is dead
-            return;
-        }
+
     }
 
     private Game startPhysicalAttack(Game game){
         BossMonster newBossMonster = bossMonsterController.hit(game.getBossMonster(), 10);
-        Player newPlayer = playerController.recover(game.getPlayer());
+        Player player = playerController.recover(game.getPlayer());
+        Player newPlayer = playerController.hit(player, getRandomNumber());
         return new Game(newBossMonster, newPlayer);
     }
 
     private Game startMagicAttack(Game game) {
         BossMonster newBossMonster = bossMonsterController.hit(game.getBossMonster(), 20);
-        Player newPlayer = playerController.hit(game.getPlayer(), 30);
+        Player newPlayer = playerController.hit(game.getPlayer(), 30 + getRandomNumber());
         return new Game(newBossMonster, newPlayer);
+    }
+
+    private int getRandomNumber(){
+        return (int)(Math.random()*20);
     }
 }
