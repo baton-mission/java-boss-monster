@@ -13,6 +13,7 @@ public class Boss {
     }
 
     public void printFigure(final Boolean isInitial) {
+        System.out.println("============================");
         System.out.println("BOSS HP [" + this.currentHp + "/" + this.maxHp + "]");
         System.out.println("____________________________");
 
