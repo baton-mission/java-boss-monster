@@ -17,6 +17,7 @@ public class InputView {
     public int readBossMonsterHp() {
         System.out.println(BOSS_HP_REQUEST_MESSAGE);
         final int bossMonsterHp = scanner.nextInt();
+        scanner.nextLine(); //줄바꿈 문자 제거
         if(bossMonsterHp <100 || bossMonsterHp > 300){
             throw new IllegalArgumentException(READ_BOSS_HP_RANGE_EXCEPTION_FORMAT);
         }
