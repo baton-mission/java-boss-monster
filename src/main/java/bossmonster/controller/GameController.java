@@ -77,28 +77,18 @@ public class GameController {
             int type = inputAttackType();
             game = controlAttack(game, type);
 
-            game.addNumverOfTimes();
+            game.addNumberOfTimes();
 
             boolean bossDie= bossMonsterController.die(game.getBossMonster());
             boolean playerDie = playerController.die(game.getPlayer());
 
-            if(!bossDie){
-                outputView.printResult(game, playerDie);
-            }
-
-
-            if(bossDie){
-                outputView.printWinMessage(game);
-                break;
-            }
-
-            if(playerDie){
-                outputView.printFailMessage();
+            boolean continueGame = outputView.controlPrintResult(game, bossDie, playerDie);
+            if(!continueGame){
                 break;
             }
         }
-
     }
+
     private Game controlAttack(Game game, int type){
         if(type==1){
             return startPhysicalAttack(game);

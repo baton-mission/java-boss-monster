@@ -5,15 +5,6 @@ import bossmonster.domain.Player;
 
 public class OutputText {
 
-    public static final String PHYSICAL_ATTACK = "물리 공격을 했습니다. (입힌 데미지: 10)";
-
-    public final String Boss_ATTACK(int attackType){
-        if(attackType == 1){
-            return "보스가 공격 했습니다. (입힌 데미지: 10)";
-        }
-        return "보스가 공격 했습니다. (입힌 데미지: 15)";
-    }
-
     public final String BOSS_INIT () {
         return  "____________________________\n"
                 + "   ^-^\n"
@@ -43,7 +34,6 @@ public class OutputText {
                 + "  - ^ -\n"
                 + "____________________________";
     }
-
 
     public final String printBossHp(BossMonster bossMonster){
         return "\n"

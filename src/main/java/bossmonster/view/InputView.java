@@ -56,10 +56,15 @@ public class InputView {
                 .mapToInt(Integer::parseInt)
                 .toArray();
     }
+
     private String[] splitPlayerInfo(String info){
         return Arrays.stream(info.split(","))
                 .map(String::trim)
                 .toArray(String[]::new);
+    }
+
+    private boolean validAttackType(int type){
+        return (type == 1 || type == 2);
     }
 
     public int inputAttack() {
@@ -67,11 +72,9 @@ public class InputView {
         int type = scanner.nextInt();
         scanner.nextLine();
 
-        if(type == 1 || type == 2){
+        if(validAttackType(type)){
             return type;
         }
-
         throw new IllegalArgumentException("Copy to clipboard[ERROR] 공격하셔야 합니다. 1 또는 2를 입력해주세요.");
-
     }
 }

@@ -43,4 +43,19 @@ public class OutputView {
     public void printWinMessage(Game game){
         System.out.println(outputText.printWinMessage(game.getPlayer(), game.getNumberOfTimes()));
     }
+
+    public boolean controlPrintResult(Game game, boolean bossDie, boolean playerDie){
+        if(!bossDie){
+            printResult(game, playerDie);
+        }
+        if(bossDie){
+            printWinMessage(game);
+            return false;
+        }
+        if(playerDie){
+            printFailMessage();
+            return false;
+        }
+        return true;
+    }
 }

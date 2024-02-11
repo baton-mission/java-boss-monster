@@ -19,7 +19,7 @@ public class Game {
         return player;
     }
 
-    public void addNumverOfTimes(){
+    public void addNumberOfTimes(){
         numberOfTimes++;
     }
 
