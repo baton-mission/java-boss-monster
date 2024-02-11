@@ -108,8 +108,9 @@ public class GameController {
 
     private Game startMagicAttack(Game game) {
         BossMonster newBossMonster = bossMonsterController.hit(game.getBossMonster(), 20);
+        Player newPlayer = playerController.consumeMp(game.getPlayer());
         int random = getRandomNumber();
-        Player newPlayer = playerController.hit(game.getPlayer(), 30 + random);
+        newPlayer = playerController.hit(newPlayer, 30 + random);
         game = new Game(newBossMonster, newPlayer);
         outputView.printMagicAttack(random, bossMonsterController.die(game.getBossMonster()));
         return game;

@@ -10,7 +10,11 @@ public class PlayerController {
         if(player.getHp() <= damage){
             return new Player(0, player.getMp(), player);
         }
-        return new Player(player.getHp()-damage, player.getInitMp(), player);
+        return new Player(player.getHp()-damage, player.getMp(), player);
+    }
+
+    public Player consumeMp(Player player){
+        return new Player(player.getHp(), player.getMp() - 30, player);
     }
 
     public Player recover(Player player){
