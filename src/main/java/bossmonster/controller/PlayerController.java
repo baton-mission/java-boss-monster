@@ -3,6 +3,7 @@ package bossmonster.controller;
 import bossmonster.domain.Player;
 
 public class PlayerController {
+
     private static final int MP_PLUS = 10;
 
     public Player hit(Player player, int damage){

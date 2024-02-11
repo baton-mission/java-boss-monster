@@ -7,6 +7,7 @@ import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
 
 public class GameController {
+
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
     private final BossMonsterController bossMonsterController = new BossMonsterController();
