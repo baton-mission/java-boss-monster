@@ -2,12 +2,13 @@ package bossmonster.service;
 
 import bossmonster.domain.Boss;
 import bossmonster.domain.Player;
+import bossmonster.exception.NoMPException;
 import java.util.Scanner;
 
 public class GameService {
+    private final Scanner sc = new Scanner(System.in);
     private final Player player;
     private final Boss boss;
-    private final Scanner sc = new Scanner(System.in);
 
     private int attackNum = 0;
 
@@ -17,7 +18,7 @@ public class GameService {
         this.player = new Player(playerName, playerHp, playerMp);
     }
 
-    public void play() throws Exception {
+    public void play() {
         while(true) {
             boss.decreaseHp(playerAttack());
             player.decreaseHp(bossAttack());
@@ -41,23 +42,27 @@ public class GameService {
     public Integer playerAttack() {
         Integer attackType, damage;
 
-        System.out.println("어떤 공격을 하시겠습니까? 공격 번호를 입력해주세요.");
-        System.out.println("1. 물리 공격\n2. 마법 공격");
-        attackType = sc.nextInt();
+        while(true) {
+            try {
+                System.out.println("어떤 공격을 하시겠습니까? 공격 번호를 입력해주세요.");
+                System.out.println("1. 물리 공격\n2. 마법 공격");
+                attackType = sc.nextInt();
 
-        if(attackType == 1) {
-            damage = player.physicalAttack();
-            System.out.println("\n물리 공격을 했습니다. (입힌 데미지: " + damage + ")");
-            return damage;
+                if(attackType == 1) {
+                    damage = player.physicalAttack();
+                    System.out.println("\n물리 공격을 했습니다. (입힌 데미지: " + damage + ")");
+                    return damage;
+                }
+
+                if(attackType == 2) {
+                    damage = player.magicalAttack();
+                    System.out.println("\n마법 공격을 했습니다. (입힌 데미지: " + damage + ")");
+                    return damage;
+                }
+            } catch (NoMPException e) {
+                System.out.println("\n[ERROR] MP가 부족합니다. 다른 공격 방법을 선택해주세요.");
+            }
         }
-
-        if(attackType == 2) {
-            damage = player.magicalAttack();
-            System.out.println("\n마법 공격을 했습니다. (입힌 데미지: " + damage + ")");
-            return damage;
-        }
-
-        return -1;
     }
 
     public Integer bossAttack() {
