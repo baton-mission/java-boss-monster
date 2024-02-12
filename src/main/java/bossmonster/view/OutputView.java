@@ -3,6 +3,7 @@ package bossmonster.view;
 import static bossmonster.view.message.InputMessage.*;
 import static bossmonster.view.message.OutputMessage.*;
 
+import bossmonster.view.message.ErrorMessage;
 import bossmonster.view.message.MagicMessage;
 
 public class OutputView {
@@ -69,5 +70,9 @@ public class OutputView {
 
 	public static void printRaidFail(int playerName) {
 		System.out.printf(RAID_FAIL_MESSAGE.getMessage(), playerName);
+	}
+
+	public static void printErrorMessage(ErrorMessage message) {
+		System.out.println(message.getMessage());
 	}
 }
