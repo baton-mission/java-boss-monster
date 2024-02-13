@@ -36,7 +36,7 @@
 # 구현 사항 정리
 - Controller
   - BossController
-    - [ ] 보스 몬스터의 HP를 입력
+    - [x] 보스 몬스터의 HP를 입력
     - [ ] 보스 몬스터가 죽으면 몇 턴 만에 잡았는지 출력
   - PlayerController
     - [ ] 플레이어의 이름을 입력
