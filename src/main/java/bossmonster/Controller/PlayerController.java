@@ -10,13 +10,14 @@ public class PlayerController {
     }
 
     public String getPlayerName() {
+        System.out.println("플레이어의 이름을 입력해주세요.");
         String name = scanner.nextLine();
 
         return name;
     }
 
     public int[] getPlayerHpMp() {
-        // 입력 형식은 "100,50" 이런식으로 입력받는다.
+        System.out.println("플레이어의 HP와 MP를 입력해주세요.(,로 구분)");
         String[] hpMp = scanner.nextLine().split(",");
         int hp = Integer.parseInt(hpMp[0]);
         int mp = Integer.parseInt(hpMp[1]);
