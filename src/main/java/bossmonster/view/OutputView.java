@@ -3,8 +3,10 @@ package bossmonster.view;
 import static bossmonster.view.message.InputMessage.*;
 import static bossmonster.view.message.OutputMessage.*;
 
-import bossmonster.view.message.ErrorMessage;
 import bossmonster.constant.AttackConstant;
+import bossmonster.dto.MonsterDTO;
+import bossmonster.dto.PlayerDTO;
+import bossmonster.view.message.ErrorMessage;
 
 public class OutputView {
 	public static void printInputMonsterHp() {
@@ -24,24 +26,25 @@ public class OutputView {
 		System.out.println(WHETHER_PHYSICAL_OR_MAGIC.getMessage());
 	}
 
-	public static void printMonsterHp(int monsterNowHp, int monsterMaxHp) {
-		System.out.printf(MONSTER_HP.getMessage(), monsterNowHp, monsterMaxHp);
+	public static void printMonsterHp(MonsterDTO monsterDTO) {
+		System.out.printf(MONSTER_HP.getMessage(), monsterDTO.getNowHp(), monsterDTO.getMaxHp());
 		System.out.println();
 	}
 
-	private static void printPlayerHpMp(String playerName, int playerMaxHp, int playerMaxMp) {
-		System.out.printf(PLAYER_HP_MP_MESSAGE.getMessage(), playerName, playerMaxHp, playerMaxMp);
+	private static void printPlayerHpMp(PlayerDTO playerDTO) {
+		System.out.printf(PLAYER_HP_MP_MESSAGE.getMessage(), playerDTO.getName(), playerDTO.getMaxHp(),
+			playerDTO.getMaxMp());
 		System.out.println();
 	}
 
-	public static void printStartGame(int monsterMaxHp, String playerName, int playerMaxHp, int playerMaxMp) {
+	public static void printStartGame(MonsterDTO monsterDTO, PlayerDTO playerDTO) {
 		System.out.println(RAID_INIT_MESSAGE.getMessage());
 		System.out.println(DOUBLE_DASH_MESSAGE.getMessage());
-		printMonsterHp(monsterMaxHp, monsterMaxHp);
+		printMonsterHp(monsterDTO);
 		System.out.println(DASH_MESSAGE.getMessage());
 		System.out.println(MONSTER_INIT_MESSAGE.getMessage());
 		System.out.println(DASH_MESSAGE.getMessage());
-		printPlayerHpMp(playerName, playerMaxHp, playerMaxMp);
+		printPlayerHpMp(playerDTO);
 	}
 
 	public static void printPlayerAttack(AttackConstant attack, int playerAttack) {
@@ -54,21 +57,20 @@ public class OutputView {
 		System.out.println();
 	}
 
-	public static void printProgressGame(int monsterNowHp, int monsterMaxHp, String playerName, int playerMaxHp, int playerNowHp,
-		int playerMaxMp, int playerNowMp) {
+	public static void printProgressGame(MonsterDTO monsterDTO, PlayerDTO playerDTO) {
 		System.out.println(DOUBLE_DASH_MESSAGE.getMessage());
-		printMonsterHp(monsterNowHp, monsterMaxHp);
+		printMonsterHp(monsterDTO);
 		System.out.println(DASH_MESSAGE.getMessage());
 		System.out.println(MONSTER_ATTACKED_MESSAGE.getMessage());
 		System.out.println(DASH_MESSAGE.getMessage());
-		printPlayerHpMp(playerName, playerMaxHp, playerMaxMp);
+		printPlayerHpMp(playerDTO);
 	}
 
-	public static void printRaidSuccess(int playerName, int raidRound) {
+	public static void printRaidSuccess(String playerName, int raidRound) {
 		System.out.printf(RAID_SUCCESS_MESSAGE.getMessage(), playerName, raidRound);
 	}
 
-	public static void printRaidFail(int playerName) {
+	public static void printRaidFail(String playerName) {
 		System.out.printf(RAID_FAIL_MESSAGE.getMessage(), playerName);
 	}
 
