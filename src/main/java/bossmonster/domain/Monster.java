@@ -1,5 +1,7 @@
 package bossmonster.domain;
 
+import static bossmonster.constant.MonsterConstant.*;
+
 public class Monster {
 	int maxHp;
 	int nowHp;
@@ -11,7 +13,7 @@ public class Monster {
 	}
 
 	private void isValid() {
-		if(maxHp < 100 || maxHp > 300)
+		if (maxHp < MONSTER_MIN_HP.getMonsterConstant() || maxHp > MONSTER_MAX_HP.getMonsterConstant())
 			throw new IllegalArgumentException();
 	}
 }

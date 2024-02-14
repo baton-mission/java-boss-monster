@@ -1,5 +1,7 @@
 package bossmonster.domain;
 
+import static bossmonster.constant.PlayerConstant.*;
+
 class Player {
 	String name;
 	int maxHp;
@@ -17,9 +19,9 @@ class Player {
 	}
 
 	private void isValid() {
-		if (name.length() > 5)
+		if (name.length() > LENGTH_OF_NAME.getConstant())
 			throw new IllegalArgumentException();
-		if (maxHp + maxMp != 200)
+		if (maxHp + maxMp != SUM_OF_HP_MP.getConstant())
 			throw new IllegalArgumentException();
 	}
 }
