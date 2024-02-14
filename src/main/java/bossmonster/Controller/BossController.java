@@ -1,10 +1,8 @@
 package bossmonster.Controller;
 
-import bossmonster.Domain.Boss;
 import java.util.Scanner;
 
 public class BossController {
-    private Boss nowRoundBoss;
     private Scanner scanner;
 
     public BossController(Scanner scanner) {
