@@ -2,7 +2,7 @@ package bossmonster.domain;
 
 import static bossmonster.constant.PlayerConstant.*;
 
-class Player {
+public class Player {
 	String name;
 	int maxHp;
 	int maxMp;
