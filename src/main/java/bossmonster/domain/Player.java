@@ -18,6 +18,26 @@ public class Player {
 		isValid();
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public int getMaxHp() {
+		return maxHp;
+	}
+
+	public int getMaxMp() {
+		return maxMp;
+	}
+
+	public int getNowHp() {
+		return nowHp;
+	}
+
+	public int getNowMp() {
+		return nowMp;
+	}
+
 	private void isValid() {
 		if (name.length() > LENGTH_OF_NAME.getConstant())
 			throw new IllegalArgumentException();
