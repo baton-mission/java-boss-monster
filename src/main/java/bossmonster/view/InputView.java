@@ -1,5 +1,9 @@
 package bossmonster.view;
 
+import static bossmonster.constant.AttackConstant.*;
+import static bossmonster.constant.MonsterConstant.*;
+import static bossmonster.constant.PlayerConstant.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -25,7 +29,7 @@ public class InputView {
 		try {
 			monsterHp = Integer.parseInt(input);
 
-			if (monsterHp < 100 || monsterHp > 300) {
+			if (monsterHp < MONSTER_MIN_HP.getMonsterConstant() || monsterHp > MONSTER_MAX_HP.getMonsterConstant()) {
 				throw new IllegalArgumentException();
 			}
 
@@ -37,7 +41,7 @@ public class InputView {
 
 	public static String readPlayerName() {
 		String playerName = input();
-		if (playerName.length() > 5) {
+		if (playerName.length() > LENGTH_OF_NAME.getConstant()) {
 			throw new IllegalArgumentException();
 		}
 		return playerName;
@@ -49,9 +53,9 @@ public class InputView {
 
 		try {
 			playerHpMp = Arrays.stream(input.split(",")).map(Integer::parseInt).toList();
-			if (playerHpMp.size() != 2)
+			if (playerHpMp.size() != COUNT_OF_HP_MP.getConstant())
 				throw new IllegalArgumentException();
-			if (playerHpMp.stream().mapToInt(Integer::valueOf).sum() != 200)
+			if (playerHpMp.stream().mapToInt(Integer::valueOf).sum() != SUM_OF_HP_MP.getConstant())
 				throw new IllegalArgumentException();
 
 			return playerHpMp;
@@ -67,7 +71,7 @@ public class InputView {
 		try {
 			whetherAttack = Integer.parseInt(input);
 
-			if (whetherAttack != 1 && whetherAttack != 2) {
+			if (whetherAttack != MAGIC.getAttackInt() && whetherAttack != PHYSICAL.getAttackInt()) {
 				throw new IllegalArgumentException();
 			}
 
