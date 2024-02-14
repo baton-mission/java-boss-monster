@@ -4,7 +4,7 @@ import static bossmonster.view.message.InputMessage.*;
 import static bossmonster.view.message.OutputMessage.*;
 
 import bossmonster.view.message.ErrorMessage;
-import bossmonster.view.message.MagicMessage;
+import bossmonster.constant.AttackConstant;
 
 public class OutputView {
 	public static void printInputMonsterHp() {
@@ -44,7 +44,7 @@ public class OutputView {
 		printPlayerHpMp(playerName, playerMaxHp, playerMaxMp);
 	}
 
-	public static void printPlayerAttack(MagicMessage attack, int playerAttack) {
+	public static void printPlayerAttack(AttackConstant attack, int playerAttack) {
 		System.out.printf(PLAYER_ATTACK_MESSAGE.getMessage(), attack.getAttackString(), playerAttack);
 		System.out.println();
 	}

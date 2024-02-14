@@ -1,13 +1,13 @@
-package bossmonster.view.message;
+package bossmonster.constant;
 
-public enum MagicMessage {
+public enum AttackConstant {
 	PHYSICAL(1, "물리 공격"),
 	MAGIC(2, "마법 공격");
 
 	private final int attackInt;
 	private final String attackString;
 
-	MagicMessage(int attackInt, String attackString) {
+	AttackConstant(int attackInt, String attackString) {
 		this.attackInt = attackInt;
 		this.attackString = attackString;
 	}
