@@ -48,7 +48,6 @@ public class BossServiceTest {
         BossService bossService = new BossService(scanner, exceptionHandler);
         when(exceptionHandler.handleIllegalBossHpException(any(IllegalArgumentException.class), eq(bossService))).thenReturn(new Boss(150));
 
-
         // When
         when(scanner.nextInt()).thenReturn(500).thenReturn(150);
         Boss boss = bossService.getBoss();
@@ -57,5 +56,37 @@ public class BossServiceTest {
         // Then
         verify(exceptionHandler).handleIllegalBossHpException(any(IllegalArgumentException.class), eq(bossService));
         assertThat(result).isEqualTo(150);
+    }
+
+    @Test
+    @DisplayName("Boss가 물리 공격을 받는다")
+    void BossPhysicalAttackTest() {
+        // Given
+        Scanner scanner = mock(Scanner.class);
+        GlobalExceptionHandler exceptionHandler = mock(GlobalExceptionHandler.class);
+        BossService bossService = new BossService(scanner, exceptionHandler);
+        Boss boss = new Boss(150);
+
+        // When
+        Boss result = bossService.getPhysicalAttack(boss);
+
+        // Then
+        assertThat(result.getHp()).isEqualTo(140);
+    }
+
+    @Test
+    @DisplayName("Boss가 마법 공격을 받는다")
+    void BossMagicalAttackTest() {
+        // Given
+        Scanner scanner = mock(Scanner.class);
+        GlobalExceptionHandler exceptionHandler = mock(GlobalExceptionHandler.class);
+        BossService bossService = new BossService(scanner, exceptionHandler);
+        Boss boss = new Boss(150);
+
+        // When
+        Boss result = bossService.getMagicalAttack(boss);
+
+        // Then
+        assertThat(result.getHp()).isEqualTo(130);
     }
 }
