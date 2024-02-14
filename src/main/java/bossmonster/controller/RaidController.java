@@ -101,5 +101,6 @@ public class RaidController {
 	}
 
 	public void playGame() {
+		outputView.printStartGame(raidService.getMonsterDTO(), raidService.getPlayerDTO());
 	}
 }

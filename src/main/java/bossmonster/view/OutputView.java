@@ -26,13 +26,13 @@ public class OutputView {
 	}
 
 	public static void printMonsterHp(MonsterDTO monsterDTO) {
-		System.out.printf(MONSTER_HP.getMessage(), monsterDTO.getNowHp(), monsterDTO.getMaxHp());
+		System.out.printf(MONSTER_HP_MESSAGE.getMessage(), monsterDTO.getNowHp(), monsterDTO.getMaxHp());
 		System.out.println();
 	}
 
 	private static void printPlayerHpMp(PlayerDTO playerDTO) {
-		System.out.printf(PLAYER_HP_MP_MESSAGE.getMessage(), playerDTO.getName(), playerDTO.getMaxHp(),
-			playerDTO.getMaxMp());
+		System.out.printf(PLAYER_HP_MP_MESSAGE.getMessage(), playerDTO.getName(), playerDTO.getNowHp(),
+			playerDTO.getMaxHp(), playerDTO.getNowMp(), playerDTO.getMaxMp());
 		System.out.println();
 	}
 
