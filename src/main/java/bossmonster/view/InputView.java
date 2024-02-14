@@ -1,7 +1,7 @@
 package bossmonster.view;
 
 import static bossmonster.constant.AttackConstant.*;
-import static bossmonster.constant.PlayerConstant.*;
+import static bossmonster.view.message.ErrorMessage.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,7 +23,11 @@ public class InputView {
 
 	public static int readMonsterHp() {
 		String input = input();
-		return Integer.parseInt(input);
+		try {
+			return Integer.parseInt(input);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException(MUST_INTEGER_BUT_NOT.getMessage());
+		}
 	}
 
 	public static String readPlayerName() {
@@ -34,9 +38,11 @@ public class InputView {
 		List<Integer> playerHpMp;
 		String input = input();
 
-		playerHpMp = Arrays.stream(input.split(",")).map(Integer::parseInt).toList();
-		if (playerHpMp.size() != COUNT_OF_HP_MP.getConstant())
-			throw new IllegalArgumentException();
+		try {
+			playerHpMp = Arrays.stream(input.split(",")).map(Integer::parseInt).toList();
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException(MUST_INTEGER_BUT_NOT.getMessage());
+		}
 
 		return playerHpMp;
 	}

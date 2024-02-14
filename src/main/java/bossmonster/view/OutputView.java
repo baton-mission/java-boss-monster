@@ -6,7 +6,6 @@ import static bossmonster.view.message.OutputMessage.*;
 import bossmonster.constant.AttackConstant;
 import bossmonster.dto.MonsterDTO;
 import bossmonster.dto.PlayerDTO;
-import bossmonster.view.message.ErrorMessage;
 
 public class OutputView {
 	public static void printInputMonsterHp() {
@@ -74,7 +73,7 @@ public class OutputView {
 		System.out.printf(RAID_FAIL_MESSAGE.getMessage(), playerName);
 	}
 
-	public static void printErrorMessage(ErrorMessage message) {
-		System.out.println(message.getMessage());
+	public static void printErrorMessage(String errorMessage) {
+		System.out.println(errorMessage);
 	}
 }

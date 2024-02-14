@@ -24,7 +24,7 @@ public class RaidController {
 		int monsterHp = inputView.readMonsterHp();
 		if (monsterHp < MONSTER_MIN_HP.getMonsterConstant()
 			|| monsterHp > MONSTER_MAX_HP.getMonsterConstant()) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(MONSTER_HP_MORE_THAN_100_LESS_THAN_300.getMessage());
 		}
 		return monsterHp;
 	}
@@ -33,7 +33,7 @@ public class RaidController {
 		String name = inputView.readPlayerName();
 
 		if (name.length() > LENGTH_OF_NAME.getConstant()) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(PLAYER_NAME_LENGTH_LESS_THAN_5_WORDS.getMessage());
 		}
 		return name;
 	}
@@ -42,9 +42,11 @@ public class RaidController {
 		List<Integer> playerHpMp = inputView.readPlayerHpMp();
 
 		if (playerHpMp.size() != COUNT_OF_HP_MP.getConstant())
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(COUNT_OF_PLAYER_HP_AND_MP_IS_2.getMessage());
+		if (playerHpMp.stream().anyMatch(i -> i < 0))
+			throw new IllegalArgumentException(MUST_POSITIVE_BUT_NOT.getMessage());
 		if (playerHpMp.stream().mapToInt(Integer::valueOf).sum() != SUM_OF_HP_MP.getConstant())
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(SUM_OF_PLAYER_HP_AND_MP_IS_200.getMessage());
 
 		return playerHpMp;
 	}
@@ -65,9 +67,9 @@ public class RaidController {
 			try {
 				return inputMonsterHp();
 			} catch (NumberFormatException e) {
-				outputView.printErrorMessage(MUST_INTEGER_BUT_NOT);
+				throw new IllegalArgumentException(MUST_INTEGER_BUT_NOT.getMessage());
 			} catch (IllegalArgumentException e) {
-				outputView.printErrorMessage(MONSTER_HP_MORE_THAN_100_LESS_THAN_300);
+				outputView.printErrorMessage(e.getMessage());
 			}
 		}
 	}
@@ -79,7 +81,7 @@ public class RaidController {
 			try {
 				return inputPlayerName();
 			} catch (IllegalArgumentException e) {
-				outputView.printErrorMessage(PLAYER_NAME_LENGTH_LESS_THAN_5_WORDS);
+				outputView.printErrorMessage(e.getMessage());
 			}
 		}
 	}
@@ -91,9 +93,9 @@ public class RaidController {
 			try {
 				return inputPlayerHpMp();
 			} catch (NumberFormatException e) {
-				outputView.printErrorMessage(MUST_INTEGER_BUT_NOT);
+				throw new IllegalArgumentException(MUST_INTEGER_BUT_NOT.getMessage());
 			} catch (IllegalArgumentException e) {
-				outputView.printErrorMessage(SUM_OF_PLAYER_HP_AND_MP_IS_200);
+				outputView.printErrorMessage(e.getMessage());
 			}
 		}
 	}
