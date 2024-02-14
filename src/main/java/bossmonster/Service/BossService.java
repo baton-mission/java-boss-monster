@@ -26,4 +26,12 @@ public class BossService {
             return new Boss(hp);
         }
     }
+
+    public Boss getPhysicalAttack(Boss boss) {
+        return new Boss(boss.getHp() - 10);
+    }
+
+    public Boss getMagicalAttack(Boss boss) {
+        return new Boss(boss.getHp() - 20);
+    }
 }
