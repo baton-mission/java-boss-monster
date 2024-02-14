@@ -9,12 +9,6 @@ public class GameController {
         this.scanner = scanner;
     }
 
-    public int getGameHp() {
-        int hp = scanner.nextInt();
-
-        return hp;
-    }
-
     public int getAttackType() {
         int attackType = scanner.nextInt();
 
