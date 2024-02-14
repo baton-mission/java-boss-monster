@@ -11,7 +11,4 @@ public class Boss {
         return hp;
     }
 
-    public Boss setHp(int hp) {
-        return new Boss(hp);
-    }
 }
