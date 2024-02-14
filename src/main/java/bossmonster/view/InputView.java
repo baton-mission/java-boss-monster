@@ -1,6 +1,7 @@
 package bossmonster.view;
 
 import static bossmonster.constant.AttackConstant.*;
+import static bossmonster.constant.PlayerConstant.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,34 +22,23 @@ public class InputView {
 	}
 
 	public static int readMonsterHp() {
-		int monsterHp;
 		String input = input();
-
-		try {
-			monsterHp = Integer.parseInt(input);
-
-			return monsterHp;
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException(e);
-		}
+		return Integer.parseInt(input);
 	}
 
 	public static String readPlayerName() {
-		String playerName = input();
-		return playerName;
+		return input();
 	}
 
 	public static List<Integer> readPlayerHpMp() {
 		List<Integer> playerHpMp;
 		String input = input();
 
-		try {
-			playerHpMp = Arrays.stream(input.split(",")).map(Integer::parseInt).toList();
+		playerHpMp = Arrays.stream(input.split(",")).map(Integer::parseInt).toList();
+		if (playerHpMp.size() != COUNT_OF_HP_MP.getConstant())
+			throw new IllegalArgumentException();
 
-			return playerHpMp;
-		} catch (Exception e) {
-			throw new IllegalArgumentException(e);
-		}
+		return playerHpMp;
 	}
 
 	public static int readWhetherAttack() {

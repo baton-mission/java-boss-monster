@@ -51,6 +51,8 @@ public class RaidController {
 		while (true) {
 			try {
 				return inputMonsterHp();
+			} catch (NumberFormatException e) {
+				outputView.printErrorMessage(MUST_INTEGER_BUT_NOT);
 			} catch (IllegalArgumentException e) {
 				outputView.printErrorMessage(MONSTER_HP_MORE_THAN_100_LESS_THAN_300);
 			}
@@ -82,6 +84,8 @@ public class RaidController {
 		while (true) {
 			try {
 				return inputPlayerHpMp();
+			} catch (NumberFormatException e) {
+				outputView.printErrorMessage(MUST_INTEGER_BUT_NOT);
 			} catch (IllegalArgumentException e) {
 				outputView.printErrorMessage(SUM_OF_PLAYER_HP_AND_MP_IS_200);
 			}
