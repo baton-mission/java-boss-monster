@@ -6,8 +6,6 @@ import static bossmonster.view.message.ErrorMessage.*;
 
 import java.util.List;
 
-import bossmonster.dto.MonsterDTO;
-import bossmonster.dto.PlayerDTO;
 import bossmonster.service.RaidService;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
@@ -22,13 +20,13 @@ public class RaidController {
 		setInitStatus();
 	}
 
-	private static MonsterDTO inputMonsterHp() {
+	private static int inputMonsterHp() {
 		int monsterHp = inputView.readMonsterHp();
 		if (monsterHp < MONSTER_MIN_HP.getMonsterConstant()
 			|| monsterHp > MONSTER_MAX_HP.getMonsterConstant()) {
 			throw new IllegalArgumentException();
 		}
-		return new MonsterDTO(monsterHp, monsterHp);
+		return monsterHp;
 	}
 
 	private static String inputPlayerName() {
@@ -40,12 +38,27 @@ public class RaidController {
 		return name;
 	}
 
-	private void setInitStatus() {
-		MonsterDTO monsterDTO = setMonsterStatus();
-		PlayerDTO playerDTO = setPlayerStatus();
+	private static List<Integer> inputPlayerHpMp() {
+		List<Integer> playerHpMp = inputView.readPlayerHpMp();
+
+		if (playerHpMp.size() != COUNT_OF_HP_MP.getConstant())
+			throw new IllegalArgumentException();
+		if (playerHpMp.stream().mapToInt(Integer::valueOf).sum() != SUM_OF_HP_MP.getConstant())
+			throw new IllegalArgumentException();
+
+		return playerHpMp;
 	}
 
-	private MonsterDTO setMonsterStatus() {
+	private void setInitStatus() {
+		int monsterHp = setMonsterHp();
+		String playerName = setPlayerName();
+		List<Integer> playerHpMp = setPlayerHpMp();
+
+		raidService.createMonster(monsterHp);
+		raidService.createPlayer(playerName, playerHpMp.get(0), playerHpMp.get(1));
+	}
+
+	private int setMonsterHp() {
 		outputView.printInputMonsterHp();
 
 		while (true) {
@@ -57,13 +70,6 @@ public class RaidController {
 				outputView.printErrorMessage(MONSTER_HP_MORE_THAN_100_LESS_THAN_300);
 			}
 		}
-	}
-
-	private PlayerDTO setPlayerStatus() {
-		String playerName = setPlayerName();
-		List<Integer> playerHpMp = setPlayerHpMp();
-
-		return new PlayerDTO(playerName, playerHpMp.get(0), playerHpMp.get(1), playerHpMp.get(0), playerHpMp.get(1));
 	}
 
 	private String setPlayerName() {
@@ -90,17 +96,6 @@ public class RaidController {
 				outputView.printErrorMessage(SUM_OF_PLAYER_HP_AND_MP_IS_200);
 			}
 		}
-	}
-
-	private List<Integer> inputPlayerHpMp() {
-		List<Integer> playerHpMp = inputView.readPlayerHpMp();
-
-		if (playerHpMp.size() != COUNT_OF_HP_MP.getConstant())
-			throw new IllegalArgumentException();
-		if (playerHpMp.stream().mapToInt(Integer::valueOf).sum() != SUM_OF_HP_MP.getConstant())
-			throw new IllegalArgumentException();
-
-		return playerHpMp;
 	}
 
 	public void playGame() {
