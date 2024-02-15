@@ -3,7 +3,6 @@ package bossmonster.view;
 import static bossmonster.view.message.InputMessage.*;
 import static bossmonster.view.message.OutputMessage.*;
 
-import bossmonster.constant.AttackConstant;
 import bossmonster.dto.MonsterDTO;
 import bossmonster.dto.PlayerDTO;
 
@@ -46,8 +45,13 @@ public class OutputView {
 		printPlayerHpMp(playerDTO);
 	}
 
-	public static void printPlayerAttack(AttackConstant attack, int playerAttack) {
-		System.out.printf(PLAYER_ATTACK_MESSAGE.getMessage(), attack.getAttackString(), playerAttack);
+	public static void printPlayerPhysicalAttack(int damage) {
+		System.out.printf(PLAYER_PHYSICAL_ATTACK_MESSAGE.getMessage(), damage);
+		System.out.println();
+	}
+
+	public static void printPlayerMagicalAttack(int damage) {
+		System.out.printf(PLAYER_MAGICAL_ATTACK_MESSAGE.getMessage(), damage);
 		System.out.println();
 	}
 

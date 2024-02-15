@@ -9,7 +9,8 @@ public enum OutputMessage {
 	PLAYER_HP_MP_MESSAGE("%s HP [%d/%d] MP [%d/%d]"),
 	DASH_MESSAGE("____________________________"),
 	DOUBLE_DASH_MESSAGE("============================"),
-	PLAYER_ATTACK_MESSAGE("%s을 했습니다. (입힌 데미지: %d)"),
+	PLAYER_PHYSICAL_ATTACK_MESSAGE("물리 공격을 했습니다. (입힌 데미지: %d)"),
+	PLAYER_MAGICAL_ATTACK_MESSAGE("마법 공격을 했습니다. (입힌 데미지: %d)"),
 	MONSTER_ATTACK_MESSAGE("보스가 공격 했습니다. (입힌 데미지: %s)"),
 	RAID_SUCCESS_MESSAGE("%s 님이 6번의 전투 끝에 보스 몬스터를 잡았습니다."),
 	RAID_FAIL_MESSAGE("%s의 HP가 0이 되었습니다.\n"

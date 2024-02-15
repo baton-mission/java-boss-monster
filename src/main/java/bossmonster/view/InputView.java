@@ -1,6 +1,5 @@
 package bossmonster.view;
 
-import static bossmonster.constant.AttackConstant.*;
 import static bossmonster.view.message.ErrorMessage.*;
 
 import java.io.BufferedReader;
@@ -54,9 +53,9 @@ public class InputView {
 		try {
 			whetherAttack = Integer.parseInt(input);
 
-			if (whetherAttack != MAGIC.getAttackInt() && whetherAttack != PHYSICAL.getAttackInt()) {
-				throw new IllegalArgumentException();
-			}
+			// if (whetherAttack != MAGIC.getAttackInt() && whetherAttack != PHYSICAL.getAttackInt()) {
+			// 	throw new IllegalArgumentException();
+			// }
 
 			return whetherAttack;
 		} catch (Exception e) {
