@@ -70,13 +70,13 @@
   - [ ] 에러 문구는 [ERROR] 로 시작해야 한다.
   - [ ] 에러 문구를 출력 후 그 부분부터 입력을 다시 받는다.
   - [ ] 보스 몬스터가 죽으면 몇 턴 만에 잡았는지 출력한다.
-  - 
-      - [ ] 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException를 발생시키기
+  - [ ] 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException를 발생시키기
 
 - Domain
   - Player
     - [x] 이름 - 5자 이하만 가능하다.
-    - [x] HP, MP
+    - [x] maxHP, maxMP
+    - [ ] HP, MP
   - Boss
     - [x] HP - 초기 HP는 100이상 300이하이다.
   - Game

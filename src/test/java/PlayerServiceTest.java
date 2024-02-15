@@ -27,8 +27,8 @@ public class PlayerServiceTest {
 
         // then
         assertThat(player.getName()).isEqualTo("test");
-        assertThat(player.getHp()).isEqualTo(100);
-        assertThat(player.getMp()).isEqualTo(100);
+        assertThat(player.getMaxHp()).isEqualTo(100);
+        assertThat(player.getMaxMp()).isEqualTo(100);
     }
 
     @Test
@@ -46,8 +46,8 @@ public class PlayerServiceTest {
 
         // then
         assertThat(player.getName()).isEqualTo("12345");
-        assertThat(player.getHp()).isEqualTo(100);
-        assertThat(player.getMp()).isEqualTo(100);
+        assertThat(player.getMaxHp()).isEqualTo(100);
+        assertThat(player.getMaxMp()).isEqualTo(100);
     }
 
     @Test
@@ -64,8 +64,8 @@ public class PlayerServiceTest {
 
         // then
         assertThat(player.getName()).isEqualTo("12345");
-        assertThat(player.getHp()).isEqualTo(20);
-        assertThat(player.getMp()).isEqualTo(180);
+        assertThat(player.getMaxHp()).isEqualTo(20);
+        assertThat(player.getMaxMp()).isEqualTo(180);
     }
 
     @Test
@@ -82,7 +82,7 @@ public class PlayerServiceTest {
 
         // then
         assertThat(player.getName()).isEqualTo("12345");
-        assertThat(player.getHp()).isEqualTo(100);
-        assertThat(player.getMp()).isEqualTo(100);
+        assertThat(player.getMaxHp()).isEqualTo(100);
+        assertThat(player.getMaxMp()).isEqualTo(100);
     }
 }

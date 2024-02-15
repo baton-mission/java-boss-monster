@@ -1,22 +1,22 @@
 package bossmonster.Domain;
 
 public class Player {
-    private final int hp;
-    private final int mp;
-    private String name;
+    private final int maxHp;
+    private final int maxMp;
+    private final String name;
 
-    public Player(int hp, int mp, String name) {
-        this.hp = hp;
-        this.mp = mp;
+    public Player(int maxHp, int maxMp, String name) {
+        this.maxHp = maxHp;
+        this.maxMp = maxMp;
         this.name = name;
     }
 
-    public int getHp() {
-        return hp;
+    public int getMaxHp() {
+        return maxHp;
     }
 
-    public int getMp() {
-        return mp;
+    public int getMaxMp() {
+        return maxMp;
     }
 
     public String getName() {
