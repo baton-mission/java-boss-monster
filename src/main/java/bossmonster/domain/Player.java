@@ -72,8 +72,9 @@ public class Player {
 
 	public int getAttackByMonster(int damage) {
 		if (nowHp <= damage) {
+			int preHp = nowHp;
 			nowHp = 0;
-			return nowHp;
+			return preHp;
 		}
 
 		nowHp -= damage;
