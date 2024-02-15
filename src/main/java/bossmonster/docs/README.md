@@ -24,9 +24,14 @@
 
 ## 3. 패키지 구조
 
+#### Constant
+
+- MonsterConstant
+- PlayerConstant
+
 #### Controller
 
-- MonsterRaidController
+- RaidController
 
 #### Domain
 
@@ -35,25 +40,21 @@
 
 #### DTO
 
-###### Request
-
-- BossStatRequest
-- PlayerNameRequest
-- PlayerStatRequest
-- PlayerAttackRequest
-
-###### Response
-
-- AttackDetailResponse
-- StatDetailResponse
-- RaidResultResponse
-- ErrorDetailResponse
+- MonsterDTO
+- PlayerDTO
 
 #### View
 
 - InputView
 - OutputView
 
+   ##### Message
+
+  - ErrorMessage
+  - InputMessage
+  - OutputMessage
+
+
 #### Service
 
-- MonsterRaidService
+- raidService
