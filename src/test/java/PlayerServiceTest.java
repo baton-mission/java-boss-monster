@@ -5,7 +5,9 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import bossmonster.Domain.Boss;
 import bossmonster.Domain.Player;
+import bossmonster.Dto.AttackResult;
 import bossmonster.Exception.GlobalExceptionHandler;
 import bossmonster.Service.PlayerService;
 import java.util.Scanner;
@@ -85,4 +87,53 @@ public class PlayerServiceTest {
         assertThat(player.getMaxHp()).isEqualTo(100);
         assertThat(player.getMaxMp()).isEqualTo(100);
     }
+
+    @Test
+    @DisplayName("Player가 물리공격을 한다.")
+    void doPhysicalAttackTest() {
+        // given
+        Scanner scanner = mock(Scanner.class);
+        GlobalExceptionHandler exceptionHandler = mock(GlobalExceptionHandler.class);
+        PlayerService playerService = new PlayerService(scanner, exceptionHandler);
+        Player player = new Player(100, 100, "test");
+        Boss boss = new Boss(150);
+
+        // when
+        AttackResult result = playerService.doPhysicalAttack(player, boss);
+        Player playerAfterAttack = result.getPlayer();
+        Boss bossAfterAttack = result.getBoss();
+
+        // then
+        assertThat(playerAfterAttack.getMaxHp()).isEqualTo(100);
+        assertThat(playerAfterAttack.getMaxMp()).isEqualTo(100);
+        assertThat(playerAfterAttack.getHp()).isEqualTo(100);
+        assertThat(playerAfterAttack.getMp()).isEqualTo(100);
+        assertThat(bossAfterAttack.getMaxHp()).isEqualTo(150);
+        assertThat(bossAfterAttack.getHp()).isEqualTo(140);
+    }
+
+    @Test
+    @DisplayName("Player가 마법공격을 한다.")
+    void doMagicalAttackTest() {
+        // given
+        Scanner scanner = mock(Scanner.class);
+        GlobalExceptionHandler exceptionHandler = mock(GlobalExceptionHandler.class);
+        PlayerService playerService = new PlayerService(scanner, exceptionHandler);
+        Player player = new Player(100, 100, "test");
+        Boss boss = new Boss(150);
+
+        // when
+        AttackResult result = playerService.doMagicalAttack(player, boss);
+        Player playerAfterAttack = result.getPlayer();
+        Boss bossAfterAttack = result.getBoss();
+
+        // then
+        assertThat(playerAfterAttack.getMaxHp()).isEqualTo(100);
+        assertThat(playerAfterAttack.getMaxMp()).isEqualTo(100);
+        assertThat(playerAfterAttack.getHp()).isEqualTo(100);
+        assertThat(playerAfterAttack.getMp()).isEqualTo(70);
+        assertThat(bossAfterAttack.getMaxHp()).isEqualTo(150);
+        assertThat(bossAfterAttack.getHp()).isEqualTo(130);
+    }
+
 }

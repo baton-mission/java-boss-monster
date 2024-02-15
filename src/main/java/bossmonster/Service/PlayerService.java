@@ -1,8 +1,9 @@
 package bossmonster.Service;
 
 import bossmonster.Controller.PlayerController;
+import bossmonster.Domain.Boss;
 import bossmonster.Domain.Player;
-import bossmonster.Exception.ExceptionHandler;
+import bossmonster.Dto.AttackResult;
 import bossmonster.Exception.GlobalExceptionHandler;
 import java.util.Scanner;
 
@@ -66,5 +67,25 @@ public class PlayerService {
             return new Player(hp, mp, name);
         }
         return fixedPlayer;
+    }
+
+    public AttackResult doPhysicalAttack(Player player, Boss boss) {
+        boss = BossService.getPhysicalAttack(boss);
+        if (player.getMp() + 10 > player.getMaxMp()) {
+            player = new Player(player.getMaxHp(), player.getMaxMp(), player.getHp(), player.getMaxMp(), player.getName());
+        }else {
+            player = new Player(player.getMaxHp(), player.getMaxMp(), player.getHp(), player.getMp() + 10, player.getName());
+        }
+        return new AttackResult(boss, player);
+    }
+
+    public AttackResult doMagicalAttack(Player player, Boss boss) {
+        boss = BossService.getMagicalAttack(boss);
+        if (player.getMp() - 30 < 0) {
+            player = new Player(player.getMaxHp(), player.getMaxMp(), player.getHp(), 0, player.getName());
+        }else {
+            player = new Player(player.getMaxHp(), player.getMaxMp(), player.getHp(), player.getMp() - 30, player.getName());
+        }
+        return new AttackResult(boss, player);
     }
 }
