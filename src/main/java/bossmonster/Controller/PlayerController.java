@@ -28,4 +28,12 @@ public class PlayerController {
 
         return new int[]{hp, mp};
     }
+
+    public static void printPhysicalAttackMessage() {
+        System.out.println("물리 공격을 했습니다. (입힌 데미지: 10)");
+    }
+
+    public static void printMagicalAttackMessage() {
+        System.out.println("마법 공격을 했습니다. (입힌 데미지: 20)");
+    }
 }
