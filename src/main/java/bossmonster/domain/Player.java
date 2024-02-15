@@ -50,11 +50,11 @@ public class Player {
 
 	public int createAttack(PlayerConstant attack) {
 		if (attack == PHYSICAL_ATTACK) {
-			modifyMpByAttack(10);
+			modifyMpByAttack(MP_COST_AFTER_PHYSICAL.getConstant());
 			return PHYSICAL_DAMAGE.getConstant();
 		}
 
-		modifyMpByAttack(-30);
+		modifyMpByAttack(MP_COST_AFTER_MAGIC.getConstant());
 		return MAGIC_DAMAGE.getConstant();
 	}
 

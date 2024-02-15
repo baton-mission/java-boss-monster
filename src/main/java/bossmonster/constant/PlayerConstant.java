@@ -7,7 +7,9 @@ public enum PlayerConstant {
 	PHYSICAL_ATTACK(1),
 	PHYSICAL_DAMAGE(10),
 	MAGIC_ATTACK(2),
-	MAGIC_DAMAGE(20);
+	MAGIC_DAMAGE(20),
+	MP_COST_AFTER_PHYSICAL(10),
+	MP_COST_AFTER_MAGIC(-30);
 
 	private final int constant;
 
