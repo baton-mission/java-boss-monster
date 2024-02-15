@@ -1,7 +1,4 @@
 package bossmonster.service;
-import java.util.Random;
-import static bossmonster.constant.PlayerConstant.*;
-import static bossmonster.view.message.ErrorMessage.*;
 
 import bossmonster.constant.PlayerConstant;
 import bossmonster.domain.Monster;
@@ -34,7 +31,7 @@ public class RaidService {
 	}
 
 	public int attackByPlayer(PlayerConstant playerConstant) {
-		int damage = player.attack(playerConstant);
+		int damage = player.createAttack(playerConstant);
 
 		if (monster.getNowHp() <= damage) {
 			damage -= monster.getNowHp();
@@ -47,7 +44,7 @@ public class RaidService {
 	}
 
 	public int attackByMonster() {
-		int damage = monster.attack();
+		int damage = monster.createAttack();
 
 		if (player.getNowHp() <= damage) {
 			damage -= player.getNowHp();
@@ -60,8 +57,6 @@ public class RaidService {
 	}
 
 	public boolean isEndGame() {
-		if (monster.getNowHp() <= 0 || player.getNowHp() <= 0)
-			return true;
-		return false;
+		return monster.getNowHp() <= 0 || player.getNowHp() <= 0;
 	}
 }

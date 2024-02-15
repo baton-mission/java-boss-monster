@@ -4,8 +4,6 @@ import static bossmonster.constant.MonsterConstant.*;
 
 import java.util.Random;
 
-import bossmonster.constant.MonsterConstant;
-
 public class Monster {
 	private static final Random random = new Random();
 	int maxHp;
@@ -30,7 +28,12 @@ public class Monster {
 		return nowHp;
 	}
 
-	public int attack() {
+	public int createAttack() {
 		return random.nextInt(MONSTER_MAX_DAMAGE.getMonsterConstant());
+	}
+
+	public int getAttackByPlayer(int damage) {
+		nowHp -= damage;
+		return damage;
 	}
 }
