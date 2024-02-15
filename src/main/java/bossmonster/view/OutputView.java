@@ -12,15 +12,18 @@ public class OutputView {
 	}
 
 	public static void printInputPlayerName() {
+		System.out.println();
 		System.out.println(PLAYER_NAME.getMessage());
 	}
 
 	public static void printInputPlayerHpMp() {
+		System.out.println();
 		System.out.println(PLAYER_HP_MP.getMessage());
 	}
 
 	public static void printInputWhetherAttack() {
 		System.out.println(DOUBLE_DASH_MESSAGE.getMessage());
+		System.out.println();
 		System.out.println(WHETHER_PHYSICAL_OR_MAGIC.getMessage());
 	}
 
@@ -30,13 +33,16 @@ public class OutputView {
 	}
 
 	private static void printPlayerHpMp(PlayerDTO playerDTO) {
+		System.out.println();
 		System.out.printf(PLAYER_HP_MP_MESSAGE.getMessage(), playerDTO.getName(), playerDTO.getNowHp(),
 			playerDTO.getMaxHp(), playerDTO.getNowMp(), playerDTO.getMaxMp());
 		System.out.println();
 	}
 
 	public static void printStartGame(MonsterDTO monsterDTO, PlayerDTO playerDTO) {
+		System.out.println();
 		System.out.println(RAID_INIT_MESSAGE.getMessage());
+		System.out.println();
 		System.out.println(DOUBLE_DASH_MESSAGE.getMessage());
 		printMonsterHp(monsterDTO);
 		System.out.println(DASH_MESSAGE.getMessage());
@@ -46,11 +52,13 @@ public class OutputView {
 	}
 
 	public static void printPlayerPhysicalAttack(int damage) {
+		System.out.println();
 		System.out.printf(PLAYER_PHYSICAL_ATTACK_MESSAGE.getMessage(), damage);
 		System.out.println();
 	}
 
 	public static void printPlayerMagicalAttack(int damage) {
+		System.out.println();
 		System.out.printf(PLAYER_MAGICAL_ATTACK_MESSAGE.getMessage(), damage);
 		System.out.println();
 	}
@@ -70,6 +78,7 @@ public class OutputView {
 	}
 
 	public static void printRaidSuccess(String playerName, int raidRound) {
+		System.out.println();
 		System.out.printf(RAID_SUCCESS_MESSAGE.getMessage(), playerName, raidRound);
 	}
 
