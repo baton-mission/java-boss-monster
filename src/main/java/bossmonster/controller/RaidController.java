@@ -6,6 +6,8 @@ import static bossmonster.view.message.ErrorMessage.*;
 
 import java.util.List;
 
+import bossmonster.dto.MonsterDTO;
+import bossmonster.dto.PlayerDTO;
 import bossmonster.service.RaidService;
 import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
@@ -49,6 +51,15 @@ public class RaidController {
 			throw new IllegalArgumentException(SUM_OF_PLAYER_HP_AND_MP_IS_200.getMessage());
 
 		return playerHpMp;
+	}
+
+	private static int inputWhetherAttack() {
+		int whetherAttack = inputView.readWhetherAttack();
+
+		if (whetherAttack == PHYSICAL_ATTACK.getConstant() || whetherAttack == MAGIC_ATTACK.getConstant())
+			return whetherAttack;
+
+		throw new IllegalArgumentException(PLAYER_SHOULD_ATTACK_MONSTER.getMessage());
 	}
 
 	private void setInitStatus() {
@@ -100,7 +111,80 @@ public class RaidController {
 		}
 	}
 
+	private int setAttack() {
+		outputView.printInputWhetherAttack();
+
+		while (true) {
+			try {
+				return inputWhetherAttack();
+			} catch (NumberFormatException e) {
+				throw new IllegalArgumentException(MUST_INTEGER_BUT_NOT.getMessage());
+			} catch (IllegalArgumentException e) {
+				outputView.printErrorMessage(e.getMessage());
+			}
+		}
+	}
+
 	public void playGame() {
 		outputView.printStartGame(raidService.getMonsterDTO(), raidService.getPlayerDTO());
+
+		int gameRound = 0;
+		do {
+			++gameRound;
+			if (!isAblePlayerAttack() || !isAbleMonsterAttack()) {
+				break;
+			}
+			MonsterDTO monsterDTO = raidService.getMonsterDTO();
+			PlayerDTO playerDTO = raidService.getPlayerDTO();
+			outputView.printProgressGame(monsterDTO, playerDTO);
+		} while (true);
+
+		printEndGame(gameRound);
+	}
+
+	private boolean isAblePlayerAttack() {
+		if (raidService.getPlayerDTO().getNowHp() == 0)
+			return true;
+
+		attackMonster();
+		return false;
+	}
+
+	private boolean isAbleMonsterAttack() {
+		if (raidService.getMonsterDTO().getNowHp() == 0)
+			return true;
+
+		attackPlayer();
+		return false;
+	}
+
+	private void attackMonster() {
+		int attack = setAttack();
+
+		if (attack == PHYSICAL_ATTACK.getConstant()) {
+			int damage = raidService.attackByPlayer(PHYSICAL_ATTACK);
+			outputView.printPlayerPhysicalAttack(damage);
+		}
+		if (attack == MAGIC_ATTACK.getConstant()) {
+			int damage = raidService.attackByPlayer(MAGIC_ATTACK);
+			outputView.printPlayerMagicalAttack(damage);
+		}
+	}
+
+	private void attackPlayer() {
+		int damage = raidService.attackByMonster();
+		outputView.printMonsterAttack(damage);
+	}
+
+	private void printEndGame(int raidRound) {
+		MonsterDTO monsterDTO = raidService.getMonsterDTO();
+		PlayerDTO playerDTO = raidService.getPlayerDTO();
+		if (monsterDTO.getNowHp() == 0) {
+			outputView.printRaidSuccess(playerDTO.getName(), raidRound);
+		}
+
+		if (playerDTO.getNowHp() == 0) {
+			outputView.printRaidFail(playerDTO.getName());
+		}
 	}
 }

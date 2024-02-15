@@ -47,19 +47,12 @@ public class InputView {
 	}
 
 	public static int readWhetherAttack() {
-		int whetherAttack;
 		String input = input();
 
 		try {
-			whetherAttack = Integer.parseInt(input);
-
-			// if (whetherAttack != MAGIC.getAttackInt() && whetherAttack != PHYSICAL.getAttackInt()) {
-			// 	throw new IllegalArgumentException();
-			// }
-
-			return whetherAttack;
-		} catch (Exception e) {
-			throw new IllegalArgumentException(e);
+			return Integer.parseInt(input);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException(MUST_INTEGER_BUT_NOT.getMessage());
 		}
 	}
 }
