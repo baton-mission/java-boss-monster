@@ -136,4 +136,20 @@ public class PlayerServiceTest {
         assertThat(bossAfterAttack.getHp()).isEqualTo(130);
     }
 
+    @Test
+    @DisplayName("Player가 공격을 당한다.")
+    void doAttackTest() {
+        // given
+        Player player = new Player(100, 100, "test");
+        Boss boss = new Boss(150);
+
+        // when
+        Player result = PlayerService.getAttack(player);
+
+        // then
+        assertThat(result.getMaxHp()).isEqualTo(100);
+        assertThat(result.getMaxMp()).isEqualTo(100);
+        assertThat(result.getHp()).isBetween(80, 90);
+        assertThat(result.getMp()).isEqualTo(100);
+    }
 }

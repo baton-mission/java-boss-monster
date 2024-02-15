@@ -5,6 +5,7 @@ import bossmonster.Domain.Boss;
 import bossmonster.Domain.Player;
 import bossmonster.Dto.AttackResult;
 import bossmonster.Exception.GlobalExceptionHandler;
+import java.util.Random;
 import java.util.Scanner;
 
 public class PlayerService {
@@ -16,6 +17,17 @@ public class PlayerService {
         this.scanner = scanner;
         this.exceptionHandler = exceptionHandler;
         this.playerController = new PlayerController(scanner);
+    }
+
+    public static Player getAttack(final Player player) {
+        int hp = player.getHp();
+        final Random random = new Random();
+        hp -= random.nextInt(10);
+        hp -= 10;
+        if (hp < 0) {
+            hp = 0;
+        }
+        return new Player(player.getMaxHp(), player.getMaxMp(), hp, player.getMp(), player.getName());
     }
 
     public Player getPlayer() {
