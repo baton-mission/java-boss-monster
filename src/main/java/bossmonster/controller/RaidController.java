@@ -6,6 +6,7 @@ import static bossmonster.view.message.ErrorMessage.*;
 
 import java.util.List;
 
+import bossmonster.constant.PlayerConstant;
 import bossmonster.dto.MonsterDTO;
 import bossmonster.dto.PlayerDTO;
 import bossmonster.service.RaidService;
@@ -171,15 +172,10 @@ public class RaidController {
 
 	private void attackMonster() {
 		int attack = setAttack();
+		PlayerConstant playerConstant = PlayerConstant.of(attack);
 
-		if (attack == PHYSICAL_ATTACK.getConstant()) {
-			int damage = raidService.attackByPlayer(PHYSICAL_ATTACK);
-			outputView.printPlayerPhysicalAttack(damage);
-		}
-		if (attack == MAGIC_ATTACK.getConstant()) {
-			int damage = raidService.attackByPlayer(MAGIC_ATTACK);
-			outputView.printPlayerMagicalAttack(damage);
-		}
+		int damage = raidService.attackByPlayer(playerConstant);
+		outputView.printPlayerAttack(playerConstant, damage);
 	}
 
 	private void attackPlayer() {

@@ -1,8 +1,10 @@
 package bossmonster.view;
 
+import static bossmonster.constant.PlayerConstant.*;
 import static bossmonster.view.message.InputMessage.*;
 import static bossmonster.view.message.OutputMessage.*;
 
+import bossmonster.constant.PlayerConstant;
 import bossmonster.dto.MonsterDTO;
 import bossmonster.dto.PlayerDTO;
 
@@ -50,16 +52,17 @@ public class OutputView {
 		System.out.println(DASH_MESSAGE.getMessage());
 		printPlayerHpMp(playerDTO);
 	}
+	public static void printPlayerAttack(PlayerConstant constant, int damage) {
+		System.out.println();
 
-	public static void printPlayerPhysicalAttack(int damage) {
-		System.out.println();
-		System.out.printf(PLAYER_PHYSICAL_ATTACK_MESSAGE.getMessage(), damage);
-		System.out.println();
-	}
+		if(constant == PHYSICAL_ATTACK) {
+			System.out.printf(PLAYER_PHYSICAL_ATTACK_MESSAGE.getMessage(), damage);
+		}
 
-	public static void printPlayerMagicalAttack(int damage) {
-		System.out.println();
-		System.out.printf(PLAYER_MAGICAL_ATTACK_MESSAGE.getMessage(), damage);
+		if(constant == MAGIC_ATTACK) {
+			System.out.printf(PLAYER_MAGICAL_ATTACK_MESSAGE.getMessage(), damage);
+		}
+
 		System.out.println();
 	}
 
