@@ -17,4 +17,8 @@ public class BossController {
 
         return hp;
     }
+
+    public static void printBossAttackMessage(int damage) {
+        System.out.println("보스가 공격을 했습니다. (입힌 데미지: " + damage + ")");
+    }
 }
