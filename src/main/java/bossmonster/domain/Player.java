@@ -63,7 +63,7 @@ public class Player {
 			nowMp = maxMp;
 			return;
 		}
-		if (nowMp + difference <= 0) {
+		if (nowMp + difference < 0) {
 			throw new IllegalArgumentException(MAGIC_ATTACK_CONSUME_MP.getMessage());
 		}
 
