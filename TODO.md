@@ -78,7 +78,8 @@
     - [x] maxHP, maxMP
     - [ ] HP, MP
   - Boss
-    - [x] HP - 초기 HP는 100이상 300이하이다.
+    - [x] maxHP - 초기 HP는 100이상 300이하이다.
+    - [ ] HP
   - Game
     - [ ] Turn
 

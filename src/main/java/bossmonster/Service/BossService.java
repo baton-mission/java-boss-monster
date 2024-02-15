@@ -1,5 +1,8 @@
 package bossmonster.Service;
 
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+
 import bossmonster.Controller.BossController;
 import bossmonster.Domain.Boss;
 import bossmonster.Exception.GlobalExceptionHandler;
@@ -27,11 +30,24 @@ public class BossService {
         }
     }
 
-    public Boss getPhysicalAttack(Boss boss) {
-        return new Boss(boss.getHp() - 10);
+    public static Boss getPhysicalAttack(Boss boss) {
+        int MAX_HP = boss.getMaxHp();
+        int HP = boss.getHp();
+        HP -= 10;
+        if (HP < 0) {
+            HP = 0;
+        }
+        Boss result = new Boss(MAX_HP, HP);
+        return result;
     }
 
-    public Boss getMagicalAttack(Boss boss) {
-        return new Boss(boss.getHp() - 20);
+    public static Boss getMagicalAttack(Boss boss) {
+        int MAX_HP = boss.getMaxHp();
+        int HP = boss.getHp()-20;
+        if (HP < 0) {
+            HP = 0;
+        }
+        Boss result = new Boss(MAX_HP, HP);
+        return result;
     }
 }

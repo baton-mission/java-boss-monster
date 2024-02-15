@@ -11,8 +11,6 @@ import bossmonster.Service.BossService;
 import java.util.Scanner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import static org.mockito.ArgumentMatchers.any;
 
@@ -28,7 +26,7 @@ public class BossServiceTest {
         // When
         when(scanner.nextInt()).thenReturn(150);
         Boss boss = bossService.getBoss();
-        int result = boss.getHp();
+        int result = boss.getMaxHp();
 
         // Then
         try {
@@ -51,7 +49,7 @@ public class BossServiceTest {
         // When
         when(scanner.nextInt()).thenReturn(500).thenReturn(150);
         Boss boss = bossService.getBoss();
-        int result = boss.getHp();
+        int result = boss.getMaxHp();
 
         // Then
         verify(exceptionHandler).handleIllegalBossHpException(any(IllegalArgumentException.class), eq(bossService));
@@ -62,15 +60,13 @@ public class BossServiceTest {
     @DisplayName("Boss가 물리 공격을 받는다")
     void BossPhysicalAttackTest() {
         // Given
-        Scanner scanner = mock(Scanner.class);
-        GlobalExceptionHandler exceptionHandler = mock(GlobalExceptionHandler.class);
-        BossService bossService = new BossService(scanner, exceptionHandler);
         Boss boss = new Boss(150);
 
         // When
-        Boss result = bossService.getPhysicalAttack(boss);
+        Boss result = BossService.getPhysicalAttack(boss);
 
         // Then
+        assertThat(result.getMaxHp()).isEqualTo(150);
         assertThat(result.getHp()).isEqualTo(140);
     }
 
@@ -78,15 +74,13 @@ public class BossServiceTest {
     @DisplayName("Boss가 마법 공격을 받는다")
     void BossMagicalAttackTest() {
         // Given
-        Scanner scanner = mock(Scanner.class);
-        GlobalExceptionHandler exceptionHandler = mock(GlobalExceptionHandler.class);
-        BossService bossService = new BossService(scanner, exceptionHandler);
         Boss boss = new Boss(150);
 
         // When
-        Boss result = bossService.getMagicalAttack(boss);
+        Boss result = BossService.getMagicalAttack(boss);
 
         // Then
+        assertThat(result.getMaxHp()).isEqualTo(150);
         assertThat(result.getHp()).isEqualTo(130);
     }
 }
