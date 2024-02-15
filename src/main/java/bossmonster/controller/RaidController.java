@@ -14,8 +14,6 @@ import bossmonster.view.InputView;
 import bossmonster.view.OutputView;
 
 public class RaidController {
-	private static final InputView inputView = new InputView();
-	private static final OutputView outputView = new OutputView();
 	private static RaidService raidService;
 
 	public RaidController() {
@@ -24,7 +22,7 @@ public class RaidController {
 	}
 
 	private static int inputMonsterHp() {
-		int monsterHp = inputView.readMonsterHp();
+		int monsterHp = InputView.readMonsterHp();
 		if (monsterHp < MONSTER_MIN_HP.getMonsterConstant()
 			|| monsterHp > MONSTER_MAX_HP.getMonsterConstant()) {
 			throw new IllegalArgumentException(MONSTER_HP_MORE_THAN_100_LESS_THAN_300.getMessage());
@@ -33,7 +31,7 @@ public class RaidController {
 	}
 
 	private static String inputPlayerName() {
-		String name = inputView.readPlayerName();
+		String name = InputView.readPlayerName();
 
 		if (name.length() > LENGTH_OF_NAME.getConstant()) {
 			throw new IllegalArgumentException(PLAYER_NAME_LENGTH_LESS_THAN_5_WORDS.getMessage());
@@ -42,7 +40,7 @@ public class RaidController {
 	}
 
 	private static List<Integer> inputPlayerHpMp() {
-		List<Integer> playerHpMp = inputView.readPlayerHpMp();
+		List<Integer> playerHpMp = InputView.readPlayerHpMp();
 
 		if (playerHpMp.size() != COUNT_OF_HP_MP.getConstant())
 			throw new IllegalArgumentException(COUNT_OF_PLAYER_HP_AND_MP_IS_2.getMessage());
@@ -55,7 +53,7 @@ public class RaidController {
 	}
 
 	private static int inputWhetherAttack() {
-		int whetherAttack = inputView.readWhetherAttack();
+		int whetherAttack = InputView.readWhetherAttack();
 
 		if (whetherAttack == PHYSICAL_ATTACK.getConstant() || whetherAttack == MAGIC_ATTACK.getConstant())
 			return whetherAttack;
@@ -64,7 +62,7 @@ public class RaidController {
 	}
 
 	private static void isValidAttack(int attack) {
-		PlayerDTO playerDTO = raidService.getPlayerDTO();
+		PlayerDTO playerDTO = RaidService.getPlayerDTO();
 		if (attack == PHYSICAL_ATTACK.getConstant())
 			return;
 		if (playerDTO.getMaxMp() < 30)
@@ -81,7 +79,7 @@ public class RaidController {
 	}
 
 	private int setMonsterHp() {
-		outputView.printInputMonsterHp();
+		OutputView.printInputMonsterHp();
 
 		while (true) {
 			try {
@@ -89,25 +87,25 @@ public class RaidController {
 			} catch (NumberFormatException e) {
 				throw new IllegalArgumentException(MUST_INTEGER_BUT_NOT.getMessage());
 			} catch (IllegalArgumentException e) {
-				outputView.printErrorMessage(e.getMessage());
+				OutputView.printErrorMessage(e.getMessage());
 			}
 		}
 	}
 
 	private String setPlayerName() {
-		outputView.printInputPlayerName();
+		OutputView.printInputPlayerName();
 
 		while (true) {
 			try {
 				return inputPlayerName();
 			} catch (IllegalArgumentException e) {
-				outputView.printErrorMessage(e.getMessage());
+				OutputView.printErrorMessage(e.getMessage());
 			}
 		}
 	}
 
 	private List<Integer> setPlayerHpMp() {
-		outputView.printInputPlayerHpMp();
+		OutputView.printInputPlayerHpMp();
 
 		while (true) {
 			try {
@@ -115,13 +113,13 @@ public class RaidController {
 			} catch (NumberFormatException e) {
 				throw new IllegalArgumentException(MUST_INTEGER_BUT_NOT.getMessage());
 			} catch (IllegalArgumentException e) {
-				outputView.printErrorMessage(e.getMessage());
+				OutputView.printErrorMessage(e.getMessage());
 			}
 		}
 	}
 
 	private int setAttack() {
-		outputView.printInputWhetherAttack();
+		OutputView.printInputWhetherAttack();
 
 		while (true) {
 			try {
@@ -132,13 +130,13 @@ public class RaidController {
 			} catch (NumberFormatException e) {
 				throw new IllegalArgumentException(MUST_INTEGER_BUT_NOT.getMessage());
 			} catch (IllegalArgumentException e) {
-				outputView.printErrorMessage(e.getMessage());
+				OutputView.printErrorMessage(e.getMessage());
 			}
 		}
 	}
 
 	public void playGame() {
-		outputView.printStartGame(raidService.getMonsterDTO(), raidService.getPlayerDTO());
+		OutputView.printStartGame(RaidService.getMonsterDTO(), RaidService.getPlayerDTO());
 
 		int gameRound = 0;
 		do {
@@ -146,16 +144,16 @@ public class RaidController {
 			if (!isAblePlayerAttack() || !isAbleMonsterAttack() || raidService.isEndGame()) {
 				break;
 			}
-			MonsterDTO monsterDTO = raidService.getMonsterDTO();
-			PlayerDTO playerDTO = raidService.getPlayerDTO();
-			outputView.printProgressGame(monsterDTO, playerDTO);
+			MonsterDTO monsterDTO = RaidService.getMonsterDTO();
+			PlayerDTO playerDTO = RaidService.getPlayerDTO();
+			OutputView.printProgressGame(monsterDTO, playerDTO);
 		} while (true);
 
 		printEndGame(gameRound);
 	}
 
 	private boolean isAblePlayerAttack() {
-		if (raidService.getPlayerDTO().getNowHp() == 0)
+		if (RaidService.getPlayerDTO().getNowHp() == 0)
 			return false;
 
 		attackMonster();
@@ -163,7 +161,7 @@ public class RaidController {
 	}
 
 	private boolean isAbleMonsterAttack() {
-		if (raidService.getMonsterDTO().getNowHp() == 0)
+		if (RaidService.getMonsterDTO().getNowHp() == 0)
 			return false;
 
 		attackPlayer();
@@ -175,23 +173,23 @@ public class RaidController {
 		PlayerConstant playerConstant = PlayerConstant.of(attack);
 
 		int damage = raidService.attackByPlayer(playerConstant);
-		outputView.printPlayerAttack(playerConstant, damage);
+		OutputView.printPlayerAttack(playerConstant, damage);
 	}
 
 	private void attackPlayer() {
 		int damage = raidService.attackByMonster();
-		outputView.printMonsterAttack(damage);
+		OutputView.printMonsterAttack(damage);
 	}
 
 	private void printEndGame(int raidRound) {
-		MonsterDTO monsterDTO = raidService.getMonsterDTO();
-		PlayerDTO playerDTO = raidService.getPlayerDTO();
+		MonsterDTO monsterDTO = RaidService.getMonsterDTO();
+		PlayerDTO playerDTO = RaidService.getPlayerDTO();
 		if (monsterDTO.getNowHp() == 0) {
-			outputView.printRaidSuccess(playerDTO, raidRound);
+			OutputView.printRaidSuccess(playerDTO, raidRound);
 		}
 
 		if (playerDTO.getNowHp() == 0) {
-			outputView.printRaidFail(monsterDTO, playerDTO);
+			OutputView.printRaidFail(monsterDTO, playerDTO);
 		}
 	}
 }
