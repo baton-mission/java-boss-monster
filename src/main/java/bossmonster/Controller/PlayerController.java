@@ -13,6 +13,8 @@ public class PlayerController {
         System.out.println("플레이어의 이름을 입력해주세요.");
         String name = scanner.nextLine();
 
+        System.out.println();
+
         return name;
     }
 
@@ -21,6 +23,8 @@ public class PlayerController {
         String[] hpMp = scanner.nextLine().split(",");
         int hp = Integer.parseInt(hpMp[0]);
         int mp = Integer.parseInt(hpMp[1]);
+
+        System.out.println();
 
         return new int[]{hp, mp};
     }

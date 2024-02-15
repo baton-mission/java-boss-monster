@@ -15,6 +15,8 @@ public class GameController {
                 + "2. 마법 공격");
         int attackType = scanner.nextInt();
 
+        System.out.println();
+
         return attackType;
     }
 

@@ -13,6 +13,8 @@ public class BossController {
         System.out.println("보스 몬스터의 HP를 입력해주세요.");
         int hp = scanner.nextInt();
 
+        System.out.println();
+
         return hp;
     }
 }
