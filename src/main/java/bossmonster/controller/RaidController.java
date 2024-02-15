@@ -144,18 +144,18 @@ public class RaidController {
 
 	private boolean isAblePlayerAttack() {
 		if (raidService.getPlayerDTO().getNowHp() == 0)
-			return true;
+			return false;
 
 		attackMonster();
-		return false;
+		return true;
 	}
 
 	private boolean isAbleMonsterAttack() {
 		if (raidService.getMonsterDTO().getNowHp() == 0)
-			return true;
+			return false;
 
 		attackPlayer();
-		return false;
+		return true;
 	}
 
 	private void attackMonster() {
