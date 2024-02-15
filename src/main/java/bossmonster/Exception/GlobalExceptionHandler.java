@@ -1,8 +1,11 @@
 package bossmonster.Exception;
 
 import bossmonster.Domain.Boss;
+import bossmonster.Domain.Game;
 import bossmonster.Domain.Player;
+import bossmonster.Dto.AttackResult;
 import bossmonster.Service.BossService;
+import bossmonster.Service.GameService;
 import bossmonster.Service.PlayerService;
 import java.util.Scanner;
 
@@ -30,8 +33,20 @@ public class GlobalExceptionHandler implements ExceptionHandler {
         return player;
     }
 
+    public int handleIllegalAttackTypeException(IllegalArgumentException e, GameService gameService) {
+        this.handle(e);
+        return gameService.getAttackType();
+    }
+
+    public Game handleLowMpException(IllegalArgumentException e, PlayerService playerService, Game game) {
+        this.handle(e);
+        AttackResult result = playerService.doPhysicalAttack(game.getPlayer(), game.getBoss());
+        game = new Game(game.getTurn(), result.getBoss(), result.getPlayer());
+        return game;
+    }
+
     @Override
     public void handle(final Exception e) {
-        System.out.println(e.getMessage());
+        System.out.println(e.getMessage() + "\n");
     }
 }

@@ -21,9 +21,9 @@ public class GameServiceTest {
         Scanner scanner = mock(Scanner.class);
         Boss boss = new Boss(100, 100);
         Player player = new Player(100, 100, "test");
-        Game game = new Game(boss, player);
+        Game game = new Game(0, boss, player);
         GlobalExceptionHandler exceptionHandler = mock(GlobalExceptionHandler.class);
-        GameService gameService = new GameService(scanner, exceptionHandler, game);
+        GameService gameService = new GameService(scanner, exceptionHandler);
         when(scanner.nextInt()).thenReturn(1);
 
         // when
@@ -40,9 +40,9 @@ public class GameServiceTest {
         Scanner scanner = mock(Scanner.class);
         Boss boss = new Boss(100, 100);
         Player player = new Player(100, 100, "test");
-        Game game = new Game(boss, player);
+        Game game = new Game(0, boss, player);
         GlobalExceptionHandler exceptionHandler = mock(GlobalExceptionHandler.class);
-        GameService gameService = new GameService(scanner, exceptionHandler, game);
+        GameService gameService = new GameService(scanner, exceptionHandler);
         when(scanner.nextInt()).thenReturn(3);
         when(exceptionHandler.handleIllegalAttackTypeException(any(IllegalArgumentException.class), eq(gameService))).thenReturn(1);
 

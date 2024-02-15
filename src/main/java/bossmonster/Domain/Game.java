@@ -5,8 +5,8 @@ public class Game {
     private Boss boss;
     private Player player;
 
-    public Game(Boss boss, Player player) {
-        this.turn = 0;
+    public Game(int turn, Boss boss, Player player) {
+        this.turn = turn;
         this.boss = boss;
         this.player = player;
     }

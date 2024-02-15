@@ -1,5 +1,6 @@
 package bossmonster.Service;
 
+import bossmonster.Controller.BossController;
 import bossmonster.Controller.PlayerController;
 import bossmonster.Domain.Boss;
 import bossmonster.Domain.Player;
@@ -22,7 +23,9 @@ public class PlayerService {
     public static Player getAttack(final Player player) {
         int hp = player.getHp();
         final Random random = new Random();
-        hp -= random.nextInt(20);
+        int damage = random.nextInt(20);
+        hp -= damage;
+        BossController.printBossAttackMessage(damage);
         return new Player(player.getMaxHp(), player.getMaxMp(), hp, player.getMp(), player.getName());
     }
 

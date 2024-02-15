@@ -4,6 +4,7 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 import bossmonster.Controller.BossController;
+import bossmonster.Controller.PlayerController;
 import bossmonster.Domain.Boss;
 import bossmonster.Exception.GlobalExceptionHandler;
 import java.util.Scanner;
@@ -38,6 +39,7 @@ public class BossService {
             HP = 0;
         }
         Boss result = new Boss(MAX_HP, HP);
+        PlayerController.printPhysicalAttackMessage();
         return result;
     }
 
@@ -48,6 +50,7 @@ public class BossService {
             HP = 0;
         }
         Boss result = new Boss(MAX_HP, HP);
+        PlayerController.printMagicalAttackMessage();
         return result;
     }
 }
