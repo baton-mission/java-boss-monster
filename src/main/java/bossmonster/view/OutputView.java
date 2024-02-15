@@ -52,14 +52,15 @@ public class OutputView {
 		System.out.println(DASH_MESSAGE.getMessage());
 		printPlayerHpMp(playerDTO);
 	}
+
 	public static void printPlayerAttack(PlayerConstant constant, int damage) {
 		System.out.println();
 
-		if(constant == PHYSICAL_ATTACK) {
+		if (constant == PHYSICAL_ATTACK) {
 			System.out.printf(PLAYER_PHYSICAL_ATTACK_MESSAGE.getMessage(), damage);
 		}
 
-		if(constant == MAGIC_ATTACK) {
+		if (constant == MAGIC_ATTACK) {
 			System.out.printf(PLAYER_MAGICAL_ATTACK_MESSAGE.getMessage(), damage);
 		}
 
@@ -80,13 +81,21 @@ public class OutputView {
 		printPlayerHpMp(playerDTO);
 	}
 
-	public static void printRaidSuccess(String playerName, int raidRound) {
+	public static void printRaidSuccess(PlayerDTO playerDTO, int raidRound) {
 		System.out.println();
-		System.out.printf(RAID_SUCCESS_MESSAGE.getMessage(), playerName, raidRound);
+		System.out.printf(RAID_SUCCESS_MESSAGE.getMessage(), playerDTO.getName(), raidRound);
 	}
 
-	public static void printRaidFail(String playerName) {
-		System.out.printf(RAID_FAIL_MESSAGE.getMessage(), playerName);
+	public static void printRaidFail(MonsterDTO monsterDTO, PlayerDTO playerDTO) {
+		System.out.println(DOUBLE_DASH_MESSAGE.getMessage());
+		printMonsterHp(monsterDTO);
+		System.out.println(DASH_MESSAGE.getMessage());
+		System.out.println(MONSTER_WIN_MESSAGE.getMessage());
+		System.out.println(DASH_MESSAGE.getMessage());
+		printPlayerHpMp(playerDTO);
+		System.out.println(DOUBLE_DASH_MESSAGE.getMessage());
+		System.out.println();
+		System.out.printf(RAID_FAIL_MESSAGE.getMessage(), playerDTO.getName());
 	}
 
 	public static void printErrorMessage(String errorMessage) {

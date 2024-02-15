@@ -143,7 +143,7 @@ public class RaidController {
 		int gameRound = 0;
 		do {
 			++gameRound;
-			if (!isAblePlayerAttack() || !isAbleMonsterAttack()) {
+			if (!isAblePlayerAttack() || !isAbleMonsterAttack() || raidService.isEndGame()) {
 				break;
 			}
 			MonsterDTO monsterDTO = raidService.getMonsterDTO();
@@ -187,11 +187,11 @@ public class RaidController {
 		MonsterDTO monsterDTO = raidService.getMonsterDTO();
 		PlayerDTO playerDTO = raidService.getPlayerDTO();
 		if (monsterDTO.getNowHp() == 0) {
-			outputView.printRaidSuccess(playerDTO.getName(), raidRound);
+			outputView.printRaidSuccess(playerDTO, raidRound);
 		}
 
 		if (playerDTO.getNowHp() == 0) {
-			outputView.printRaidFail(playerDTO.getName());
+			outputView.printRaidFail(monsterDTO, playerDTO);
 		}
 	}
 }
