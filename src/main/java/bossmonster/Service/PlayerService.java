@@ -22,11 +22,7 @@ public class PlayerService {
     public static Player getAttack(final Player player) {
         int hp = player.getHp();
         final Random random = new Random();
-        hp -= random.nextInt(10);
-        hp -= 10;
-        if (hp < 0) {
-            hp = 0;
-        }
+        hp -= random.nextInt(20);
         return new Player(player.getMaxHp(), player.getMaxMp(), hp, player.getMp(), player.getName());
     }
 

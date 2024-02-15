@@ -149,7 +149,7 @@ public class PlayerServiceTest {
         // then
         assertThat(result.getMaxHp()).isEqualTo(100);
         assertThat(result.getMaxMp()).isEqualTo(100);
-        assertThat(result.getHp()).isBetween(80, 90);
+        assertThat(result.getHp()).isBetween(80, 100);
         assertThat(result.getMp()).isEqualTo(100);
     }
 }
