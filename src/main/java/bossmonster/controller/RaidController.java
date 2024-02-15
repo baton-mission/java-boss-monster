@@ -62,6 +62,14 @@ public class RaidController {
 		throw new IllegalArgumentException(PLAYER_SHOULD_ATTACK_MONSTER.getMessage());
 	}
 
+	private static void isValidAttack(int attack) {
+		PlayerDTO playerDTO = raidService.getPlayerDTO();
+		if (attack == PHYSICAL_ATTACK.getConstant())
+			return;
+		if (playerDTO.getMaxMp() < 30)
+			throw new IllegalArgumentException(MAGIC_ATTACK_CONSUME_MP.getMessage());
+	}
+
 	private void setInitStatus() {
 		int monsterHp = setMonsterHp();
 		String playerName = setPlayerName();
@@ -116,7 +124,10 @@ public class RaidController {
 
 		while (true) {
 			try {
-				return inputWhetherAttack();
+				int attack = inputWhetherAttack();
+				isValidAttack(attack);
+
+				return attack;
 			} catch (NumberFormatException e) {
 				throw new IllegalArgumentException(MUST_INTEGER_BUT_NOT.getMessage());
 			} catch (IllegalArgumentException e) {

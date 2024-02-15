@@ -1,6 +1,7 @@
 package bossmonster.domain;
 
 import static bossmonster.constant.PlayerConstant.*;
+import static bossmonster.view.message.ErrorMessage.*;
 
 import bossmonster.constant.PlayerConstant;
 
@@ -49,16 +50,28 @@ public class Player {
 
 	public int createAttack(PlayerConstant attack) {
 		if (attack == PHYSICAL_ATTACK) {
-			nowMp += 10;
+			modifyMpByAttack(10);
 			return PHYSICAL_DAMAGE.getConstant();
 		}
 
-		nowMp -= 30;
+		modifyMpByAttack(-30);
 		return MAGIC_DAMAGE.getConstant();
 	}
 
+	public void modifyMpByAttack(int difference) {
+		if (nowMp + difference >= maxMp) {
+			nowMp = maxMp;
+			return;
+		}
+		if (nowMp + difference <= 0) {
+			throw new IllegalArgumentException(MAGIC_ATTACK_CONSUME_MP.getMessage());
+		}
+
+		nowMp += difference;
+	}
+
 	public int getAttackByMonster(int damage) {
-		if(nowHp <= damage) {
+		if (nowHp <= damage) {
 			nowHp = 0;
 			return nowHp;
 		}
