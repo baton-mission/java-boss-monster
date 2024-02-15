@@ -2,6 +2,8 @@ package bossmonster.domain;
 
 import static bossmonster.constant.PlayerConstant.*;
 
+import bossmonster.constant.PlayerConstant;
+
 public class Player {
 	String name;
 	int maxHp;
@@ -43,5 +45,17 @@ public class Player {
 			throw new IllegalArgumentException();
 		if (maxHp + maxMp != SUM_OF_HP_MP.getConstant())
 			throw new IllegalArgumentException();
+	}
+
+	public int attack(PlayerConstant attack) {
+		if (attack == PHYSICAL_ATTACK) {
+			return PHYSICAL_DAMAGE.getConstant();
+		}
+
+		if (attack == MAGIC_ATTACK) {
+			return MAGIC_DAMAGE.getConstant();
+		}
+
+		return 0;
 	}
 }

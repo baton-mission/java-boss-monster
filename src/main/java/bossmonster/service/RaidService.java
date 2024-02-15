@@ -1,5 +1,5 @@
 package bossmonster.service;
-
+import java.util.Random;
 import static bossmonster.constant.PlayerConstant.*;
 import static bossmonster.view.message.ErrorMessage.*;
 
@@ -33,27 +33,29 @@ public class RaidService {
 		player = new Player(playerName, playerHp, playerMp);
 	}
 
-	private int attackMonsterByPhysical() {
-		int damage = PHYSICAL_DAMAGE.getConstant();
-		return damage;
-	}
-
-	private int attackMonsterByMagic() {
-		int damage = MAGIC_DAMAGE.getConstant();
-		return damage;
-	}
-
 	public int attackByPlayer(PlayerConstant playerConstant) {
-		if (playerConstant == PHYSICAL_ATTACK)
-			return attackMonsterByPhysical();
-		if (playerConstant == MAGIC_ATTACK)
-			return attackMonsterByMagic();
+		int damage = player.attack(playerConstant);
 
-		throw new IllegalArgumentException(PLAYER_SHOULD_ATTACK_MONSTER.getMessage());
+		if (monster.getNowHp() <= damage) {
+			damage -= monster.getNowHp();
+			monster = new Monster(0);
+			return damage;
+		}
+
+		monster = new Monster(monster.getNowHp() - damage);
+		return damage;
 	}
 
 	public int attackByMonster() {
-		int damage = 0;
+		int damage = monster.attack();
+
+		if (player.getNowHp() <= damage) {
+			damage -= player.getNowHp();
+			player = new Player(player.getName(), 0, player.getMaxMp());
+			return damage;
+		}
+
+		player = new Player(player.getName(), player.getNowHp() - damage, player.getMaxMp());
 		return damage;
 	}
 

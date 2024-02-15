@@ -2,7 +2,12 @@ package bossmonster.domain;
 
 import static bossmonster.constant.MonsterConstant.*;
 
+import java.util.Random;
+
+import bossmonster.constant.MonsterConstant;
+
 public class Monster {
+	private static final Random random = new Random();
 	int maxHp;
 	int nowHp;
 
@@ -23,5 +28,9 @@ public class Monster {
 
 	public int getNowHp() {
 		return nowHp;
+	}
+
+	public int attack() {
+		return random.nextInt(MONSTER_MAX_DAMAGE.getMonsterConstant());
 	}
 }
