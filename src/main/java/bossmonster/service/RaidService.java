@@ -33,27 +33,13 @@ public class RaidService {
 	public int attackByPlayer(PlayerConstant playerConstant) {
 		int damage = player.createAttack(playerConstant);
 
-		if (monster.getNowHp() <= damage) {
-			damage -= monster.getNowHp();
-			monster = new Monster(0);
-			return damage;
-		}
-
-		monster = new Monster(monster.getNowHp() - damage);
-		return damage;
+		return monster.getAttackByPlayer(damage);
 	}
 
 	public int attackByMonster() {
 		int damage = monster.createAttack();
 
-		if (player.getNowHp() <= damage) {
-			damage -= player.getNowHp();
-			player = new Player(player.getName(), 0, player.getMaxMp());
-			return damage;
-		}
-
-		player = new Player(player.getName(), player.getNowHp() - damage, player.getMaxMp());
-		return damage;
+		return player.getAttackByMonster(damage);
 	}
 
 	public boolean isEndGame() {

@@ -33,6 +33,11 @@ public class Monster {
 	}
 
 	public int getAttackByPlayer(int damage) {
+		if(nowHp <= damage) {
+			nowHp = 0;
+			return nowHp;
+		}
+
 		nowHp -= damage;
 		return damage;
 	}

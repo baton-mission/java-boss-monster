@@ -49,13 +49,20 @@ public class Player {
 
 	public int createAttack(PlayerConstant attack) {
 		if (attack == PHYSICAL_ATTACK) {
+			nowMp += 10;
 			return PHYSICAL_DAMAGE.getConstant();
 		}
 
+		nowMp -= 30;
 		return MAGIC_DAMAGE.getConstant();
 	}
 
 	public int getAttackByMonster(int damage) {
+		if(nowHp <= damage) {
+			nowHp = 0;
+			return nowHp;
+		}
+
 		nowHp -= damage;
 		return damage;
 	}
